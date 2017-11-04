@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="swift学习," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Swift 元组(Tuples)介绍元组的定义元组是Objective-C中没有的数据类型，与数组类似，都是表示一组数据的集合，但与数组不同，它的特点是：">
+<meta name="keywords" content="swift学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="swift学习之元组">
+<meta property="og:url" content="http://www.perphet.com/2017/11/04/swift学习之元组/index.html">
+<meta property="og:site_name" content="Tuski&#39;s Blog">
+<meta property="og:description" content="Swift 元组(Tuples)介绍元组的定义元组是Objective-C中没有的数据类型，与数组类似，都是表示一组数据的集合，但与数组不同，它的特点是：">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-11-03T18:08:00.562Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="swift学习之元组">
+<meta name="twitter:description" content="Swift 元组(Tuples)介绍元组的定义元组是Objective-C中没有的数据类型，与数组类似，都是表示一组数据的集合，但与数组不同，它的特点是：">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.perphet.com/2017/11/04/swift学习之元组/"/>
+
+
+
+
+
+  <title>swift学习之元组 | Tuski's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tuski's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Code my life</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Startseite
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archiv
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-schedule">
+          <a href="/schedule/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-calendar"></i> <br />
+            
+            Schedule
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.perphet.com/2017/11/04/swift学习之元组/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tuski">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tuski's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">swift学习之元组</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-04T01:53:54+08:00">
+                2017-11-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="Swift-元组-Tuples-介绍"><a href="#Swift-元组-Tuples-介绍" class="headerlink" title="Swift 元组(Tuples)介绍"></a>Swift 元组(Tuples)介绍</h3><h2 id="元组的定义"><a href="#元组的定义" class="headerlink" title="元组的定义"></a>元组的定义</h2><p>元组是Objective-C中没有的数据类型，与数组类似，都是表示一组数据的集合，但与数组不同，它的特点是：</p>
+<a id="more"></a>
+<p>1&gt;元组的长度任意</p>
+<p>2&gt;元组中的数据可以是不同的数据类型</p>
+<p>元组的定义很简单，用小括号括起来，以逗号隔开就可以了，如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">var userInfo = (<span class="string">"Tuski"</span> ,<span class="literal">true</span>, 19)</div></pre></td></tr></table></figure>
+<p>元组内的值可以使任意类型,并不要求是相同类型。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">let</span> http404Error = (404, <span class="string">"Not Found"</span>)</div><div class="line">// http404Error 的类型是 (Int, String),值是 (404, <span class="string">"Not Found"</span>)</div></pre></td></tr></table></figure>
+<p>另外，在创建元组时你还可以给元组中的元素命名：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">let</span> secondHighScore = (name: <span class="string">"James"</span>, score: 4096)</div></pre></td></tr></table></figure>
+<p>###以上就是创建元组的方法</p>
+<p><strong>从元组中读元素</strong></p>
+<p>如果我们没有给元组的元素命名，我们可以用点语法，通过定义好的元组变量或常量获取它的第1个到第n个元素：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">let</span> firstHighScore = (<span class="string">"Mary"</span>, 9001)</div><div class="line">println(firstHighScore.0) // Mary</div><div class="line">println(firstHighScore.1) // 9001</div></pre></td></tr></table></figure>
+<p>若你觉得上述这种方法会造成语义的不明确，我们还可以将元组赋值给一个带有元素名称的元组（元素名称个数要对应）:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">let</span> (firstName, firstScore) = firstHighScore</div><div class="line">println(firstName) // Mary</div><div class="line">println(firstScore) // 9001</div></pre></td></tr></table></figure>
+<p>如果你只需要一部分元组值，分解的时候可以把要忽略的部分用下划线（_）标记：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">let</span> (_, firstScore) = firstHighScore</div><div class="line">println(firstScore) // 9001</div></pre></td></tr></table></figure>
+<p>如果我们已经给元组中的元素命名了名称，那么我们可以这样写：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">let</span> secondHighScore = (name: <span class="string">"James"</span>, score: 4096)</div><div class="line">println(secondHighScore.name) // James</div><div class="line">println(secondHighScore.score) // 4096</div></pre></td></tr></table></figure>
+<p><strong>将元组作为函数返回值</strong></p>
+<p>当你想让一个函数能够返回多种类型时，这是元组的最佳使用场景。</p>
+<p>我们可以将元组作为函数的返回值，下面这个函数的返回值就是我们之前定义过的secondHighScore元组：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">func getAHighScore() -&gt; (name: String, score: Int) &#123;</div><div class="line"> <span class="built_in">let</span> theName = <span class="string">"Patricia"</span></div><div class="line"> <span class="built_in">let</span> theScore = 3894</div><div class="line"> <span class="built_in">return</span> (theName, theScore)</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<p>为什么说上述函数的返回值是secondHighScore元组呢？因为getAHighScore函数返回的元组元素个数、元素名称、元素类型均和secondHighScore相同。</p>
+<p>其实将元组作为函数的返回值时也可以不必对元素进行命名，只要你明白每个元素代表的含义即可：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">func getAHighScore() -&gt; (String, Int) &#123;</div><div class="line"> <span class="built_in">let</span> theName = <span class="string">"Patricia"</span></div><div class="line"> <span class="built_in">let</span> theScore = 3894</div><div class="line"> <span class="built_in">return</span> (theName, theScore)</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<p>如果你不确定返回的元组一定不为nil，那么你可以返回一个可选的元组类型：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">func maybeGetHighScore() -&gt; (String, Int)? &#123;</div><div class="line"> <span class="built_in">return</span> nil</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>因为是可选的元组类型，所以当返回的元组不为nil时，你需要对元组进行解包：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> <span class="built_in">let</span> possibleScore = <span class="function"><span class="title">maybeGetHighScore</span></span>() &#123;</div><div class="line"> possibleScore.0</div><div class="line"> possibleScore.1</div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line"> println(<span class="string">"Nothing Here"</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>###<strong>注意：</strong>当你定义了一个没有返回值的函数时，其实该函数是返回一个空的元组()</p>
+<p><strong>元组的访问级别</strong></p>
+<p>元组的访问级别取决于它包含的元素。比如元组里的元素都是private级别的，那么该元组也是private级别的。但这里有一个遵循最小的原则，也就是说如果一个元组中有两个元素，一个为private级别，另一个为public级别，那么该元组遵循最小原则，它的访问级别为private。</p>
+<p><strong>元组是值类型</strong></p>
+<p>关于值类型和引用类型的知识这里不再累赘，我们通过一个代码示例来看看元组是哪种类型：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">var someScore = (<span class="string">"John"</span>, 55)</div><div class="line">var anotherScore = someScore</div><div class="line">anotherScore.0 = <span class="string">"Robert"</span></div><div class="line">println(anotherScore.0) //Outputs: <span class="string">"Robert"</span></div><div class="line">println(someScore.0)  //Outputs: <span class="string">"John"</span></div></pre></td></tr></table></figure>
+<p>通过上述的代码示例可以看出，我把someScore元组赋值给了anotherScore，然后修改了anotherScore的第1个元素的值，最后分别打印了someScore和anotherScore第1个元素的值。someScore元组第一个元素的值为Robert，而anotherScore元组第一个元素的值仍然为John。由此可见元组是值类型。</p>
+<p><strong>总结</strong></p>
+<p>元组（Tuple）的概念对于没有接触过脚本语言的同学来说，是比较新的概念。但是元组既不复杂也不神秘，很多时候用Struct结构体或者类都可以解决。可以把元组理解为一种只能存放数据，却没有定义方法的轻量级数据结构。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="tuski WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt="tuski Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/swift学习/" rel="tag"># swift学习</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/03/c语言课后作业实验3/" rel="next" title="c语言课后作业实验3">
+                <i class="fa fa-chevron-left"></i> c语言课后作业实验3
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/04/Swift-强大且易用的矢量图形库-Macaw/" rel="prev" title="Swift 强大且易用的矢量图形库 Macaw">
+                Swift 强大且易用的矢量图形库 Macaw <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Inhaltsverzeichnis
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Übersicht
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="tuski" />
+            
+              <p class="site-author-name" itemprop="name">tuski</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">Artikel</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">Tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/thevenomsnake" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:tutushushujianjian@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plus.google.com/tutushushujianjian" target="_blank" title="Google">
+                    
+                      <i class="fa fa-fw fa-google"></i>Google</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/tushujian" target="_blank" title="Twitter">
+                    
+                      <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://youtube.com/yourname" target="_blank" title="YouTube">
+                    
+                      <i class="fa fa-fw fa-youtube"></i>YouTube</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Swift-元组-Tuples-介绍"><span class="nav-number">1.</span> <span class="nav-text">Swift 元组(Tuples)介绍</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#元组的定义"><span class="nav-number"></span> <span class="nav-text">元组的定义</span></a></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">tuski</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
