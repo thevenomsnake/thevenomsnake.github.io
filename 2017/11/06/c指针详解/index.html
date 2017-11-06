@@ -86,18 +86,18 @@
 
 
 
-<meta name="description" content="c指针详解前言:复杂类型说明​    要了解指针,多多少少会出现一些比较复杂的类型,">
+<meta name="description" content="前言:复杂类型说明​    要了解指针,多多少少会出现一些比较复杂的类型,">
 <meta name="keywords" content="c语言">
 <meta property="og:type" content="article">
 <meta property="og:title" content="c指针详解">
 <meta property="og:url" content="http://www.perphet.com/2017/11/06/c指针详解/index.html">
 <meta property="og:site_name" content="Tuski&#39;s Blog">
-<meta property="og:description" content="c指针详解前言:复杂类型说明​    要了解指针,多多少少会出现一些比较复杂的类型,">
+<meta property="og:description" content="前言:复杂类型说明​    要了解指针,多多少少会出现一些比较复杂的类型,">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-11-06T12:00:27.545Z">
+<meta property="og:updated_time" content="2017-11-06T12:06:09.568Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="c指针详解">
-<meta name="twitter:description" content="c指针详解前言:复杂类型说明​    要了解指针,多多少少会出现一些比较复杂的类型,">
+<meta name="twitter:description" content="前言:复杂类型说明​    要了解指针,多多少少会出现一些比较复杂的类型,">
 
 
 
@@ -193,7 +193,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
             
-            Home
+            Startseite
           </a>
         </li>
       
@@ -213,7 +213,7 @@
             
               <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
-            Archives
+            Archiv
           </a>
         </li>
       
@@ -287,7 +287,7 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">Veröffentlicht am</span>
               
               <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-06T19:42:33+08:00">
                 2017-11-06
@@ -327,7 +327,7 @@
       
 
       
-        <h3 id="c指针详解"><a href="#c指针详解" class="headerlink" title="c指针详解"></a>c指针详解</h3><h2 id="前言-复杂类型说明"><a href="#前言-复杂类型说明" class="headerlink" title="前言:复杂类型说明"></a>前言:复杂类型说明</h2><p>​    要了解指针,多多少少会出现一些比较复杂的类型,</p>
+        <h2 id="前言-复杂类型说明"><a href="#前言-复杂类型说明" class="headerlink" title="前言:复杂类型说明"></a>前言:复杂类型说明</h2><p>​    要了解指针,多多少少会出现一些比较复杂的类型,</p>
 <a id="more"></a>
 <p>所以我先介绍一下如何完全理解一个复杂类型,要理解复杂类型其实很简单,一个类型里会出现很多运算符,他们也像普通的表达式一样,有优先级,其优先级和运算优先级一样,所以我总结了一下其原则:从变量名处起,根据运算符优先级结合,一步一步分析.下面让我们先从简单的类型开始慢慢分析吧:</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> p; <span class="comment">//这是一个普通的整型变量</span></div><div class="line"><span class="keyword">int</span> *p; <span class="comment">//首先从P 处开始,先与*结合,所以说明P 是一个指针,然后再与int 结合,说明指针所指向的内容的类型为int 型.所以P是一个返回整型数据的指针</span></div><div class="line"><span class="keyword">int</span> p[<span class="number">3</span>]; <span class="comment">//首先从P 处开始,先与[]结合,说明P 是一个数组,然后与int 结合,说明数组里的元素是整型的,所以P 是一个由整型数据组成的数组</span></div><div class="line"><span class="keyword">int</span> *p[<span class="number">3</span>]; <span class="comment">//首先从P 处开始,先与[]结合,因为其优先级比*高,所以P 是一个数组,然后再与*结合,说明数组里的元素是指针类型,然后再与int 结合,说明指针所指向的内容的类型是整型的,所以P 是一个由返回整型数据的指针所组成的数组</span></div><div class="line"><span class="keyword">int</span> (*p)[<span class="number">3</span>]; <span class="comment">//首先从P 处开始,先与*结合,说明P 是一个指针然后再与[]结合(与"()"这步可以忽略,只是为了改变优先级),说明指针所指向的内容是一个数组,然后再与int 结合,说明数组里的元素是整型的.所以P 是一个指向由整型数据组成的数组的指针</span></div><div class="line"><span class="keyword">int</span> **p; <span class="comment">//首先从P 开始,先与*结合,说是P 是一个指针,然后再与*结合,说明指针所指向的元素是指针,然后再与int 结合,说明该指针所指向的元素是整型数据.由于二级指针以及更高级的指针极少用在复杂的类型中,所以后面更复杂的类型我们就不考虑多级指针了,最多只考虑一级指针.</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">p</span><span class="params">(<span class="keyword">int</span>)</span></span>; <span class="comment">//从P 处起,先与()结合,说明P 是一个函数,然后进入()里分析,说明该函数有一个整型变量的参数,然后再与外面的int 结合,说明函数的返回值是一个整型数据</span></div><div class="line">Int (*p)(<span class="keyword">int</span>); <span class="comment">//从P 处开始,先与指针结合,说明P 是一个指针,然后与()结合,说明指针指向的是一个函数,然后再与()里的int 结合,说明函数有一个int 型的参数,再与最外层的int 结合,说明函数的返回类型是整型,所以P 是一个指向有一个整型参数且返回类型为整型的函数的指针</span></div><div class="line"><span class="keyword">int</span> *(*p(<span class="keyword">int</span>))[<span class="number">3</span>]; <span class="comment">//可以先跳过,不看这个类型,过于复杂从P 开始,先与()结合,说明P 是一个函数,然后进入()里面,与int 结合,说明函数有一个整型变量参数,然后再与外面的*结合,说明函数返回的是一个指针,,然后到最外面一层,先与[]结合,说明返回的指针指向的是一个数组,然后再与*结合,说明数组里的元素是指针,然后再与int 结合,说明指针指向的内容是整型数据.所以P 是一个参数为一个整数据且返回一个指向由整型指针变量组成的数组的指针变量的函数.</span></div></pre></td></tr></table></figure>
@@ -464,8 +464,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/11/05/C89标准和C99标准C11标准的区别/" rel="next" title="C89标准和C99标准C11标准的区别">
-                <i class="fa fa-chevron-left"></i> C89标准和C99标准C11标准的区别
+              <a href="/2017/11/05/C89标准和C99标准C11标准的区别/" rel="next" title="C89标准和C99标准C11标准的区别（简单总结版&&较为完整版）">
+                <i class="fa fa-chevron-left"></i> C89标准和C99标准C11标准的区别（简单总结版&&较为完整版）
               </a>
             
           </div>
@@ -524,10 +524,10 @@
       
         <ul class="sidebar-nav motion-element">
           <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
+            Inhaltsverzeichnis
           </li>
           <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
+            Übersicht
           </li>
         </ul>
       
@@ -552,7 +552,7 @@
                 <a href="/archives/">
               
                   <span class="site-state-item-count">10</span>
-                  <span class="site-state-item-name">posts</span>
+                  <span class="site-state-item-name">Artikel</span>
                 </a>
               </div>
             
@@ -565,7 +565,7 @@
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
                   <span class="site-state-item-count">3</span>
-                  <span class="site-state-item-name">tags</span>
+                  <span class="site-state-item-name">Tags</span>
                 </a>
               </div>
             
@@ -631,7 +631,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#c指针详解"><span class="nav-number">1.</span> <span class="nav-text">c指针详解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#前言-复杂类型说明"><span class="nav-number"></span> <span class="nav-text">前言:复杂类型说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一、细说指针"><span class="nav-number"></span> <span class="nav-text">一、细说指针</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-指针的类型"><span class="nav-number">1.</span> <span class="nav-text">1.指针的类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-指针所指向的类型"><span class="nav-number">2.</span> <span class="nav-text">2.指针所指向的类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-指针的值—-或者叫指针所指向的内存区或地址"><span class="nav-number">3.</span> <span class="nav-text">3.指针的值—-或者叫指针所指向的内存区或地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-指针本身所占据的内存区"><span class="nav-number">4.</span> <span class="nav-text">4 指针本身所占据的内存区</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、指针的算术运算"><span class="nav-number"></span> <span class="nav-text">二、指针的算术运算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、运算符-amp-和"><span class="nav-number"></span> <span class="nav-text">三、运算符&和*</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、指针表达式"><span class="nav-number"></span> <span class="nav-text">四、指针表达式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、数组和指针的关系"><span class="nav-number"></span> <span class="nav-text">五、数组和指针的关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、指针和结构类型的关系"><span class="nav-number"></span> <span class="nav-text">六、指针和结构类型的关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#七、指针和函数的关系"><span class="nav-number"></span> <span class="nav-text">七、指针和函数的关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#八、指针类型转换"><span class="nav-number"></span> <span class="nav-text">八、指针类型转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#九、指针的安全问题"><span class="nav-number"></span> <span class="nav-text">九、指针的安全问题</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言-复杂类型说明"><span class="nav-number">1.</span> <span class="nav-text">前言:复杂类型说明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一、细说指针"><span class="nav-number">2.</span> <span class="nav-text">一、细说指针</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-指针的类型"><span class="nav-number">2.1.</span> <span class="nav-text">1.指针的类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-指针所指向的类型"><span class="nav-number">2.2.</span> <span class="nav-text">2.指针所指向的类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-指针的值—-或者叫指针所指向的内存区或地址"><span class="nav-number">2.3.</span> <span class="nav-text">3.指针的值—-或者叫指针所指向的内存区或地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-指针本身所占据的内存区"><span class="nav-number">2.4.</span> <span class="nav-text">4 指针本身所占据的内存区</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、指针的算术运算"><span class="nav-number">3.</span> <span class="nav-text">二、指针的算术运算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、运算符-amp-和"><span class="nav-number">4.</span> <span class="nav-text">三、运算符&和*</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、指针表达式"><span class="nav-number">5.</span> <span class="nav-text">四、指针表达式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、数组和指针的关系"><span class="nav-number">6.</span> <span class="nav-text">五、数组和指针的关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、指针和结构类型的关系"><span class="nav-number">7.</span> <span class="nav-text">六、指针和结构类型的关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#七、指针和函数的关系"><span class="nav-number">8.</span> <span class="nav-text">七、指针和函数的关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#八、指针类型转换"><span class="nav-number">9.</span> <span class="nav-text">八、指针类型转换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#九、指针的安全问题"><span class="nav-number">10.</span> <span class="nav-text">九、指针的安全问题</span></a></li></ol></div>
             
 
           </div>
@@ -661,7 +661,7 @@
 </div>
 
 
-  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+  <div class="powered-by">Erstellt mit  <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
 
 
 
