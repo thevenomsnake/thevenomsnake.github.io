@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-big-counter.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="c语言," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="这篇文章简要的介绍了c语言结构体的一些用法和定义=。=">
+<meta name="keywords" content="c语言">
+<meta property="og:type" content="article">
+<meta property="og:title" content="c语言struct结构体简介">
+<meta property="og:url" content="http://www.perphet.com/2017/11/23/c语言struct结构体简介/index.html">
+<meta property="og:site_name" content="Tuski&#39;s Blog">
+<meta property="og:description" content="这篇文章简要的介绍了c语言结构体的一些用法和定义=。=">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.loli.net/2017/11/23/5a16bba1e27d9.gif">
+<meta property="og:image" content="https://i.loli.net/2017/11/23/5a16bc1ae1a89.gif">
+<meta property="og:image" content="https://i.loli.net/2017/11/23/5a16bc4539f0c.jpg">
+<meta property="og:updated_time" content="2017-11-23T12:18:09.488Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="c语言struct结构体简介">
+<meta name="twitter:description" content="这篇文章简要的介绍了c语言结构体的一些用法和定义=。=">
+<meta name="twitter:image" content="https://i.loli.net/2017/11/23/5a16bba1e27d9.gif">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.perphet.com/2017/11/23/c语言struct结构体简介/"/>
+
+
+
+
+
+  <title>c语言struct结构体简介 | Tuski's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tuski's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Code my life</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.perphet.com/2017/11/23/c语言struct结构体简介/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tuski">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tuski's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">c语言struct结构体简介</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-23T19:16:52+08:00">
+                2017-11-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="这篇文章简要的介绍了c语言结构体的一些用法和定义-。"><a href="#这篇文章简要的介绍了c语言结构体的一些用法和定义-。" class="headerlink" title="这篇文章简要的介绍了c语言结构体的一些用法和定义=。="></a>这篇文章简要的介绍了c语言结构体的一些用法和定义=。=</h1><a id="more"></a>
+<p><img src="https://i.loli.net/2017/11/23/5a16bba1e27d9.gif" alt="57B29FB7114768BAC514D141DD7F31D6.gif"></p>
+<p>##初见</p>
+<p>想必大家已经对数组比较了解了，它是一组具有相同类型的数据的集合。但在实际的编程过程中，我们往往还需要一组类型不同的数据，例如对于学生信息登记表，姓名为字符串，学号为整数，年龄为整数，所在的学习小组为字符，成绩为小数，因为数据类型不同，显然不能用一个数组来存放。</p>
+<p><strong>在C语言中，可以使用结构体（Struct）来存放一组不同类型的数据。通俗讲就像是打包封装，把一些有共同特征（比如同属于某一类事物的属性，往往是某种业务相关属性的聚合）的变量封装在内部，通过一定方法访问修改内部变量。</strong></p>
+<p>结构体是一种集合，它里面包含了多个变量或数组，它们的类型可以相同，也可以不同，每个这样的变量或数组都称为结构体的成员（Member）。<strong>结构名是结构的标识符不是变量名。</strong>构成结构的每一个类型变量称为结构成员, 它象数组的元素一样, 但数组中<strong>元素是以下标来访问的, 而结构是按变量名字来访问成员的。 </strong></p>
+<h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p>###第一种：只有结构体定义</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">stuff</span>&#123;</span></div><div class="line">        <span class="keyword">char</span> job[<span class="number">20</span>];</div><div class="line">        <span class="keyword">int</span> age;</div><div class="line">        <span class="keyword">float</span> height;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>###第二种：附加该结构体类型的“结构体变量”的初始化的结构体定义</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//直接带变量名hhh2233</span></div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">stuff</span>&#123;</span>  </div><div class="line">        <span class="keyword">char</span> job[<span class="number">20</span>];  </div><div class="line">        <span class="keyword">int</span> age;  </div><div class="line">        <span class="keyword">float</span> height;  </div><div class="line">&#125;bang;</div></pre></td></tr></table></figure>
+<p>也许初期看不习惯容易困惑，其实这就相当于：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">stuff</span>&#123;</span></div><div class="line">        <span class="keyword">char</span> job[<span class="number">20</span>];</div><div class="line">        <span class="keyword">int</span> age;</div><div class="line">        <span class="keyword">float</span> height;</div><div class="line">&#125;;</div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">stuff</span> <span class="title">bang</span>;</span></div></pre></td></tr></table></figure>
+<p>###第三种：如果该结构体你只用一个变量hhh2233，而不再需要用去定义第二个变量。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">stuff</span> <span class="title">yourname</span>;</span></div></pre></td></tr></table></figure>
+<p>那么，附加变量初始化的结构体定义还可进一步简化出</p>
+<p>###第三种：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span>&#123;</span></div><div class="line">        <span class="keyword">char</span> job[<span class="number">20</span>];</div><div class="line">        <span class="keyword">int</span> age;</div><div class="line">        <span class="keyword">float</span> height;</div><div class="line">&#125;bang;</div></pre></td></tr></table></figure>
+<p>把结构体名称去掉，这样更简洁，不过也不能定义其他同结构体变量了</p>
+<p><strong>结构体变量及其内部成员变量的定义及访问：</strong></p>
+<p><img src="https://i.loli.net/2017/11/23/5a16bc1ae1a89.gif" alt="EB91C22D80CFFB7E0744AA1001F02879.gif"></p>
+<p>绕口吧？要分清结构体变量和结构体内部成员变量的概念。</p>
+<p>就像刚才的第二种提到的，结构体变量的声明可以用：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">stuff</span> <span class="title">yourname</span>;</span></div></pre></td></tr></table></figure>
+<p>其成员变量的定义可以随声明进行：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">stuff</span> <span class="title">bang</span> = &#123;</span><span class="string">"manager"</span>,<span class="number">30</span>,<span class="number">185</span>&#125;;</div></pre></td></tr></table></figure>
+<p>也可以考虑结构体之间的赋值：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">stuff</span> <span class="title">faker</span> = <span class="title">bang</span>;</span></div><div class="line"><span class="comment">//或    struct stuff faker2;</span></div><div class="line"><span class="comment">//      faker2 = faker;</span></div><div class="line">    可见结构体的每一个成员变量一模一样</div></pre></td></tr></table></figure>
+<p>如果不使用上边两种方法，那么成员数组的操作会稍微麻烦（用for循环可能好点）</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">bang.job[<span class="number">0</span>] = <span class="string">'M'</span>;</div><div class="line">bang.job[<span class="number">1</span>] = <span class="string">'a'</span>;</div><div class="line">bang.age = <span class="number">27</span>;</div><div class="line">bang.height = <span class="number">185</span>;</div></pre></td></tr></table></figure>
+<p>结构体成员变量的访问除了可以借助符号”.”，还可以用”-&gt;”访问（下边会提）。</p>
+<p>##引用（C++）、指针和数组：</p>
+<p>首先是</p>
+<h3 id="引用和指针："><a href="#引用和指针：" class="headerlink" title="引用和指针："></a>引用和指针：</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">stuff</span> <span class="title">bang</span>;</span></div><div class="line"></div><div class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">stuff</span> &amp;<span class="title">ref</span> = <span class="title">bang</span>;</span></div><div class="line">        ref.age = <span class="number">100</span>;</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"bang.age is %d\n"</span>,bang.age);</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"ref.age is %d\n"</span>,ref.age);</div><div class="line"></div><div class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">stuff</span> *<span class="title">ptr</span> = &amp;<span class="title">bang</span>;</span></div><div class="line">        ptr-&gt;age = <span class="number">200</span>;</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"bang.age is %d\n"</span>,bang.age);</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"ptr-&gt;age is %d\n"</span>,bang.age);</div><div class="line"><span class="comment">//指针引用也加上了</span></div><div class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">stuff</span> *&amp;<span class="title">refToPtr</span> = <span class="title">ptr</span>;</span></div><div class="line">        refToPtr-&gt;age = <span class="number">300</span>;</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"bang.age is %d\n"</span>,bang.age);</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"refToPtr-&gt;age is %d\n"</span>,refToPtr-&gt;age);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>结构体也不能免俗，必须有数组：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">test</span>&#123;</span></div><div class="line">        <span class="keyword">int</span> a[<span class="number">3</span>];</div><div class="line">        <span class="keyword">int</span> b;</div><div class="line">&#125;;</div><div class="line"><span class="comment">//对于数组和变量同时存在的情况，有如下定义方法：</span></div><div class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">test</span> <span class="title">student</span>[3] =       &#123;</span>&#123;&#123;<span class="number">66</span>,<span class="number">77</span>,<span class="number">55</span>&#125;,<span class="number">0</span>&#125;,</div><div class="line">                                        &#123;&#123;<span class="number">44</span>,<span class="number">65</span>,<span class="number">33</span>&#125;,<span class="number">0</span>&#125;,</div><div class="line">                                        &#123;&#123;<span class="number">46</span>,<span class="number">99</span>,<span class="number">77</span>&#125;,<span class="number">0</span>&#125;&#125;;</div><div class="line"><span class="comment">//特别的，可以简化成：</span></div><div class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">test</span> <span class="title">student</span>[3] =       &#123;</span>&#123;<span class="number">66</span>,<span class="number">77</span>,<span class="number">55</span>,<span class="number">0</span>&#125;,</div><div class="line">                                        &#123;<span class="number">44</span>,<span class="number">65</span>,<span class="number">33</span>,<span class="number">0</span>&#125;,</div><div class="line">                                        &#123;<span class="number">46</span>,<span class="number">99</span>,<span class="number">77</span>,<span class="number">0</span>&#125;&#125;;</div></pre></td></tr></table></figure>
+<h3 id="变长结构体"><a href="#变长结构体" class="headerlink" title="变长结构体"></a>变长结构体</h3><p>可以变长的数组</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;malloc.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></div><div class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">changeable</span>&#123;</span></div><div class="line">        <span class="keyword">int</span> iCnt;</div><div class="line">        <span class="keyword">char</span> pc[<span class="number">0</span>];</div><div class="line">&#125;schangeable;</div><div class="line"></div><div class="line">main()&#123;</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"size of struct changeable : %d\n"</span>,<span class="keyword">sizeof</span>(schangeable));</div><div class="line"></div><div class="line">        schangeable *pchangeable = (schangeable *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(schangeable) + <span class="number">10</span>*<span class="keyword">sizeof</span>(<span class="keyword">char</span>));</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"size of pchangeable : %d\n"</span>,<span class="keyword">sizeof</span>(pchangeable));</div><div class="line"></div><div class="line">        schangeable *pchangeable2 = (schangeable *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(schangeable) + <span class="number">20</span>*<span class="keyword">sizeof</span>(<span class="keyword">char</span>));</div><div class="line">        pchangeable2-&gt;iCnt = <span class="number">20</span>;</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"pchangeable2-&gt;iCnt : %d\n"</span>,pchangeable2-&gt;iCnt);</div><div class="line">        <span class="built_in">strncpy</span>(pchangeable2-&gt;pc,<span class="string">"hello world"</span>,<span class="number">11</span>);</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"%s\n"</span>,pchangeable2-&gt;pc);</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"size of pchangeable2 : %d\n"</span>,<span class="keyword">sizeof</span>(pchangeable2));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>运行结果</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">size of <span class="class"><span class="keyword">struct</span> <span class="title">changeable</span> :</span> <span class="number">4</span></div><div class="line">size of pchangeable : <span class="number">4</span></div><div class="line">pchangeable2-&gt;iCnt : <span class="number">20</span></div><div class="line">hello world</div><div class="line">size of pchangeable2 : <span class="number">4</span></div></pre></td></tr></table></figure>
+<p><strong>结构体本身长度就是一个int长度（这个int值通常只为了表示后边的数组长度），后边的数组长度不计算在内，但是该数组可以直接使用。说后边是个指针吧？指针也占长度！这个是不占的！原理很简单，这个东西完全是数组后边的尾巴，malloc开辟的是一片连续空间。 </strong></p>
+<p>Ps：非弹性数组不能用”char a[]”这种形式定义弹性（flexible）变量，必须明确大小。</p>
+<p>弹性数组在结构体中，下面的形式是唯一允许的：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">s</span></span></div><div class="line"><span class="class">&#123;</span></div><div class="line">        <span class="keyword">int</span> a;</div><div class="line">        <span class="keyword">char</span> b[] ;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>顺序颠倒会让b和a数据重合，会在编译时不通过。</p>
+<p>char b[] = “hell”;也不行（C和C++都不行）</p>
+<p>少了整型变量a又会让整个结构体长度为0，compiler不允许编译通过。不同的是，</p>
+<p>其实C++形式上是允许空结构体的，本质上是通过机制避免了纯空结构体和类对象，自动给空结构体对象分配一个字节（sizeof（）返回1）方便区分对象，避免地址重合！</p>
+<p>所以呢，C如果有空结构体，定义两个（或一打，或干脆一个数组）该结构体的变量（对象），地址是完全一样的。调试看程序运行，这些语句其实根本没有运行，没有实际意义，C压根不支持空结构体这种东西。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">s2</span></span></div><div class="line"><span class="class">&#123;</span></div><div class="line"><span class="comment">//      char a[]  = "hasd" ;</span></div><div class="line"><span class="comment">//      int c;</span></div><div class="line">&#125;;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">s2</span> <span class="title">s22</span>;</span></div><div class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">s2</span> <span class="title">s23</span>;</span></div><div class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">s2</span> <span class="title">s24</span>;</span></div><div class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">s2</span> <span class="title">s25</span>;</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>例外的是，C++唯独不给带弹性数组的结构体分配空间（可能怕和变长结构体机制产生某种冲突，比如大小怎么算）:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//程序一</span></div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">s</span>  </span></div><div class="line"><span class="class">&#123;</span>  </div><div class="line">        <span class="keyword">char</span> b[] ;  </div><div class="line">&#125;;  </div><div class="line"><span class="comment">//程序二</span></div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">s</span></span></div><div class="line"><span class="class">&#123;</span></div><div class="line">       <span class="keyword">char</span> b[] ;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>C++中两者是不一样的，空的结构体反而“大”（sizeof()返回1）</p>
+<p><strong>这个机制利用了一个非常重要的特性——数组和指针的区别！数组和指针在很多操作上是一样的，但是本质不一样。最直观的，指针可以改指向，数组不可以，因为数组占用的每一个内存地址都用来保存变量或者对象，而指针占用的内存地址保存的是一个地址，数组没有单独的保存指向地址的这样一个结构。数组的位置是固定的，正如指针变量自身的位置也是固定的，改的是指针的值，是指向的目标地址，而因为数组不存储目标地址，所以改不了指向。企图把地址强制赋值给数组的话，也只是说把指针赋值给数组，类型不兼容。</strong></p>
+<h3 id="结构体嵌套："><a href="#结构体嵌套：" class="headerlink" title="结构体嵌套："></a>结构体嵌套：</h3><p>结构体嵌套其实没有太意外的东西，只要遵循一定规律即可：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//对于“一锤子买卖”，只对最终的结构体变量感兴趣，其中A、B也可删，不过最好带着</span></div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">A</span>&#123;</span> </div><div class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">B</span>&#123;</span></div><div class="line">             <span class="keyword">int</span> c;</div><div class="line">        &#125;</div><div class="line">        b;</div><div class="line">&#125;</div><div class="line">a;</div><div class="line"><span class="comment">//使用如下方式访问：</span></div><div class="line">a.b.c = <span class="number">10</span>;</div></pre></td></tr></table></figure>
+<p><strong>Specially,可以一边定义结构体B，一边就使用上：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">A</span>&#123;</span></div><div class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">B</span>&#123;</span></div><div class="line">                <span class="keyword">int</span> c;</div><div class="line">        &#125;b;</div><div class="line"></div><div class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">B</span> <span class="title">sb</span>;</span></div><div class="line"></div><div class="line">&#125;a;</div></pre></td></tr></table></figure>
+<p>使用方法与测试：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">a.b.c = <span class="number">11</span>;</div><div class="line"><span class="built_in">printf</span>(<span class="string">"%d\n"</span>,a.b.c);</div><div class="line">a.sb.c = <span class="number">22</span>;</div><div class="line"><span class="built_in">printf</span>(<span class="string">"%d\n"</span>,a.sb.c);</div><div class="line"><span class="comment">//运行正确</span></div></pre></td></tr></table></figure>
+<p>但是如果嵌套的结构体B是在A内部才声明的，并且没定义一个对应的对象实体b，这个结构体B的大小还是不算进结构体A中。</p>
+<p>###结构体与函数：</p>
+<p>关于传参，首先：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">(<span class="keyword">int</span>)</span></span>;</div><div class="line">func(a.b.c);</div></pre></td></tr></table></figure>
+<p>把结构体中的int成员变量当做和普通int变量一样的东西来使用，是不用脑子就想到的一种方法。</p>
+<p>另外两种就是传递副本和指针了 ：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//struct A定义同上</span></div><div class="line"><span class="comment">//设立了两个函数，分别传递struct A结构体和其指针。</span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">func1</span><span class="params">(struct A a)</span></span>&#123;</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,a.b.c);</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">func2</span><span class="params">(struct A* a)</span></span>&#123;</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,a-&gt;b.c);</div><div class="line">&#125;</div><div class="line">main()&#123;</div><div class="line">        a.b.c = <span class="number">112</span>;</div><div class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">A</span> * <span class="title">pa</span>;</span></div><div class="line">        pa = &amp;a;</div><div class="line">        func1(a);</div><div class="line">        func2(&amp;a);</div><div class="line">        func2(pa);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>占用内存空间：</strong></p>
+<p>struct结构体，在<strong>结构体</strong>定义的时候不能申请内存空间，不过如果是<strong>结构体变量</strong>，声明的时候就可以分配——两者关系就像C++的类与对象，对象才分配内存（不过严格讲，作为代码段，结构体定义部分“.text”真的就不占空间了么？当然，这是另外一个范畴的话题）。</p>
+<p>结构体的大小通常（只是通常）是结构体所含变量大小的总和，下面打印输出上述结构体的size：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">printf</span>(<span class="string">"size of struct man:%d\n"</span>,<span class="keyword">sizeof</span>(struct man));</div><div class="line"><span class="built_in">printf</span>(<span class="string">"size:%d\n"</span>,<span class="keyword">sizeof</span>(Huqinwei));</div><div class="line">结果是<span class="number">28</span>：分别是<span class="keyword">char</span>数组<span class="number">20</span>，<span class="keyword">int</span>变量<span class="number">4</span>，浮点变量<span class="number">4.</span></div></pre></td></tr></table></figure>
+<p><strong>下边说说不通常：</strong></p>
+<p>对于结构体中比较小的成员，可能会被强行对齐，造成空间的空置，这和读取内存的机制有关，为了效率。通常32位机按4字节对齐，小于的都当4字节，有连续小于4字节的，可以不着急对齐，等到凑够了整，加上下一个元素超出一个对齐位置，才开始调整，比如3+2或者1+4，后者都需要另起（下边的结构体大小是8bytes），相关例子就多了，不赘述。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">s</span></span></div><div class="line"><span class="class">&#123;</span></div><div class="line"><span class="keyword">char</span> a;</div><div class="line"><span class="keyword">short</span> b;</div><div class="line"><span class="keyword">int</span> c;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>相应的，64位机按8字节对齐。不过对齐不是绝对的，用#pragma pack()可以修改对齐，如果</p>
+<p>改成1，结构体大小就是实实在在的成员变量大小的总和了。</p>
+<p>和C++的类不一样，结构体不可以给<strong>结构体内部变量</strong>初始化，。</p>
+<p>如下，为<strong>错误示范：</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="comment">//直接带变量名bang</span></div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">stuff</span>&#123;</span></div><div class="line">      <span class="keyword">char</span> job[<span class="number">20</span>] = <span class="string">"Programmer"</span>;</div><div class="line">      <span class="keyword">char</span> job[];</div><div class="line">      <span class="keyword">int</span> age = <span class="number">27</span>;</div><div class="line">      <span class="keyword">float</span> height = <span class="number">185</span>;</div><div class="line">&#125;bang;<span class="comment">//错误示范！</span></div></pre></td></tr></table></figure>
+<p>###PS：结构体的声明也要注意位置的，作用域不一样。</p>
+<p>C++的结构体变量的声明定义和C有略微不同，说白了就是更“面向对象”风格化，要求更低。</p>
+<p><img src="https://i.loli.net/2017/11/23/5a16bc4539f0c.jpg" alt="FE386B018D56744EE3E56CB0CCA13168.jpg"></p>
+<p>###PSS：typedef定义结构体</p>
+<p><strong>例如</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span>  <span class="title">person</span> &#123;</span></div><div class="line"><span class="keyword">int</span> age ;</div><div class="line"><span class="keyword">char</span> *name;</div><div class="line"><span class="keyword">char</span> *sex;</div><div class="line">&#125; student;</div></pre></td></tr></table></figure>
+<p><strong>我们可以用student来定义一个结构体变量：student stu1；typedef的作用就相当于给你struct person取了一个别名，如果我们不用typedef定义我们就不能用student定义，此时student就是一个结构体变量，如果要定义结构体变量的话就得用struct person来定义 struct person stu1.</strong></p>
+<p>####typedef的其它定义：</p>
+<blockquote>
+<p><strong>typedef char name[51];</strong></p>
+<p><strong>如果想要定义多个相同类型长51的数组，我们可以直接用name定义比如name sex;可能大家对这里不太好理解，如果看过关于数据类型的介绍方面的知识大家就很好理解了，或者经常用java编写程序的就很好理解的</strong></p>
+<p><strong>其实我们可以可以把 typedef char name【51】看作 typedef char【51】name，更具typedef的语法可以知道name是给 char name 【51】取得别名。这些知道怎么回事了吧。</strong></p>
+<p><strong>其实c结构体和对象编程 像java等里面的类是非常相似的。不过像C++里面对结构体进行了扩展，c++里面的结构体是可以包含方法的，但是C里面是不能够的。</strong></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/c语言/" rel="tag"><i class="fa fa-tag"></i> c语言</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/23/c语言课后作业实验5/" rel="next" title="c语言课后作业实验5">
+                <i class="fa fa-chevron-left"></i> c语言课后作业实验5
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+    <div class="comments" id="comments">
+      <div id="uyan_frame"></div>
+    </div>
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="tuski" />
+            
+              <p class="site-author-name" itemprop="name">tuski</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/thevenomsnake" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:tutushushujianjian@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plus.google.com/tutushushujianjian" target="_blank" title="Google">
+                    
+                      <i class="fa fa-fw fa-google"></i>Google</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/tushujian" target="_blank" title="Twitter">
+                    
+                      <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://youtube.com/yourname" target="_blank" title="YouTube">
+                    
+                      <i class="fa fa-fw fa-youtube"></i>YouTube</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#这篇文章简要的介绍了c语言结构体的一些用法和定义-。"><span class="nav-number">1.</span> <span class="nav-text">这篇文章简要的介绍了c语言结构体的一些用法和定义=。=</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#定义"><span class="nav-number">1.0.1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#引用和指针："><span class="nav-number">1.0.2.</span> <span class="nav-text">引用和指针：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变长结构体"><span class="nav-number">1.0.3.</span> <span class="nav-text">变长结构体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结构体嵌套："><span class="nav-number">1.0.4.</span> <span class="nav-text">结构体嵌套：</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">tuski</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+    
+
+    
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2148214"></script>
+      <!-- UY END -->
+    
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

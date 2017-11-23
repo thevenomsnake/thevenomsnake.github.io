@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-big-counter.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="c语言," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="差点就忘记了- -！（汗） ##最近在忙做作品，所以会断断续续的更= = Ps：之前群里有人问一道oj题，然而本人基本没做过oj，就点简单的写了些（在底部），其中我用了struct，会单独放一篇文章讲解。">
+<meta name="keywords" content="c语言">
+<meta property="og:type" content="article">
+<meta property="og:title" content="c语言课后作业实验5">
+<meta property="og:url" content="http://www.perphet.com/2017/11/23/c语言课后作业实验5/index.html">
+<meta property="og:site_name" content="Tuski&#39;s Blog">
+<meta property="og:description" content="差点就忘记了- -！（汗） ##最近在忙做作品，所以会断断续续的更= = Ps：之前群里有人问一道oj题，然而本人基本没做过oj，就点简单的写了些（在底部），其中我用了struct，会单独放一篇文章讲解。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-11-23T11:37:29.365Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="c语言课后作业实验5">
+<meta name="twitter:description" content="差点就忘记了- -！（汗） ##最近在忙做作品，所以会断断续续的更= = Ps：之前群里有人问一道oj题，然而本人基本没做过oj，就点简单的写了些（在底部），其中我用了struct，会单独放一篇文章讲解。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.perphet.com/2017/11/23/c语言课后作业实验5/"/>
+
+
+
+
+
+  <title>c语言课后作业实验5 | Tuski's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tuski's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Code my life</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.perphet.com/2017/11/23/c语言课后作业实验5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tuski">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tuski's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">c语言课后作业实验5</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-23T18:54:14+08:00">
+                2017-11-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>差点就忘记了- -！（汗）</p>
+<p>##最近在忙做作品，所以会断断续续的更= =</p>
+<h2 id="Ps：之前群里有人问一道oj题，然而本人基本没做过oj，就点简单的写了些（在底部），其中我用了struct，会单独放一篇文章讲解。"><a href="#Ps：之前群里有人问一道oj题，然而本人基本没做过oj，就点简单的写了些（在底部），其中我用了struct，会单独放一篇文章讲解。" class="headerlink" title="Ps：之前群里有人问一道oj题，然而本人基本没做过oj，就点简单的写了些（在底部），其中我用了struct，会单独放一篇文章讲解。"></a>Ps：之前群里有人问一道oj题，然而本人基本没做过oj，就点简单的写了些（在底部），其中我用了struct，会单独放一篇文章讲解。</h2><a id="more"></a>
+<p>感觉实验5没啥需要po出来的=。=</p>
+<h3 id="基础练习2-7"><a href="#基础练习2-7" class="headerlink" title="基础练习2.7"></a>基础练习2.7</h3><p>只是添加了一个自己输入行数的功能而已= 。=</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> * argv[])</span></span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">int</span> arr[<span class="number">30</span>][<span class="number">30</span>]= &#123;<span class="number">0</span>&#125;;</div><div class="line">    <span class="keyword">int</span> n;</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"input n:"</span>);</div><div class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=n; i++)</div><div class="line">    &#123;</div><div class="line">        arr[i][<span class="number">1</span>]=<span class="number">1</span>;</div><div class="line">        arr[i][i]=<span class="number">1</span>;</div><div class="line">        <span class="keyword">if</span>(i&gt;=<span class="number">2</span>)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>; j&lt;=i; j++)</div><div class="line">            &#123;</div><div class="line">                arr[i][j]=arr[i<span class="number">-1</span>][j<span class="number">-1</span>]+arr[i<span class="number">-1</span>][j];</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=n; i++)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>; j&lt;=i; j++)</div><div class="line">        &#123;</div><div class="line">            <span class="built_in">printf</span>(<span class="string">"%3d "</span>,arr[i][j]);</div><div class="line">        &#125;</div><div class="line">        <span class="built_in">putchar</span>(<span class="string">'\n'</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<h3 id="进阶练习3-2"><a href="#进阶练习3-2" class="headerlink" title="进阶练习3.2"></a>进阶练习3.2</h3><p>既然是要同时输出之前的顺序，不如设定两个数组。(坐下！基本操作而已。)</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> * argv[])</span></span>&#123;</div><div class="line">    </div><div class="line">    <span class="keyword">int</span> i, j,k,l,t1,t2;</div><div class="line">    <span class="keyword">int</span> a[<span class="number">20</span>], b[<span class="number">20</span>];</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"please enter 20 numbers:"</span>);</div><div class="line">    <span class="keyword">for</span>( i=<span class="number">0</span>, j=<span class="number">1</span>; i&lt;<span class="number">20</span>; i++, j++)</div><div class="line">    &#123;</div><div class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;a[i]);</div><div class="line">        b[i] = j;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span>( k = <span class="number">0</span>; k&lt;<span class="number">20</span>; k++)&#123;</div><div class="line">        <span class="keyword">for</span>( l =k+<span class="number">1</span>; l&lt;=<span class="number">19</span>; l++)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span>(a[k]&gt;a[l])</div><div class="line">            &#123;</div><div class="line">                t1 = a[l];a[l] = a[k];a[k] = t1;</div><div class="line">                t2 = b[l];b[l] = b[k];b[k] = t2;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span>( i=<span class="number">0</span>; i&lt;<span class="number">20</span>; i++)</div><div class="line">    &#123;</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"%d"</span>, a[i]);</div><div class="line">        <span class="keyword">if</span>(i&lt;<span class="number">19</span>)</div><div class="line">            <span class="built_in">printf</span>(<span class="string">" "</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"\n"</span>);</div><div class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>; i&lt;<span class="number">20</span>; i++)</div><div class="line">    &#123;</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"%d"</span>, b[i]);</div><div class="line">        <span class="keyword">if</span>(i&lt;<span class="number">19</span>)</div><div class="line">          <span class="built_in">printf</span>(<span class="string">" "</span>);</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"\n"</span>);</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="进阶练习3-8"><a href="#进阶练习3-8" class="headerlink" title="进阶练习3.8"></a>进阶练习3.8</h3><p>若题目多一个非数字时停止，能否用一行代码实现判断和输入呢？</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//代码写得很不规范，不过我懒得改了=。=</span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">bubbleSortPlus</span><span class="params">(<span class="keyword">int</span> a[<span class="number">10</span>])</span><span class="comment">//改进版冒泡排序</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    <span class="keyword">int</span> i,j,flag;</div><div class="line">    </div><div class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;<span class="number">9</span>;i++)</div><div class="line">    &#123;</div><div class="line">        flag=<span class="number">1</span>;</div><div class="line">        <span class="keyword">for</span>(j=<span class="number">0</span>;j&lt;<span class="number">9</span>-i;j++)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span>(a[j] &lt; a[j+<span class="number">1</span>])</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">int</span> tmp=a[j];</div><div class="line">                a[j]=a[j+<span class="number">1</span>];</div><div class="line">                a[j+<span class="number">1</span>]=tmp;</div><div class="line">                flag=<span class="number">0</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span>(flag == <span class="number">1</span>) <span class="keyword">break</span>;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">for</span>(i=<span class="number">10</span>;i&gt;<span class="number">0</span>;i--)&#123;</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"%d  "</span>,a[i]);</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">putchar</span>(<span class="string">'\n'</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">quikSort</span><span class="params">(<span class="keyword">int</span> a[],<span class="keyword">int</span> low,<span class="keyword">int</span> high)</span><span class="comment">//快速排序</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    <span class="keyword">int</span> i = low;</div><div class="line">    <span class="keyword">int</span> j = high;</div><div class="line">    <span class="keyword">int</span> temp = a[i];</div><div class="line">    </div><div class="line">    <span class="keyword">if</span>( low &lt; high)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">while</span>(i &lt; j)</div><div class="line">        &#123;</div><div class="line">            <span class="keyword">while</span>((a[j] &gt;= temp) &amp;&amp; (i &lt; j))</div><div class="line">            &#123;</div><div class="line">                j--;</div><div class="line">            &#125;</div><div class="line">            a[i] = a[j];</div><div class="line">            <span class="keyword">while</span>((a[i] &lt;= temp) &amp;&amp; (i &lt; j))</div><div class="line">            &#123;</div><div class="line">                i++;</div><div class="line">            &#125;</div><div class="line">            a[j]= a[i];</div><div class="line">        &#125;</div><div class="line">        a[i] = temp;</div><div class="line">        quikSort(a,low,i<span class="number">-1</span>);</div><div class="line">        quikSort(a,j+<span class="number">1</span>,high);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)&#123;</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"%d  "</span>,a[i]);</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">putchar</span>(<span class="string">'\n'</span>);</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    <span class="keyword">int</span> i=<span class="number">0</span>,a[<span class="number">10</span>];</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"Please enter 10 numbers:"</span>);</div><div class="line">    <span class="keyword">for</span> (i=<span class="number">0</span>; i&lt;<span class="number">10</span>; i++) &#123;</div><div class="line">          <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;a[i]);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    bubbleSortPlus(a);<span class="comment">//调用冒泡</span></div><div class="line">    quikSort(a,<span class="number">0</span>,<span class="number">4</span>);<span class="comment">//调用快速排序</span></div><div class="line">    </div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="杭电（hdu）2085-核反应堆题"><a href="#杭电（hdu）2085-核反应堆题" class="headerlink" title="杭电（hdu）2085 核反应堆题"></a>杭电（hdu）2085 核反应堆题</h1><p><strong>Time Limit: 1000/1000 MS (Java/Others)    Memory Limit: 32768/32768 K (Java/Others)Total Submission(s): 12219    Accepted Submission(s): 5547</strong></p>
+<p>Problem Description</p>
+<p>某核反应堆有两类事件发生：<br>高能质点碰击核子时，质点被吸收，放出3个高能质点和1个低能质点；<br>低能质点碰击核子时，质点被吸收，放出2个高能质点和1个低能质点。<br>假定开始的时候（0微秒）只有一个高能质点射入核反应堆，每一微秒引起一个事件发生(对于一个事件，当前存在的所有质点都会撞击核子)，试确定n微秒时高能质点和低能质点的数目。</p>
+<p>Input</p>
+<p>输入含有一些整数n(0≤n≤33)，以微秒为单位，若n为-1表示处理结束。</p>
+<p>Output</p>
+<p>分别输出n微秒时刻高能质点和低能质点的数量，高能质点与低能质点数量之间以逗号空格分隔。每个输出占一行。</p>
+<p>Sample Input</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">5 2</div><div class="line">-1</div></pre></td></tr></table></figure>
+<p>Sample Output</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">571, 209</div><div class="line">11, 4</div></pre></td></tr></table></figure>
+<h3 id="简单分析"><a href="#简单分析" class="headerlink" title="简单分析"></a>简单分析</h3><p>分析题目得到，某秒的高能质点数是它的前一秒乘3再加上前一秒的低能质点数乘2。</p>
+<p>所以不难写出</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">nuclearReactor</span></span></div><div class="line"><span class="class">&#123;</span></div><div class="line">    <span class="keyword">long</span> <span class="keyword">long</span> high,low;</div><div class="line">&#125;;</div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    <span class="keyword">int</span> i,n;</div><div class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">nuclearReactor</span> <span class="title">narr</span>[35];</span></div><div class="line">    narr[<span class="number">0</span>].high=<span class="number">1</span>;</div><div class="line">    narr[<span class="number">0</span>].low=<span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span>(i=<span class="number">1</span>; i&lt;=<span class="number">33</span>; i++)</div><div class="line">    &#123;</div><div class="line">        narr[i].high=narr[i<span class="number">-1</span>].high*<span class="number">3</span>+narr[i<span class="number">-1</span>].low*<span class="number">2</span>;</div><div class="line">        narr[i].low=narr[i<span class="number">-1</span>].high+narr[i<span class="number">-1</span>].low;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">while</span>((<span class="keyword">void</span>)(<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n)!=EOF),n!=<span class="number">-1</span>)</div><div class="line">    &#123;</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"%lld, %lld\n"</span>,narr[n].high,narr[n].low);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>##想了解结构体的用法就去看我发布的结构体文章啦～</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/c语言/" rel="tag"><i class="fa fa-tag"></i> c语言</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/21/为什么Kotlin-比你们用的那些垃圾语言都好/" rel="next" title="为什么 Kotlin 比你们用的那些垃圾语言都好">
+                <i class="fa fa-chevron-left"></i> 为什么 Kotlin 比你们用的那些垃圾语言都好
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/23/c语言struct结构体简介/" rel="prev" title="c语言struct结构体简介">
+                c语言struct结构体简介 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+    <div class="comments" id="comments">
+      <div id="uyan_frame"></div>
+    </div>
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="tuski" />
+            
+              <p class="site-author-name" itemprop="name">tuski</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/thevenomsnake" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:tutushushujianjian@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plus.google.com/tutushushujianjian" target="_blank" title="Google">
+                    
+                      <i class="fa fa-fw fa-google"></i>Google</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/tushujian" target="_blank" title="Twitter">
+                    
+                      <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://youtube.com/yourname" target="_blank" title="YouTube">
+                    
+                      <i class="fa fa-fw fa-youtube"></i>YouTube</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Ps：之前群里有人问一道oj题，然而本人基本没做过oj，就点简单的写了些（在底部），其中我用了struct，会单独放一篇文章讲解。"><span class="nav-number">1.</span> <span class="nav-text">Ps：之前群里有人问一道oj题，然而本人基本没做过oj，就点简单的写了些（在底部），其中我用了struct，会单独放一篇文章讲解。</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基础练习2-7"><span class="nav-number">1.1.</span> <span class="nav-text">基础练习2.7</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进阶练习3-2"><span class="nav-number">1.2.</span> <span class="nav-text">进阶练习3.2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#进阶练习3-8"><span class="nav-number">1.3.</span> <span class="nav-text">进阶练习3.8</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#杭电（hdu）2085-核反应堆题"><span class="nav-number"></span> <span class="nav-text">杭电（hdu）2085 核反应堆题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简单分析"><span class="nav-number">0.1.</span> <span class="nav-text">简单分析</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">tuski</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+    
+
+    
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2148214"></script>
+      <!-- UY END -->
+    
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
