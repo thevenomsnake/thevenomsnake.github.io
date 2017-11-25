@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-big-counter.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="swift库," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Swift自动布局SnapKit的详细使用介绍简介SnapKit，一个经典的Swift版的第三方库，专门用于项目的自动布局，目前在github上的stars就高达11346颗星，这是一个不小的数字，亦足以证明它存在的非凡意义和作用。作者认为，在iOS开发（swift）中，它是用于项目最优秀的自动布局的必选库之一。它的作者仍然是写Objective-C的第三方库Masonry的大牛 - Robert">
+<meta name="keywords" content="swift库">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Swift-自动布局SnapKit">
+<meta property="og:url" content="http://www.perphet.com/2017/11/25/Swift-自动布局SnapKit/index.html">
+<meta property="og:site_name" content="Tuski&#39;s Blog">
+<meta property="og:description" content="Swift自动布局SnapKit的详细使用介绍简介SnapKit，一个经典的Swift版的第三方库，专门用于项目的自动布局，目前在github上的stars就高达11346颗星，这是一个不小的数字，亦足以证明它存在的非凡意义和作用。作者认为，在iOS开发（swift）中，它是用于项目最优秀的自动布局的必选库之一。它的作者仍然是写Objective-C的第三方库Masonry的大牛 - Robert">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.loli.net/2017/11/25/5a1923f5bec02.png">
+<meta property="og:image" content="https://i.loli.net/2017/11/25/5a19243f59a94.png">
+<meta property="og:image" content="https://i.loli.net/2017/11/25/5a1929a43c0e9.png">
+<meta property="og:image" content="https://i.loli.net/2017/11/25/5a1929cb608b9.png">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1974698-4a58ce03c79222d3.jpg">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1974698-09c6303f2d50331c.jpg">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1974698-f85ad9126140abae.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1974698-87a1f04f3651a3a8.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1974698-5d2e213fdaa51b25.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1974698-f26b2286347c39cc.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1974698-9a709cc7bfd4a9e9.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1974698-e5f347e060f611f2.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1974698-a8eb71769d210970.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1974698-ca57e8436580500d.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1974698-d3ad7232e8a70246.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1974698-a0d9f2b52521f740.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1974698-1e9f584ce592812c.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1974698-5fd5a69571c14dd0.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1974698-d5f4714041562066.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1974698-bbf3ddc34397a09b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-11-25T08:50:22.151Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Swift-自动布局SnapKit">
+<meta name="twitter:description" content="Swift自动布局SnapKit的详细使用介绍简介SnapKit，一个经典的Swift版的第三方库，专门用于项目的自动布局，目前在github上的stars就高达11346颗星，这是一个不小的数字，亦足以证明它存在的非凡意义和作用。作者认为，在iOS开发（swift）中，它是用于项目最优秀的自动布局的必选库之一。它的作者仍然是写Objective-C的第三方库Masonry的大牛 - Robert">
+<meta name="twitter:image" content="https://i.loli.net/2017/11/25/5a1923f5bec02.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.perphet.com/2017/11/25/Swift-自动布局SnapKit/"/>
+
+
+
+
+
+  <title>Swift-自动布局SnapKit | Tuski's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tuski's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Code my life</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.perphet.com/2017/11/25/Swift-自动布局SnapKit/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tuski">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tuski's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Swift-自动布局SnapKit</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-25T15:44:18+08:00">
+                2017-11-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Swift自动布局SnapKit的详细使用介绍"><a href="#Swift自动布局SnapKit的详细使用介绍" class="headerlink" title="Swift自动布局SnapKit的详细使用介绍"></a>Swift自动布局SnapKit的详细使用介绍</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>SnapKit，一个经典的Swift版的第三方库，专门用于项目的自动布局，目前在github上的stars就高达11346颗星，这是一个不小的数字，亦足以证明它存在的非凡意义和作用。作者认为，在iOS开发（swift）中，它是用于项目最优秀的自动布局的必选库之一。它的作者仍然是写Objective-C的第三方库Masonry的大牛 - Robert Payne，开门见山，本文将详细介绍介绍SnapKit的详细使用和安装，相信对于初入门该库的开发者或许会有一定的帮助，当然，鉴于作者能力有限，如有不足之处，欢迎指点和批评。</p>
+<h2 id="Snapkit的安装"><a href="#Snapkit的安装" class="headerlink" title="Snapkit的安装"></a>Snapkit的安装</h2><h3 id="环境配置要求："><a href="#环境配置要求：" class="headerlink" title="环境配置要求："></a>环境配置要求：</h3><blockquote>
+<ul>
+<li>iOS 8.0 / Mac OS X 10.11+</li>
+<li>Xcode 8.0+</li>
+<li>Swift 3.0+</li>
+</ul>
+</blockquote>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>在已经安装<a href="www.baidu.com">CocoaPods</a>的前提下， 即可以进行下列步骤。</p>
+<ul>
+<li>在你的项目工程里的<strong>Podfile</strong>文件里面添加</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">source &apos;https://github.com/CocoaPods/Specs.git&apos;</div><div class="line"></div><div class="line">platform :ios, &apos;10.0&apos;</div><div class="line"></div><div class="line">use_frameworks!</div><div class="line"></div><div class="line">target &apos;这里是你的工程名称&apos; do</div><div class="line">    pod &apos;SnapKit&apos;, &apos;~&gt; 3.0&apos;</div><div class="line">end</div></pre></td></tr></table></figure>
+<ul>
+<li>老生常谈，运行CocoaPods的如下命令</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pod install</div></pre></td></tr></table></figure>
+<p>到此，不出意外的话，你已经将<strong>SnapKit</strong>集成到你的项目中了。然后，就开始讲怎么使用它了。</p>
+<h3 id="Snapkit的布局使用"><a href="#Snapkit的布局使用" class="headerlink" title="Snapkit的布局使用"></a>Snapkit的布局使用</h3><p><strong>1</strong>、 实现一个宽高为100，居于当前视图的中心的视图布局，示例代码如下</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> UIKit</div><div class="line"><span class="keyword">import</span> SnapKit</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ViewController</span>: <span class="title">UIViewController</span> </span>&#123;</div><div class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">viewDidLoad</span><span class="params">()</span></span> &#123;</div><div class="line">        <span class="keyword">super</span>.viewDidLoad()</div><div class="line"></div><div class="line">        <span class="keyword">let</span> testView = <span class="type">UIView</span>()</div><div class="line">        testView.backgroundColor = <span class="type">UIColor</span>.cyan</div><div class="line">        view.addSubview(testView)</div><div class="line">        testView.snp.makeConstraints &#123; (make) <span class="keyword">in</span></div><div class="line">            make.width.equalTo(<span class="number">100</span>)         <span class="comment">// 宽为100</span></div><div class="line">            make.height.equalTo(<span class="number">100</span>)        <span class="comment">// 高为100</span></div><div class="line">            make.center.equalTo(view)       <span class="comment">// 位于当前视图的中心</span></div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>更简洁的写法可以</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> UIKit</div><div class="line"><span class="keyword">import</span> SnapKit</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ViewController</span>: <span class="title">UIViewController</span> </span>&#123;</div><div class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">viewDidLoad</span><span class="params">()</span></span> &#123;</div><div class="line">        <span class="keyword">super</span>.viewDidLoad()</div><div class="line"></div><div class="line">        <span class="keyword">let</span> testView = <span class="type">UIView</span>()</div><div class="line">        testView.backgroundColor = <span class="type">UIColor</span>.cyan</div><div class="line">        view.addSubview(testView)</div><div class="line">        testView.snp.makeConstraints &#123; (make) <span class="keyword">in</span></div><div class="line">            make.width.height.equalTo(<span class="number">100</span>)    <span class="comment">// 链式语法直接定义宽高</span></div><div class="line">            make.center.equalToSuperview()    <span class="comment">// 直接在父视图居中</span></div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>效果图</p>
+<p><img src="https://i.loli.net/2017/11/25/5a1923f5bec02.png" alt="1974698-e0670758f7c9b415.png"></p>
+<p><strong>2</strong>、View2位于View1内， view2位于View1的中心， 并且距离View的边距的距离都为20</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> UIKit</div><div class="line"><span class="keyword">import</span> SnapKit</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ViewController</span>: <span class="title">UIViewController</span> </span>&#123;</div><div class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">viewDidLoad</span><span class="params">()</span></span> &#123;</div><div class="line">        <span class="keyword">super</span>.viewDidLoad()</div><div class="line"></div><div class="line">         <span class="comment">// 黑色视图作为父视图</span></div><div class="line">         <span class="keyword">let</span> view1 = <span class="type">UIView</span>()</div><div class="line">         view1.frame = <span class="type">CGRect</span>(x: <span class="number">0</span>, y: <span class="number">0</span>, width: <span class="number">300</span>, height: <span class="number">300</span>)</div><div class="line">         view1.center = view.center</div><div class="line">         view1.backgroundColor = <span class="type">UIColor</span>.black</div><div class="line">         view.addSubview(view1)</div><div class="line"></div><div class="line">         <span class="comment">// 测试视图</span></div><div class="line">         <span class="keyword">let</span> view2 = <span class="type">UIView</span>()</div><div class="line">         view2.backgroundColor = <span class="type">UIColor</span>.magenta</div><div class="line">         view1.addSubview(view2)</div><div class="line">         view2.snp.makeConstraints &#123; (make) <span class="keyword">in</span></div><div class="line">               make.top.equalToSuperview().offset(<span class="number">20</span>)      <span class="comment">// 当前视图的顶部距离父视图的顶部：20（父视图顶部+20）</span></div><div class="line">               make.<span class="keyword">left</span>.equalToSuperview().offset(<span class="number">20</span>)     <span class="comment">// 当前视图的左边距离父视图的左边：20（父视图左边+20）</span></div><div class="line">              make.bottom.equalToSuperview().offset(-<span class="number">20</span>)  <span class="comment">// 当前视图的底部距离父视图的底部：-20（父视图底部-20）</span></div><div class="line">              make.<span class="keyword">right</span>.equalToSuperview().offset(-<span class="number">20</span>)   <span class="comment">// 当前视图的右边距离父视图的右边：-20（父视图右边-20）</span></div><div class="line">         &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>更简洁的写法</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> UIKit</div><div class="line"><span class="keyword">import</span> SnapKit</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ViewController</span>: <span class="title">UIViewController</span> </span>&#123;</div><div class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">viewDidLoad</span><span class="params">()</span></span> &#123;</div><div class="line">        <span class="keyword">super</span>.viewDidLoad()</div><div class="line"></div><div class="line">         <span class="comment">// 黑色视图作为父视图</span></div><div class="line">         <span class="keyword">let</span> view1 = <span class="type">UIView</span>()</div><div class="line">         view1.frame = <span class="type">CGRect</span>(x: <span class="number">0</span>, y: <span class="number">0</span>, width: <span class="number">300</span>, height: <span class="number">300</span>)</div><div class="line">         view1.center = view.center</div><div class="line">         view1.backgroundColor = <span class="type">UIColor</span>.black</div><div class="line">         view.addSubview(view1)</div><div class="line"></div><div class="line">         <span class="comment">// 测试视图</span></div><div class="line">         <span class="keyword">let</span> view2 = <span class="type">UIView</span>()</div><div class="line">         view2.backgroundColor = <span class="type">UIColor</span>.magenta</div><div class="line">         view1.addSubview(view2)</div><div class="line">         view2.snp.makeConstraints &#123; (make) <span class="keyword">in</span></div><div class="line">            make.edges.equalToSuperview().inset(<span class="type">UIEdgeInsets</span>(top: <span class="number">20</span>, <span class="keyword">left</span>: <span class="number">20</span>, bottom: <span class="number">20</span>, <span class="keyword">right</span>: <span class="number">20</span>))</div><div class="line">         &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>效果图</p>
+<p><img src="https://i.loli.net/2017/11/25/5a19243f59a94.png" alt="1974698-ad6e16114189a9bb.png"></p>
+<p><strong>3</strong>、布局一个视图view2， 让它的水平中心线小于等于另一个视图view2的左边，可以这样布局</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> UIKit</div><div class="line"><span class="keyword">import</span> SnapKit</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ViewController</span>: <span class="title">UIViewController</span> </span>&#123;</div><div class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">viewDidLoad</span><span class="params">()</span></span> &#123;</div><div class="line">        <span class="keyword">super</span>.viewDidLoad()</div><div class="line"></div><div class="line">         <span class="comment">// 黑色视图作为父视图</span></div><div class="line">         <span class="keyword">let</span> view1 = <span class="type">UIView</span>()</div><div class="line">         view1.frame = <span class="type">CGRect</span>(x: <span class="number">0</span>, y: <span class="number">0</span>, width: <span class="number">300</span>, height: <span class="number">300</span>)</div><div class="line">         view1.center = view.center</div><div class="line">         view1.backgroundColor = <span class="type">UIColor</span>.black</div><div class="line">         view.addSubview(view1)</div><div class="line"></div><div class="line">         <span class="comment">// 测试视图</span></div><div class="line">         <span class="keyword">let</span> view2 = <span class="type">UIView</span>()</div><div class="line">         view2.backgroundColor = <span class="type">UIColor</span>.magenta</div><div class="line">         view1.addSubview(view2)</div><div class="line">         view2.snp.makeConstraints &#123; (make) <span class="keyword">in</span></div><div class="line">            <span class="comment">// 让顶部距离view1的底部为10的距离</span></div><div class="line">            make.top.equalTo(view1.snp.bottom).offset(<span class="number">10</span>)</div><div class="line">            <span class="comment">// 设置宽、高</span></div><div class="line">            make.width.height.equalTo(<span class="number">100</span>)</div><div class="line">            <span class="comment">// 水平中心线&lt;=view1的左边</span></div><div class="line">            make.centerX.lessThanOrEqualTo(view1.snp.leading)</div><div class="line">         &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>效果图</p>
+<p><img src="https://i.loli.net/2017/11/25/5a1929a43c0e9.png" alt="1974698-fda525f8d8d474b0-1.png"></p>
+<h3 id="视图的属性说明"><a href="#视图的属性说明" class="headerlink" title="视图的属性说明"></a>视图的属性说明</h3><p>通过上面的大致简单布局我们对SnapKit有了一个基本的了解，那么， 它的布局属性是怎么来的呢？和原生的布局类有什么关联？ 下面看一个SnapKit的布局属性表</p>
+<p><img src="https://i.loli.net/2017/11/25/5a1929cb608b9.png" alt="1974698-98e6cb55d8b7702c.png"></p>
+<p>从表中，我们知道，Snapkit的布局属性都是源自于系统的NSLayoutAttribute，那么，NSLayoutAttribute是个什么呢？其实，它在swift中是一个枚举，内部列举了很多布局属性诸如top、left、leading、centerX等，Snapkit的布局属性与它们都存在一一的对应关系。</p>
+<h4 id="Snapkit-的-greaterThanOrEqualTo-属性"><a href="#Snapkit-的-greaterThanOrEqualTo-属性" class="headerlink" title="Snapkit 的 greaterThanOrEqualTo 属性"></a>Snapkit 的 greaterThanOrEqualTo 属性</h4><p>如果想让视图View2的左边&gt;=父视图View1的左边， 这时我们就可以用到greaterThanOrEqualTo</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> UIKit</div><div class="line"><span class="keyword">import</span> SnapKit</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ViewController</span>: <span class="title">UIViewController</span> </span>&#123;</div><div class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">viewDidLoad</span><span class="params">()</span></span> &#123;</div><div class="line">        <span class="keyword">super</span>.viewDidLoad()</div><div class="line"></div><div class="line">         <span class="comment">// 黑色视图作为父视图</span></div><div class="line">         <span class="keyword">let</span> view1 = <span class="type">UIView</span>()</div><div class="line">         view1.frame = <span class="type">CGRect</span>(x: <span class="number">0</span>, y: <span class="number">0</span>, width: <span class="number">300</span>, height: <span class="number">300</span>)</div><div class="line">         view1.center = view.center</div><div class="line">         view1.backgroundColor = <span class="type">UIColor</span>.black</div><div class="line">         view.addSubview(view1)</div><div class="line"></div><div class="line">         <span class="comment">// 测试视图</span></div><div class="line">         <span class="keyword">let</span> view2 = <span class="type">UIView</span>()</div><div class="line">         view2.backgroundColor = <span class="type">UIColor</span>.magenta</div><div class="line">         view1.addSubview(view2)</div><div class="line">         view2.snp.makeConstraints &#123; (make) <span class="keyword">in</span></div><div class="line">            <span class="comment">// 让顶部距离view1的底部为10的距离</span></div><div class="line">            make.top.equalTo(view1.snp.bottom).offset(<span class="number">10</span>)</div><div class="line">            <span class="comment">// 设置宽、高</span></div><div class="line">            make.width.height.equalTo(<span class="number">100</span>)</div><div class="line">            <span class="comment">// 水平中心线&lt;=view1的左边</span></div><div class="line">            make.<span class="keyword">left</span>.greaterThanOrEqualTo(view1)</div><div class="line"></div><div class="line">            <span class="comment">// 或者, 和上面一行代码一样的效果</span></div><div class="line"><span class="comment">//            make.left.greaterThanOrEqualTo(view1.snp.left)</span></div><div class="line">         &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>效果图</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1974698-4a58ce03c79222d3.jpg" alt="1974698-4a58ce03c79222d3.jpg"></p>
+<p>其实，greaterThanOrEqualTo这个属性有点多余，比如上面这行代码 <strong>make.left.greaterThanOrEqualTo(view1)</strong> ， 我们可以换成 <strong>make.left.equalToSuperview()</strong>或<strong>make.left.equalTo(view1.snp.left)</strong>， 效果是一样的，也就是说，一般情况下 <strong>&gt;=</strong> 或 <strong>&lt;=</strong> 我们都可以直接用<strong>equalTo</strong>来代替！</p>
+<h4 id="SnapKit的greaterThanOrEqualTo和lessThanOrEqualTo联合使用"><a href="#SnapKit的greaterThanOrEqualTo和lessThanOrEqualTo联合使用" class="headerlink" title="SnapKit的greaterThanOrEqualTo和lessThanOrEqualTo联合使用"></a>SnapKit的greaterThanOrEqualTo和lessThanOrEqualTo联合使用</h4><p>当我们想要让某个视图的<strong>width或height</strong>大于等于某个特定的值，小于等于某个特定的值的时候，一般而言，Snapkit会以greaterThanOrEqualTo为准，这里举一个width的例子，为了方便，这里指贴出了viewDidLoad中的代码（其他没必要）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">// 黑色视图作为父视图</div><div class="line">let view1 = UIView()</div><div class="line">view1.frame = CGRect(x: 0, y: 0, width: 300, height: 300)</div><div class="line">view1.center = view.center</div><div class="line">view1.backgroundColor = UIColor.black</div><div class="line">view.addSubview(view1)</div><div class="line"></div><div class="line">// 测试视图</div><div class="line">let view2 = UIView()</div><div class="line">view2.backgroundColor = UIColor.magenta</div><div class="line">view1.addSubview(view2)</div><div class="line">view2.snp.makeConstraints &#123; (make) in</div><div class="line">   make.width.lessThanOrEqualTo(300)</div><div class="line">   make.width.greaterThanOrEqualTo(200)</div><div class="line">   make.height.equalTo(100)</div><div class="line">   make.center.equalToSuperview()</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>接着，我们来看一下效果图</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1974698-09c6303f2d50331c.jpg" alt="1974698-09c6303f2d50331c.jpg"></p>
+<p>很明显，最后的宽度是以<strong>make.width.greaterThanOrEqualTo(200)</strong>为标准的，也可以这样的，在同时使用两者的情况下，<strong>greaterThanOrEqualTo</strong>的优先级略比<strong>lessThanOrEqualTo</strong>的优先级高。值得一提的是， 在上面的例子中，如果我们只设置<strong>make.width.lessThanOrEqualTo(300)</strong>，那么view2是不会显示出来的，因为view2不知道你要表达的是要显示多少，小于等于300，到底是100还是200呢？(这里指针对width和height）所以它不能确定这个约束的值，但是，如果我们单独设置<strong>make.width.greaterThanOrEqualTo(200)</strong>，那么就和上面的效果一样，因为它会以200为标准布局约束！</p>
+<h4 id="lessThanOrEqualTo的用于上、下、左、右"><a href="#lessThanOrEqualTo的用于上、下、左、右" class="headerlink" title="lessThanOrEqualTo的用于上、下、左、右"></a>lessThanOrEqualTo的用于上、下、左、右</h4><p>如果我们想要视图view2的左边 &lt;= view1.left + 10, 那么就可以直接用到<strong>lessThanOrEqualTo</strong>布局了，看下面这个例子</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">// 黑色视图作为父视图</div><div class="line">let view1 = UIView()</div><div class="line">view1.frame = CGRect(x: 0, y: 0, width: 300, height: 300)</div><div class="line">view1.center = view.center</div><div class="line">view1.backgroundColor = UIColor.black</div><div class="line">view.addSubview(view1)</div><div class="line"></div><div class="line">// 测试视图</div><div class="line">let view2 = UIView()</div><div class="line">view2.backgroundColor = UIColor.magenta</div><div class="line">view1.addSubview(view2)</div><div class="line">view2.snp.makeConstraints &#123; (make) in</div><div class="line">   make.left.lessThanOrEqualTo(20)        // &lt;= 父视图的左边+20</div><div class="line">   make.right.equalTo(-40)                // = 父视图的右边-40</div><div class="line">   make.height.equalTo(100)</div><div class="line">   make.center.equalToSuperview()</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>效果图</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1974698-f85ad9126140abae.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="123"></p>
+<h4 id="Snapkit布局的灵活性"><a href="#Snapkit布局的灵活性" class="headerlink" title="Snapkit布局的灵活性"></a>Snapkit布局的灵活性</h4><ul>
+<li>Snapkit布局灵活性很强， 我们看下面的例子, 他们的效果是一样的</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">make.<span class="keyword">left</span>.equalToSuperview().offset(<span class="number">10</span>)</div><div class="line">make.<span class="keyword">left</span>.equalTo(<span class="number">10</span>)</div><div class="line">make.<span class="keyword">left</span>.equalTo(view1.snp.<span class="keyword">left</span>).offset(<span class="number">10</span>)</div></pre></td></tr></table></figure>
+<ul>
+<li>设置视图的大小（width，height）,他们效果是一样的</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">make.width.height.equalTo(100)</div><div class="line">或</div><div class="line">make.width.equalTo(100)</div><div class="line">make.height.equalTo(100)</div><div class="line">或</div><div class="line">make.size.equalTo(CGSize(width: 100, height: 100))</div></pre></td></tr></table></figure>
+<ul>
+<li>优先级(priority)</li>
+</ul>
+<p>我们来看一下Snapkit的优先级设置， 优先级都是附加在约束链的末尾处，看下面的使用方法</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 黑色视图作为父视图</span></div><div class="line"><span class="keyword">let</span> view1 = <span class="type">UIView</span>()</div><div class="line">view1.frame = <span class="type">CGRect</span>(x: <span class="number">0</span>, y: <span class="number">0</span>, width: <span class="number">300</span>, height: <span class="number">300</span>)</div><div class="line">view1.center = view.center</div><div class="line">view1.backgroundColor = <span class="type">UIColor</span>.black</div><div class="line">view.addSubview(view1)</div><div class="line"></div><div class="line"><span class="comment">// 测试视图</span></div><div class="line"><span class="keyword">let</span> view2 = <span class="type">UIView</span>()</div><div class="line">view2.backgroundColor = <span class="type">UIColor</span>.magenta</div><div class="line">view1.addSubview(view2)</div><div class="line">view2.snp.makeConstraints &#123; (make) <span class="keyword">in</span></div><div class="line">    make.width.equalTo(<span class="number">100</span>).priority(<span class="number">666</span>)</div><div class="line">    make.width.equalTo(<span class="number">250</span>).priority(<span class="number">999</span>)</div><div class="line">    make.height.equalTo(<span class="number">111</span>)</div><div class="line">    make.center.equalToSuperview()</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>效果图</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1974698-87a1f04f3651a3a8.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="priorityimage"></p>
+<p>从上面我们可以知道, 我们设置了两个优先级：make.width.equalTo(100).priority(666) <strong>和</strong> make.width.equalTo(250).priority(999)， 那运行结果是一个哪个为准呢？显然是以优先级为 <strong>999</strong>的为准，因为 priority(999)&gt;priotity(666)， 所以在使用Snapkit的过程中，有时我们可以使用优先级priority来设置我们的约束， 另外，值得一提的是，SnapKit的优先级最大值只能是 1000， 如果优先级的数值超过1000，则运行时就会<strong>Crash</strong>！这里要尤其注意。</p>
+<ul>
+<li>更新约束（引用约束）</li>
+</ul>
+<p>我们可以通过保存某一个约束布局来更新相应的约束，或者保存一组约束布局到一个数组中更新约束， 具体看下面代码</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 保存约束（引用约束）</span></div><div class="line"><span class="keyword">var</span> updateConstraint: <span class="type">Constraint</span>?</div><div class="line"></div><div class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">viewDidLoad</span><span class="params">()</span></span> &#123;</div><div class="line">    <span class="keyword">super</span>.viewDidLoad()</div><div class="line"></div><div class="line">    <span class="comment">// 黑色视图作为父视图</span></div><div class="line">    <span class="keyword">let</span> view1 = <span class="type">UIView</span>()</div><div class="line">    view1.frame = <span class="type">CGRect</span>(x: <span class="number">0</span>, y: <span class="number">0</span>, width: <span class="number">300</span>, height: <span class="number">300</span>)</div><div class="line">    view1.center = view.center</div><div class="line">    view1.backgroundColor = <span class="type">UIColor</span>.black</div><div class="line">    view.addSubview(view1)</div><div class="line"></div><div class="line">    <span class="comment">// 测试视图</span></div><div class="line">    <span class="keyword">let</span> view2 = <span class="type">UIView</span>()</div><div class="line">    view2.backgroundColor = <span class="type">UIColor</span>.magenta</div><div class="line">    view1.addSubview(view2)</div><div class="line">    view2.snp.makeConstraints &#123; (make) <span class="keyword">in</span></div><div class="line">        make.width.height.equalTo(<span class="number">100</span>)  <span class="comment">// 宽高为100</span></div><div class="line">        <span class="keyword">self</span>.updateConstraint = make.top.<span class="keyword">left</span>.equalTo(<span class="number">10</span>).constraint   <span class="comment">// 距离父视图上、左为10</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">let</span> updateButton = <span class="type">UIButton</span>(type: .custom)</div><div class="line">    updateButton.backgroundColor = <span class="type">UIColor</span>.brown</div><div class="line">    updateButton.frame = <span class="type">CGRect</span>(x: <span class="number">100</span>, y: <span class="number">80</span>, width: <span class="number">50</span>, height: <span class="number">30</span>)</div><div class="line">    updateButton.setTitle(<span class="string">"更新"</span>, <span class="keyword">for</span>: .normal)</div><div class="line">    updateButton.addTarget(<span class="keyword">self</span>, action: #selector(updateConstraintMethod), <span class="keyword">for</span>: .touchUpInside)</div><div class="line">    view.addSubview(updateButton)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 更新约束</span></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">updateConstraintMethod</span><span class="params">()</span></span> &#123;</div><div class="line">    <span class="keyword">self</span>.updateConstraint?.update(offset: <span class="number">50</span>)   <span class="comment">// 更新距离父视图上、左为50</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/1974698-5d2e213fdaa51b25.gif?imageMogr2/auto-orient/strip" alt="testgif1"></p>
+<ul>
+<li>更新约束(snp.updateConstraints)</li>
+</ul>
+<p>说起这个<code>updateConstraints</code>, 我也懵逼过，那么它到底有何作用呢？又怎么用呢？它和一开始就使用的<code>makeConstraints</code>又有什么明确的区别呢？请继续往下看</p>
+<p><strong>说明1</strong>：如果你这是更新某个约束或某几个约束的常量值，你就可以使用<code>updateConstraints</code>而不是<code>makeConstraints</code>。</p>
+<p><strong>说明2</strong>：这个也是苹果推荐用来添加或更新约束的方式</p>
+<p><strong>说明3</strong>：这个方法可以调用多次，会相应<code>setNeedsUpdateConstraints</code>, 在控制器中，可以写在<code>override func updateViewConstraints()</code>方法里面（当然也可以写在你想要什么时候更新的点击事件里面）</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> UIKit</div><div class="line"><span class="keyword">import</span> SnapKit</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ViewController</span>: <span class="title">UIViewController</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="built_in">lazy</span> <span class="keyword">var</span> blackView = <span class="type">UIView</span>()</div><div class="line"></div><div class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">viewDidLoad</span><span class="params">()</span></span> &#123;</div><div class="line">        <span class="keyword">super</span>.viewDidLoad()</div><div class="line"></div><div class="line">        blackView.backgroundColor = <span class="type">UIColor</span>.black</div><div class="line">        view.addSubview(blackView)</div><div class="line">        blackView.snp.makeConstraints &#123; (make) <span class="keyword">in</span></div><div class="line"></div><div class="line">            <span class="comment">// 四个约束确定位置和大小</span></div><div class="line">            make.width.equalTo(<span class="number">100</span>)</div><div class="line">            make.height.equalTo(<span class="number">150</span>)</div><div class="line">            make.top.equalTo(<span class="number">10</span>)</div><div class="line">            make.centerX.equalToSuperview()</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">updateViewConstraints</span><span class="params">()</span></span> &#123;</div><div class="line"></div><div class="line">        blackView.snp.updateConstraints &#123; (make) <span class="keyword">in</span></div><div class="line">            <span class="comment">// 更新距离父视图顶部的约束（从 10 ---&gt; 300 ）</span></div><div class="line">            make.top.equalTo(<span class="number">300</span>)</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">// 根据苹果，调用父类应该放在末尾</span></div><div class="line">        <span class="keyword">super</span>.updateViewConstraints()</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><code>注意</code>: 从上面的代码中我们很明确地知道， <code>blackView</code>通过<code>width</code>、<code>height</code>、<code>top</code>、<code>centerX</code>确定了它本身的大小和位置， 但是， 在 run 出来之后，它的top改变了距离， 从 10 变成了 300，其他三个约束保持不变， 见下图效果：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1974698-f26b2286347c39cc.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="test10"></p>
+<p>显而易见， 除了<code>top</code>约束， 其他都没有改变！ 也就是说，约束被更新（相当于系统升级一样，是一个道理）</p>
+<p>现在，我们通过UIButton的点击事件来证明一下制作约束<code>makeConstraints</code>和<code>updateConstraints</code><strong>具体的区别</strong>在哪里？</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">lazy</span> <span class="keyword">var</span> blackView = <span class="type">UIView</span>()</div><div class="line"></div><div class="line"><span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">viewDidLoad</span><span class="params">()</span></span> &#123;</div><div class="line">    <span class="keyword">super</span>.viewDidLoad()</div><div class="line"></div><div class="line">    blackView.backgroundColor = <span class="type">UIColor</span>.black</div><div class="line">    view.addSubview(blackView)</div><div class="line">    blackView.snp.makeConstraints &#123; (make) <span class="keyword">in</span></div><div class="line"></div><div class="line">        make.width.equalTo(<span class="number">100</span>)</div><div class="line">        make.height.equalTo(<span class="number">150</span>)</div><div class="line">        make.top.equalTo(<span class="number">50</span>)</div><div class="line">        make.centerX.equalToSuperview()</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">let</span> btn = <span class="type">UIButton</span>(type: .custom)</div><div class="line">    btn.backgroundColor = <span class="type">UIColor</span>.brown</div><div class="line">    btn.frame = <span class="type">CGRect</span>(x: <span class="number">100</span>, y: <span class="number">200</span>, width: <span class="number">60</span>, height: <span class="number">30</span>)</div><div class="line">    btn.addTarget(<span class="keyword">self</span>, action: #selector(buttonAction), <span class="keyword">for</span>: .touchUpInside)</div><div class="line">    view.addSubview(btn)</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 点击更新/制作约束</span></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">buttonAction</span><span class="params">()</span></span> &#123;</div><div class="line"></div><div class="line">    blackView.snp.makeConstraints &#123; (make) <span class="keyword">in</span></div><div class="line">        make.width.height.equalTo(<span class="number">20</span>)</div><div class="line">        make.top.equalTo(<span class="number">300</span>)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>先看效果图</p>
+<p><strong>点击事件发生前(图1）：</strong></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1974698-9a709cc7bfd4a9e9.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="test11"></p>
+<p><strong>点击事件发生后（图2）</strong></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1974698-e5f347e060f611f2.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="test12"></p>
+<p><strong>图3</strong></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1974698-a8eb71769d210970.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="test14"></p>
+<p><strong>图4</strong></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1974698-ca57e8436580500d.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="test13"></p>
+<blockquote>
+<p>上面，我们知道，视图 <strong>blackView</strong>一开始是由四个约束确定位置和大小，在点击事情响应后，我们又给 <strong>blackView</strong> 制作（记住，是制作，而不是重做，两者有明确的区别）了3个约束，分别是 <code>width</code>、<code>height</code>、<code>top</code>, 那么这样做问题出现在哪里呢？ <strong>第一</strong>， 点击事情发生前（图1）， 在点击事件发生后（见图2）， 我们发现，<code>blackView</code>的<code>width</code>、<code>height</code>约束改变了，但是 <code>top</code>却没有改变，还是原来的距离父视图顶部 50 的距离， 原因在于，我们在原来的约束基础上又添加了<strong>多余的</strong>约束， 也就是说，约束从4个变成了7个（见图3左边constraints）， 这样就产生了约束不明确，进而导致<strong>snapkit</strong>的警告（见图4）， 这样布局显然是不可取的，在项目中这样做极其危险，甚至可能会导致异常奔溃！！！！</p>
+</blockquote>
+<p><strong>现在</strong>， 我们该将点击事件中的约束布局从<code>makeConstraints</code>改变成<code>updateConstraints</code>来试试两者有什么区别(下面只添加了点击事件的代码，其他事重复的就不多此一举了）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">func buttonAction() &#123;</div><div class="line">    // 注意这里是updateConstraints， 而不是makeConstraints</div><div class="line">    blackView.snp.updateConstraints &#123; (make) in</div><div class="line">        make.width.height.equalTo(20)</div><div class="line">        make.top.equalTo(300)</div><div class="line">    &#125;</div><div class="line">    print(&quot;这里试试snapkit有没有报警告&quot;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>接着看点击事件后的效果图</p>
+<p><strong>图5</strong></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1974698-d3ad7232e8a70246.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="test5"></p>
+<p><strong>图6</strong></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1974698-a0d9f2b52521f740.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="test6"></p>
+<p><strong>图7</strong></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1974698-1e9f584ce592812c.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="test7"></p>
+<blockquote>
+<p>发现没有，在将<code>makeConstraints</code>改变成<code>updateConstraints</code>之后，约束还是4个，snapkit没有报警告，点击事件中的<code>width</code>、<code>height</code>、<code>top</code>全部起了作用，而这就是两者的<strong>本质区别</strong>：<code>makeConstraints</code>是制作约束，在原来的基础上再添加另外的约束，也就是画蛇添足，约束增加，视图布局就有不确定性，从而有些约束起作用，有些不起作用（如上面的top），snapkit报警告！！！而<code>updateConstraints</code>是更新约束，改变原有约束，约束不会增加，没经过<code>updateConstraints</code>处理的保持原有约束，经过处理就更新约束，约束不会减少，snapkit不会产生警告，这是正常标准的更新约束的正确方式！！！</p>
+</blockquote>
+<ul>
+<li>重做约束（remakeConstraints）</li>
+</ul>
+<p>重做约束的本质就是：去掉已有的<strong>所有约束</strong>， 重新做约束，记住，是做约束， 也就是说， 使用了<code>remakeConstraints</code>后，重做的约束必须要能确定相应视图的<strong>大小</strong>和<strong>位置</strong>, 之前<code>makeConstraints</code>的约束已经不会存在了，完全销毁！！！</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 点击更新/制作约束</span></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">buttonAction</span><span class="params">()</span></span> &#123;</div><div class="line"></div><div class="line">    <span class="comment">// 注意这里是 remakeConstraints</span></div><div class="line">    blackView.snp.remakeConstraints &#123; (make) <span class="keyword">in</span></div><div class="line">        make.width.height.equalTo(<span class="number">20</span>)</div><div class="line">        make.top.equalTo(<span class="number">300</span>)</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="built_in">print</span>(<span class="string">"这里试试snapkit有没有报警告"</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>效果图</strong></p>
+<p><strong>图（1）</strong></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1974698-5fd5a69571c14dd0.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="test18"></p>
+<p><strong>图（2）</strong></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1974698-d5f4714041562066.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="test19"></p>
+<p><strong>图（3）</strong></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1974698-bbf3ddc34397a09b.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="test20"></p>
+<blockquote>
+<p>我们看到， <code>blackView</code>重做了约束， 之前的约束不起任何作用，由于它在重做约束后只有 3 个约束分别是 <code>width</code>、<code>height</code>、<code>top</code>, 但是这里有一个问题，就是这 3 个约束只能确定大小，无法确定视图的位置， 所以在水平方向上或者左右缺少一个布局条件， 故 <code>blackView</code>整体视图的x紧靠左边（默认）！ 另外我们发现， 在<strong>图（3）</strong>中，右上角出现了一个感叹号“！”, 那是因为告诉你缺少了一个约束条件：<code>x-xcode-debug-views://7f81fcbc7900: runtime: Layout Issues: Horizontal position is ambiguous for UIView.</code></p>
+</blockquote>
+<h4 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h4><p>通过以上学习，我们或深或浅地学习了布局三方库SnapKit的使用， 我相信，只要将上述布局会使用，并且懂得布局的原则和道理，基本上就可以“高枕无忧”了，至于涉及动态布局、动画布局等知识，后续有时间会更新文档。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/swift库/" rel="tag"><i class="fa fa-tag"></i> swift库</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/25/c语言课后实验作业6/" rel="next" title="c语言课后实验作业6">
+                <i class="fa fa-chevron-left"></i> c语言课后实验作业6
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/25/CocoaPods安装和使用教程/" rel="prev" title="Swift-自动布局SnapKit">
+                Swift-自动布局SnapKit <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+    <div class="comments" id="comments">
+      <div id="uyan_frame"></div>
+    </div>
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="tuski" />
+            
+              <p class="site-author-name" itemprop="name">tuski</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/thevenomsnake" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:tutushushujianjian@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plus.google.com/tutushushujianjian" target="_blank" title="Google">
+                    
+                      <i class="fa fa-fw fa-google"></i>Google</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/tushujian" target="_blank" title="Twitter">
+                    
+                      <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://youtube.com/yourname" target="_blank" title="YouTube">
+                    
+                      <i class="fa fa-fw fa-youtube"></i>YouTube</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Swift自动布局SnapKit的详细使用介绍"><span class="nav-number">1.</span> <span class="nav-text">Swift自动布局SnapKit的详细使用介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Snapkit的安装"><span class="nav-number">1.2.</span> <span class="nav-text">Snapkit的安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#环境配置要求："><span class="nav-number">1.2.1.</span> <span class="nav-text">环境配置要求：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装"><span class="nav-number">1.2.2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Snapkit的布局使用"><span class="nav-number">1.2.3.</span> <span class="nav-text">Snapkit的布局使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#视图的属性说明"><span class="nav-number">1.2.4.</span> <span class="nav-text">视图的属性说明</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Snapkit-的-greaterThanOrEqualTo-属性"><span class="nav-number">1.2.4.1.</span> <span class="nav-text">Snapkit 的 greaterThanOrEqualTo 属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SnapKit的greaterThanOrEqualTo和lessThanOrEqualTo联合使用"><span class="nav-number">1.2.4.2.</span> <span class="nav-text">SnapKit的greaterThanOrEqualTo和lessThanOrEqualTo联合使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#lessThanOrEqualTo的用于上、下、左、右"><span class="nav-number">1.2.4.3.</span> <span class="nav-text">lessThanOrEqualTo的用于上、下、左、右</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Snapkit布局的灵活性"><span class="nav-number">1.2.4.4.</span> <span class="nav-text">Snapkit布局的灵活性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#小结"><span class="nav-number">1.2.4.5.</span> <span class="nav-text">小结</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">tuski</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+    
+
+    
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2148214"></script>
+      <!-- UY END -->
+    
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
