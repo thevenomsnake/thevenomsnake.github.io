@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="c语言," />
 
 
 
@@ -86,14 +86,22 @@
 
 
 
+<meta name="description" content="想起来了立马更新=。=">
+<meta name="keywords" content="c语言">
 <meta property="og:type" content="article">
 <meta property="og:title" content="c语言课后实验作业6">
 <meta property="og:url" content="http://www.perphet.com/2017/11/25/c语言课后实验作业6/index.html">
 <meta property="og:site_name" content="Tuski&#39;s Blog">
+<meta property="og:description" content="想起来了立马更新=。=">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-25T07:13:56.237Z">
+<meta property="og:image" content="https://i.loli.net/2017/11/25/5a1918e07e5ad.gif">
+<meta property="og:image" content="https://i.loli.net/2017/11/25/5a191a9a2747a.gif">
+<meta property="og:image" content="https://i.loli.net/2017/11/25/5a191d340cf0b.jpg">
+<meta property="og:updated_time" content="2017-11-25T07:35:50.361Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="c语言课后实验作业6">
+<meta name="twitter:description" content="想起来了立马更新=。=">
+<meta name="twitter:image" content="https://i.loli.net/2017/11/25/5a1918e07e5ad.gif">
 
 
 
@@ -323,7 +331,27 @@
       
 
       
-        
+        <p><strong>想起来了立马更新=。=</strong></p>
+<a id="more"></a>
+<p>#感觉实验6好简单吖</p>
+<p><img src="https://i.loli.net/2017/11/25/5a1918e07e5ad.gif" alt="ACA724D83AAFBA88A5538C08585FC313.gif"></p>
+<p>##进阶练习3.1</p>
+<p>没啥好说的，老师上课也讲了。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> N 1024</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    <span class="keyword">char</span> str[N];</div><div class="line">    </div><div class="line">    <span class="keyword">int</span> num[<span class="number">26</span>][<span class="number">2</span>];</div><div class="line">    <span class="keyword">int</span> i,j,t;</div><div class="line"></div><div class="line">    <span class="keyword">for</span> (i =<span class="number">0</span> ; i&lt;<span class="number">26</span>; i++) &#123;</div><div class="line">        num[i][<span class="number">0</span>] = <span class="string">'a'</span>+i;</div><div class="line">        num[i][<span class="number">1</span>] = <span class="number">0</span>;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line">    gets(str);</div><div class="line">   </div><div class="line">    <span class="keyword">for</span> ( i = <span class="number">0</span>; i&lt;<span class="built_in">strlen</span>(str); i++) &#123;</div><div class="line">        <span class="keyword">if</span> (str[i]&gt;=<span class="string">'a'</span> &amp;&amp; str[i]&lt;=<span class="string">'z'</span>) &#123;</div><div class="line">            num[str[i]-<span class="string">'a'</span>][<span class="number">1</span>]++;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">for</span> ( i = <span class="number">0</span>; i&lt;<span class="number">26</span><span class="number">-1</span>; i++) &#123;</div><div class="line">        <span class="keyword">for</span> ( j = <span class="number">0</span>; j&lt;<span class="number">26</span><span class="number">-1</span>; j++) &#123;</div><div class="line">            <span class="keyword">if</span> (num[j][<span class="number">1</span>]&lt;num[j+<span class="number">1</span>][<span class="number">1</span>]) &#123;</div><div class="line">                t = num[j+<span class="number">1</span>][<span class="number">1</span>];</div><div class="line">                num[j+<span class="number">1</span>][<span class="number">1</span>] = num[j][<span class="number">1</span>];</div><div class="line">                num[j][<span class="number">1</span>] = t;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">  </div><div class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i&lt;<span class="number">26</span>; i++) &#123;</div><div class="line">        <span class="keyword">if</span> (num[i][<span class="number">1</span>]&gt;<span class="number">0</span>) &#123;</div><div class="line">            <span class="built_in">printf</span>(<span class="string">"%c\t%d\n"</span>,num[i][<span class="number">0</span>],num[i][<span class="number">1</span>]);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>##进阶练习3.2</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span>  <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    <span class="keyword">char</span> str[<span class="number">3</span>][<span class="number">81</span>];</div><div class="line">    <span class="keyword">int</span> upper = <span class="number">0</span>,lower = <span class="number">0</span>,digit = <span class="number">0</span>,space = <span class="number">0</span>,other = <span class="number">0</span>;</div><div class="line">    <span class="keyword">int</span> i,j;</div><div class="line"></div><div class="line">    </div><div class="line">    <span class="built_in">printf</span> (<span class="string">"请输入三行字符：\n"</span>);</div><div class="line">    </div><div class="line">    <span class="keyword">for</span> (i=<span class="number">0</span>;i&lt;<span class="number">3</span>;i++)</div><div class="line">        gets(str[i]);</div><div class="line">    </div><div class="line">    <span class="keyword">for</span> (i=<span class="number">0</span>;i&lt;<span class="number">3</span>;i++)</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">for</span> (j=<span class="number">0</span>;j&lt;<span class="built_in">strlen</span>(str[i]);j++)<span class="comment">//注意这里要用strlen来计算长度作为循环的标准</span></div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span> (str[i][j]&gt;=<span class="string">'A'</span> &amp;&amp; str[i][j]&lt;=<span class="string">'Z'</span>)&#123;</div><div class="line">                upper++;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (str[i][j]&gt;=<span class="string">'a'</span> &amp;&amp; str[i][j]&lt;=<span class="string">'z'</span>)&#123;</div><div class="line">                lower++;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span> (str[i][j]&gt;=<span class="string">'0'</span> &amp;&amp; str[i][j]&lt;=<span class="string">'9'</span>)&#123;</div><div class="line">                digit++;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span> <span class="keyword">if</span> ((str[i][j]=<span class="string">' '</span>))&#123;</div><div class="line">                space++;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">else</span>&#123;</div><div class="line">                other++;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"大写字母：%d 个\n"</span>,upper);</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"小写字母：%d 个\n"</span>,lower);</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"数　　字：%d 个\n"</span>,digit);</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"空　　格：%d 个\n"</span>,space);</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"其　　它：%d 个\n"</span>,other);</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>##进阶练习3.3</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span>  <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    <span class="keyword">char</span> str[<span class="number">1024</span>];</div><div class="line">    gets(str);</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i =<span class="number">0</span>; i&lt;<span class="built_in">strlen</span>(str);i++) &#123;</div><div class="line">        <span class="keyword">if</span> (str[i]==<span class="string">','</span>) &#123;</div><div class="line">            str[i]=<span class="string">'\n'</span>;<span class="comment">//直接检测到逗号就替换为换行，这是最简单办法</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span></div><div class="line">            ;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="built_in">puts</span>(str);</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>##进阶练习3.4</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">FIB WARRING:practice is missing，the police is searching.....</div><div class="line"> &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;<span class="comment">/// OOO ///警方突袭进行中/// OOO ///&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;</span></div></pre></td></tr></table></figure>
+<p><img src="https://i.loli.net/2017/11/25/5a191a9a2747a.gif" alt="5E83F1178EC9EB5893850AAD5E42AF2B.gif"></p>
+<blockquote>
+<p>我也不知哪里去了，或许3.4逃走了吧。。。</p>
+</blockquote>
+<p>##进阶练习3.5</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//貌似有点不美观，不过再次懒得改了- -！</span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    <span class="keyword">int</span> i,flag,top=<span class="number">0</span>;</div><div class="line">    <span class="keyword">unsigned</span> <span class="keyword">long</span> len;<span class="comment">//编译器提示：Implicit conversion loses integer precision: 'unsigned long' to 'int'，说明推荐我们使用unsigned long，因为len可能会超出限制长度</span></div><div class="line">    <span class="keyword">char</span> str1[<span class="number">1024</span>],str2[<span class="number">1024</span>];<span class="comment">//st2存放的只有字母</span></div><div class="line">    gets(str1);</div><div class="line">    len=<span class="built_in">strlen</span>(str1);</div><div class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;len;i++)<span class="comment">//用来判断字符，如果是字母就移动位置到前一个地方</span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span>((str1[i]&gt;=<span class="string">'a'</span>&amp;&amp;str1[i]&lt;=<span class="string">'z'</span>)||(str1[i]&gt;=<span class="string">'A'</span>&amp;&amp;str1[i]&lt;=<span class="string">'Z'</span>))</div><div class="line">            str2[top++]=str1[i];</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">        flag = <span class="number">1</span>;</div><div class="line">        len = <span class="built_in">strlen</span>(str2);</div><div class="line">  </div><div class="line">        </div><div class="line">        <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; len/<span class="number">2</span>; i ++)<span class="comment">//此时开始从两头往中间开始判断</span></div><div class="line">        &#123;</div><div class="line">            <span class="keyword">if</span>(str2[i] != str2[len - <span class="number">1</span> -i])</div><div class="line">            &#123;</div><div class="line">                flag = <span class="number">0</span>;</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span>(flag)&#123;</div><div class="line">            <span class="built_in">printf</span>(<span class="string">"Yes!\n"</span>);</div><div class="line">           </div><div class="line">            </div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span>&#123;</div><div class="line">            <span class="built_in">printf</span>(<span class="string">"No!\n"</span>);</div><div class="line">           </div><div class="line">        &#125;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="看完了？"><a href="#看完了？" class="headerlink" title="看完了？"></a>看完了？</h2><p><img src="https://i.loli.net/2017/11/25/5a191d340cf0b.jpg" alt="489723AE45B1F1F2391020127D5CE959.jpg"></p>
+
       
     </div>
     
@@ -337,6 +365,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/c语言/" rel="tag"><i class="fa fa-tag"></i> c语言</a>
+          
+        </div>
       
 
       
@@ -409,8 +443,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -499,6 +542,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#看完了？"><span class="nav-number">1.</span> <span class="nav-text">看完了？</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
