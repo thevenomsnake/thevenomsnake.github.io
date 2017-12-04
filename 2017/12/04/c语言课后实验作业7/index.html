@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-big-counter.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="c语言,c语言作业," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="其实重点在隔壁。。。。。">
+<meta name="keywords" content="c语言,c语言作业">
+<meta property="og:type" content="article">
+<meta property="og:title" content="c语言课后实验作业7">
+<meta property="og:url" content="http://www.perphet.com/2017/12/04/c语言课后实验作业7/index.html">
+<meta property="og:site_name" content="Tuski&#39;s Blog">
+<meta property="og:description" content="其实重点在隔壁。。。。。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-12-04T17:09:37.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="c语言课后实验作业7">
+<meta name="twitter:description" content="其实重点在隔壁。。。。。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.perphet.com/2017/12/04/c语言课后实验作业7/"/>
+
+
+
+
+
+  <title>c语言课后实验作业7 | Tuski's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tuski's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Code my life</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.perphet.com/2017/12/04/c语言课后实验作业7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tuski">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tuski's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">c语言课后实验作业7</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-04T23:42:41+08:00">
+                2017-12-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>其实重点在隔壁。。。。。</p>
+<a id="more"></a>
+<h1 id="实验7"><a href="#实验7" class="headerlink" title="实验7"></a>实验7</h1><p><strong>ps：实验3.1和实验3.3实际是一样的，顺序有点乱（其实我懒得重新写了，逃</strong></p>
+<h2 id="进阶练习3-3"><a href="#进阶练习3-3" class="headerlink" title="进阶练习3.3"></a>进阶练习3.3</h2><h3 id="程序中指定个数，再进行分配的办法"><a href="#程序中指定个数，再进行分配的办法" class="headerlink" title="程序中指定个数，再进行分配的办法"></a>程序中指定个数，再进行分配的办法</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    <span class="keyword">int</span> n,i,sum = <span class="number">0</span>;</div><div class="line">    <span class="keyword">double</span> avg;</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"先输入个数："</span>);</div><div class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</div><div class="line">    <span class="keyword">int</span> *in = (<span class="keyword">int</span> *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">int</span>) * n);</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"输入数："</span>);</div><div class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>;i &lt; n;i++)</div><div class="line">    &#123;</div><div class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>,in+i);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>;i &lt; n;i++)</div><div class="line">    &#123;</div><div class="line">        sum += *(in + i);</div><div class="line">    &#125;</div><div class="line">    avg = (<span class="keyword">double</span>)sum / n </div><div class="line">    <span class="built_in">printf</span>(<span class="string">"和为：%d，平均值为:%.2lf\n"</span>,sum,avg);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>;i &lt; n;i++)</div><div class="line">    &#123;</div><div class="line">       <span class="built_in">printf</span>(<span class="string">"%d 对应的差值是 %.2lf \n"</span>,in+i,avg-*(in+i);</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">free</span>(in);</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>但实际上，题目要求的是“键盘输入若干个整数”，而没有提到要预先输入个数，严格来说，这样是错误的，没有达到题目要求。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//于是 ”一个惊叹号“ 同学在我的提醒下开始看书，查找方法解决这个问题，终于。。。</span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span> <span class="params">()</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    <span class="keyword">int</span> *p = <span class="literal">NULL</span>;</div><div class="line">    <span class="keyword">float</span> ave;</div><div class="line">    <span class="keyword">int</span> sum = <span class="number">0</span>, count = <span class="number">0</span>;<span class="comment">//count用来计数</span></div><div class="line">    <span class="keyword">int</span> room = <span class="number">5</span>, temp;<span class="comment">//保证第一次输入有空间</span></div><div class="line">    <span class="keyword">int</span> i;</div><div class="line">    p = (<span class="keyword">int</span>*)<span class="built_in">malloc</span>(room*<span class="keyword">sizeof</span>(<span class="keyword">int</span>));<span class="comment">//分配第一次输入的内存</span></div><div class="line">    <span class="built_in">printf</span>(<span class="string">"输入整数 一个整数输入后按下回车进行下一次输入\n"</span>);</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"输入-1，结束输入，开始运行程序\n"</span>);</div><div class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>; ; i++)</div><div class="line">    &#123;</div><div class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;temp);</div><div class="line">        <span class="keyword">if</span>(temp == <span class="number">-1</span>)</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">        p[count] = temp;</div><div class="line">        sum+=p[count];</div><div class="line">        count++;</div><div class="line">        <span class="keyword">if</span>(count == room)<span class="comment">//判断内存是否已满</span></div><div class="line">            room+=<span class="number">5</span>;<span class="comment">//待申请内存新的大小</span></div><div class="line">        p = <span class="built_in">realloc</span>(p,room*<span class="keyword">sizeof</span>(<span class="keyword">int</span>));<span class="comment">//realloc 拓展内存</span></div><div class="line">    &#125;</div><div class="line">    ave = (<span class="keyword">float</span>)sum/count;</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"平均数为%f\n"</span>,ave);</div><div class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>; i&lt;count; i++)&#123;</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"第%d个数与平均数的差值为%f\n"</span>, i+<span class="number">1</span>, p[i]-ave);</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">free</span>(p);</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>不过还有些小东西没有完善。。具体是什么，请看实验3.1</p>
+<h2 id="进阶练习3-2"><a href="#进阶练习3-2" class="headerlink" title="进阶练习3.2"></a>进阶练习3.2</h2><h3 id="常规操作"><a href="#常规操作" class="headerlink" title="常规操作"></a>常规操作</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;ctype.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</div><div class="line">    <span class="keyword">char</span> s[<span class="number">1024</span>];</div><div class="line">    <span class="keyword">int</span> i,j;</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"输入字符串:\n"</span>);</div><div class="line">    <span class="keyword">while</span>(fgets(s,<span class="number">1024</span>,<span class="built_in">stdin</span>)) &#123;</div><div class="line">        <span class="keyword">for</span>(i = <span class="number">0</span>,j = <span class="number">0</span>;s[i];++i)&#123;</div><div class="line">            <span class="keyword">if</span>(<span class="built_in">isalpha</span>(s[i]))&#123;</div><div class="line">                s[j++] = s[i];</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        s[j] = <span class="string">'\0'</span>;</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"%s\n"</span>,s);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="只有常规操作，坐下"><a href="#只有常规操作，坐下" class="headerlink" title="只有常规操作，坐下"></a>只有常规操作，坐下</h3><h2 id="进阶练习3-1"><a href="#进阶练习3-1" class="headerlink" title="进阶练习3.1"></a>进阶练习3.1</h2><h3 id="好好体会（逃"><a href="#好好体会（逃" class="headerlink" title="好好体会（逃"></a>好好体会（逃</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;ctype.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> ROOM 5</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    <span class="keyword">double</span> *values = <span class="literal">NULL</span>;</div><div class="line">    <span class="keyword">int</span> capacity = <span class="number">0</span>;</div><div class="line">    <span class="keyword">double</span> *temp = <span class="literal">NULL</span>;</div><div class="line">    <span class="keyword">double</span> sum = <span class="number">0.0</span>;</div><div class="line">    <span class="keyword">int</span> count = <span class="number">0</span>;</div><div class="line">    <span class="keyword">char</span> answer = <span class="string">'n'</span>;</div><div class="line">    <span class="keyword">do</span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">if</span>(count == capacity)</div><div class="line">        &#123;</div><div class="line">            capacity += ROOM;</div><div class="line">            temp = <span class="built_in">realloc</span>(values, capacity*<span class="keyword">sizeof</span>(<span class="keyword">double</span>));</div><div class="line">            <span class="keyword">if</span>(!temp)</div><div class="line">            &#123;</div><div class="line">                <span class="built_in">printf</span>(<span class="string">"Memory allocation failed.Bye"</span>);</div><div class="line">                <span class="built_in">exit</span>(<span class="number">1</span>);</div><div class="line">            &#125;</div><div class="line">            </div><div class="line">            values = temp;</div><div class="line">            temp = <span class="literal">NULL</span>;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="built_in">printf</span>(<span class="string">"Enter a value: "</span>);</div><div class="line">        <span class="built_in">scanf</span>(<span class="string">"%lf"</span>, values+count++);</div><div class="line">        </div><div class="line">        <span class="built_in">printf</span>(<span class="string">"Do you want to enter another(y/Y or n/N)? "</span>);</div><div class="line">        <span class="built_in">scanf</span>(<span class="string">" %c"</span>, &amp;answer);</div><div class="line">    &#125;<span class="keyword">while</span>(<span class="built_in">tolower</span>(answer) == <span class="string">'y'</span>);</div><div class="line">    </div><div class="line">    <span class="keyword">for</span>(<span class="keyword">size_t</span> i = <span class="number">0</span> ; i &lt; count ; ++i)</div><div class="line">        sum += *(values + i);</div><div class="line">    </div><div class="line">    <span class="built_in">printf</span>(<span class="string">"The average is %f.\n"</span>, sum/count);</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">size_t</span> i = <span class="number">0</span> ; i &lt; count ; ++i)&#123;</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"%f -&gt; %f\n"</span>,(*(values + i)),((*(values + i))-(sum/count)));</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"\n"</span>);</div><div class="line">    <span class="built_in">free</span>(values);</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="其实重点在隔壁，你们可以去瞅瞅"><a href="#其实重点在隔壁，你们可以去瞅瞅" class="headerlink" title="其实重点在隔壁，你们可以去瞅瞅"></a>其实重点在隔壁，你们可以去瞅瞅</h3>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/c语言/" rel="tag"><i class="fa fa-tag"></i> c语言</a>
+          
+            <a href="/tags/c语言作业/" rel="tag"><i class="fa fa-tag"></i> c语言作业</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/25/CocoaPods安装和使用教程/" rel="next" title="CocoaPods安装和使用教程">
+                <i class="fa fa-chevron-left"></i> CocoaPods安装和使用教程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/05/c语言malloc与realloc，calloc和-alloca的简要介绍/" rel="prev" title="c语言malloc与realloc，calloc和_alloca的简要介绍">
+                c语言malloc与realloc，calloc和_alloca的简要介绍 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+    <div class="comments" id="comments">
+      <div id="uyan_frame"></div>
+    </div>
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="tuski" />
+            
+              <p class="site-author-name" itemprop="name">tuski</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/thevenomsnake" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:tutushushujianjian@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plus.google.com/tutushushujianjian" target="_blank" title="Google">
+                    
+                      <i class="fa fa-fw fa-google"></i>Google</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/tushujian" target="_blank" title="Twitter">
+                    
+                      <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://youtube.com/yourname" target="_blank" title="YouTube">
+                    
+                      <i class="fa fa-fw fa-youtube"></i>YouTube</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#实验7"><span class="nav-number">1.</span> <span class="nav-text">实验7</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#进阶练习3-3"><span class="nav-number">1.1.</span> <span class="nav-text">进阶练习3.3</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#程序中指定个数，再进行分配的办法"><span class="nav-number">1.1.1.</span> <span class="nav-text">程序中指定个数，再进行分配的办法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进阶练习3-2"><span class="nav-number">1.2.</span> <span class="nav-text">进阶练习3.2</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#常规操作"><span class="nav-number">1.2.1.</span> <span class="nav-text">常规操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#只有常规操作，坐下"><span class="nav-number">1.2.2.</span> <span class="nav-text">只有常规操作，坐下</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进阶练习3-1"><span class="nav-number">1.3.</span> <span class="nav-text">进阶练习3.1</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#好好体会（逃"><span class="nav-number">1.3.1.</span> <span class="nav-text">好好体会（逃</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其实重点在隔壁，你们可以去瞅瞅"><span class="nav-number">1.3.2.</span> <span class="nav-text">其实重点在隔壁，你们可以去瞅瞅</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">tuski</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+    
+
+    
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2148214"></script>
+      <!-- UY END -->
+    
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
