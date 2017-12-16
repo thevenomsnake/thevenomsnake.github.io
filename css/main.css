@@ -1973,7 +1973,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #37f606;
+  background: #beff7a;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3087,6 +3087,12 @@ hr {
 }
 .with-love {
   color: #ff71a8;
+}
+#days {
+  display: block;
+  color: #07b39b;
+  font-size: 13px;
+  margin-top: 15px;
 }
 @-moz-keyframes heartAnimate {
   0%, 100% {
