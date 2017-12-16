@@ -369,7 +369,7 @@
       
 
       
-        <p>其实重点在隔壁。。。。。</p>
+        <script src="/assets/js/APlayer.min.js"> </script><p>其实重点在隔壁。。。。。</p>
 <a id="more"></a>
 <h1 id="实验7"><a href="#实验7" class="headerlink" title="实验7"></a>实验7</h1><p><strong>ps：实验3.1和实验3.3实际是一样的，顺序有点乱（其实我懒得重新写了，逃</strong></p>
 <h2 id="进阶练习3-3"><a href="#进阶练习3-3" class="headerlink" title="进阶练习3.3"></a>进阶练习3.3</h2><h3 id="程序中指定个数，再进行分配的办法"><a href="#程序中指定个数，再进行分配的办法" class="headerlink" title="程序中指定个数，再进行分配的办法"></a>程序中指定个数，再进行分配的办法</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    <span class="keyword">int</span> n,i,sum = <span class="number">0</span>;</div><div class="line">    <span class="keyword">double</span> avg;</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"先输入个数："</span>);</div><div class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</div><div class="line">    <span class="keyword">int</span> *in = (<span class="keyword">int</span> *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">int</span>) * n);</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"输入数："</span>);</div><div class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>;i &lt; n;i++)</div><div class="line">    &#123;</div><div class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>,in+i);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>;i &lt; n;i++)</div><div class="line">    &#123;</div><div class="line">        sum += *(in + i);</div><div class="line">    &#125;</div><div class="line">    avg = (<span class="keyword">double</span>)sum / n </div><div class="line">    <span class="built_in">printf</span>(<span class="string">"和为：%d，平均值为:%.2lf\n"</span>,sum,avg);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>;i &lt; n;i++)</div><div class="line">    &#123;</div><div class="line">       <span class="built_in">printf</span>(<span class="string">"%d 对应的差值是 %.2lf \n"</span>,in+i,avg-*(in+i);</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">free</span>(in);</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -612,13 +612,10 @@
           
           
 
-          <div id="music163player">
-            <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=280 height=86 src="//music.163.com/outchain/player?type=2&id=511648453&auto=0&height=66">
-            </iframe>
-          </div>
+       <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=437250669&auto=0&height=66"></iframe>
 
           
-        </div>
+       
       </section>
 
       

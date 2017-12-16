@@ -1,4 +1,4 @@
-;(function (root, factory) {
+<script src="/assets/js/APlayer.min.js"> </script>;(function (root, factory) {
   if (typeof exports === 'object') {
     module.exports = factory();
   } else if (typeof define === 'function' && define.amd) {

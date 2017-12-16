@@ -95,7 +95,7 @@
 <meta property="og:description" content="主要是说说这个malloc与realloc，calloc和_alloca的区别">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.loli.net/2017/12/05/5a2583adb1035.jpg">
-<meta property="og:updated_time" content="2017-12-04T17:22:16.947Z">
+<meta property="og:updated_time" content="2017-12-16T05:10:41.765Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="c语言malloc与realloc，calloc和_alloca的简要介绍">
 <meta name="twitter:description" content="主要是说说这个malloc与realloc，calloc和_alloca的区别">
@@ -334,7 +334,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,941
+                  1,937
                 </span>
               
 
@@ -371,10 +371,9 @@
       
 
       
-        <p>主要是说说这个malloc与realloc，calloc和_alloca的区别</p>
+        <script src="/assets/js/APlayer.min.js"> </script><p>主要是说说这个malloc与realloc，calloc和_alloca的区别</p>
 <a id="more"></a>
-<h1 id="malloc与realloc，calloc和-alloca"><a href="#malloc与realloc，calloc和-alloca" class="headerlink" title="malloc与realloc，calloc和_alloca"></a>malloc与realloc，calloc和_alloca</h1><p><strong>在了解之前首先得知道c语言跟内存分配的方式</strong></p>
-<p><img src="https://i.loli.net/2017/12/05/5a2583adb1035.jpg" alt="0CD2DA2B8667FE9B7E231CE98C658044.jpg"></p>
+<h1 id="在了解之前首先得知道c语言跟内存分配的方式"><a href="#在了解之前首先得知道c语言跟内存分配的方式" class="headerlink" title="在了解之前首先得知道c语言跟内存分配的方式"></a>在了解之前首先得知道c语言跟内存分配的方式</h1><p><img src="https://i.loli.net/2017/12/05/5a2583adb1035.jpg" alt="0CD2DA2B8667FE9B7E231CE98C658044.jpg"></p>
 <h2 id="1-C语言跟内存分配方式"><a href="#1-C语言跟内存分配方式" class="headerlink" title="1.C语言跟内存分配方式"></a>1.C语言跟内存分配方式</h2><h3 id="1-gt-从静态存储区域分配"><a href="#1-gt-从静态存储区域分配" class="headerlink" title="1&gt;.从静态存储区域分配."></a>1&gt;.从静态存储区域分配.</h3><p>​       内存是在程序编译的时候就已经分配好，而且这块内存在程序的整个运行期间都存在.例如全局变量、static变量等等。。</p>
 <h3 id="2-gt-在栈上创建"><a href="#2-gt-在栈上创建" class="headerlink" title="2&gt;.在栈上创建."></a>2&gt;.在栈上创建.</h3><p>​       在执行函数时，函数内局部变量的存储单元都可以在栈上创建，函数执行结束时这些存储单元自动被释放.栈内存分配运算内置于处理器的指令集中，效率很高，但是分配的内存容量有限.</p>
 <h3 id="3-gt-从堆上分配，又称动态内存分配"><a href="#3-gt-从堆上分配，又称动态内存分配" class="headerlink" title="3&gt;.从堆上分配，又称动态内存分配."></a>3&gt;.从堆上分配，又称动态内存分配.</h3><p>​       程序在运行的时候用malloc或new申请任意多少的内存，而写程序的人负责在何时用free或delete释放内存.动态内存的生存期由用户自己决定，<strong>使用非常灵活，但问题也最多.</strong></p>
@@ -669,13 +668,10 @@
           
           
 
-          <div id="music163player">
-            <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=280 height=86 src="//music.163.com/outchain/player?type=2&id=511648453&auto=0&height=66">
-            </iframe>
-          </div>
+       <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=437250669&auto=0&height=66"></iframe>
 
           
-        </div>
+       
       </section>
 
       
@@ -688,7 +684,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#malloc与realloc，calloc和-alloca"><span class="nav-number">1.</span> <span class="nav-text">malloc与realloc，calloc和_alloca</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-C语言跟内存分配方式"><span class="nav-number">1.1.</span> <span class="nav-text">1.C语言跟内存分配方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-gt-从静态存储区域分配"><span class="nav-number">1.1.1.</span> <span class="nav-text">1>.从静态存储区域分配.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-gt-在栈上创建"><span class="nav-number">1.1.2.</span> <span class="nav-text">2>.在栈上创建.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-gt-从堆上分配，又称动态内存分配"><span class="nav-number">1.1.3.</span> <span class="nav-text">3>.从堆上分配，又称动态内存分配.</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-C语言跟内存申请相关主要的函数"><span class="nav-number">1.2.</span> <span class="nav-text">2.C语言跟内存申请相关主要的函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-简要的概述"><span class="nav-number">1.3.</span> <span class="nav-text">3.简要的概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-gt-malloc"><span class="nav-number">1.3.1.</span> <span class="nav-text">1>malloc:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-gt-realloc"><span class="nav-number">1.3.2.</span> <span class="nav-text">2>realloc:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-gt-calloc"><span class="nav-number">1.3.3.</span> <span class="nav-text">3>calloc:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-gt-alloca"><span class="nav-number">1.3.4.</span> <span class="nav-text">4>_alloca:</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#在了解之前首先得知道c语言跟内存分配的方式"><span class="nav-number">1.</span> <span class="nav-text">在了解之前首先得知道c语言跟内存分配的方式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-C语言跟内存分配方式"><span class="nav-number">1.1.</span> <span class="nav-text">1.C语言跟内存分配方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-gt-从静态存储区域分配"><span class="nav-number">1.1.1.</span> <span class="nav-text">1>.从静态存储区域分配.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-gt-在栈上创建"><span class="nav-number">1.1.2.</span> <span class="nav-text">2>.在栈上创建.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-gt-从堆上分配，又称动态内存分配"><span class="nav-number">1.1.3.</span> <span class="nav-text">3>.从堆上分配，又称动态内存分配.</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-C语言跟内存申请相关主要的函数"><span class="nav-number">1.2.</span> <span class="nav-text">2.C语言跟内存申请相关主要的函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-简要的概述"><span class="nav-number">1.3.</span> <span class="nav-text">3.简要的概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-gt-malloc"><span class="nav-number">1.3.1.</span> <span class="nav-text">1>malloc:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-gt-realloc"><span class="nav-number">1.3.2.</span> <span class="nav-text">2>realloc:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-gt-calloc"><span class="nav-number">1.3.3.</span> <span class="nav-text">3>calloc:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-gt-alloca"><span class="nav-number">1.3.4.</span> <span class="nav-text">4>_alloca:</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
