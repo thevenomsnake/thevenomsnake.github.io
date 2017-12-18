@@ -1,0 +1,1488 @@
+<!DOCTYPE html>
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+<script type="text/javascript">var OriginTitile=document.title,st;document.addEventListener("visibilitychange",function(){document.hidden?(document.title="(/≧▽≦/)页面崩溃啦！",clearTimeout(st)):(document.title="(ฅ>ω<*ฅ) 又恢复了~"+OriginTitile,st=setTimeout(function(){document.title=OriginTitile},3e3))})</script>
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-big-counter.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="网页,JavaScript,CSS," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="给你的网站加上女朋友">
+<meta name="keywords" content="网页,JavaScript,CSS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="利用live 2d给博客添加看版娘">
+<meta property="og:url" content="http://www.perpeht.com/2017/12/18/利用live-2d给博客添加看版娘/index.html">
+<meta property="og:site_name" content="Tuski&#39;s Blog">
+<meta property="og:description" content="给你的网站加上女朋友">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.loli.net/2017/12/18/5a37bb2e8b926.jpg">
+<meta property="og:image" content="https://file.ohyhello.com//file/2017/12/20171204023402.png">
+<meta property="og:image" content="https://file.ohyhello.com//file/2017/12/20171204023847.png">
+<meta property="og:image" content="https://file.ohyhello.com//file/2017/12/20171204024032.png">
+<meta property="og:image" content="https://file.ohyhello.com//file/2017/12/20171204024224.png">
+<meta property="og:image" content="https://file.ohyhello.com//file/2017/12/sp171118_143233.png">
+<meta property="og:image" content="https://file.ohyhello.com//file/2017/12/sp171118_143554.png">
+<meta property="og:image" content="https://i.loli.net/2017/12/18/5a37c28fc881d.jpg">
+<meta property="og:updated_time" content="2017-12-18T13:40:53.232Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="利用live 2d给博客添加看版娘">
+<meta name="twitter:description" content="给你的网站加上女朋友">
+<meta name="twitter:image" content="https://i.loli.net/2017/12/18/5a37bb2e8b926.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.perpeht.com/2017/12/18/利用live-2d给博客添加看版娘/"/>
+
+
+
+<link rel="stylesheet" href="../live2d/css/live2d.css" />
+
+
+  <title>利用live 2d给博客添加看版娘 | Tuski's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+<div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+   
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tuski's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">I code my life</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.perpeht.com/2017/12/18/利用live-2d给博客添加看版娘/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tuski">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tuski's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">利用live 2d给博客添加看版娘</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-18T20:51:09+08:00">
+                2017-12-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+            <!--noindex-->
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/12/18/利用live-2d给博客添加看版娘/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="2017/12/18/利用live-2d给博客添加看版娘/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+              <!--/noindex-->
+            
+          
+
+          
+          
+             <span id="/2017/12/18/利用live-2d给博客添加看版娘/" class="leancloud_visitors" data-flag-title="利用live 2d给博客添加看版娘">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  4,482
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  21
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <script src="/assets/js/APlayer.min.js"> </script><blockquote class="blockquote-center"><del>给你的网站加上女朋友</del></blockquote>
+
+<p><img src="https://i.loli.net/2017/12/18/5a37bb2e8b926.jpg" alt="5AD4C5DB3145A8EB01CA7D1B3374D4A0.jpg"></p>
+<a id="more"></a>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p><del>现实生活的你是不是没有女朋友呢？没关系，你可以给你自己网页上弄一个</del></p>
+<p>live2d常常被我们用于做手机的动态壁纸增加萌点！live2dviewerex<br>当然你也可以把她放到你的博客上！这样也很卡哇伊不是吗(<em>/ω＼</em>)<br>live2d目前技术还不是很成熟 但是很适合用来做网站的看板娘</p>
+<blockquote>
+<p> 转载自@猫与向日葵和@JiuMeng，本人进行一定整合</p>
+</blockquote>
+<h1 id="获取模型-amp-调整："><a href="#获取模型-amp-调整：" class="headerlink" title="获取模型&amp;调整："></a>获取模型&amp;调整：</h1><h2 id="科普："><a href="#科普：" class="headerlink" title="科普："></a>科普：</h2><p>Live2D是一种应用于电子游戏的绘图渲染技术，技术由日本Cybernoids公司开发。<br>通过一系列的连续图像和人物建模来生成一种类似三维模型的二维图像，对于以动画风格为主的冒险游戏来说非常有用，缺点是Live 2D人物无法大幅度转身，开发商正设法让该技术可显示360度图像。<br>首先既然是做live2d的看板娘怎么能少了最基础的模型呢！<br>这里是本project的大概流程图：</p>
+<blockquote>
+<p>Live2d的模型（你喜欢的）[这里包含了声音调用以及其他的0.0]→官方或者修改的SDK（合成）→上传至网站相应目录→在相应位置插入 js css div以及其他附属→调整css→完工了！</p>
+</blockquote>
+<p>关于模型如何获取这里不详细讲解</p>
+<p>以下为获取途径：<br>1.百度贴吧 （live2d吧 live2dviewerex吧 ）这里面有很多模型 自己去看看吧！看看能不能找到你们的老婆<br>2.在游戏里提取（注意版权问题）这些游戏都是由live2d引擎驱动的<br>像在这些游戏里都能提取出模型 置于方法嘛（自己百度吧）说出来我怕菊花被人捅烂<br><del>《樱花庄的宠物女孩》【2013/02/14】(角川游戏)PSP/PSV</del><br><del>《某魔术和科学的群奏活剧》【2013/02/21】(NBGI)PSP</del><br><del>《药水制作师》【2015/3/23】(Sinsiroad) 安卓/ios</del><br>这里有篇讲如何提取《药水制作师》模型的文章：<a href="https://imjad.cn/archives/lab/add-dynamic-poster-girl-with-live2d-to-your-blog-01" target="_blank" rel="external">相关链接</a><br>获取模型的格式 最好是moc的可编辑工程文件 当然lpk也行 但是lpk能不能用就看你的运气了<br>这里讲讲如何打开模型<br>查看模型需要使用LIVE2D官方提供的Live2D Viewer，下载和安装方法请查看 <a href="http://sites.cybernoids.jp/cubism2/tools/live2d-viewer" target="_blank" rel="external">这个网页</a>然后如果你下载（或者提取的）的是编工程文件的live2d的话 （json已经写好的）你可以吧json拖到live2d-viewer里面就可以预览模型了<br>如果是lpk格式的文件的话 这里讲解一种（菊花被人捅烂的方法解lpk）</p>
+<p>先下载好lpk然后用zip压缩工具查看打开这个lpk 然后解压里面的文件出来就可以得到moc 那样的模型了<br>如果你下载的lpk是被加密过的那么这个方法就不能使用了<del>（乖乖换老婆或者想其他办法吧）</del></p>
+<h2 id="提取"><a href="#提取" class="headerlink" title="提取"></a>提取</h2><p><img src="https://file.ohyhello.com//file/2017/12/20171204023402.png" alt="132.png"></p>
+<p><strong>没有被加密的lpk解压出来是这样的：</strong></p>
+<p><img src="https://file.ohyhello.com//file/2017/12/20171204023847.png" alt="www.png"></p>
+<p>红色部分为lpk配置文件这个不影响我们制作模型可以不管它</p>
+<p>打开主题部分：</p>
+<p><img src="https://file.ohyhello.com//file/2017/12/20171204024032.png" alt="ss.png"></p>
+<p>把这个拖进我们的Live2D Viewer你就会看到：</p>
+<p>模型成功加载了！</p>
+<p><img src="https://file.ohyhello.com//file/2017/12/20171204024224.png" alt="wwwww.png"></p>
+<p>同样我们可以把别的模型也拖进去拖进live2d-viewer里 就可以预览模型了<br>打开Live2D Viewer，将json或者moc （网页只调用json）拖入主窗口，可以看到模型已经加载成功，若有贴图错位、动作鬼畜等情况则为上一步的json文件配置有误，测试直到找到正确的模型、动作、贴图组合</p>
+<p><img src="https://file.ohyhello.com//file/2017/12/sp171118_143233.png" alt="s.png"></p>
+<p>有些模型是自带动作以及语音的<br>这样可以测试动作：</p>
+<p><img src="https://file.ohyhello.com//file/2017/12/sp171118_143554.png" alt="ww.png"></p>
+<p>选择要测试的动作，点击Playback播放动作以测试动作是否正常，勾选Loop可以循环播放<br>模型测试好了之后就进入下一步吧！</p>
+<p>模型大概就到这里了 下面是主体部分：</p>
+<h1 id="准备SDK"><a href="#准备SDK" class="headerlink" title="准备SDK"></a>准备SDK</h1><p>为了效率最大化，不用把有限的时间投入到与bug无限的斗争和踩坑中；为了不重复造轮子；为了爱与和平 就是因为懒，我们不使用官方的SDK，而是用<a href="https://github.com/EYHN" target="_blank" rel="external">@EYHN</a>大佬封装好的库来加载并显示模型。相比较<a href="http://sites.cybernoids.jp/cubism-sdk2_e/webgl2-1" target="_blank" rel="external">官方版本</a>而言，仅需一条命令即可进行模型的加载，无疑方便许多。</p>
+<p>但对于<del>「药水制作师」</del>这款游戏的模型来说，上面所说的库还需经过一些修改。</p>
+<h2 id="修改原因"><a href="#修改原因" class="headerlink" title="修改原因"></a>修改原因</h2><p>基于<a href="https://github.com/EYHN/hexo-helper-live2d/commit/fea64e49a760ded5cc2dad974fd3d55bcebe15c6" target="_blank" rel="external">commit #fea64e4</a>修改，修改内容：<br>修复移动鼠标会触发点击事件的问题<br>增加鼠标点击事件<br>移除自带的眨眼动作<br>增加久置动作与事件支持<br>增加自定义HIT_AREA的方法<br>由于原项目使用了GPL v2开源协议，修改后的代码已开源至<a href="https://github.com/ohyhello/kanbanniang_live2d" target="_blank" rel="external">GitHub</a>，若想修改请参考项目<a href="https://github.com/EYHN/hexo-helper-live2d" target="_blank" rel="external">hexo-helper-live2d</a></p>
+<p>鉴于该项目仍在活跃开发中，@猫与向日葵修改的版本可能会随时间变化而过时</p>
+<p>编译后的版本可以在这里下载：<a id="download" href="https://github.com/ohyhello/kanbanniang_live2d" target="_blank" rel="external"><i class="fa fa-download"></i><span> Download Now</span> </a></p>
+<p>以下部分内容为转载内容：<br>提示功能（可选）<br>这部分直接抄自之前的浮动小人，做了部分修改，非必须项，须jQuery支持<br>若不启用此部分内容，下一步应作相应修改<br>此处代码不可直接套用，应根据自身情况进行修改<br>这里是为小人添加消息提示框的 此部分可以不做 当然你喜欢的话我也是不介意的<br><del>少女盲目分析中</del></p>
+<p><img src="https://i.loli.net/2017/12/18/5a37c28fc881d.jpg" alt="93EED6EFBC4328F995A919344B66F53D.jpg"></p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><h2 id="脚本"><a href="#脚本" class="headerlink" title="脚本"></a>脚本</h2><p>将以下内容保存为<code>waifu-tips.js</code>，放至相应目录</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">render</span>(<span class="params">template, context</span>) </span>&#123;</div><div class="line"> </div><div class="line">    <span class="keyword">var</span> tokenReg = <span class="regexp">/(\\)?\&#123;([^\&#123;\&#125;\\]+)(\\)?\&#125;/g</span>;</div><div class="line"> </div><div class="line">    <span class="keyword">return</span> template.replace(tokenReg, <span class="function"><span class="keyword">function</span> (<span class="params">word, slash1, token, slash2</span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span> (slash1 || slash2) &#123;  </div><div class="line">            <span class="keyword">return</span> word.replace(<span class="string">'\\'</span>, <span class="string">''</span>);</div><div class="line">        &#125;</div><div class="line"> </div><div class="line">        <span class="keyword">var</span> variables = token.replace(<span class="regexp">/\s/g</span>, <span class="string">''</span>).split(<span class="string">'.'</span>);</div><div class="line">        <span class="keyword">var</span> currentObject = context;</div><div class="line">        <span class="keyword">var</span> i, length, variable;</div><div class="line"> </div><div class="line">        <span class="keyword">for</span> (i = <span class="number">0</span>, length = variables.length; i &amp;amp;amp;lt; length; ++i) &#123;</div><div class="line">            variable = variables[i];</div><div class="line">            currentObject = currentObject[variable];</div><div class="line">            <span class="keyword">if</span> (currentObject === <span class="literal">undefined</span> || currentObject === <span class="literal">null</span>) <span class="keyword">return</span> <span class="string">''</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> currentObject;</div><div class="line">    &#125;);</div><div class="line">&#125;</div><div class="line"><span class="built_in">String</span>.prototype.render = <span class="function"><span class="keyword">function</span> (<span class="params">context</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> render(<span class="keyword">this</span>, context);</div><div class="line">&#125;;</div><div class="line"> </div><div class="line"><span class="keyword">var</span> re = <span class="regexp">/x/</span>;</div><div class="line"><span class="built_in">console</span>.log(re);</div><div class="line">re.toString = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    showMessage(<span class="string">'哈哈，你打开了控制台，是想要看看我的秘密吗？'</span>, <span class="number">5000</span>);</div><div class="line">    <span class="keyword">return</span> <span class="string">''</span>;</div><div class="line">&#125;;</div><div class="line"> </div><div class="line">$(<span class="built_in">document</span>).on(<span class="string">'copy'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</div><div class="line">    showMessage(<span class="string">'你都复制了些什么呀，转载要记得加上出处哦'</span>, <span class="number">5000</span>);</div><div class="line">&#125;);</div><div class="line"> </div><div class="line">$.ajax(&#123;</div><div class="line">    cache: <span class="literal">true</span>,</div><div class="line">    url: <span class="string">"path/to/waifu-tips.json"</span>,</div><div class="line">    dataType: <span class="string">"json"</span>,</div><div class="line">    success: <span class="function"><span class="keyword">function</span> (<span class="params">result</span>)</span>&#123;</div><div class="line">        $.each(result.mouseover, <span class="function"><span class="keyword">function</span> (<span class="params">index, tips</span>)</span>&#123;</div><div class="line">            $(tips.selector).mouseover(<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</div><div class="line">                <span class="keyword">var</span> text = tips.text;</div><div class="line">                <span class="keyword">if</span>(<span class="built_in">Array</span>.isArray(tips.text)) text = tips.text[<span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * tips.text.length + <span class="number">1</span>)<span class="number">-1</span>];</div><div class="line">                text = text.render(&#123;<span class="attr">text</span>: $(<span class="keyword">this</span>).text()&#125;);</div><div class="line">                showMessage(text, <span class="number">3000</span>);</div><div class="line">            &#125;);</div><div class="line">        &#125;);</div><div class="line">        $.each(result.click, <span class="function"><span class="keyword">function</span> (<span class="params">index, tips</span>)</span>&#123;</div><div class="line">            $(tips.selector).click(<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</div><div class="line">                <span class="keyword">var</span> text = tips.text;</div><div class="line">                <span class="keyword">if</span>(<span class="built_in">Array</span>.isArray(tips.text)) text = tips.text[<span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * tips.text.length + <span class="number">1</span>)<span class="number">-1</span>];</div><div class="line">                text = text.render(&#123;<span class="attr">text</span>: $(<span class="keyword">this</span>).text()&#125;);</div><div class="line">                showMessage(text, <span class="number">3000</span>);</div><div class="line">            &#125;);</div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line">&#125;);</div><div class="line"> </div><div class="line">(<span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> text;</div><div class="line">    <span class="keyword">if</span>(<span class="built_in">document</span>.referrer !== <span class="string">''</span>)&#123;</div><div class="line">        <span class="keyword">var</span> referrer = <span class="built_in">document</span>.createElement(<span class="string">'a'</span>);</div><div class="line">        referrer.href = <span class="built_in">document</span>.referrer;</div><div class="line">        text = <span class="string">'Hello! 来自 &amp;amp;amp;lt;span style="color:#0099cc;"&amp;amp;amp;gt;'</span> + referrer.hostname + <span class="string">'&amp;amp;amp;lt;/span&amp;amp;amp;gt; 的朋友'</span>;</div><div class="line">        <span class="keyword">var</span> domain = referrer.hostname.split(<span class="string">'.'</span>)[<span class="number">1</span>];</div><div class="line">        <span class="keyword">if</span> (domain == <span class="string">'baidu'</span>) &#123;</div><div class="line">            text = <span class="string">'Hello! 来自 百度搜索 的朋友</span></div><div class="line"><span class="string">你是搜索 &amp;amp;amp;lt;span style="color:#0099cc;"&amp;amp;amp;gt;'</span> + referrer.search.split(<span class="string">'&amp;amp;amp;amp;wd='</span>)[<span class="number">1</span>].split(<span class="string">'&amp;amp;amp;amp;'</span>)[<span class="number">0</span>] + <span class="string">'&amp;amp;amp;lt;/span&amp;amp;amp;gt; 找到的我吗？'</span>;</div><div class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span> (domain == <span class="string">'so'</span>) &#123;</div><div class="line">            text = <span class="string">'Hello! 来自 360搜索 的朋友</span></div><div class="line"><span class="string">你是搜索 &amp;amp;amp;lt;span style="color:#0099cc;"&amp;amp;amp;gt;'</span> + referrer.search.split(<span class="string">'&amp;amp;amp;amp;q='</span>)[<span class="number">1</span>].split(<span class="string">'&amp;amp;amp;amp;'</span>)[<span class="number">0</span>] + <span class="string">'&amp;amp;amp;lt;/span&amp;amp;amp;gt; 找到的我吗？'</span>;</div><div class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span> (domain == <span class="string">'google'</span>) &#123;</div><div class="line">            text = <span class="string">'Hello! 来自 谷歌搜索 的朋友</span></div><div class="line"><span class="string">欢迎阅读&amp;amp;amp;lt;span style="color:#0099cc;"&amp;amp;amp;gt;『'</span> + <span class="built_in">document</span>.title.split(<span class="string">' - '</span>)[<span class="number">0</span>] + <span class="string">'』&amp;amp;amp;lt;/span&amp;amp;amp;gt;'</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;<span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">if</span> (<span class="built_in">window</span>.location.href == <span class="string">'https://imjad.cn/'</span>) &#123; <span class="comment">//如果是主页</span></div><div class="line">            <span class="keyword">var</span> now = (<span class="keyword">new</span> <span class="built_in">Date</span>()).getHours();</div><div class="line">            <span class="keyword">if</span> (now &amp;amp;amp;gt; <span class="number">23</span> || now &amp;amp;amp;lt;= <span class="number">5</span>) &#123;</div><div class="line">                text = <span class="string">'你是夜猫子呀？这么晚还不睡觉，明天起的来嘛'</span>;</div><div class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (now &amp;amp;amp;gt; <span class="number">5</span> &amp;amp;amp;amp;&amp;amp;amp;amp; now &amp;amp;amp;lt;= <span class="number">7</span>) &#123;</div><div class="line">                text = <span class="string">'早上好！一日之计在于晨，美好的一天就要开始了'</span>;</div><div class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (now &amp;amp;amp;gt; <span class="number">7</span> &amp;amp;amp;amp;&amp;amp;amp;amp; now &amp;amp;amp;lt;= <span class="number">11</span>) &#123;</div><div class="line">                text = <span class="string">'上午好！工作顺利嘛，不要久坐，多起来走动走动哦！'</span>;</div><div class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (now &amp;amp;amp;gt; <span class="number">11</span> &amp;amp;amp;amp;&amp;amp;amp;amp; now &amp;amp;amp;lt;= <span class="number">14</span>) &#123;</div><div class="line">                text = <span class="string">'中午了，工作了一个上午，现在是午餐时间！'</span>;</div><div class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (now &amp;amp;amp;gt; <span class="number">14</span> &amp;amp;amp;amp;&amp;amp;amp;amp; now &amp;amp;amp;lt;= <span class="number">17</span>) &#123;</div><div class="line">                text = <span class="string">'午后很容易犯困呢，今天的运动目标完成了吗？'</span>;</div><div class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (now &amp;amp;amp;gt; <span class="number">17</span> &amp;amp;amp;amp;&amp;amp;amp;amp; now &amp;amp;amp;lt;= <span class="number">19</span>) &#123;</div><div class="line">                text = <span class="string">'傍晚了！窗外夕阳的景色很美丽呢，最美不过夕阳红~'</span>;</div><div class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (now &amp;amp;amp;gt; <span class="number">19</span> &amp;amp;amp;amp;&amp;amp;amp;amp; now &amp;amp;amp;lt;= <span class="number">21</span>) &#123;</div><div class="line">                text = <span class="string">'晚上好，今天过得怎么样？'</span>;</div><div class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (now &amp;amp;amp;gt; <span class="number">21</span> &amp;amp;amp;amp;&amp;amp;amp;amp; now &amp;amp;amp;lt;= <span class="number">23</span>) &#123;</div><div class="line">                text = <span class="string">'已经这么晚了呀，早点休息吧，晚安~'</span>;</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                text = <span class="string">'嗨~ 快来逗我玩吧！'</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;<span class="keyword">else</span> &#123;</div><div class="line">            text = <span class="string">'欢迎阅读&amp;amp;amp;lt;span style="color:#0099cc;"&amp;amp;amp;gt;『'</span> + <span class="built_in">document</span>.title.split(<span class="string">' - '</span>)[<span class="number">0</span>] + <span class="string">'』&amp;amp;amp;lt;/span&amp;amp;amp;gt;'</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    showMessage(text, <span class="number">6000</span>);</div><div class="line">&#125;)();</div><div class="line"> </div><div class="line"><span class="built_in">window</span>.setInterval(showHitokoto,<span class="number">30000</span>);</div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">showHitokoto</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    $.getJSON(<span class="string">'https://api.imjad.cn/hitokoto/?cat=&amp;amp;amp;amp;charset=utf-8&amp;amp;amp;amp;length=28&amp;amp;amp;amp;encode=json'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">result</span>)</span>&#123;</div><div class="line">        showMessage(result.hitokoto, <span class="number">5000</span>);</div><div class="line">    &#125;);</div><div class="line">&#125;</div><div class="line"> </div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">showMessage</span>(<span class="params">text, timeout</span>)</span>&#123;</div><div class="line">    <span class="keyword">if</span>(<span class="built_in">Array</span>.isArray(text)) text = text[<span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * text.length + <span class="number">1</span>)<span class="number">-1</span>];</div><div class="line">    <span class="built_in">console</span>.log(text);</div><div class="line">    $(<span class="string">'.waifu-tips'</span>).stop();</div><div class="line">    $(<span class="string">'.waifu-tips'</span>).html(text).fadeTo(<span class="number">200</span>, <span class="number">1</span>);</div><div class="line">    <span class="keyword">if</span> (timeout === <span class="literal">null</span>) timeout = <span class="number">5000</span>;</div><div class="line">    hideMessage(timeout);</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">hideMessage</span>(<span class="params">timeout</span>)</span>&#123;</div><div class="line">    $(<span class="string">'.waifu-tips'</span>).stop().css(<span class="string">'opacity'</span>,<span class="number">1</span>);</div><div class="line">    <span class="keyword">if</span> (timeout === <span class="literal">null</span>) timeout = <span class="number">5000</span>;</div><div class="line">    $(<span class="string">'.waifu-tips'</span>).delay(timeout).fadeTo(<span class="number">200</span>, <span class="number">0</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="文本"><a href="#文本" class="headerlink" title="文本"></a>文本</h2><p>将以下内容保存为<code>waifu-tips.json</code>，放至相应目录</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attr">"mouseover"</span>: [</div><div class="line">        &#123;</div><div class="line">            <span class="attr">"selector"</span>: <span class="string">".container a[href^='http']"</span>,</div><div class="line">            <span class="attr">"text"</span>: [<span class="string">"要看看 &amp;amp;amp;lt;span style=\"color:#0099cc;\"&amp;amp;amp;gt;&#123;text&#125;&amp;amp;amp;lt;/span&amp;amp;amp;gt; 么？"</span>]</div><div class="line">        &#125;,</div><div class="line">        &#123;</div><div class="line">            <span class="attr">"selector"</span>: <span class="string">".fui-home"</span>,</div><div class="line">            <span class="attr">"text"</span>: [<span class="string">"点击前往首页，想回到上一页可以使用浏览器的后退功能哦"</span>]</div><div class="line">        &#125;,</div><div class="line">        &#123;</div><div class="line">            <span class="attr">"selector"</span>: <span class="string">"#tor_show"</span>,</div><div class="line">            <span class="attr">"text"</span>: [<span class="string">"翻页比较麻烦吗，点击可以显示这篇文章的目录呢"</span>]</div><div class="line">        &#125;,</div><div class="line">        &#123;</div><div class="line">            <span class="attr">"selector"</span>: <span class="string">"#comment_go,.fui-chat"</span>,</div><div class="line">            <span class="attr">"text"</span>: [<span class="string">"想要去评论些什么吗？"</span>]</div><div class="line">        &#125;,</div><div class="line">        &#123;</div><div class="line">            <span class="attr">"selector"</span>: <span class="string">"#night_mode"</span>,</div><div class="line">            <span class="attr">"text"</span>: [<span class="string">"深夜时要爱护眼睛呀"</span>]</div><div class="line">        &#125;,</div><div class="line">        &#123;</div><div class="line">            <span class="attr">"selector"</span>: <span class="string">"#qrcode"</span>,</div><div class="line">            <span class="attr">"text"</span>: [<span class="string">"手机扫一下就能继续看，很方便呢"</span>]</div><div class="line">        &#125;,</div><div class="line">        &#123;</div><div class="line">            <span class="attr">"selector"</span>: <span class="string">".comment_reply"</span>,</div><div class="line">            <span class="attr">"text"</span>: [<span class="string">"要吐槽些什么呢"</span>]</div><div class="line">        &#125;,</div><div class="line">        &#123;</div><div class="line">            <span class="attr">"selector"</span>: <span class="string">"#back-to-top"</span>,</div><div class="line">            <span class="attr">"text"</span>: [<span class="string">"回到开始的地方吧"</span>]</div><div class="line">        &#125;,</div><div class="line">        &#123;</div><div class="line">            <span class="attr">"selector"</span>: <span class="string">"#author"</span>,</div><div class="line">            <span class="attr">"text"</span>: [<span class="string">"该怎么称呼你呢"</span>]</div><div class="line">        &#125;,</div><div class="line">        &#123;</div><div class="line">            <span class="attr">"selector"</span>: <span class="string">"#mail"</span>,</div><div class="line">            <span class="attr">"text"</span>: [<span class="string">"留下你的邮箱，不然就是无头像人士了"</span>]</div><div class="line">        &#125;,</div><div class="line">        &#123;</div><div class="line">            <span class="attr">"selector"</span>: <span class="string">"#url"</span>,</div><div class="line">            <span class="attr">"text"</span>: [<span class="string">"你的家在哪里呢，好让我去参观参观"</span>]</div><div class="line">        &#125;,</div><div class="line">        &#123;</div><div class="line">            <span class="attr">"selector"</span>: <span class="string">"#textarea"</span>,</div><div class="line">            <span class="attr">"text"</span>: [<span class="string">"认真填写哦，垃圾评论是禁止事项"</span>]</div><div class="line">        &#125;,</div><div class="line">        &#123;</div><div class="line">            <span class="attr">"selector"</span>: <span class="string">".OwO-logo"</span>,</div><div class="line">            <span class="attr">"text"</span>: [<span class="string">"要插入一个表情吗"</span>]</div><div class="line">        &#125;,</div><div class="line">        &#123;</div><div class="line">            <span class="attr">"selector"</span>: <span class="string">"#csubmit"</span>,</div><div class="line">            <span class="attr">"text"</span>: [<span class="string">"要提交了吗，首次评论需要审核，请耐心等待~"</span>]</div><div class="line">        &#125;,</div><div class="line">        &#123;</div><div class="line">            <span class="attr">"selector"</span>: <span class="string">".ImageBox"</span>,</div><div class="line">            <span class="attr">"text"</span>: [<span class="string">"点击图片可以放大呢"</span>]</div><div class="line">        &#125;,</div><div class="line">        &#123;</div><div class="line">            <span class="attr">"selector"</span>: <span class="string">"input[name=s]"</span>,</div><div class="line">            <span class="attr">"text"</span>: [<span class="string">"找不到想看的内容？搜索看看吧"</span>]</div><div class="line">        &#125;,</div><div class="line">        &#123;</div><div class="line">            <span class="attr">"selector"</span>: <span class="string">".previous"</span>,</div><div class="line">            <span class="attr">"text"</span>: [<span class="string">"去上一页看看吧"</span>]</div><div class="line">        &#125;,</div><div class="line">        &#123;</div><div class="line">            <span class="attr">"selector"</span>: <span class="string">".next"</span>,</div><div class="line">            <span class="attr">"text"</span>: [<span class="string">"去下一页看看吧"</span>]</div><div class="line">        &#125;,</div><div class="line">        &#123;</div><div class="line">            <span class="attr">"selector"</span>: <span class="string">".dropdown-toggle"</span>,</div><div class="line">            <span class="attr">"text"</span>: [<span class="string">"这里是菜单"</span>]</div><div class="line">        &#125;,</div><div class="line">        &#123;</div><div class="line">            <span class="attr">"selector"</span>: <span class="string">"c-player a.play-icon"</span>,</div><div class="line">            <span class="attr">"text"</span>: [<span class="string">"想要听点音乐吗"</span>]</div><div class="line">        &#125;,</div><div class="line">        &#123;</div><div class="line">            <span class="attr">"selector"</span>: <span class="string">"c-player div.time"</span>,</div><div class="line">            <span class="attr">"text"</span>: [<span class="string">"在这里可以调整&amp;amp;amp;lt;span style=\"color:#0099cc;\"&amp;amp;amp;gt;播放进度&amp;amp;amp;lt;/span&amp;amp;amp;gt;呢"</span>]</div><div class="line">        &#125;,</div><div class="line">        &#123;</div><div class="line">            <span class="attr">"selector"</span>: <span class="string">"c-player div.volume"</span>,</div><div class="line">            <span class="attr">"text"</span>: [<span class="string">"在这里可以调整&amp;amp;amp;lt;span style=\"color:#0099cc;\"&amp;amp;amp;gt;音量&amp;amp;amp;lt;/span&amp;amp;amp;gt;呢"</span>]</div><div class="line">        &#125;,</div><div class="line">        &#123;</div><div class="line">            <span class="attr">"selector"</span>: <span class="string">"c-player div.list-button"</span>,</div><div class="line">            <span class="attr">"text"</span>: [<span class="string">"&amp;amp;amp;lt;span style=\"color:#0099cc;\"&amp;amp;amp;gt;播放列表&amp;amp;amp;lt;/span&amp;amp;amp;gt;里都有什么呢"</span>]</div><div class="line">        &#125;,</div><div class="line">        &#123;</div><div class="line">            <span class="attr">"selector"</span>: <span class="string">"c-player div.lyric-button"</span>,</div><div class="line">            <span class="attr">"text"</span>: [<span class="string">"有&amp;amp;amp;lt;span style=\"color:#0099cc;\"&amp;amp;amp;gt;歌词&amp;amp;amp;lt;/span&amp;amp;amp;gt;的话就能跟着一起唱呢"</span>]</div><div class="line">        &#125;,</div><div class="line">        &#123;</div><div class="line">            <span class="attr">"selector"</span>: <span class="string">".waifu #live2d"</span>,</div><div class="line">            <span class="attr">"text"</span>: [<span class="string">"干嘛呢你，快把手拿开"</span>, <span class="string">"鼠…鼠标放错地方了！"</span>]</div><div class="line">        &#125;</div><div class="line">    ],</div><div class="line">    <span class="attr">"click"</span>: [</div><div class="line">        &#123;</div><div class="line">            <span class="attr">"selector"</span>: <span class="string">".waifu #live2d"</span>,</div><div class="line">            <span class="attr">"text"</span>: [<span class="string">"是…是不小心碰到了吧"</span>, <span class="string">"萝莉控是什么呀"</span>, <span class="string">"你看到我的小熊了吗"</span>, <span class="string">"再摸的话我可要报警了！⌇●﹏●⌇"</span>, <span class="string">"110吗，这里有个变态一直在摸我(ó﹏ò｡)"</span>]</div><div class="line">        &#125;</div><div class="line">    ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="引入JS"><a href="#引入JS" class="headerlink" title="引入JS"></a>引入JS</h2><p>修改<code>header.php</code>，加入以下内容以创建画布和提示框：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&amp;amp;lt;div class="waifu"&amp;amp;gt;</div><div class="line">&amp;amp;lt;div class="waifu-tips"&amp;amp;gt;&amp;amp;lt;/div&amp;amp;gt;</div><div class="line">&amp;amp;lt;canvas id="live2d" width="280" height="250" class="live2d"&amp;amp;gt;&amp;amp;lt;/canvas&amp;amp;gt;</div><div class="line">&amp;amp;lt;/div&amp;amp;gt;</div></pre></td></tr></table></figure>
+<p>在<code>footer.php</code>中加入以下内容：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&amp;amp;lt;img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-wp-preserve="%3Cscript%20async%20src%3D%22path%2Fto%2Fwaifu-tips.js%22%3E%3C%2Fscript%3E" data-mce-resize="false" data-mce-placeholder="1" class="mce-object" width="20" height="20" alt="&amp;amp;amp;lt;script&amp;amp;amp;gt;" title="&amp;amp;amp;lt;script&amp;amp;amp;gt;" /&amp;amp;gt;</div><div class="line">&amp;amp;lt;img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-wp-preserve="%3Cscript%20src%3D%22path%2Fto%2Flive2d.js%22%3E%3C%2Fscript%3E" data-mce-resize="false" data-mce-placeholder="1" class="mce-object" width="20" height="20" alt="&amp;amp;amp;lt;script&amp;amp;amp;gt;" title="&amp;amp;amp;lt;script&amp;amp;amp;gt;" /&amp;amp;gt;</div><div class="line">&amp;amp;lt;img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-wp-preserve="%3Cscript%20type%3D%22text%2Fjavascript%22%3E%0A%20loadlive2d(%22live2d%22%2C%20%22path%2Fto%2Fmodel.json%22)%3B%0A%3C%2Fscript%3E" data-mce-resize="false" data-mce-placeholder="1" class="mce-object" width="20" height="20" alt="&amp;amp;amp;lt;script&amp;amp;amp;gt;" title="&amp;amp;amp;lt;script&amp;amp;amp;gt;" /&amp;amp;gt;</div></pre></td></tr></table></figure>
+<p><code>model.json</code>修改为以下内容<br>其中<code>hit_areas_custom</code>字段的<strong>head_x和body_x</strong>定义了头部和身体的<em>HIT_AREA</em>的左上角的坐标，<code>head_y</code>和<code>body_y</code>定义了右下角的坐标</p>
+<p>坐标可通过启用<code>DEBUG_MOUSE_LOG</code>获取</p>
+<p>源码+声音</p>
+<p>已下是可选择内容 <code>修改你的人物.json</code></p>
+<p>这里给的只是某个贴图的格式:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attr">"version"</span>:<span class="string">"1.0.0"</span>,</div><div class="line">    <span class="attr">"model"</span>:<span class="string">"model.moc"</span>,</div><div class="line">    <span class="attr">"textures"</span>:[</div><div class="line">        <span class="string">"textures/default-costume.png"</span></div><div class="line">    ],</div><div class="line">    <span class="attr">"layout"</span>:&#123;</div><div class="line">        <span class="attr">"center_x"</span>:<span class="number">0.0</span>,</div><div class="line">        <span class="attr">"center_y"</span>:<span class="number">-0.05</span>,</div><div class="line">        <span class="attr">"width"</span>:<span class="number">2.0</span></div><div class="line">    &#125;,</div><div class="line">    <span class="attr">"hit_areas_custom"</span>:&#123;</div><div class="line">        <span class="attr">"head_x"</span>:[<span class="number">-0.35</span>, <span class="number">0.6</span>],</div><div class="line">        <span class="attr">"head_y"</span>:[<span class="number">0.19</span>, <span class="number">-0.2</span>],</div><div class="line">        <span class="attr">"body_x"</span>:[<span class="number">-0.3</span>, <span class="number">-0.25</span>],</div><div class="line">        <span class="attr">"body_y"</span>:[<span class="number">0.3</span>, <span class="number">-0.9</span>]</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">"motions"</span>:&#123;</div><div class="line">        <span class="attr">"idle"</span>:[</div><div class="line">            &#123;<span class="attr">"file"</span>:<span class="string">"motions/WakeUp.mtn"</span>&#125;,</div><div class="line">            &#123;<span class="attr">"file"</span>:<span class="string">"motions/Breath1.mtn"</span>&#125;,</div><div class="line">            &#123;<span class="attr">"file"</span>:<span class="string">"motions/Breath2.mtn"</span>&#125;,</div><div class="line">            &#123;<span class="attr">"file"</span>:<span class="string">"motions/Breath3.mtn"</span>&#125;,</div><div class="line">            &#123;<span class="attr">"file"</span>:<span class="string">"motions/Breath5.mtn"</span>&#125;,</div><div class="line">            &#123;<span class="attr">"file"</span>:<span class="string">"motions/Breath7.mtn"</span>&#125;,</div><div class="line">            &#123;<span class="attr">"file"</span>:<span class="string">"motions/Breath8.mtn"</span>&#125;</div><div class="line">        ],</div><div class="line">        <span class="attr">"sleepy"</span>:[</div><div class="line">            &#123;<span class="attr">"file"</span>:<span class="string">"motions/Sleeping.mtn"</span>&#125;</div><div class="line">        ],</div><div class="line">        <span class="attr">"flick_head"</span>:[</div><div class="line">            &#123;<span class="attr">"file"</span>:<span class="string">"motions/Touch Dere1.mtn"</span>&#125;,</div><div class="line">            &#123;<span class="attr">"file"</span>:<span class="string">"motions/Touch Dere2.mtn"</span>&#125;,</div><div class="line">            &#123;<span class="attr">"file"</span>:<span class="string">"motions/Touch Dere3.mtn"</span>&#125;,</div><div class="line">            &#123;<span class="attr">"file"</span>:<span class="string">"motions/Touch Dere4.mtn"</span>&#125;,</div><div class="line">            &#123;<span class="attr">"file"</span>:<span class="string">"motions/Touch Dere5.mtn"</span>&#125;,</div><div class="line">            &#123;<span class="attr">"file"</span>:<span class="string">"motions/Touch Dere6.mtn"</span>&#125;</div><div class="line">        ],</div><div class="line">        <span class="attr">"tap_body"</span>:[</div><div class="line">            &#123;<span class="attr">"file"</span>:<span class="string">"motions/Touch1.mtn"</span>&#125;,</div><div class="line">            &#123;<span class="attr">"file"</span>:<span class="string">"motions/Touch2.mtn"</span>&#125;,</div><div class="line">            &#123;<span class="attr">"file"</span>:<span class="string">"motions/Touch3.mtn"</span>&#125;,</div><div class="line">            &#123;<span class="attr">"file"</span>:<span class="string">"motions/Touch4.mtn"</span>&#125;,</div><div class="line">            &#123;<span class="attr">"file"</span>:<span class="string">"motions/Touch5.mtn"</span>&#125;,</div><div class="line">            &#123;<span class="attr">"file"</span>:<span class="string">"motions/Touch6.mtn"</span>&#125;</div><div class="line">        ],</div><div class="line">        <span class="attr">""</span>:[</div><div class="line">            &#123;<span class="attr">"file"</span>:<span class="string">"motions/Breath1.mtn"</span>&#125;,</div><div class="line">            &#123;<span class="attr">"file"</span>:<span class="string">"motions/Breath2.mtn"</span>&#125;,</div><div class="line">            &#123;<span class="attr">"file"</span>:<span class="string">"motions/Breath3.mtn"</span>&#125;,</div><div class="line">            &#123;<span class="attr">"file"</span>:<span class="string">"motions/Breath4.mtn"</span>&#125;,</div><div class="line">            &#123;<span class="attr">"file"</span>:<span class="string">"motions/Breath5.mtn"</span>&#125;,</div><div class="line">            &#123;<span class="attr">"file"</span>:<span class="string">"motions/Breath6.mtn"</span>&#125;,</div><div class="line">            &#123;<span class="attr">"file"</span>:<span class="string">"motions/Breath7.mtn"</span>&#125;,</div><div class="line">            &#123;<span class="attr">"file"</span>:<span class="string">"motions/Breath8.mtn"</span>&#125;,</div><div class="line">            &#123;<span class="attr">"file"</span>:<span class="string">"motions/Fail.mtn"</span>&#125;,</div><div class="line">            &#123;<span class="attr">"file"</span>:<span class="string">"motions/Sleeping.mtn"</span>&#125;,</div><div class="line">            &#123;<span class="attr">"file"</span>:<span class="string">"motions/Success.mtn"</span>&#125;,</div><div class="line">            &#123;<span class="attr">"file"</span>:<span class="string">"motions/Sukebei1.mtn"</span>&#125;,</div><div class="line">            &#123;<span class="attr">"file"</span>:<span class="string">"motions/Sukebei2.mtn"</span>&#125;,</div><div class="line">            &#123;<span class="attr">"file"</span>:<span class="string">"motions/Sukebei3.mtn"</span>&#125;,</div><div class="line">            &#123;<span class="attr">"file"</span>:<span class="string">"motions/Touch Dere1.mtn"</span>&#125;,</div><div class="line">            &#123;<span class="attr">"file"</span>:<span class="string">"motions/Touch Dere2.mtn"</span>&#125;,</div><div class="line">            &#123;<span class="attr">"file"</span>:<span class="string">"motions/Touch Dere3.mtn"</span>&#125;,</div><div class="line">            &#123;<span class="attr">"file"</span>:<span class="string">"motions/Touch Dere4.mtn"</span>&#125;,</div><div class="line">            &#123;<span class="attr">"file"</span>:<span class="string">"motions/Touch Dere5.mtn"</span>&#125;,</div><div class="line">            &#123;<span class="attr">"file"</span>:<span class="string">"motions/Touch Dere6.mtn"</span>&#125;,</div><div class="line">            &#123;<span class="attr">"file"</span>:<span class="string">"motions/Touch1.mtn"</span>&#125;,</div><div class="line">            &#123;<span class="attr">"file"</span>:<span class="string">"motions/Touch2.mtn"</span>&#125;,</div><div class="line">            &#123;<span class="attr">"file"</span>:<span class="string">"motions/Touch3.mtn"</span>&#125;,</div><div class="line">            &#123;<span class="attr">"file"</span>:<span class="string">"motions/Touch4.mtn"</span>&#125;,</div><div class="line">            &#123;<span class="attr">"file"</span>:<span class="string">"motions/Touch5.mtn"</span>&#125;,</div><div class="line">            &#123;<span class="attr">"file"</span>:<span class="string">"motions/Touch6.mtn"</span>&#125;,</div><div class="line">            &#123;<span class="attr">"file"</span>:<span class="string">"motions/WakeUp.mtn"</span>&#125;</div><div class="line">        ],</div><div class="line">        <span class="attr">"tap_body"</span>:</div><div class="line">        [</div><div class="line">            &#123; <span class="attr">"file"</span>:<span class="string">"motions/Touch Dere3.mtn"</span> , <span class="attr">"sound"</span>:<span class="string">"sounds/1.mp3"</span>&#125;,</div><div class="line">            &#123; <span class="attr">"file"</span>:<span class="string">"motions/Touch1.mtn"</span> , <span class="attr">"sound"</span>:<span class="string">"sounds/3.mp3"</span>&#125;,</div><div class="line">            &#123; <span class="attr">"file"</span>:<span class="string">"motions/Touch2.mtn"</span> , <span class="attr">"sound"</span>:<span class="string">"sounds/4.mp3"</span>&#125;</div><div class="line">        ],</div><div class="line">        <span class="attr">"pinch_in"</span>:</div><div class="line">        [</div><div class="line">            &#123; <span class="attr">"file"</span>:<span class="string">"motions/Breath3.mtn"</span>, <span class="attr">"sound"</span>:<span class="string">"sounds/9.mp3"</span> &#125;</div><div class="line">        ],</div><div class="line">        <span class="attr">"pinch_out"</span>:</div><div class="line">        [</div><div class="line">            &#123; <span class="attr">"file"</span>:<span class="string">"motions/Breath5.mtn"</span>, <span class="attr">"sound"</span>:<span class="string">"sounds/8.mp3"</span> &#125;</div><div class="line">        ],</div><div class="line">        <span class="attr">"shake"</span>:</div><div class="line">        [</div><div class="line">            &#123; <span class="attr">"file"</span>:<span class="string">"motions/Breath7.mtn"</span>, <span class="attr">"sound"</span>:<span class="string">"sounds/6.mp3"</span>,<span class="attr">"fade_in"</span>:<span class="number">500</span> &#125;</div><div class="line">        ],</div><div class="line">        <span class="attr">"flick_head"</span>:</div><div class="line">        [</div><div class="line">            &#123; <span class="attr">"file"</span>:<span class="string">"motions/Breath8.mtn"</span>, <span class="attr">"sound"</span>:<span class="string">"sounds/3.mp3"</span> &#125;</div><div class="line">        ]</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上面的<code>mtn动作</code>以及<code>sounds</code>可以选择添加 这样可以在人物里面添加动作同步声音 增加看板娘萌度！</p>
+<p>其中<code>motions</code>的<code>idle组</code>是放置时的动作，按照次序依次显示，可以在这里添加更多的动作</p>
+<p><code>layout</code>的<code>center_x</code>字段和<code>center_y</code>字段用于偏移显示模型，日后若有显示错位可以修改此处的值</p>
+<h2 id="增加样式"><a href="#增加样式" class="headerlink" title="增加样式:"></a>增加样式:</h2><p>把如下源码写成css再调用或者直接插入<code>style.css</code>里再调用都可以</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.waifu</span> &#123;</div><div class="line">    <span class="attribute">position</span>: fixed;</div><div class="line">    <span class="attribute">bottom</span>: <span class="number">0</span>;</div><div class="line">    <span class="attribute">left</span>: <span class="number">0</span>;</div><div class="line">    <span class="attribute">z-index</span>: <span class="number">1</span>;</div><div class="line">    <span class="attribute">font-size</span>: <span class="number">0</span>;</div><div class="line">    <span class="attribute">transition</span>: all .<span class="number">3s</span> ease-in-out;</div><div class="line">    <span class="attribute">-webkit-transform</span>: <span class="built_in">translateY</span>(3px);</div><div class="line">    <span class="attribute">transform</span>: <span class="built_in">translateY</span>(3px);</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.waifu</span><span class="selector-pseudo">:hover</span> &#123;</div><div class="line">    <span class="attribute">-webkit-transform</span>: <span class="built_in">translateY</span>(0);</div><div class="line">    <span class="attribute">transform</span>: <span class="built_in">translateY</span>(0);</div><div class="line">&#125;</div><div class="line">@<span class="keyword">media</span> (max-width: <span class="number">768px</span>) &#123;</div><div class="line">    <span class="selector-class">.waifu</span> &#123;</div><div class="line">        <span class="attribute">display</span>: none;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.waifu-tips</span> &#123;</div><div class="line">    <span class="attribute">opacity</span>: <span class="number">0</span>;</div><div class="line">    <span class="attribute">width</span>: <span class="number">200px</span>;</div><div class="line">    <span class="attribute">height</span>: <span class="number">60px</span>;</div><div class="line">    <span class="attribute">margin</span>: -<span class="number">20px</span> <span class="number">20px</span>;</div><div class="line">    <span class="attribute">padding</span>: <span class="number">4px</span> <span class="number">6px</span>;</div><div class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid <span class="built_in">rgba</span>(224, 186, 140, 0.62);</div><div class="line">    <span class="attribute">border-radius</span>: <span class="number">12px</span>;</div><div class="line">    <span class="attribute">background-color</span>: <span class="built_in">rgba</span>(236, 217, 188, 0.5);</div><div class="line">    <span class="attribute">box-shadow</span>: <span class="number">0</span> <span class="number">3px</span> <span class="number">15px</span> <span class="number">2px</span> <span class="built_in">rgba</span>(191, 158, 118, 0.2);</div><div class="line">    <span class="attribute">font-size</span>: <span class="number">12px</span>;</div><div class="line">    <span class="attribute">text-overflow</span>: ellipsis;</div><div class="line">    <span class="attribute">overflow</span>: hidden;</div><div class="line">    <span class="attribute">position</span>: absolute;</div><div class="line">    <span class="attribute">animation-delay</span>: <span class="number">5s</span>;</div><div class="line">    <span class="attribute">animation-duration</span>: <span class="number">50s</span>;</div><div class="line">    <span class="attribute">animation-iteration-count</span>: infinite;</div><div class="line">    <span class="attribute">animation-name</span>: shake;</div><div class="line">    <span class="attribute">animation-timing-function</span>: ease-in-out;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.waifu</span> <span class="selector-id">#live2d</span>&#123;</div><div class="line">    <span class="attribute">position</span>: relative;</div><div class="line">&#125;</div><div class="line"> </div><div class="line">@<span class="keyword">keyframes</span> shake &#123;</div><div class="line">    2% &#123;</div><div class="line">        <span class="attribute">transform</span>: <span class="built_in">translate</span>(0.5px, -1.5px) <span class="built_in">rotate</span>(-0.5deg);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    4% &#123;</div><div class="line">        <span class="attribute">transform</span>: <span class="built_in">translate</span>(0.5px, 1.5px) <span class="built_in">rotate</span>(1.5deg);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    6% &#123;</div><div class="line">        <span class="attribute">transform</span>: <span class="built_in">translate</span>(1.5px, 1.5px) <span class="built_in">rotate</span>(1.5deg);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    8% &#123;</div><div class="line">        <span class="attribute">transform</span>: <span class="built_in">translate</span>(2.5px, 1.5px) <span class="built_in">rotate</span>(0.5deg);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    10% &#123;</div><div class="line">        <span class="attribute">transform</span>: <span class="built_in">translate</span>(0.5px, 2.5px) <span class="built_in">rotate</span>(0.5deg);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    12% &#123;</div><div class="line">        <span class="attribute">transform</span>: <span class="built_in">translate</span>(1.5px, 1.5px) <span class="built_in">rotate</span>(0.5deg);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    14% &#123;</div><div class="line">        <span class="attribute">transform</span>: <span class="built_in">translate</span>(0.5px, 0.5px) <span class="built_in">rotate</span>(0.5deg);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    16% &#123;</div><div class="line">        <span class="attribute">transform</span>: <span class="built_in">translate</span>(-1.5px, -0.5px) <span class="built_in">rotate</span>(1.5deg);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    18% &#123;</div><div class="line">        <span class="attribute">transform</span>: <span class="built_in">translate</span>(0.5px, 0.5px) <span class="built_in">rotate</span>(1.5deg);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    20% &#123;</div><div class="line">        <span class="attribute">transform</span>: <span class="built_in">translate</span>(2.5px, 2.5px) <span class="built_in">rotate</span>(1.5deg);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    22% &#123;</div><div class="line">        <span class="attribute">transform</span>: <span class="built_in">translate</span>(0.5px, -1.5px) <span class="built_in">rotate</span>(1.5deg);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    24% &#123;</div><div class="line">        <span class="attribute">transform</span>: <span class="built_in">translate</span>(-1.5px, 1.5px) <span class="built_in">rotate</span>(-0.5deg);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    26% &#123;</div><div class="line">        <span class="attribute">transform</span>: <span class="built_in">translate</span>(1.5px, 0.5px) <span class="built_in">rotate</span>(1.5deg);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    28% &#123;</div><div class="line">        <span class="attribute">transform</span>: <span class="built_in">translate</span>(-0.5px, -0.5px) <span class="built_in">rotate</span>(-0.5deg);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    30% &#123;</div><div class="line">        <span class="attribute">transform</span>: <span class="built_in">translate</span>(1.5px, -0.5px) <span class="built_in">rotate</span>(-0.5deg);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    32% &#123;</div><div class="line">        <span class="attribute">transform</span>: <span class="built_in">translate</span>(2.5px, -1.5px) <span class="built_in">rotate</span>(1.5deg);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    34% &#123;</div><div class="line">        <span class="attribute">transform</span>: <span class="built_in">translate</span>(2.5px, 2.5px) <span class="built_in">rotate</span>(-0.5deg);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    36% &#123;</div><div class="line">        <span class="attribute">transform</span>: <span class="built_in">translate</span>(0.5px, -1.5px) <span class="built_in">rotate</span>(0.5deg);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    38% &#123;</div><div class="line">        <span class="attribute">transform</span>: <span class="built_in">translate</span>(2.5px, -0.5px) <span class="built_in">rotate</span>(-0.5deg);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    40% &#123;</div><div class="line">        <span class="attribute">transform</span>: <span class="built_in">translate</span>(-0.5px, 2.5px) <span class="built_in">rotate</span>(0.5deg);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    42% &#123;</div><div class="line">        <span class="attribute">transform</span>: <span class="built_in">translate</span>(-1.5px, 2.5px) <span class="built_in">rotate</span>(0.5deg);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    44% &#123;</div><div class="line">        <span class="attribute">transform</span>: <span class="built_in">translate</span>(-1.5px, 1.5px) <span class="built_in">rotate</span>(0.5deg);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    46% &#123;</div><div class="line">        <span class="attribute">transform</span>: <span class="built_in">translate</span>(1.5px, -0.5px) <span class="built_in">rotate</span>(-0.5deg);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    48% &#123;</div><div class="line">        <span class="attribute">transform</span>: <span class="built_in">translate</span>(2.5px, -0.5px) <span class="built_in">rotate</span>(0.5deg);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    50% &#123;</div><div class="line">        <span class="attribute">transform</span>: <span class="built_in">translate</span>(-1.5px, 1.5px) <span class="built_in">rotate</span>(0.5deg);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    52% &#123;</div><div class="line">        <span class="attribute">transform</span>: <span class="built_in">translate</span>(-0.5px, 1.5px) <span class="built_in">rotate</span>(0.5deg);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    54% &#123;</div><div class="line">        <span class="attribute">transform</span>: <span class="built_in">translate</span>(-1.5px, 1.5px) <span class="built_in">rotate</span>(0.5deg);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    56% &#123;</div><div class="line">        <span class="attribute">transform</span>: <span class="built_in">translate</span>(0.5px, 2.5px) <span class="built_in">rotate</span>(1.5deg);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    58% &#123;</div><div class="line">        <span class="attribute">transform</span>: <span class="built_in">translate</span>(2.5px, 2.5px) <span class="built_in">rotate</span>(0.5deg);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    60% &#123;</div><div class="line">        <span class="attribute">transform</span>: <span class="built_in">translate</span>(2.5px, -1.5px) <span class="built_in">rotate</span>(1.5deg);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    62% &#123;</div><div class="line">        <span class="attribute">transform</span>: <span class="built_in">translate</span>(-1.5px, 0.5px) <span class="built_in">rotate</span>(1.5deg);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    64% &#123;</div><div class="line">        <span class="attribute">transform</span>: <span class="built_in">translate</span>(-1.5px, 1.5px) <span class="built_in">rotate</span>(1.5deg);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    66% &#123;</div><div class="line">        <span class="attribute">transform</span>: <span class="built_in">translate</span>(0.5px, 2.5px) <span class="built_in">rotate</span>(1.5deg);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    68% &#123;</div><div class="line">        <span class="attribute">transform</span>: <span class="built_in">translate</span>(2.5px, -1.5px) <span class="built_in">rotate</span>(1.5deg);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    70% &#123;</div><div class="line">        <span class="attribute">transform</span>: <span class="built_in">translate</span>(2.5px, 2.5px) <span class="built_in">rotate</span>(0.5deg);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    72% &#123;</div><div class="line">        <span class="attribute">transform</span>: <span class="built_in">translate</span>(-0.5px, -1.5px) <span class="built_in">rotate</span>(1.5deg);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    74% &#123;</div><div class="line">        <span class="attribute">transform</span>: <span class="built_in">translate</span>(-1.5px, 2.5px) <span class="built_in">rotate</span>(1.5deg);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    76% &#123;</div><div class="line">        <span class="attribute">transform</span>: <span class="built_in">translate</span>(-1.5px, 2.5px) <span class="built_in">rotate</span>(1.5deg);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    78% &#123;</div><div class="line">        <span class="attribute">transform</span>: <span class="built_in">translate</span>(-1.5px, 2.5px) <span class="built_in">rotate</span>(0.5deg);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    80% &#123;</div><div class="line">        <span class="attribute">transform</span>: <span class="built_in">translate</span>(-1.5px, 0.5px) <span class="built_in">rotate</span>(-0.5deg);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    82% &#123;</div><div class="line">        <span class="attribute">transform</span>: <span class="built_in">translate</span>(-1.5px, 0.5px) <span class="built_in">rotate</span>(-0.5deg);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    84% &#123;</div><div class="line">        <span class="attribute">transform</span>: <span class="built_in">translate</span>(-0.5px, 0.5px) <span class="built_in">rotate</span>(1.5deg);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    86% &#123;</div><div class="line">        <span class="attribute">transform</span>: <span class="built_in">translate</span>(2.5px, 1.5px) <span class="built_in">rotate</span>(0.5deg);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    88% &#123;</div><div class="line">        <span class="attribute">transform</span>: <span class="built_in">translate</span>(-1.5px, 0.5px) <span class="built_in">rotate</span>(1.5deg);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    90% &#123;</div><div class="line">        <span class="attribute">transform</span>: <span class="built_in">translate</span>(-1.5px, -0.5px) <span class="built_in">rotate</span>(-0.5deg);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    92% &#123;</div><div class="line">        <span class="attribute">transform</span>: <span class="built_in">translate</span>(-1.5px, -1.5px) <span class="built_in">rotate</span>(1.5deg);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    94% &#123;</div><div class="line">        <span class="attribute">transform</span>: <span class="built_in">translate</span>(0.5px, 0.5px) <span class="built_in">rotate</span>(-0.5deg);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    96% &#123;</div><div class="line">        <span class="attribute">transform</span>: <span class="built_in">translate</span>(2.5px, -0.5px) <span class="built_in">rotate</span>(-0.5deg);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    98% &#123;</div><div class="line">        <span class="attribute">transform</span>: <span class="built_in">translate</span>(-1.5px, -1.5px) <span class="built_in">rotate</span>(-0.5deg);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    0%, 100% &#123;</div><div class="line">        <span class="attribute">transform</span>: <span class="built_in">translate</span>(0, 0) <span class="built_in">rotate</span>(0);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果单独写成css的 你就在<code>header.php</code>里面加上</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&amp;amp;lt;link rel=<span class="string">"stylesheet"</span> href=<span class="string">"https://www.ohyhello.com/live2d/live2d.css"</span> type=<span class="string">"text/css"</span>/&amp;amp;gt;</div></pre></td></tr></table></figure>
+<p>调用你自己的css</p>
+<p>如一切正常，刷新网页后，可爱的Pio就会出现在页面左下角，点击会播放不同的动作并有相应提示文字</p>
+<p>结语：<br>按照以上步骤的话你的博客大概已经出现了卡哇伊的看板娘了<br>注意检查细节特别是<code>waifu-tips.js</code>里面有调用一个json注意别写错路径了</p>
+<p>参考&amp;相关连接<br><a href="https://github.com/EYHN/hexo-helper-live2d" target="_blank" rel="external">hexo-helper-live2d</a><br><a href="https://github.com/ohyhello/kanbanniang_live2d" target="_blank" rel="external">live2d_src</a></p>
+<p><a href="https://imjad.cn/archives/lab/add-dynamic-poster-girl-with-live2d-to-your-blog-01" target="_blank" rel="external">修改模型@猫与向日葵</a></p>
+<p><a href="https://imjad.cn/archives/lab/add-dynamic-poster-girl-with-live2d-to-your-blog-02" target="_blank" rel="external">部分内容转载@猫与向日葵</a></p>
+<p><a href="https://www.ohyhello.com/530/" target="_blank" rel="external">部分内容转载@JiuMeng</a></p>
+<p><a href="http://www.live2d.com/" target="_blank" rel="external">live2d</a></p>
+<p><a href="http://www.live2d.com/en/about/whats_live2d" target="_blank" rel="external">什么是live2d</a></p>
+<p><a href="http://www.live2d.com/usermanual/cubism2_cn/live2dviewer.html" target="_blank" rel="external">Live2D Viewer – Live2D Cubism 2 中文說明書</a></p>
+<p><a href="https://play.google.com/store/apps/details?id=com.sinsiroad.potionmaker" target="_blank" rel="external">药水制作师</a><br><a href="https://github.com/Perfare/UnityStudio" target="_blank" rel="external">Unity Studio</a><br><a href="https://7daystodie.com/forums/showthread.php?22675-Unity-Assets-Bundle-Extractor" target="_blank" rel="external">UABE</a></p>
+
+      
+    </div>
+    
+    
+    
+    <div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script type="text/javascript" src="http://jslibs.wuxubj.cn/sweetalert_mini/jquery-1.7.1.min.js"></script>
+  <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
+  <p><span>本文标题:</span>利用live 2d给博客添加看版娘</a></p>
+  <p><span>文章作者:</span>Tuski</a></p>
+  <p><span>发布时间:</span>2017年12月18日 - 20:51:09</p>
+  <p><span>最后更新:</span>2017年12月18日 - 21:40:53</p>
+  <p><span>原始链接:</span><a href="/2017/12/18/利用live-2d给博客添加看版娘/" title="利用live 2d给博客添加看版娘">http://www.perpeht.com/2017/12/18/利用live-2d给博客添加看版娘/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://www.perpeht.com/2017/12/18/利用live-2d给博客添加看版娘/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script>
+    var clipboard = new Clipboard('.fa-clipboard');
+    clipboard.on('success', $(function(){
+      $(".fa-clipboard").click(function(){
+        swal({   
+          title: "",   
+          text: '复制成功',   
+          html: false,
+          timer: 500,   
+          showConfirmButton: false
+        });
+      });
+    }));  
+</script>
+
+      
+    </div>
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>大佬给点钱吧QAQ</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="https://i.loli.net/2017/12/16/5a33fd668ce7c.png" alt="Tuski 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="https://i.loli.net/2017/12/16/5a33fdbe62e6f.png" alt="Tuski 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/网页/" rel="tag"><i class="fa fa-tag"></i> 网页</a>
+          
+            <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+          
+            <a href="/tags/CSS/" rel="tag"><i class="fa fa-tag"></i> CSS</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+         
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/17/给网页添加鼠标点击特效/" rel="next" title="给网页添加鼠标点击特效">
+                <i class="fa fa-chevron-left"></i> 给网页添加鼠标点击特效
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a35fec5ad889f1e" async = "async" ></script>
+</div>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+    <div class="comments" id="comments">
+      <div id="hypercomments_widget"></div>
+    </div>
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="Tuski" />
+            
+              <p class="site-author-name" itemprop="name">Tuski</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">12</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/thevenomsnake" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:tutushushujianjian@gmail.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plus.google.com/u/0/104624402456467592306" target="_blank" title="Google">
+                    
+                      <i class="fa fa-fw fa-google"></i>Google</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/perphet" target="_blank" title="Twitter">
+                    
+                      <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.youtube.com/channel/UComQu3jg43YgIvm2PqAG1tA" target="_blank" title="YouTube">
+                    
+                      <i class="fa fa-fw fa-youtube"></i>YouTube</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+      <iframe src="https://open.spotify.com/embed?uri=spotify:user:spotify:playlist:37i9dQZF1DXcBWIGoYBM5M&theme=white" width="215" height="305" frameborder="0" allowtransparency="true"></iframe>    
+       
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#获取模型-amp-调整："><span class="nav-text">获取模型&调整：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#科普："><span class="nav-text">科普：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#提取"><span class="nav-text">提取</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#准备SDK"><span class="nav-text">准备SDK</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#修改原因"><span class="nav-text">修改原因</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#代码"><span class="nav-text">代码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#脚本"><span class="nav-text">脚本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文本"><span class="nav-text">文本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引入JS"><span class="nav-text">引入JS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#增加样式"><span class="nav-text">增加样式:</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love" id="heart">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tuski</span>
+
+
+
+  
+</div>
+
+
+
+<!--
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.3</div>
+
+
+-->
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+		<script type="text/javascript">
+		_hcwp = window._hcwp || [];
+
+		_hcwp.push({widget:"Bloggerstream", widget_id: 99037, selector:".hc-comment-count", label: "{\%COUNT%\}" });
+
+		
+		_hcwp.push({widget:"Stream", widget_id: 99037, xid: "2017/12/18/利用live-2d给博客添加看版娘/"});
+		
+
+		(function() {
+		if("HC_LOAD_INIT" in window)return;
+		HC_LOAD_INIT = true;
+		var lang = (navigator.language || navigator.systemLanguage || navigator.userLanguage || "en").substr(0, 2).toLowerCase();
+		var hcc = document.createElement("script"); hcc.type = "text/javascript"; hcc.async = true;
+		hcc.src = ("https:" == document.location.protocol ? "https" : "http")+"://w.hypercomments.com/widget/hc/99037/"+lang+"/widget.js";
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(hcc, s.nextSibling);
+		})();
+		</script>
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("c6sjJ6fGADGrCVC48k5MVQcD-gzGzoHsz", "YuTcQ8aPXftmtmeC4VvTrK9B");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+  <script type="text/javascript">
+  wpac_init = window.wpac_init || [];
+  wpac_init.push({widget: 'Rating', id: 8566,
+    el: 'wpac-rating',
+    color: 'fc6423'
+  });
+  (function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = '//embed.widgetpack.com/widget.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+  })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+<div id="hexo-helper-live2d">
+  <canvas id="live2dcanvas" width="150" height="300"></canvas>
+</div>
+<style>
+  #live2dcanvas{
+    position: fixed;
+    width: 150px;
+    height: 300px;
+    opacity:0.7;
+    right: 0px;
+    z-index: 999;
+    pointer-events: none;
+    bottom: -20px;
+  }
+</style>
+<script type="text/javascript" src="/live2d/device.min.js"></script>
+<script type="text/javascript">
+const loadScript = function loadScript(c,b){var a=document.createElement("script");a.type="text/javascript";"undefined"!=typeof b&&(a.readyState?a.onreadystatechange=function(){if("loaded"==a.readyState||"complete"==a.readyState)a.onreadystatechange=null,b()}:a.onload=function(){b()});a.src=c;document.body.appendChild(a)};
+(function(){
+  if((typeof(device) != 'undefined') && (device.mobile())){
+    document.getElementById("live2dcanvas").style.width = '75px';
+    document.getElementById("live2dcanvas").style.height = '150px';
+  }else
+    if (typeof(device) === 'undefined') console.error('Cannot find current-device script.');
+  loadScript("/live2d/script.js", function(){loadlive2d("live2dcanvas", "/live2d/assets/shizuku.model.json", 0.5);});
+})();
+</script>
+
+ <canvas class="fireworks" 
+        style="position: fixed; left: 0px; top: 0px; z-index: 99999999; pointer-events: none; width: 1158px; height: 916px;" 
+        width="2316" 
+        height="1832">
+</canvas>
+<script type="text/javascript" src="/js/src/anime.min.js"></script>
+<script type="text/javascript" src="/js/src/fireworks.js"></script>
+</body>
+</html>
