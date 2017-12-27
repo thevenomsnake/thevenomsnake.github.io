@@ -96,7 +96,7 @@
 <meta property="og:description" content="引子：C 语言中int main()和 void main() 有何区别？">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.loli.net/2017/12/28/5a43e4bca53f7.png">
-<meta property="og:updated_time" content="2017-12-27T19:32:57.702Z">
+<meta property="og:updated_time" content="2017-12-27T19:44:54.303Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="初探C&#x2F;C++标准&amp;&amp;未定义行为">
 <meta name="twitter:description" content="引子：C 语言中int main()和 void main() 有何区别？">
@@ -394,7 +394,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  4,704
+                  4,702
                 </span>
               
 
@@ -543,8 +543,8 @@
 
 
 <h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><blockquote>
-<p>在<a href="https://zh.wikipedia.org/wiki/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1" target="_blank" rel="external">计算机程序设计</a>中，<strong>未定义行为</strong>（英语：undefined behavior）是指行为不可预测的计算机代码。这是一些编程语言的一个特点，最有名的是在<a href="https://zh.wikipedia.org/wiki/C%E8%AF%AD%E8%A8%80" target="_blank" rel="external">C语言</a>中。<a href="https://zh.wikipedia.org/wiki/%E6%9C%AA%E5%AE%9A%E4%B9%89%E8%A1%8C%E4%B8%BA#cite_note-1" target="_blank" rel="external">[1]</a>在这些语言中，为了简化标准，并给予实现一定的灵活性，标准特别地规定某些操作的结果是<em>未定义的</em>，这意味着程序员不能预测会发生什么事。</p>
-<p>例如，在C语言中，在任何<a href="https://zh.wikipedia.org/wiki/%E8%87%AA%E5%8A%A8%E5%8F%98%E9%87%8F" target="_blank" rel="external">自动对象</a>被<a href="https://zh.wikipedia.org/wiki/%E5%88%9D%E5%A7%8B%E5%8C%96" target="_blank" rel="external">初始化</a>之前，通过非字符类型的<a href="https://zh.wikipedia.org/wiki/%E5%B7%A6%E5%80%BC" target="_blank" rel="external">左值</a>表达式读取这个变量存储的值会产生未定义行为，除以零或访问数组定义的界限之外的元素（参见<a href="https://zh.wikipedia.org/wiki/%E7%BC%93%E5%86%B2%E5%8C%BA%E6%BA%A2%E5%87%BA" target="_blank" rel="external">缓冲区溢出</a>）也会产生未定义行为。在一般情况下，之后的任何行为是不确定的；甚至只要程序的执行存在未定义行为，在引起未定义行为操作发生之前也可能不要求保证程序的行为可预测（如ISO C++）<a href="https://zh.wikipedia.org/wiki/%E6%9C%AA%E5%AE%9A%E4%B9%89%E8%A1%8C%E4%B8%BA#cite_note-2" target="_blank" rel="external">[2]</a>。特别地，标准从来没有要求编译器判断未定义行为，因此，如果程序调用未定义行为，可能会成功编译，甚至一开始运行时没有错误，只会在另一个系统上，甚至是在另一个日期运行失败。当一个未定义行为的实例发生时，正如语言标准所说，“什么事情都可能发生”，也许什么都没有发生。</p>
+<p>在计算机程序设计中，<strong>未定义行为</strong>（英语：undefined behavior）是指行为不可预测的计算机代码。这是一些编程语言的一个特点，最有名的是在C语言中。在这些语言中，为了简化标准，并给予实现一定的灵活性，标准特别地规定某些操作的结果是<em>未定义的</em>，这意味着程序员不能预测会发生什么事。</p>
+<p>例如，在C语言中，在任何自动对象被初始化之前，通过非字符类型的左值表达式读取这个变量存储的值会产生未定义行为，除以零或访问数组定义的界限之外的元素（参见缓冲区溢出）也会产生未定义行为。在一般情况下，之后的任何行为是不确定的；甚至只要程序的执行存在未定义行为，在引起未定义行为操作发生之前也可能不要求保证程序的行为可预测（如ISO C++）。特别地，标准从来没有要求编译器判断未定义行为，因此，如果程序调用未定义行为，可能会成功编译，甚至一开始运行时没有错误，只会在另一个系统上，甚至是在另一个日期运行失败。当一个未定义行为的实例发生时，正如语言标准所说，“什么事情都可能发生”，也许什么都没有发生。</p>
 <p>和未指定行为(unspecified behavior)不同，未定义行为强调基于不可移植或错误的程序构造，或使用错误的数据。一个符合标准的实现可以在假定未定义行为永远不发生（除了显式使用不严格遵守标准的扩展）的基础上进行优化，可能导致原本存在未定义行为（例如有符号数溢出）的程序经过优化后显示出更加明显的错误（例如死循环）。因此，这种未定义行为一般应被视为bug。</p>
 </blockquote>
 <h2 id="Example-in-C-and-C"><a href="#Example-in-C-and-C" class="headerlink" title="Example  in C and C++"></a>Example  in C and C++</h2><p>Attempting to modify a string literal causes undefined behavior</p>
@@ -592,7 +592,7 @@
 </blockquote>
 <p>An example for the <strong>C language:</strong></p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">foo</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> x)</span></span>&#123;</div><div class="line">     <span class="keyword">int</span> value = <span class="number">2147483600</span>; <span class="comment">/* assuming 32 bit int */</span></div><div class="line">     value += x;</div><div class="line">     <span class="keyword">if</span> (value &lt; <span class="number">2147483600</span>)</div><div class="line">        bar();</div><div class="line">     <span class="keyword">return</span> value;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>The value of <code>x</code> cannot be negative and, given that signed <a href="https://en.wikipedia.org/wiki/Integer_overflow" target="_blank" rel="external">integer overflow</a> is undefined behavior in C, the compiler can assume that at the line of the if check <code>value &gt;= 2147483600</code>. Thus the <code>if</code> and the call to the function <code>bar</code> can be ignored by the compiler since the <code>if</code> has no side effects and its condition will never be satisfied. The code above is therefore semantically equivalent to:</p>
+<p>The value of <code>x</code> cannot be negative and, given that signed integer overflow is undefined behavior in C, the compiler can assume that at the line of the if check <code>value &gt;= 2147483600</code>. Thus the <code>if</code> and the call to the function <code>bar</code> can be ignored by the compiler since the <code>if</code> has no side effects and its condition will never be satisfied. The code above is therefore semantically equivalent to:</p>
 <blockquote>
 <p><em><code>x</code>不能为负值，并且考虑到有符号整数溢出在C中是未定义的行为，编译器可以假设在if检查<code>value &gt;= 2147483600</code>。因此<code>if</code>对函数的调用<code>bar</code>可以被编译器忽略，因为<code>if</code>没有带来任何影响，它的条件永远不会被满足。上面的代码因此在语义上等同于：</em></p>
 </blockquote>
@@ -641,7 +641,7 @@
   <p><span>本文标题:</span>初探C/C++标准&&未定义行为</a></p>
   <p><span>文章作者:</span>Tuski</a></p>
   <p><span>发布时间:</span>2017年12月27日 - 23:05:59</p>
-  <p><span>最后更新:</span>2017年12月28日 - 03:32:57</p>
+  <p><span>最后更新:</span>2017年12月28日 - 03:44:54</p>
   <p><span>原始链接:</span><a href="/2017/12/初探未定义行为/" title="初探C/C++标准&&未定义行为">http://www.perpeht.com/2017/12/初探未定义行为/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://www.perpeht.com/2017/12/初探未定义行为/"  aria-label="复制成功！"></i></span>
   </p>
