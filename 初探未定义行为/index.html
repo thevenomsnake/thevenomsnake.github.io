@@ -76,7 +76,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="语言标准," />
 
 
 
@@ -87,17 +87,20 @@
 
 
 
-<meta name="description" content="居中   Download  Now  黑条">
+<meta name="description" content="引子：C 语言中int main()和 void main() 有何区别？">
+<meta name="keywords" content="语言标准">
 <meta property="og:type" content="article">
-<meta property="og:title" content="初探未定义行为">
+<meta property="og:title" content="初探C&#x2F;C++标准&amp;&amp;未定义行为">
 <meta property="og:url" content="http://www.perpeht.com/初探未定义行为/index.html">
 <meta property="og:site_name" content="Tuski&#39;s Blog">
-<meta property="og:description" content="居中   Download  Now  黑条">
+<meta property="og:description" content="引子：C 语言中int main()和 void main() 有何区别？">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-12-27T17:05:59.563Z">
+<meta property="og:image" content="https://i.loli.net/2017/12/28/5a43e4bca53f7.png">
+<meta property="og:updated_time" content="2017-12-27T19:32:57.702Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="初探未定义行为">
-<meta name="twitter:description" content="居中   Download  Now  黑条">
+<meta name="twitter:title" content="初探C&#x2F;C++标准&amp;&amp;未定义行为">
+<meta name="twitter:description" content="引子：C 语言中int main()和 void main() 有何区别？">
+<meta name="twitter:image" content="https://i.loli.net/2017/12/28/5a43e4bca53f7.png">
 
 
 
@@ -134,7 +137,7 @@
 <link rel="stylesheet" href="../live2d/css/live2d.css" />
 
 
-  <title>初探未定义行为 | Tuski's Blog</title>
+  <title>初探C/C++标准&&未定义行为 | Tuski's Blog</title>
   
 
 
@@ -324,7 +327,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">初探未定义行为</h1>
+          <h1 class="post-title" itemprop="name headline">初探C/C++标准&&未定义行为</h1>
         
 
         <div class="post-meta">
@@ -336,8 +339,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-28T01:05:59+08:00">
-                2017-12-28
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-27T23:05:59+08:00">
+                2017-12-27
               </time>
             
 
@@ -366,7 +369,7 @@
 
           
           
-             <span id="/初探未定义行为/" class="leancloud_visitors" data-flag-title="初探未定义行为">
+             <span id="/初探未定义行为/" class="leancloud_visitors" data-flag-title="初探C/C++标准&&未定义行为">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -391,7 +394,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  6
+                  4,704
                 </span>
               
 
@@ -407,7 +410,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1
+                  23
                 </span>
               
             </div>
@@ -428,11 +431,198 @@
       
 
       
-        <script src="/assets/js/APlayer.min.js"> </script><a id="more"></a>
-<blockquote class="blockquote-center">居中</blockquote>
+        <script src="/assets/js/APlayer.min.js"> </script><blockquote class="blockquote-center">引子：C 语言中<code>int main()</code>和 <code>void main()</code> 有何区别？</blockquote>
 
-<p><a id="download" href="下载链接"><i class="fa fa-download"></i><span> Download  Now</span> </a></p>
-<p><span style="background: black; color: black">黑条</span></p>
+<a id="more"></a>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><blockquote>
+<p>文章基于官方文档汇总而成，引用地址会放在文章末尾，若有修改意见欢迎评论指出～</p>
+</blockquote>
+<p>刚开始上课的时候，难免会接触到<code>int main()</code>和<code>void main()</code>，当初我只是初步认识到了<code>void main()</code>是一种    <em>不标准</em> 的写法，但是今天进一步认识到<code>void main()</code>算是一种Undefined behavior(未定义行为)。</p>
+<h1 id="main函数原型-amp-amp-终止行为"><a href="#main函数原型-amp-amp-终止行为" class="headerlink" title="main函数原型&amp;&amp;终止行为"></a>main函数原型&amp;&amp;终止行为</h1><p>在C和C++中流传着很多版本的<code>main</code>函数原型，不同的书里也有不同的写法。今天我从几种标准(C89/99/11以及C++98/03/11/14)的角度来寻找一下什么是“<strong>标准行为</strong>”以及在主函数中<strong>return</strong>后发生了什么。</p>
+<p>比较常见的是下面几种：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line"><span class="function"><span class="title">main</span><span class="params">()</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc,<span class="keyword">char</span> *argv[])</span></span></div></pre></td></tr></table></figure>
+<h2 id="void-main"><a href="#void-main" class="headerlink" title="void main()"></a>void main()</h2><p>首先，从标准角度(所有版本)来说，<code>void main()</code>肯定是错的，没有任何标准(C89/99/11以及C++98/03/11/14)中允许过这种写法。</p>
+<p>但是我在APUE里看到了一种把主函数写为<code>void main()</code>的原因，不知道是不是有人从这个角度说的然后就以讹传讹了。</p>
+<blockquote>
+<p>The problem is that these compilers don’t know that an exit from main is the same as a return. One way around these warnings, which become annoying after a while, is to use return instead of exit from main. But doing this prevents us from using the UNIX System’s grep utility to locate all calls to exit from a program. Another solution is to declare main as returning void, instead of int, and continue calling exit. This gets rid of the compiler warning but doesn’t look right (especially in a programming text), and can generate other compiler warnings, since the return type of main is supposed to be a signed integer.</p>
+</blockquote>
+<p>还有一种可能是从嵌入式来的，没有操作系统，入口点是硬件实现，返回任何东西都没意义。</p>
+<h2 id="main"><a href="#main" class="headerlink" title="main()"></a>main()</h2><p>在K&amp;R C与C89里，函数没有显式声明返回类型，则默认是<code>int</code>:</p>
+<p>C89对函数定义的语法(Syntax)描述如下(注意<em>declaration-specifiers</em>的<em>opt</em>下标符号)：</p>
+<blockquote>
+<p>$${declaration\textrm{-}specifiers<em>{opt}}\hspace{2mm}{declarator\hspace{2mm}declaration\textrm{-}list</em>{opt}}\hspace{2mm}{compound\textrm{-}statement}$$</p>
+</blockquote>
+<p>C89中<em>declaration-specifiers</em>在<em>Syntax</em>上为：</p>
+<ul>
+<li>storage-class-specifier</li>
+<li>type-specifier</li>
+<li>type-qualifier</li>
+</ul>
+<p>表明在C89中函数的<code>return type</code>可以省略。</p>
+<p>K&amp;R C里的描述如下：</p>
+<blockquote>
+<p>Various parts may be absent; a minimal function is</p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">dummy() &#123;&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>which does nothing and returns nothing. A do-nothing function like this is sometimes useful as a place holder during program development. If the return type is omitted, <code>int</code> is assumed.</p>
+</blockquote>
+<p>所以说：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">func()&#123;&#125;</div><div class="line"><span class="comment">// 等价于</span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">func</span><span class="params">()</span></span>&#123;&#125;</div></pre></td></tr></table></figure>
+<p>但是这种方式在C99之后就被废除掉了(注意<em>declaration-specifiers</em>没有<em>opt</em>下标了)：</p>
+<center>declaration-specifiers declarator declaration-list(opt) compound-statement</center>
+
+<p>综上，在C89中，函数的返回类型可以省略，但默认为<code>int</code>，即</p>
+<blockquote>
+<p>主函数声明<code>main()</code>隐式是<code>int main()</code>。</p>
+</blockquote>
+<h2 id="int-main"><a href="#int-main" class="headerlink" title="int main()"></a>int main()</h2><p><code>int main()</code>和<code>int main(void)</code>在C语言中是有区别的：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line"><span class="function"><span class="comment">// 不等价于</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></div></pre></td></tr></table></figure>
+<p>在C语言中参数列表为空(即不提供参数列表也不为void)，表示不提供参数数量和参数类型信息：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">func</span><span class="params">()</span></span>&#123;</div><div class="line">  print(<span class="string">"func()\n"</span>);</div><div class="line">  <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span>&#123;</div><div class="line">  func(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>);<span class="comment">// call func();</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>The empty list in a function declarator that is not part of a definition of that function specifies that no information about the number or types of theparameters is supplied.</p>
+</blockquote>
+<h2 id="C99-11-Standard"><a href="#C99-11-Standard" class="headerlink" title="C99/11 Standard"></a>C99/11 Standard</h2><p>在C99/11标准中，明确定义了对于标准的main函数的两个原型：</p>
+<blockquote>
+<p>摘自ISO/IEC 9899:201x 中5.1.2.2.1<a href="http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1570.pdf" target="_blank" rel="external">在线查阅&amp;&amp;下载</a></p>
+</blockquote>
+<p>The function called at program startup is named main. The implementation declares no prototype for this function. It shall be defined with a return type of <strong>int</strong> and with <strong>no parameters</strong>:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123; <span class="comment">/* ... */</span> &#125;</div></pre></td></tr></table></figure>
+<p>or with <strong>two parameters</strong> (referred to here as <strong>argc</strong> and <strong>argv</strong>, though any names may be used, as they are local to the function in which they are declared):</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span> </span>&#123; <span class="comment">/* ... */</span> &#125;</div></pre></td></tr></table></figure>
+<p>or equivalent;or in some other implementation-defined manner.<br>If they are declared, the parameters to the main function shall obey the following constraints:</p>
+<ul>
+<li>The value of argc shall be nonnegative.</li>
+<li><strong>argv[argc]</strong> shall be a null pointer.</li>
+<li>If the value of argc is <strong>greater than zero</strong>, the array members <strong>argv[0]</strong> through <strong>argv[argc-1]</strong> inclusive shall contain pointers to strings, which are given implementation-defined values by the host environment prior to program startup. The intent is to supply to the program information determined prior to program startup from elsewhere in the hosted environment. If the host environment is not capable of supplying strings with letters in both uppercase and lowercase, the implementation shall ensure that the strings are received in lowercase.</li>
+<li>If the value of argc is <strong>greater than zero</strong>, the string pointed to by <strong>argv[0]</strong><br>represents the program name; <code>argv[0][0]</code> shall be the null character if the program name is not available from the host environment. If the value of argc is greater than one, the strings pointed to by <strong>argv[1]</strong> through <strong>argv[argc-1]</strong><br>represent the program parameters.</li>
+<li>The parameters argc and argv and the strings pointed to by the argv array shall be modifiable by the program, and retain their last-stored values between program startup and program termination.</li>
+</ul>
+<h2 id="C-Strandard"><a href="#C-Strandard" class="headerlink" title="C++ Strandard"></a>C++ Strandard</h2><p>由于C和C++中对于函数参数列表的规则并不一致(C++中参数列表为空代表不接收任何参数)。所以C++中main的原型和ISO C也并不太一样：</p>
+<ul>
+<li>a function of <strong>()</strong> returning <strong>int</strong> and</li>
+<li>a function of (<strong>int</strong>, <strong>pointer to pointer to char</strong>) returning <strong>int</strong></li>
+</ul>
+<h2 id="main-返回的值"><a href="#main-返回的值" class="headerlink" title="main 返回的值"></a>main 返回的值</h2><p>main必须要有返回值的原因是：在C和C++中使用return-statement都是将return的值作为参数来调用<code>exit</code>/<code>std::exit</code>来终止程序。</p>
+<blockquote>
+<p>If status is zero or EXIT_SUCCESS, an implementation-defined form of the status successful termination is returned.</p>
+</blockquote>
+<p><strong>ISO C99/11:</strong><br>If the return type of the <strong>main</strong> function is a type compatible with <strong>int</strong>, a return from the initial call to the <strong>main</strong> function is equivalent to calling the <strong>exit</strong> function with the value returned by the <strong>main</strong> function as its argument;reaching the <strong>}</strong> that terminates the <strong>main</strong> function returns a value of 0. If the return type is not compatible with <strong>int</strong>, the termination status returned to the host environment is unspecified.</p>
+<p><em>Forward references: definition of terms (ISO/IEC 9899:201x 7.1.1), the exit function (ISO/IEC 9899:201x 7.22.4.4).</em></p>
+<h3 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h3><blockquote>
+<p>ISO/IEC 9899:201x -6.9.1 #12</p>
+<p>If the <strong>}</strong> that terminates a function is reached, and the value of the function call is used by<br>the caller, the behavior is undefined.</p>
+</blockquote>
+<p>所以函数结尾不写return是undefined behavior</p>
+<center><em>在Xcode9.0环境下，不写return的函数无法通过编译</em></center>
+
+<p><strong>但是：</strong></p>
+<blockquote>
+<p>ISO/IEC 9899:201x</p>
+<p><strong>5.1.2.2.3 Program termination</strong></p>
+<p>1 If the return type of the <strong>main</strong> function is a type compatible with <strong>int</strong>, a return from the<br>initial call to the <strong>main</strong> function is equivalent to calling the <strong>exit</strong> function with the value<br>returned by the <strong>main</strong> function as its argument;(11) reaching the <strong>}</strong> that terminates the<br><strong>main</strong> function returns a value of 0. If the return type is not compatible with <strong>int</strong>, the<br>termination status returned to the host environment is unspecified.<br><strong>Forward references: </strong>definition of terms (7.1.1), the exit function (7.22.4.4)</p>
+</blockquote>
+<p>main函数是一个特例，可以不用return</p>
+<p><strong>ISO C++11/14:</strong><br>A return statement in main has the eﬀect of leaving the main function (destroying any objects with automatic storage duration) and calling <strong>std::exit</strong> with the return value as the argument. If control reaches the end of main without encountering a return statement, the eﬀect is that of executing</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">return</span> <span class="number">0</span>;</div></pre></td></tr></table></figure>
+<p><del>待补充</del></p>
+<h2 id="exit"><a href="#exit" class="headerlink" title="exit"></a>exit</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">exit</span><span class="params">(<span class="keyword">int</span> status)</span></span>;</div></pre></td></tr></table></figure>
+<p>The <strong>exit</strong> function causes normal program termination to occur. If more than one call to the <strong>exit</strong> function is executed by a program, the behavior is undefined.</p>
+<ul>
+<li>First, all functions registered by the <strong>atexit</strong> function are called, in the reverse order of their registration,except that a function is called after any previously registered functions that had already been called at the time it was registered. If, during the call to any such function, a call to the <strong>longjmp</strong> function is made that would terminate the call to the registered function, the behavior is undefined.</li>
+<li>Next, all open streams with unwritten buffered data are ﬂushed, all open streams are closed, and all files created by the <strong>tmpfile</strong> function are removed.</li>
+<li>Finally, control is returned to the host environment. If the value of <strong>status</strong> is <strong>zero</strong> or <strong>EXIT_SUCCESS</strong>, an implementation-defined form of the status <em>successful termination</em> is returned. If the value of <strong>status</strong> is <strong>EXIT_FAILURE</strong>, an implementation-defined form of the status <em>unsuccessful termination</em> is returned. Otherwise the status returned is implementation-defined.</li>
+</ul>
+<p><strong>The exit function cannot return to its caller.</strong></p>
+<h2 id="Exit"><a href="#Exit" class="headerlink" title="_Exit"></a>_Exit</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></div><div class="line"><span class="keyword">void</span> _Exit(<span class="keyword">int</span> status);</div></pre></td></tr></table></figure>
+<p>The <code>_Exit</code> function causes normal program termination to occur and control to be returned to the host environment. No functions registered by the atexit function or signal handlers registered by the signal function are called. The status returned to the host environment is determined in the same way as for the exit function (7.20.4.3).Whether open streams with unwritten buffered data are ﬂushed, open streams are closed,or temporary files are removed is implementation-defined.<br>The <code>_Exit</code> function cannot return to its caller.</p>
+<p><img src="https://i.loli.net/2017/12/28/5a43e4bca53f7.png" alt="StartAndterminatesACProgram.png"></p>
+<h1 id="Undefined-behavior"><a href="#Undefined-behavior" class="headerlink" title="Undefined behavior"></a>Undefined behavior</h1><center><strong><em>渣翻译请见谅，如果翻译有定义性错误，还请评论指出，谢谢 ! <a href="https://en.wikipedia.org/wiki/Undefined_behavior#cite_note-6" target="_blank" rel="external">原文链接</a></em></strong></center>
+
+
+
+<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><blockquote>
+<p>在<a href="https://zh.wikipedia.org/wiki/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1" target="_blank" rel="external">计算机程序设计</a>中，<strong>未定义行为</strong>（英语：undefined behavior）是指行为不可预测的计算机代码。这是一些编程语言的一个特点，最有名的是在<a href="https://zh.wikipedia.org/wiki/C%E8%AF%AD%E8%A8%80" target="_blank" rel="external">C语言</a>中。<a href="https://zh.wikipedia.org/wiki/%E6%9C%AA%E5%AE%9A%E4%B9%89%E8%A1%8C%E4%B8%BA#cite_note-1" target="_blank" rel="external">[1]</a>在这些语言中，为了简化标准，并给予实现一定的灵活性，标准特别地规定某些操作的结果是<em>未定义的</em>，这意味着程序员不能预测会发生什么事。</p>
+<p>例如，在C语言中，在任何<a href="https://zh.wikipedia.org/wiki/%E8%87%AA%E5%8A%A8%E5%8F%98%E9%87%8F" target="_blank" rel="external">自动对象</a>被<a href="https://zh.wikipedia.org/wiki/%E5%88%9D%E5%A7%8B%E5%8C%96" target="_blank" rel="external">初始化</a>之前，通过非字符类型的<a href="https://zh.wikipedia.org/wiki/%E5%B7%A6%E5%80%BC" target="_blank" rel="external">左值</a>表达式读取这个变量存储的值会产生未定义行为，除以零或访问数组定义的界限之外的元素（参见<a href="https://zh.wikipedia.org/wiki/%E7%BC%93%E5%86%B2%E5%8C%BA%E6%BA%A2%E5%87%BA" target="_blank" rel="external">缓冲区溢出</a>）也会产生未定义行为。在一般情况下，之后的任何行为是不确定的；甚至只要程序的执行存在未定义行为，在引起未定义行为操作发生之前也可能不要求保证程序的行为可预测（如ISO C++）<a href="https://zh.wikipedia.org/wiki/%E6%9C%AA%E5%AE%9A%E4%B9%89%E8%A1%8C%E4%B8%BA#cite_note-2" target="_blank" rel="external">[2]</a>。特别地，标准从来没有要求编译器判断未定义行为，因此，如果程序调用未定义行为，可能会成功编译，甚至一开始运行时没有错误，只会在另一个系统上，甚至是在另一个日期运行失败。当一个未定义行为的实例发生时，正如语言标准所说，“什么事情都可能发生”，也许什么都没有发生。</p>
+<p>和未指定行为(unspecified behavior)不同，未定义行为强调基于不可移植或错误的程序构造，或使用错误的数据。一个符合标准的实现可以在假定未定义行为永远不发生（除了显式使用不严格遵守标准的扩展）的基础上进行优化，可能导致原本存在未定义行为（例如有符号数溢出）的程序经过优化后显示出更加明显的错误（例如死循环）。因此，这种未定义行为一般应被视为bug。</p>
+</blockquote>
+<h2 id="Example-in-C-and-C"><a href="#Example-in-C-and-C" class="headerlink" title="Example  in C and C++"></a>Example  in C and C++</h2><p>Attempting to modify a string literal causes undefined behavior</p>
+<blockquote>
+<p><em>尝试修改字符串字面量会产生未定义行为：</em></p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">char</span> * p = <span class="string">"wikipedia"</span>;<span class="comment">// valid C, ill-formed in C++11, deprecated C++98/C++03</span></div><div class="line">                      <span class="comment">//C++11中错误，C++98/C++03不推荐使用</span></div><div class="line">p[<span class="number">0</span>] = <span class="string">'W'</span>; <span class="comment">// undefined behavior 未定义行为</span></div></pre></td></tr></table></figure>
+<p>防止这一点的方法之一是将它定义为数组而不是指针：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">char</span> p[] = <span class="string">"wikipedia"</span>; <span class="comment">/* 正确 */</span></div><div class="line">p[<span class="number">0</span>] = <span class="string">'W'</span>;</div></pre></td></tr></table></figure>
+<p>Integer division by zero results in undefined behavior</p>
+<blockquote>
+<p><em>除以零会导致未定义行为。</em></p>
+<p><em>根据 <a href="https://zh.wikipedia.org/wiki/IEEE_754" target="_blank" rel="external">IEEE 754</a>，float、double和long double类型的值除以零的结果是无穷大或<a href="https://zh.wikipedia.org/wiki/NaN" target="_blank" rel="external">NaN</a>：</em></p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">return</span> x/<span class="number">0</span>; <span class="comment">// undefined behavior</span></div></pre></td></tr></table></figure>
+<p>Certain pointer operations may result in undefined behavior:</p>
+<blockquote>
+<p><em>某些指针操作可能导致未定义行为：</em></p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> arr[<span class="number">4</span>] = &#123;<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;;</div><div class="line"><span class="keyword">int</span> *p = arr + <span class="number">5</span>;  <span class="comment">// undefined behavior for indexing out of bounds</span></div><div class="line">p = <span class="number">0</span>;</div><div class="line"><span class="keyword">int</span> a = *p;        <span class="comment">// undefined behavior for dereferencing a null pointer</span></div></pre></td></tr></table></figure>
+<p>In C and C++, the comparison of pointers to objects is only strictly defined if the pointers point to members of the same object, or elements of the same array. Example:</p>
+<blockquote>
+<p><em>在C和C ++中，如果指针指向相同对象的成员，或者指向同一个数组的元素，那么只能严格定义指向对象的指针。样例：</em></p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">  <span class="keyword">int</span> a = <span class="number">0</span>;</div><div class="line">  <span class="keyword">int</span> b = <span class="number">0</span>;</div><div class="line">  <span class="keyword">return</span> &amp;a &lt; &amp;b; <span class="comment">/* undefined behavior */</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Reaching the end of a value-returning function (other than main()) without a return statement results in undefined behavior if the value of the function call is used by the caller:</p>
+<blockquote>
+<p> <em>到达返回数值的函数（除main函数以外）的结尾，而没有一个return语句，会导致未定义行为：</em></p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">f</span><span class="params">()</span></span>&#123;</div><div class="line">&#125; <span class="comment">/* undefined behavior if the value of the function call is used*/</span></div></pre></td></tr></table></figure>
+<p>Modifying an object between two sequence points more than once produces undefined behavior. It is worth mentioning that there are considerable changes in what causes undefined behavior in relation to sequence points as of C++11. The following example will however cause undefined behavior in both C++ and C.</p>
+<blockquote>
+<p><em>在两个连续点之间多次修改对象会产生未定义的行为。值得一提的是，与C ++ 11相比，未定义的行为与顺序点的关系有所改变。下面的例子然而会导致C ++和C 中未定义的行为</em></p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">i = i++ + <span class="number">1</span>; <span class="comment">// undefined behavior</span></div></pre></td></tr></table></figure>
+<p>When modifying an object between two sequence points, reading the value of the object for any other purpose than determining the value to be stored is also undefined behavior.</p>
+<blockquote>
+<p><em>在两个连续点之间修改对象时，除了确定要存储的值之外，读取对象的值也是未定义的行为。</em></p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">a[i] = i++; <span class="comment">// undefined behavior</span></div><div class="line"><span class="built_in">printf</span>(<span class="string">"%d %d\n"</span>, ++n, power(<span class="number">2</span>, n)); <span class="comment">// also undefined behavior</span></div></pre></td></tr></table></figure>
+<h2 id="Benefits"><a href="#Benefits" class="headerlink" title="Benefits"></a>Benefits</h2><p>Documenting an operation as undefined behavior allows compilers to assume that this operation will never happen in a conforming program. This gives the compiler more information about the code and this information can lead to more optimization opportunities.</p>
+<blockquote>
+<p><em>将记录为未定义的行为允许编译器假定这个行为永远不会在符合的程序中执行。这给了编译器更多关于代码的信息，这些信息可以有更多机会去优化代码。</em></p>
+<p> <em>C语言的一个例子：</em></p>
+</blockquote>
+<p>An example for the <strong>C language:</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">foo</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> x)</span></span>&#123;</div><div class="line">     <span class="keyword">int</span> value = <span class="number">2147483600</span>; <span class="comment">/* assuming 32 bit int */</span></div><div class="line">     value += x;</div><div class="line">     <span class="keyword">if</span> (value &lt; <span class="number">2147483600</span>)</div><div class="line">        bar();</div><div class="line">     <span class="keyword">return</span> value;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>The value of <code>x</code> cannot be negative and, given that signed <a href="https://en.wikipedia.org/wiki/Integer_overflow" target="_blank" rel="external">integer overflow</a> is undefined behavior in C, the compiler can assume that at the line of the if check <code>value &gt;= 2147483600</code>. Thus the <code>if</code> and the call to the function <code>bar</code> can be ignored by the compiler since the <code>if</code> has no side effects and its condition will never be satisfied. The code above is therefore semantically equivalent to:</p>
+<blockquote>
+<p><em><code>x</code>不能为负值，并且考虑到有符号整数溢出在C中是未定义的行为，编译器可以假设在if检查<code>value &gt;= 2147483600</code>。因此<code>if</code>对函数的调用<code>bar</code>可以被编译器忽略，因为<code>if</code>没有带来任何影响，它的条件永远不会被满足。上面的代码因此在语义上等同于：</em></p>
+</blockquote>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">foo</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">char</span> x)</span></span>&#123;</div><div class="line">     <span class="keyword">int</span> value = <span class="number">2147483600</span>;</div><div class="line">     value += x;</div><div class="line">     <span class="keyword">return</span> value;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Had the compiler been forced to assume that signed integer overflow has <em>wraparound</em> behavior, then the transformation above would not have been legal.</p>
+<p>Such optimizations become hard to spot by humans when the code is more complex and other optimizations, like inlining, take place.</p>
+<p>Another benefit from allowing signed integer overflow to be undefined is that it makes it possible to store and manipulate a variable’s value in a processor register that is larger than the size of the variable in the source code. For example, if the type of a variable as specified in the source code is narrower than the native register width (such as “int on a 64-bit machine, a common scenario), then the compiler can safely use a signed 64-bit integer for the variable in the machine code it produces, without changing the defined behavior of the code. If the behavior of a 32-bit integer under overflow conditions was depended upon by the program, then a compiler would have to insert additional logic when compiling for a 64-bit machine, because the overflow behavior of most machine code instructions depends on the register width.</p>
+<p>A further important benefit of undefined signed integer overflow is that it enables, though does not require, such erroneous overflows to be detected at compile-time or by static program analysis, or by run-time checks such as the Clang and GCC sanitizers and valgrind; if such overflow was defined with a valid semantics such as wrap-around then compile-time checks would not be possible.</p>
+<blockquote>
+<p><em>如果编译器被迫假定有符号整数溢出具有环绕行为，那么上面的转换就不合法了。</em></p>
+<p><em>当代码更复杂时，人们难以发现这样的优化，并作出其他优化，如内联。</em></p>
+<p><em>允许有符号整数溢出未定义的另一个好处是可以在处理器寄存器中存储和操作变量的值，该寄存器的值大于源代码中变量的大小。例如，如果源代码中指定的变量类型比本地寄存器宽度窄（例如64位机器上的“ int ” ，这是最常见的情况），那么编译器可以安全地使用带符号的 64 位寄存器 机器代码中产生的整数变量，而不会改变代码的定义行为。如果在溢出条件下32位整数的行为被程序所依赖，那么在编译64位机器时，编译器将不得不考虑额外的逻辑，因为大多数机器代码指令的溢出行为取决于寄存器宽度.</em></p>
+<p><em>未定义的有符号整数溢出的另一个重要好处是，它可以在编译时或通过静态程序分析或通过运行时检查（如Clang和GCC sanitizers和valgrind来检测这种溢出的错误; 如果这样的溢出是用一个有效的语义来定义的，比如环绕行为，那么编译时检查是不可能的。</em></p>
+</blockquote>
+<h2 id="Risks"><a href="#Risks" class="headerlink" title="Risks"></a>Risks</h2><p>C and C++ standards have several forms of undefined behavior throughout, which offers increased liberty in compiler implementations and compile-time checks at the expense of undefined run-time behavior if present. In particular, there is an appendix section dedicated to a non-exhaustive listing of common sources of undefined behavior in C. Moreoever, compilers are not required to diagnose code that relies on undefined behavior, due to current static analysis limitations. Hence, it is common for programmers, even experienced ones, to unintentionally rely on undefined behavior either by mistake, or simply because they are not well-versed in the rules of the language that can span over hundreds of pages. This can result in bugs that are exposed when optimizations are enabled on the compiler, or when a compiler of a different vendor or version is used. Testing or fuzzing with dynamic undefined behavior checks enabled, e.g. the Clang sanitizers, can help to catch undefined behavior not diagnosed by the compiler or static analyzers.</p>
+<p>In scenarios where security is critical, undefined behavior can lead to security vulnerabilities in software. When GCC’s developers changed their compiler in 2008 such that it omitted certain overflow checks that relied on undefined behavior, CERT issued a warning against the newer versions of the compiler. Linux Weekly News pointed out that the same behavior was observed in PathScale C, Microsoft Visual C++ 2005 and several other compilers; the warning was later amended to warn about various compilers.</p>
+<blockquote>
+<p><em>C和C ++标准在整个制定过程中都有几种不确定的行为，如果存在未定义的运行行为，则会增加编译器执行和编译时检查的自由度。特别是有一个附录部分，专门用于列举C中不确定行为的常见来源。不过，由于当前的静态分析限制，编译器不需要诊断依赖于未定义行为的代码。因此，甚至经验丰富的程序员通常会无意中依赖未定义的行为，或者是因为他们不熟悉可能长达数百页的语言规则。这可能会导致在编译器上启用优化时或在使用不同供应商或版本的编译器时公开的bug。启用动态未定义行为检查（例如Clang sanitizers）的测试或模糊测试可以帮助捕获未经编译器或静态分析器诊断的未定义行为。</em></p>
+<p><em>在安全性至关重要的情况下，未定义的行为会导致软件中出现安全漏洞。当GCC的开发人员在2008年修改了他们的编译器，从而忽略了某些依赖于未定义行为的溢出检查时，CERT对新版本的编译器发出警告。 Linux Weekly News指出，同样的行为是在 PathScale C, Microsoft Visual C++ 2005和其他一些编译器; 警告规则在后来已经被修订，用来警告各种编译器.</em></p>
+</blockquote>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
+<li><strong>ISO/IEC 9899:2011</strong> ，Information technology – Programming languages – C</li>
+<li><strong>ISO/IEC 9899:1999</strong>，Programming languages – C</li>
+<li><a href="https://zh.wikipedia.org/wiki/%E6%9C%AA%E5%AE%9A%E4%B9%89%E8%A1%8C%E4%B8%BA" target="_blank" rel="external">https://zh.wikipedia.org/wiki/%E6%9C%AA%E5%AE%9A%E4%B9%89%E8%A1%8C%E4%B8%BA</a></li>
+<li><a href="https://imzlp.me/posts/15272/" target="_blank" rel="external">https://imzlp.me/posts/15272/</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Undefined_behavior#Examples_in_C_and_C++" target="_blank" rel="external">https://en.wikipedia.org/wiki/Undefined_behavior#Examples_in_C_and_C++</a></li>
+<li><a href="http://blogs.msdn.com/b/oldnewthing/archive/2014/06/27/10537746.aspx" target="_blank" rel="external">Undefined behavior can result in time travel</a>. 27 Jun 2014 [2015-03-09].</li>
+<li>Lattner, Chris. <a href="http://blog.llvm.org/2011/05/what-every-c-programmer-should-know.html" target="_blank" rel="external">What Every C Programmer Should Know About Undefined Behavior</a>. LLVM Project Blog. LLVM.org. May 13, 2011 [May 24, 2011].</li>
+<li><a href="http://www.catb.org/jargon/html/N/nasal-demons.html" target="_blank" rel="external">The Jargon File on “nasal demons”</a>，未定义行为的一个可能后果。</li>
+</ul>
 
       
     </div>
@@ -448,11 +638,11 @@
   <script type="text/javascript" src="http://jslibs.wuxubj.cn/sweetalert_mini/jquery-1.7.1.min.js"></script>
   <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
   <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
-  <p><span>本文标题:</span>初探未定义行为</a></p>
+  <p><span>本文标题:</span>初探C/C++标准&&未定义行为</a></p>
   <p><span>文章作者:</span>Tuski</a></p>
-  <p><span>发布时间:</span>2017年12月28日 - 01:05:59</p>
-  <p><span>最后更新:</span>2017年12月28日 - 01:05:59</p>
-  <p><span>原始链接:</span><a href="/初探未定义行为/" title="初探未定义行为">http://www.perpeht.com/初探未定义行为/</a>
+  <p><span>发布时间:</span>2017年12月27日 - 23:05:59</p>
+  <p><span>最后更新:</span>2017年12月28日 - 03:32:57</p>
+  <p><span>原始链接:</span><a href="/初探未定义行为/" title="初探C/C++标准&&未定义行为">http://www.perpeht.com/初探未定义行为/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://www.perpeht.com/初探未定义行为/"  aria-label="复制成功！"></i></span>
   </p>
   <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
@@ -511,6 +701,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/语言标准/" rel="tag"><i class="fa fa-tag"></i> 语言标准</a>
+          
+        </div>
       
 
       
@@ -602,8 +798,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -635,7 +840,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-count">18</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -691,6 +896,22 @@
        
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#main函数原型-amp-amp-终止行为"><span class="nav-text">main函数原型&&终止行为</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#void-main"><span class="nav-text">void main()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#main"><span class="nav-text">main()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#int-main"><span class="nav-text">int main()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C99-11-Standard"><span class="nav-text">C99/11 Standard</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-Strandard"><span class="nav-text">C++ Strandard</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#main-返回的值"><span class="nav-text">main 返回的值</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#注意："><span class="nav-text">注意：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#exit"><span class="nav-text">exit</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Exit"><span class="nav-text">_Exit</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Undefined-behavior"><span class="nav-text">Undefined behavior</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#定义"><span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Example-in-C-and-C"><span class="nav-text">Example  in C and C++</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Benefits"><span class="nav-text">Benefits</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Risks"><span class="nav-text">Risks</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-text">参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
