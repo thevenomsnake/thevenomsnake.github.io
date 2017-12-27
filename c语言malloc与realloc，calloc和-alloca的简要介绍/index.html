@@ -1,0 +1,1487 @@
+<!DOCTYPE html>
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+<script type="text/javascript">var OriginTitile=document.title,st;document.addEventListener("visibilitychange",function(){document.hidden?(document.title="(/≧▽≦/)页面崩溃啦！",clearTimeout(st)):(document.title="(ฅ>ω<*ฅ) 又恢复了~"+OriginTitile,st=setTimeout(function(){document.title=OriginTitile},3e3))})</script>
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-bounce.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="c语言,c语言语法," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="主要是说说这个malloc与realloc，calloc和_alloca的区别">
+<meta name="keywords" content="c语言,c语言语法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="c语言malloc与realloc，calloc和_alloca的简要介绍">
+<meta property="og:url" content="http://www.perpeht.com/c语言malloc与realloc，calloc和-alloca的简要介绍/index.html">
+<meta property="og:site_name" content="Tuski&#39;s Blog">
+<meta property="og:description" content="主要是说说这个malloc与realloc，calloc和_alloca的区别">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://i.loli.net/2017/12/05/5a2583adb1035.jpg">
+<meta property="og:updated_time" content="2017-12-17T09:59:56.670Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="c语言malloc与realloc，calloc和_alloca的简要介绍">
+<meta name="twitter:description" content="主要是说说这个malloc与realloc，calloc和_alloca的区别">
+<meta name="twitter:image" content="https://i.loli.net/2017/12/05/5a2583adb1035.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.perpeht.com/c语言malloc与realloc，calloc和-alloca的简要介绍/"/>
+
+
+
+<link rel="stylesheet" href="../live2d/css/live2d.css" />
+
+
+  <title>c语言malloc与realloc，calloc和_alloca的简要介绍 | Tuski's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+<div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+   
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tuski's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">I code my life</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-music">
+          <a href="/music/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-music"></i> <br />
+            
+            音乐
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.perpeht.com/c语言malloc与realloc，calloc和-alloca的简要介绍/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tuski">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tuski's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">c语言malloc与realloc，calloc和_alloca的简要介绍</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-05T01:01:43+08:00">
+                2017-12-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+            <!--noindex-->
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/c语言malloc与realloc，calloc和-alloca的简要介绍/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="c语言malloc与realloc，calloc和-alloca的简要介绍/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+              <!--/noindex-->
+            
+          
+
+          
+          
+             <span id="/c语言malloc与realloc，calloc和-alloca的简要介绍/" class="leancloud_visitors" data-flag-title="c语言malloc与realloc，calloc和_alloca的简要介绍">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,936
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  8
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <script src="/assets/js/APlayer.min.js"> </script><blockquote class="blockquote-center">主要是说说这个malloc与realloc，calloc和_alloca的区别</blockquote>
+
+<a id="more"></a>
+<h1 id="在了解之前首先得知道c语言跟内存分配的方式"><a href="#在了解之前首先得知道c语言跟内存分配的方式" class="headerlink" title="在了解之前首先得知道c语言跟内存分配的方式"></a>在了解之前首先得知道c语言跟内存分配的方式</h1><p><img src="https://i.loli.net/2017/12/05/5a2583adb1035.jpg" alt="0CD2DA2B8667FE9B7E231CE98C658044.jpg"></p>
+<h2 id="1-C语言跟内存分配方式"><a href="#1-C语言跟内存分配方式" class="headerlink" title="1.C语言跟内存分配方式"></a>1.C语言跟内存分配方式</h2><h3 id="1-gt-从静态存储区域分配"><a href="#1-gt-从静态存储区域分配" class="headerlink" title="1&gt;.从静态存储区域分配."></a>1&gt;.从静态存储区域分配.</h3><p>​       内存是在程序编译的时候就已经分配好，而且这块内存在程序的整个运行期间都存在.例如全局变量、static变量等等。。</p>
+<h3 id="2-gt-在栈上创建"><a href="#2-gt-在栈上创建" class="headerlink" title="2&gt;.在栈上创建."></a>2&gt;.在栈上创建.</h3><p>​       在执行函数时，函数内局部变量的存储单元都可以在栈上创建，函数执行结束时这些存储单元自动被释放.栈内存分配运算内置于处理器的指令集中，效率很高，但是分配的内存容量有限.</p>
+<h3 id="3-gt-从堆上分配，又称动态内存分配"><a href="#3-gt-从堆上分配，又称动态内存分配" class="headerlink" title="3&gt;.从堆上分配，又称动态内存分配."></a>3&gt;.从堆上分配，又称动态内存分配.</h3><p>​       程序在运行的时候用malloc或new申请任意多少的内存，而写程序的人负责在何时用free或delete释放内存.动态内存的生存期由用户自己决定，<strong>使用非常灵活，但问题也最多.</strong></p>
+<h2 id="2-C语言跟内存申请相关主要的函数"><a href="#2-C语言跟内存申请相关主要的函数" class="headerlink" title="2.C语言跟内存申请相关主要的函数"></a>2.C语言跟内存申请相关主要的函数</h2><p>​     <0>_alloca是向栈申请内存,因此无需释放.(<strong>仅供了解</strong>)<br>​     <1>malloc分配的内存是位于堆中的,并且没有初始化内存的内容,因此基本上malloc之后调用函数memset来初始化这部分的内存空间.<br>​     <2>calloc则将初始化这部分的内存,设置为0.<br>​     <3>realloc则对malloc申请的内存进行大小的调整.</3></2></1></0></p>
+<h2 id="3-简要的概述"><a href="#3-简要的概述" class="headerlink" title="3.简要的概述"></a>3.简要的概述</h2><h3 id="1-gt-malloc"><a href="#1-gt-malloc" class="headerlink" title="1&gt;malloc:"></a>1&gt;<strong>malloc</strong>:</h3><p><strong>函数原型为：</strong>extern void *malloc(unsigned int num_bytes);</p>
+<p><strong>功能：</strong>分配长度为num_bytes字节的内存块</p>
+<p><strong>返回值：</strong>如果分配成功则返回指向被分配内存的指针(此存储区中的初始值不确定)，否则返回空指针NULL。当内存不再使用时，应使用free()函数将内存块释放。函数返回的指针一定要适当对齐，使其可以用于任何数据对象。</p>
+<blockquote>
+<p>说明：malloc 向系统申请分配指定size个字节的内存空间。返回类型是 void<em> 类型。void</em> 表示未确定类型的指针。C,C++规定，void* 类型可以强制转换为任何其它类型的指针。</p>
+</blockquote>
+<p><strong>用法</strong>：</p>
+<p>char <em>p = (char </em>)malloc(sizeof(char));</p>
+<p><strong>正常程序</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">data_type</span>&#123;</span></div><div class="line">    <span class="keyword">int</span> age;</div><div class="line">    <span class="keyword">char</span> name[<span class="number">20</span>];</div><div class="line">&#125;data;</div><div class="line"></div><div class="line">data*bob=<span class="literal">NULL</span>;    </div><div class="line">bob=(data*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(data));</div><div class="line"><span class="keyword">if</span>(bob!=<span class="literal">NULL</span>)</div><div class="line">&#123;</div><div class="line">    bob-&gt;age=<span class="number">22</span>;</div><div class="line">    <span class="built_in">strcpy</span>(bob-&gt;name,<span class="string">"Robert"</span>);</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"%sis%dyearsold\n"</span>,bob-&gt;name,bob-&gt;age);</div><div class="line">&#125;</div><div class="line">    <span class="keyword">else</span></div><div class="line"> </div><div class="line">&#123;</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"mallocerror!\n"</span>);</div><div class="line">    <span class="built_in">exit</span>(<span class="number">-1</span>);</div><div class="line">&#125;  </div><div class="line"><span class="built_in">free</span>(bob);</div><div class="line">bob=<span class="literal">NULL</span>;</div></pre></td></tr></table></figure>
+<p><strong>内存泄漏实例</strong></p>
+<p>例子1</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"stdio.h"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"malloc.h"</span><span class="comment">//malloc()函数被包含在malloc.h里面</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    <span class="keyword">char</span> *a = <span class="literal">NULL</span>;<span class="comment">//声明一个指向a的char*类型的指针</span></div><div class="line">         </div><div class="line">    a = (<span class="keyword">char</span>*)<span class="built_in">malloc</span>(<span class="number">100</span>*<span class="keyword">sizeof</span>(<span class="keyword">char</span>));<span class="comment">//使用malloc分配内存的首地址，然后赋值给a</span></div><div class="line"> </div><div class="line">    <span class="keyword">if</span>(!a)<span class="comment">//如果malloc失败，可以得到一些log</span></div><div class="line">         </div><div class="line">    &#123;</div><div class="line">        perror(<span class="string">"malloc"</span>);</div><div class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="built_in">sprintf</span>(a,<span class="string">"%s"</span>,<span class="string">"HelloWorld\n"</span>);<span class="comment">//"HelloWorld\n"写入a指向的地址</span></div><div class="line">     </div><div class="line">    <span class="built_in">printf</span>(<span class="string">"%s\n"</span>,a);<span class="comment">//输出用户输入的数据</span></div><div class="line">     </div><div class="line">    <span class="built_in">free</span>(a);<span class="comment">//释放掉使用的内存地址</span></div><div class="line"> </div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;<span class="comment">//例2有无内存泄露？</span></div><div class="line">  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>例子2</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"stdio.h"</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"malloc.h"</span><span class="comment">//malloc()函数被包含在malloc.h里面</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    <span class="keyword">char</span> *a = <span class="literal">NULL</span>;<span class="comment">//声明一个指向a的char*类型的指针   </span></div><div class="line">    a = (<span class="keyword">char</span>*)<span class="built_in">malloc</span>(<span class="number">100</span>*<span class="keyword">sizeof</span>(<span class="keyword">char</span>));<span class="comment">//使用malloc分配内存的首地址，然后赋值给a</span></div><div class="line">    <span class="keyword">if</span>(!a)<span class="comment">//如果malloc失败，可以得到一些log </span></div><div class="line">    &#123;</div><div class="line">        perror(<span class="string">"malloc"</span>);</div><div class="line">        <span class="keyword">return</span> <span class="number">-1</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">sprintf</span>(a,<span class="string">"%s"</span>,<span class="string">"HelloWorld\n"</span>);<span class="comment">//"HelloWorld\n"写入a指向的地址</span></div><div class="line">    <span class="built_in">printf</span>(<span class="string">"%s\n"</span>,a);<span class="comment">//输出用户输入的数据 </span></div><div class="line">    <span class="built_in">free</span>(a);<span class="comment">//释放掉使用的内存地址</span></div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;<span class="comment">//例2有无内存泄露？</span></div><div class="line">&#125;</div><div class="line">注：例<span class="number">1</span>：对<span class="built_in">malloc</span>申请之后没有检测返回值；例<span class="number">2</span>：检测<span class="built_in">malloc</span>返回值条件有误（例<span class="number">2</span>是对的么？）。</div></pre></td></tr></table></figure>
+<p><strong>特别注意</strong>！！！：函数的实参为 <strong>sizeof(int)</strong> ，用于指明一个整型数据需要的大小。如果你写成:</p>
+<p>int<em> p = (int </em>) malloc (1);</p>
+<p>代码也能通过编译，但事实上只分配了1个字节大小的内存空间，当你往里头存入一个整数，就会有3个字节没空间存放，而占了其他的位置！造成的结果是后面的内存中原有数据内容被改写。</p>
+<h3 id="2-gt-realloc"><a href="#2-gt-realloc" class="headerlink" title="2&gt;realloc:"></a>2&gt;realloc:</h3><p><strong>函数原型为：</strong>extern void <em>realloc(void </em>mem_address, unsigned int newsize);</p>
+<p><strong>功能：</strong>先判断当前的指针是否有足够的连续空间，如果有，扩大mem_address指向的地址，并且将mem_address返回，如果空间不够，先按照newsize指定的大小分配空间，将原有数据从头到尾拷贝到新分配的内存区域，而后释放原来mem_address所指内存区域，同时返回新分配的内存区域的首地址。即重新分配存储器块的地址。新的大小一定要大于原来的大小不然的话会导致数据丢失！</p>
+<p><strong>返回值：</strong>如果重新分配成功则返回指向被分配内存的指针，否则返回空指针NULL。</p>
+<p><strong>语法</strong>：指针名=（数据类型*）realloc（要改变内存大小的指针名，新的大小）</p>
+<p><strong>用法</strong>：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">char</span> *p = (<span class="keyword">char</span> *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(<span class="keyword">char</span>));</div><div class="line">p= (<span class="keyword">char</span> *)<span class="built_in">realloc</span>(p, <span class="number">256</span>);<span class="comment">//将p所指向的对象的大小改为size个字节.</span></div></pre></td></tr></table></figure>
+<p><strong>实例</strong></p>
+<p>例1</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">   inti;</div><div class="line">   <span class="keyword">int</span>*pn=(<span class="keyword">int</span>*)<span class="built_in">malloc</span>(<span class="number">5</span>*<span class="keyword">sizeof</span>(<span class="keyword">int</span>));</div><div class="line">   <span class="built_in">printf</span>(<span class="string">"malloc%p\n"</span>,pn);</div><div class="line">   <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;<span class="number">5</span>;i++)</div><div class="line">   pn[i]=i;</div><div class="line">   pn=(<span class="keyword">int</span>*)<span class="built_in">realloc</span>(pn,<span class="number">10</span>*<span class="keyword">sizeof</span>(<span class="keyword">int</span>));</div><div class="line">   <span class="built_in">printf</span>(<span class="string">"realloc%p\n"</span>,pn);</div><div class="line">   <span class="keyword">for</span>(i=<span class="number">5</span>;i&lt;<span class="number">10</span>;i++)</div><div class="line">   pn[i]=i;</div><div class="line">   <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;<span class="number">10</span>;i++)</div><div class="line">   <span class="built_in">printf</span>(<span class="string">"%3d"</span>,pn[i]);</div><div class="line">   <span class="built_in">free</span>(pn);</div><div class="line">   <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>例2</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//realloc.c</span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;syslib.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;alloc.h&gt;</span></span></div><div class="line">main()</div><div class="line">&#123;</div><div class="line">   <span class="keyword">char</span>*p;</div><div class="line">   clrscr();<span class="comment">//clearscreen</span></div><div class="line">   p=(<span class="keyword">char</span>*)<span class="built_in">malloc</span>(<span class="number">100</span>);</div><div class="line">   <span class="keyword">if</span>(p)</div><div class="line">      <span class="built_in">printf</span>(<span class="string">"Memory Allocatedat:%x"</span>,p);</div><div class="line">   <span class="keyword">else</span></div><div class="line">      <span class="built_in">printf</span>(<span class="string">"Not Enough Memory!\n"</span>);</div><div class="line">   getchar();</div><div class="line">   p=(<span class="keyword">char</span>*)<span class="built_in">realloc</span>(p,<span class="number">256</span>);</div><div class="line">   <span class="keyword">if</span>(p)</div><div class="line">      <span class="built_in">printf</span>(<span class="string">"Memory Reallocatedat:%x"</span>,p);</div><div class="line">   <span class="keyword">else</span></div><div class="line">      <span class="built_in">printf</span>(<span class="string">"Not Enough Memory!\n"</span>);</div><div class="line">   <span class="built_in">free</span>(p);</div><div class="line">   getchar();</div><div class="line">   <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="3-gt-calloc"><a href="#3-gt-calloc" class="headerlink" title="3&gt;calloc:"></a>3&gt;calloc:</h3><p><strong>函数原型为：</strong>void *calloc(unsigned n,unsigned size)；</p>
+<p><strong>功能：</strong>在内存的动态存储区中分配n个长度为size的连续空间，函数返回一个指向分配起始地址的指针；如果分配不成功，返回NULL。</p>
+<p><strong>返回值：</strong>如果分配成功则返回指向被分配内存的指针(此存储区中的初始值为零)，否则返回空指针NULL。当内存不再使用时，应使用free()函数将内存块释放。函数返回的指针一定要适当对齐，使其可以用于任何数据对象。</p>
+<p><strong>与malloc的区别：</strong>calloc在动态分配完内存后，自动初始化该内存空间为零，而malloc不初始化，里边数据是随机的垃圾数据。</p>
+<p><strong>用法</strong>：</p>
+<p>void *malloc(size_t size);</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">str = (<span class="keyword">char</span>*)<span class="built_in">calloc</span>(<span class="number">10</span>,<span class="keyword">sizeof</span>(<span class="keyword">char</span>))</div></pre></td></tr></table></figure>
+<p><strong>实例</strong></p>
+<p>例1</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    <span class="keyword">char</span>*str = <span class="literal">NULL</span>;</div><div class="line">    str = (<span class="keyword">char</span>*)<span class="built_in">calloc</span>(<span class="number">10</span>,<span class="keyword">sizeof</span>(<span class="keyword">char</span>));<span class="comment">/*分配内存空间*/</span></div><div class="line">    <span class="built_in">strcpy</span>(str, <span class="string">"Hello"</span>);<span class="comment">/*将hello写入*/</span></div><div class="line">    <span class="built_in">printf</span>(<span class="string">"String is %s\n"</span>,str);<span class="comment">/*显示变量内容*/</span></div><div class="line">    <span class="built_in">free</span>(str);<span class="comment">/*释放空间*/</span></div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>例2</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdlib.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    <span class="keyword">int</span> i;</div><div class="line">    <span class="keyword">int</span>* pn = (<span class="keyword">int</span>*)<span class="built_in">calloc</span>(<span class="number">10</span>, <span class="keyword">sizeof</span>(<span class="keyword">int</span>));</div><div class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>;i &lt; <span class="number">10</span>;i++)</div><div class="line">        <span class="built_in">printf</span>(<span class="string">"%d"</span>, pn[i]);</div><div class="line">    <span class="built_in">printf</span>(<span class="string">"\n"</span>);</div><div class="line">    <span class="built_in">free</span>(pn);</div><div class="line">    <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="4-gt-alloca"><a href="#4-gt-alloca" class="headerlink" title="4&gt;_alloca:"></a>4&gt;_alloca:</h3><p><strong>函数原型为：</strong>void * __cdecl alloca(size_t);</p>
+<p><strong>介绍</strong>：内存分配函数,与malloc,calloc,realloc类似.</p>
+<p>但是注意一个重要的区别,<strong>_alloca</strong>是在栈(stack)上申请空间,用完马上就释放.</p>
+<p>包含在头文件malloc.h中.</p>
+<p>在某些系统中会宏定义成alloca使用.</p>
+<p>#define alloca _alloca</p>
+<p><strong>注意</strong></p>
+<blockquote>
+<p>在调用 <strong>_alloca</strong>的函数返回的时候, 它分配的内存会自动释放。</p>
+<p>也就是说, 用 alloca 分配的内存在栈上。</p>
+<p><strong>_alloca</strong> 不具可移植性, 而且在没有传统堆栈的机器上很难实现。</p>
+<p>当它的返回值直接传入另一个函数时会带来问题,因为他分配在栈上.</p>
+<p>由于这些原因, <strong>_alloca</strong> 不宜使用在必须广泛移植的程序中, 不管它可能多么有用。</p>
+<p>既然 C99 支持变长数组, 它可以用来更好的 完成 alloca() 以前的任务。</p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+    <div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script type="text/javascript" src="http://jslibs.wuxubj.cn/sweetalert_mini/jquery-1.7.1.min.js"></script>
+  <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
+  <p><span>本文标题:</span>c语言malloc与realloc，calloc和_alloca的简要介绍</a></p>
+  <p><span>文章作者:</span>Tuski</a></p>
+  <p><span>发布时间:</span>2017年12月05日 - 01:01:43</p>
+  <p><span>最后更新:</span>2017年12月17日 - 17:59:56</p>
+  <p><span>原始链接:</span><a href="/c语言malloc与realloc，calloc和-alloca的简要介绍/" title="c语言malloc与realloc，calloc和_alloca的简要介绍">http://www.perpeht.com/c语言malloc与realloc，calloc和-alloca的简要介绍/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://www.perpeht.com/c语言malloc与realloc，calloc和-alloca的简要介绍/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script>
+    var clipboard = new Clipboard('.fa-clipboard');
+    clipboard.on('success', $(function(){
+      $(".fa-clipboard").click(function(){
+        swal({   
+          title: "",   
+          text: '复制成功',   
+          html: false,
+          timer: 500,   
+          showConfirmButton: false
+        });
+      });
+    }));  
+</script>
+
+      
+    </div>
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>大佬给点钱吧QAQ</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="https://i.loli.net/2017/12/16/5a33fd668ce7c.png" alt="Tuski 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="https://i.loli.net/2017/12/16/5a33fdbe62e6f.png" alt="Tuski 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/c语言/" rel="tag"><i class="fa fa-tag"></i> c语言</a>
+          
+            <a href="/tags/c语言语法/" rel="tag"><i class="fa fa-tag"></i> c语言语法</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+         
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/c语言课后实验作业7/" rel="next" title="c语言课后实验作业7">
+                <i class="fa fa-chevron-left"></i> c语言课后实验作业7
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/解决Win-VS编译的文件到xCode出现乱码的问题/" rel="prev" title="解决Win VS编译的文件到xCode出现乱码的问题">
+                解决Win VS编译的文件到xCode出现乱码的问题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a35fec5ad889f1e" async = "async" ></script>
+</div>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+    <div class="comments" id="comments">
+      <div id="hypercomments_widget"></div>
+    </div>
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="Tuski" />
+            
+              <p class="site-author-name" itemprop="name">Tuski</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/thevenomsnake" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:thevenomsnake@icloud.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plus.google.com/u/0/104624402456467592306" target="_blank" title="Google">
+                    
+                      <i class="fa fa-fw fa-google"></i>Google</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/perphet" target="_blank" title="Twitter">
+                    
+                      <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.youtube.com/channel/UComQu3jg43YgIvm2PqAG1tA" target="_blank" title="YouTube">
+                    
+                      <i class="fa fa-fw fa-youtube"></i>YouTube</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+      <iframe src="https://open.spotify.com/embed?uri=spotify:user:spotifycharts:playlist:37i9dQZEVXbMDoHDwVN2tF&theme=white" width="215" height="325" frameborder="0" allowtransparency="true"></iframe>  
+       
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#在了解之前首先得知道c语言跟内存分配的方式"><span class="nav-text">在了解之前首先得知道c语言跟内存分配的方式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-C语言跟内存分配方式"><span class="nav-text">1.C语言跟内存分配方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-gt-从静态存储区域分配"><span class="nav-text">1>.从静态存储区域分配.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-gt-在栈上创建"><span class="nav-text">2>.在栈上创建.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-gt-从堆上分配，又称动态内存分配"><span class="nav-text">3>.从堆上分配，又称动态内存分配.</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-C语言跟内存申请相关主要的函数"><span class="nav-text">2.C语言跟内存申请相关主要的函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-简要的概述"><span class="nav-text">3.简要的概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-gt-malloc"><span class="nav-text">1>malloc:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-gt-realloc"><span class="nav-text">2>realloc:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-gt-calloc"><span class="nav-text">3>calloc:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-gt-alloca"><span class="nav-text">4>_alloca:</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love" id="heart">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tuski</span>
+
+
+
+  
+</div>
+
+
+
+<!--
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.3</div>
+
+
+-->
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+		<script type="text/javascript">
+		_hcwp = window._hcwp || [];
+
+		_hcwp.push({widget:"Bloggerstream", widget_id: 99037, selector:".hc-comment-count", label: "{\%COUNT%\}" });
+
+		
+		_hcwp.push({widget:"Stream", widget_id: 99037, xid: "c语言malloc与realloc，calloc和-alloca的简要介绍/"});
+		
+
+		(function() {
+		if("HC_LOAD_INIT" in window)return;
+		HC_LOAD_INIT = true;
+		var lang = (navigator.language || navigator.systemLanguage || navigator.userLanguage || "en").substr(0, 2).toLowerCase();
+		var hcc = document.createElement("script"); hcc.type = "text/javascript"; hcc.async = true;
+		hcc.src = ("https:" == document.location.protocol ? "https" : "http")+"://w.hypercomments.com/widget/hc/99037/"+lang+"/widget.js";
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(hcc, s.nextSibling);
+		})();
+		</script>
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("c6sjJ6fGADGrCVC48k5MVQcD-gzGzoHsz", "YuTcQ8aPXftmtmeC4VvTrK9B");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+  <script type="text/javascript">
+  wpac_init = window.wpac_init || [];
+  wpac_init.push({widget: 'Rating', id: 8566,
+    el: 'wpac-rating',
+    color: 'fc6423'
+  });
+  (function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = '//embed.widgetpack.com/widget.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+  })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+<div id="hexo-helper-live2d">
+  <canvas id="live2dcanvas" width="150" height="350"></canvas>
+</div>
+<style>
+  #live2dcanvas{
+    position: fixed;
+    width: 150px;
+    height: 350px;
+    opacity:0.8;
+    right: 0px;
+    z-index: 999;
+    pointer-events: none;
+    bottom: -20px;
+  }
+</style>
+<script type="text/javascript" src="/live2d/device.min.js"></script>
+<script type="text/javascript">
+const loadScript = function loadScript(c,b){var a=document.createElement("script");a.type="text/javascript";"undefined"!=typeof b&&(a.readyState?a.onreadystatechange=function(){if("loaded"==a.readyState||"complete"==a.readyState)a.onreadystatechange=null,b()}:a.onload=function(){b()});a.src=c;document.body.appendChild(a)};
+(function(){
+  if((typeof(device) != 'undefined') && (device.mobile())){
+    document.getElementById("live2dcanvas").style.width = '75px';
+    document.getElementById("live2dcanvas").style.height = '175px';
+  }else
+    if (typeof(device) === 'undefined') console.error('Cannot find current-device script.');
+  loadScript("/live2d/script.js", function(){loadlive2d("live2dcanvas", "/live2d/assets/hibiki.model.json", 0.5);});
+})();
+</script>
+
+ <canvas class="fireworks" 
+        style="position: fixed; left: 0px; top: 0px; z-index: 99999999; pointer-events: none; width: 1158px; height: 916px;" 
+        width="2316" 
+        height="1832">
+</canvas>
+<script type="text/javascript" src="/js/src/anime.min.js"></script>
+<script type="text/javascript" src="/js/src/fireworks.js"></script>
+</body>
+</html>

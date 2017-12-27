@@ -1,0 +1,1498 @@
+<!DOCTYPE html>
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+<script type="text/javascript">var OriginTitile=document.title,st;document.addEventListener("visibilitychange",function(){document.hidden?(document.title="(/≧▽≦/)页面崩溃啦！",clearTimeout(st)):(document.title="(ฅ>ω<*ฅ) 又恢复了~"+OriginTitile,st=setTimeout(function(){document.title=OriginTitile},3e3))})</script>
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-bounce.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Kotlin," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="5月18日，安卓团队在谷歌 I/O 2017 大会上宣布 Kotlin 成为官方头等支持语言。这条爆炸性资讯在当天就是 Hacker News 首页热门讨论，与此同时，谷歌技术大牛 Steve Yegge 也写了一篇关于 Kotlin 的使用体会总结文章，同样也在首页热门，并引发大量讨论（点击进入原文）">
+<meta name="keywords" content="Kotlin">
+<meta property="og:type" content="article">
+<meta property="og:title" content="为什么 Kotlin 比你们用的那些垃圾语言都好">
+<meta property="og:url" content="http://www.perpeht.com/为什么Kotlin-比你们用的那些垃圾语言都好/index.html">
+<meta property="og:site_name" content="Tuski&#39;s Blog">
+<meta property="og:description" content="5月18日，安卓团队在谷歌 I/O 2017 大会上宣布 Kotlin 成为官方头等支持语言。这条爆炸性资讯在当天就是 Hacker News 首页热门讨论，与此同时，谷歌技术大牛 Steve Yegge 也写了一篇关于 Kotlin 的使用体会总结文章，同样也在首页热门，并引发大量讨论（点击进入原文）">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://wx4.sinaimg.cn/large/7cc829d3gy1ffu5zuwglij20dw099406.jpg">
+<meta property="og:image" content="http://wx2.sinaimg.cn/mw690/7cc829d3gy1fftzgxa728j20ic0b0wom.jpg">
+<meta property="og:image" content="http://wx3.sinaimg.cn/large/7cc829d3gy1fftze72i5xj20mr0c1grh.jpg">
+<meta property="og:image" content="http://wx4.sinaimg.cn/mw690/7cc829d3gy1fftzgxualfj215o0k00sy.jpg">
+<meta property="og:updated_time" content="2017-12-17T05:45:03.042Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="为什么 Kotlin 比你们用的那些垃圾语言都好">
+<meta name="twitter:description" content="5月18日，安卓团队在谷歌 I/O 2017 大会上宣布 Kotlin 成为官方头等支持语言。这条爆炸性资讯在当天就是 Hacker News 首页热门讨论，与此同时，谷歌技术大牛 Steve Yegge 也写了一篇关于 Kotlin 的使用体会总结文章，同样也在首页热门，并引发大量讨论（点击进入原文）">
+<meta name="twitter:image" content="http://wx4.sinaimg.cn/large/7cc829d3gy1ffu5zuwglij20dw099406.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.perpeht.com/为什么Kotlin-比你们用的那些垃圾语言都好/"/>
+
+
+
+<link rel="stylesheet" href="../live2d/css/live2d.css" />
+
+
+  <title>为什么 Kotlin 比你们用的那些垃圾语言都好 | Tuski's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+<div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+   
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tuski's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">I code my life</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-music">
+          <a href="/music/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-music"></i> <br />
+            
+            音乐
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.perpeht.com/为什么Kotlin-比你们用的那些垃圾语言都好/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tuski">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tuski's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">为什么 Kotlin 比你们用的那些垃圾语言都好</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-21T13:49:41+08:00">
+                2017-11-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+            <!--noindex-->
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/为什么Kotlin-比你们用的那些垃圾语言都好/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="为什么Kotlin-比你们用的那些垃圾语言都好/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+              <!--/noindex-->
+            
+          
+
+          
+          
+             <span id="/为什么Kotlin-比你们用的那些垃圾语言都好/" class="leancloud_visitors" data-flag-title="为什么 Kotlin 比你们用的那些垃圾语言都好">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  5,525
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  19
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <script src="/assets/js/APlayer.min.js"> </script><p>5月18日，安卓团队在谷歌 I/O 2017 大会上宣布 Kotlin 成为官方头等支持语言。这条爆炸性资讯在当天就是 Hacker News 首页热门讨论，与此同时，谷歌技术大牛 Steve Yegge 也写了一篇关于 Kotlin 的使用体会总结文章，同样也在首页热门，并<a href="https://news.ycombinator.com/item?id=14362975" target="_blank" rel="external">引发大量讨论（点击进入原文）</a></p>
+<a id="more"></a>
+<p><img src="http://wx4.sinaimg.cn/large/7cc829d3gy1ffu5zuwglij20dw099406.jpg" alt="img"></p>
+<p>​                                                                               （Steve Yegge ）</p>
+<h3 id="为什么说-Kotlin-比你们用的那些垃圾语言都好"><a href="#为什么说-Kotlin-比你们用的那些垃圾语言都好" class="headerlink" title="为什么说 Kotlin 比你们用的那些垃圾语言都好"></a>为什么说 Kotlin 比你们用的那些垃圾语言都好</h3><p>哈，这个标题党的题目让你点进来看了吧。不要奇怪，现在标题党在网上很普遍的。而且这篇文章给出的回答，肯定能震撼到你。</p>
+<p>说真的，其实我不想去攻击你们的语言信仰……至少不会“大大地”想。毕竟你喜欢的语言大放异彩的时期，可能要追溯到冰川时代了，对不？如果你喜欢的语言到今天还没有死，那只能说明这门语言在逐渐地改进和更新，保持与时俱进。</p>
+<p>但改进的速度呢？好吧……假设你现在用的语言碰巧是 Java，并且你也沉溺于 Java 曾经是一门非常优秀的语言的想法，那么你就完蛋了。而且是早就完蛋了。尽管人类都不太喜欢思考终极命运问题，但是相比于在 20 多年前刚刚问世，Java 8 仅仅是做了部分语言特性的替换，对此你禁不住要想：“我真的要和这种语言来共度过的余生么？还是说 Java 也就只能这样了？”</p>
+<p>因为终于要开始做 Android 开发了，我把各种老旧的语言问题又过了一遍。我写过一个老游戏 <a href="http://reddit.com/r/wyvernrpg" target="_blank" rel="external">Wyvern</a>，这个游戏已经有一个 iOS 版本了，最近我决定再搞一个 Android 版本。我从来没料到计算机语言会折腾到让我“思考人生”（例如“我这是他娘的在浪费生命么？”）如果你写过 Android 程序的话，你就知道在 Android 领域，语言的问题是会让你相当难熬的。</p>
+<p>我第一次尝试写 Android 程序是在去年夏天，我的个老天爷，那感觉简直糟透了。其实是有人警告过我的。他们都说：“那些 API 可是很难搞啊。”而我却不听劝。一意孤行。</p>
+<p>我想：这些玩意儿能糟糕到哪儿去呢？反正不就是 Java 么？</p>
+<h3 id="历史代码的灾难"><a href="#历史代码的灾难" class="headerlink" title="历史代码的灾难"></a>历史代码的灾难</h3><p>真是很不走运——因为很复杂的历史原因，并且也没人在意——造成 Android 的核心 API 实在是糟糕透顶。我是说：真的很糟，真的很糟，真的很糟。你只能关掉参考书，深呼吸，然后出去猛喝咖啡来压压惊。人们之前给我的告诫看来是完全正确的。</p>
+<p>Android API 库就是一个百宝箱。很多 API 真的是非常好用。我可以说，很多在 iOS 开发里非常难搞的事情在 Android 里面却很容易。Product flavors、Downloads 服务、findViewById() 方法、Preferences activity 等等，这些都是很好的例子。有太多 Android 里面有的东西在 iOS 里面是诶有的，所以在 iOS 里面你总能看到：开发者自己实现的恶心的和优雅的应用库并存。</p>
+<p><strong>但是</strong>！注意左边是一个大写加粗的但是！在写 Android 程序的时候，人们只关注那些不好的 API，就像你开车时候只会数路上遇到了几个红灯一样，绿灯的数量是没人关心的。因为人们只会通过红灯的数量来评价路途是否通顺。</p>
+<p>Android 确实有几个很糟糕的“红灯”API。例如 Fragments，这就是在 Andoird “红灯” API 中的招牌 API。这个 API 的整个生命周期的糟糕程度达到了令人发指的地步，好吧其实 Activities 和 Fragments 都是如此。说句不中听的，iOS 反而却没有这么糟糕的API。去年夏天我试了试这些API，它们是如此之糟糕以至于我当时就放弃了。我算是彻底服了。去它的，我还是以后找个人来帮我写这些程序吧。</p>
+<p>接下来的一年半，我就没再碰过 Android 编程。</p>
+<h3 id="来自俄罗斯的救星"><a href="#来自俄罗斯的救星" class="headerlink" title="来自俄罗斯的救星"></a>来自俄罗斯的救星</h3><p>我一直听说，有一种新语言叫做 Kotlin，可以用来写基于 JVM 或者 Android 程序。发明这种语言的不是别国，正是战斗的民族俄罗斯。更具体一点儿，它是由 JetBrains 开发。JetBrains 可是世界知名的 IDE 开发商，代表作是 Intellij IDEA，还有他们那可爱而且大名鼎鼎的橘色，绿色，紫色和黑色混合的暗色“Darcula”主题。</p>
+<p><img src="http://wx2.sinaimg.cn/mw690/7cc829d3gy1fftzgxa728j20ic0b0wom.jpg" alt="img"></p>
+<p><em>图：一个千年老妖按捺不住对 Java 8 的兴奋</em></p>
+<p>那么为什么要给这种语言起名叫 Kotlin 呢？好吧，有一种说法是因为 Java 的第一个字母是“J”，而 Kotlin 则用了Java 的下一个字母“K”作为开头。除此之外，有人还猜想（这种猜想可能来自加州大学伯克利分校），“Kotlin”这个名字的灵感还来源于“克里姆林宫”，“赫鲁晓夫”以及“克格勃”。这些都是前苏联的骄傲，所以他们就用了一个前苏联军事基地的名字“Kotlin”来命名这种语言。总之这个名字不错，而且你会习惯它的。</p>
+<blockquote>
+<p>伯乐在线补充：Steve Yegge 在前文关于 Kotlin 的名字来源，应该错了。在他自己原文评论中，也有网友指出了。</p>
+<p>正确的应该是：① JetBrains 是一家注册地在捷克布拉格的公司，在全球共有 6 个办公点：布拉格、圣彼得堡、莫斯科、波士顿、慕尼黑和新西伯利亚。但主要管理层和开发者是在圣彼得堡。② 芬兰湾中有个岛就是「Kotlin/科特林」，在圣彼得堡以西 32 公里。</p>
+<p><img src="http://wx3.sinaimg.cn/large/7cc829d3gy1fftze72i5xj20mr0c1grh.jpg" alt="img"></p>
+</blockquote>
+<p>我发现去年业界关于 Kotlin 只是有不少“嘀咕（buzz）”。注意，只是“嘀咕”，不是天花乱坠地吹牛宣传。人们只是低调地“嘀咕”着。好吧，总之，我当时看了一下，然后就觉得这个语言和我过去 15 年看过的 50 ~ 100 种计算机语言一样，这也是一门可以替代 Java 的语言，当然，我认为任何理性的语言都能替代 Java。</p>
+<h3 id="对-Kotlin-的第一印象"><a href="#对-Kotlin-的第一印象" class="headerlink" title="对 Kotlin 的第一印象"></a>对 Kotlin 的第一印象</h3><p>我第一次看到 Kotlin 的时候，真心觉得这种语言不可能在现实生活中用到，真的是一点可能性都没有。其实我也就是走马观花。我的第一印象？这个语言也没什么大问题。它很简洁，也具有先进的特性。如果说它时髦也行，因为它几乎囊括了计算机语言设计上的所有最新潮流。不过这也没什么大不了，因为很多语言也都满足这一点。比如，Rust。Rust 也是一门健壮的，名字起得很好的，但是没什么人用的语言。</p>
+<p>Kotlin 给我的一种奇怪的感觉是“似曾相识”，后来我才反应过来，原来这是因为它和 Swift 很像。我之所以没有马上反应过来，是因为我的 iOS 程序因为历史代码的原因不得不用 Objective-C 而不是 Swift 来写。当然现在我也弄明白了：其实 Kotlin 的历史比 Swift 要悠久几年，所以正确的说法应该是：<a href="http://mp.weixin.qq.com/s?__biz=MjM5OTA1MDUyMA==&amp;mid=2655438427&amp;idx=2&amp;sn=ed5433de4a067d6aae2facd6dd094ec2&amp;chksm=bd730a2c8a04833ad8f44780d12ea1fb18503472397daec8645aa3d0fe316c58e61fa7c83d69#rd" target="_blank" rel="external">Swift 和 Kotlin 很像</a>。</p>
+<p>不过即便如此我当时也没准备用这种语言干活。Kotlin 对我来说确实是一种语法优雅的语言，但是我觉得我对这门语言还没有掌握到足够的程度，以至于让我可以用它来应付残酷的现实工作。</p>
+<h3 id="从-Java-叛逃到-Kotlin"><a href="#从-Java-叛逃到-Kotlin" class="headerlink" title="从 Java 叛逃到 Kotlin"></a>从 Java 叛逃到 Kotlin</h3><p>我不太记得我是具体怎么爱上 Kotlin 的了。但是我敢肯定的是这绝对不是有意为之。</p>
+<p>我努力回忆了一下，事情是这样的，我做的那个游戏的玩家跟我说了好久，让我开发一个 Android 版本。这个游戏是 12 月份在 Apple Store 上架的，然后几周之内，大量粉丝就跟我说，他们是 Andorid 用户，所以没法玩到这个游戏。所以，尽管我已经“发誓”再也不碰Android 编程了，但是用户就是上帝，所以我又开始尝试了。不过这一次要换个玩儿法——不能再把胃口坏在 Android 的 Java 语言上了。我需要有个现成的框架，或者什么类似的东西，来让工作变得简单一点儿。</p>
+<p>在 1 月中旬，我做了一个粗略评估，然后就决定用 Kotlin 来开发了，Kotlin 当时可同时支持 Dalvik 和 Art 两种 Android 虚拟机。我觉得我的评估是基于以下几个原因：</p>
+<ul>
+<li>\1. Kotlin 已经小有名气；</li>
+<li>\2. 当时我写 iOS 版的时候就想用 Swift（但是没用成）；</li>
+<li>\3. Kotlin有一种挺不错的 Android DSL 叫做 Anko，这勾起了我的兴趣，虽然最后我并没有真的用到它。</li>
+</ul>
+<p>所以我就用 Kotlin 开始做了。在接下来的 4-5 周内，我用 Kotlin 重写了游戏的服务平台。要知道这个平台之前已经有 20 多年历史了。用了一个月的 Kotlin，我就被完全征服了。我不是要说 Scala 或者其他语言的坏话，但是对我这种普通码农来说，Koltin 是完美的。我的要求不高，给口饭吃就行，知道不？Scala 固然很好，但是它好得过头了，就像牛蛙\牛脑\松露蜗牛这些高档菜那么好。要知道我就是个蓝领，Clojure、Scala 这类的语言对我来说太高大上了。</p>
+<p>我大约花了 3 天时间来学习 Kotlin 的各种语法，然后就开始正式编程了，虽然我还是很不熟练，但是我知道这种语言和 IDE 工具足以让我解决各种麻烦。</p>
+<p>当我对这种语言稍微熟悉了一些以后，我就知道，我应该不会再去爱上另外一种语言了，因为 Kotlin 实在是太迷人了。你在代码写出来的东西让你觉得很酷。当然我以前用其他的语言编程的时候也体验过类似的感觉，但是<strong>那些语言的学习曲线一般都非常陡峭</strong>。Kotlin呢，它就是大救星：当 Java 程序员为了 Java 8 弄出来的一大堆新概念挠头的时候，Kotlin 出现了。Kotlin 能实现 Java 8 的各种新特性，并且通过对 coroutines 的支持，其实能实现更强大的功能，而且语法表现力更简洁。Java 8 确实也能表达很有意思的逻辑，但是很繁琐，感觉就像让你说话之前要先给你嘴里塞沙子。</p>
+<p>我想 Kotlin 上手很容易的原因太显而易见了，要归功于它的 IDE 支持。现在几乎所有的 JVM 语言或者 Android 语言的 IDE 支持都是由社区的几个志愿者在维护（当然 Java 除外）。而 Kotlin 则是来自世界级的 IDE 厂商（Jetbrains），所以 Kotlin 打一开始就是自带 IDE 支持的。有多少语言能做到从发明伊始就能有 IDE 支持呢？编程语言的进化历程一般做不到这一点。况且有的编程语言从一开始就是要避开 IDE 这个因素的（Hi！Rob）另外一个能一开始就做到 IDE 支持的语言就是 C#，当然 C# 毫无疑问是全世界最好的编程语言之一。</p>
+<blockquote>
+<p>伯乐在线译注：上面这段中的 Rob，应该是指 Go 语言的发明者 Rob Pike，作者在这里也许是暗讽 Go 语言从发明到现在都没有一个靠谱的 IDE 支持吧。</p>
+</blockquote>
+<p>作为一个自带 IDE 支持的语言，你在 Kotlin buffer 敲代码的时候，打字基本对就可以了。IDE 会帮你补全你没写完的部分。你知道吗，你甚至可以把Java代码复制到IDE里面，然后 IDE 会帮你自动转换成Kotlin代码。如果你觉得 Java 的 IDE 都还不错，那么我可以很荣幸地告诉你，Kotlin IDE 会把这种“不错”推进到前所未有的地步。甚至有一个前微软工程师跟我说：“我本以为微软的 Visual Studio 是 IDE 界的标杆，是不可超越的。但是我觉得 IntelliJ IDEA 的确要更好。”在我看来，因为我对 Visual Studio 不熟悉，所以我在这里只是引用他说的话。不过我认为 IntelliJ IDEA 至少和 VS 是同等水平。</p>
+<p>诚然，在现实工作中我还是要经常切换到 Emacs 的。IntelliJ 在你打字很快的时候还是有点儿反应不过来。如果你打字总是只打一半儿的话，那么自动补全动能的运行压力还是很大。况且对纯文本的处理也很糟糕，这是所有 IDE 的通病。所以 IDE 和 Emacs 你都是需要用到的。不幸的是，目前 Emcacs 对 Kotlin 的支持现在也就那么回事儿，不过相信以后会越来越好。我现在反正就是在 Emacs 和 IntelliJ 之间来回切换。目前还算是 OK。</p>
+<p>就是这样了。我曾经花了大约 10 年的时间，来找一种语言来取代 Java。我真的找得很努力很辛苦。讽刺的是，在我放弃了以后，这种东西居然出来了。去看看吧。Kudos 对 JetBrains 来说，是一个惊艳的成就。</p>
+<h3 id="Android：Kotlin-的杀手锏"><a href="#Android：Kotlin-的杀手锏" class="headerlink" title="Android：Kotlin 的杀手锏"></a>Android：Kotlin 的杀手锏</h3><p>这年头新生编程语言几乎很难产生什么巨大影响力。不是说现在没有新语言产生了，相反是每年都有质量不错的新语言产生，但是然并卵，没人用！要给“不可能”划定界限很难。但是计算机语言的市场已经非常饱和了。如果要让一个新的语言能够大火（而且这个规律在过去 10 到 20 年都成立），那么这个语言就必须有一个“杀手级”的应用。这门语言需要绑定一个平台，让大家都非常迫切地区使用这个平台，这才能促进大家学习这门语言以便在这个平台上编程。</p>
+<p>就目前看来，我们上面所说的杀手级应用——也就是我们上面扯了这么多的东西——却是 Android 恶心的 API。每当你顺着 Android 路线往下走，一遇到 API 就会卡壳，这只会让你去诅咒 Android 这个平台。Android 不论有多少优秀的 API 都不管用，重要的是，Android 糟糕的 API 太多了，所以你不得不停下来去找”现成”的办法（solution）。</p>
+<p>不过兄弟，Android 里面解决问题的“现成办法”可是不少。对于新手来说，有一大堆 Java annotation processors可用，这就为语言的问题埋下伏笔。更不要提一堆迷你的框架（比如 Lyft 的 Scoop）。还有那些和 Android（Java）完全独立的框架：React Native、Cordova、Xamarin、Flutter等等。</p>
+<p>如果以上说的技术你都不喜欢，那么你还可以从语言的角度来解决问题。当然，那些完全独立的框架是基于特定语言的，而并不是Java。</p>
+<p>Kotlin 的竞争优势在于它并不是完全隔离于 Java 语言。它基本上是 100% 可与 Java 相互翻译转换的。这很像C++ 与 C 的关系一样（但它们做不到 100% ）。Kotlin 也是在不断进化的。所以你可以直接把你写的 Kotlin 代码扔到 Android 工程中，连目录都不用改，然后程序就能正常运行了，方便得眼睛都不用眨一下。</p>
+<p>其他种类的 Android 平台都倾向于迫使你去学习一种全新的语言以及对应的平台，其编程范式，理念和特性都各不相同。Kotlin 则是让你直接写出 Android 可运行的类，就跟其他 Android 程序员用 Java 写出来的一样。其实其底层的 API 都是一样的，但是 Kotlin 组织得要好很多。</p>
+<p>还记得我去年夏天把 Android 编程书扔了然后再也不打算看了么。现在 Kotlin 则让我感觉：Android 编程是快乐的？我甚至觉得可能 Android 那些糟糕的 API 很可能并不是那么糟，只是 Java 把它搞得太恶心了而已。</p>
+<p>Kotlin 致力于让大家绕过 Android API 那些恶心的东西，并且能让你充分发挥你的经验，这一点甚至比 iOS 做得还要好。好吧，至少来说比 Objective-C 做得好，因为我觉得 Swift 肯定也不会差。知道为什么吗？因为 Swift 和 Kotlin 很像啊。</p>
+<p><img src="http://wx4.sinaimg.cn/mw690/7cc829d3gy1fftzgxualfj215o0k00sy.jpg" alt="img"></p>
+<h3 id="我特别喜欢-Kotlin-的地方有哪些？"><a href="#我特别喜欢-Kotlin-的地方有哪些？" class="headerlink" title="我特别喜欢 Kotlin 的地方有哪些？"></a>我特别喜欢 Kotlin 的地方有哪些？</h3><p>嗯，这个话题其实要细说就很大了，我觉得我最好再开一篇文章来写这个。这里我就提一下那些高级（high-level）且共性的点。</p>
+<ul>
+<li><strong>Kotlin 很像 Java</strong>。它长得不像 Clojure 或者 Scala 那么奇怪（承认现实把，这两种语言就是挺奇怪的）。所以你学 Kotlin 应该很快。这门语言显然就是写给 Java 开发者来用的。</li>
+<li>它比 Java 更安全。Java 很多需要 annotation processors 来做的事情在 Kotlin 里则是内置的，例如 overriding，nullability等等。而且 Kotlin 对数值转换的规则也更安全，虽然我不太喜欢 Kotlin 的处理方式，但是我还是很感谢这门语言强制我去思考我的数值表现形式。</li>
+<li><strong>Kotlin 和 Java 是可以互译的</strong>。真的是指无缝互译。我见过很多 JVM 语言最后挂掉，就是因为其不支持子类继承机制。我不知道什么时候就会用到静态内部类，非静态内部类，或者什么破玩意儿类。Kotlin 在设计时就把和Java互译的属性放在第一位，也就是说，把 Java 翻译到 Kotlin 可以逐渐进行，一次可以直接转换一个文件。</li>
+<li><strong>Kotlin 很简洁</strong>。你要知道我也算是个高尔夫球手，所以我实话实说。如果在一切都相同的情况下，我更喜欢短的程序，只要它写的逻辑清楚。Kotlin 对我来说就像是打了一轮好局。平均下来我发现 Kotlin 的代码长度比相同逻辑的 Jython 代码短了 5%-10%（这可是我用某种“黄金标准”测出来的），而且还能保证程序的可读性和类型安全。</li>
+<li><strong>Kotlin 更贴近实际</strong>。Kotlin 支持在一个文件里定义多个类，支持一等方法，操作符重载，扩展方法，类型别名，字符串模板，还有一堆看上去没什么新意的语言特性它都支持。而我就是不明白为什么 Java 什么都不支持，连人们需要的语言特性它都不做。</li>
+<li><strong>Kotlin 进化很快</strong>。例如刚刚宣布启动的对 coroutine 的支持，将会成为提供 asyn/await， geneator 以及所有其他无锁并发特性的基础设施。</li>
+<li><strong>Kotlin 很擅长“拿来主义”</strong>。Kotlin 经常从其他的计算机语言设计中抄点子，并且也毫不避讳。他们说：“我们很喜欢 C# 的处理方式，所以我们就自己照着撸了一个。”</li>
+<li><strong>Kotlin 支持 DSL</strong>。DSL 不到深思熟虑万不得已的话千万不要引入，但是不得不承认 DSL 威力巨大。例如你看 Gradle 的 DSL 和 Maven 比，在典型的 Maven 项目里，配置代码肯定要超过上千行。所以 Kotlin 是来给你降工作压力的。</li>
+<li><strong>Kotlin 的 IDE 是在是太棒了</strong>。刚才不久我才在 Emacs 里写程序文件，结果 Emacs 报了一对错。而我把同样的代码拷贝到 IntelliJ 里面，然后按 Alt-Enter 逐一自动修复了 50 多条，然后所有的错误就都搞定了。这真是帮了大忙啊。</li>
+<li>​</li>
+<li><strong>Kotlin 很有趣</strong>。我跟你们说，Kotlin 就是有趣。也许这是我发自潜意识地在做广告。Kolint 的关键字和方法名都很有意思。Kotlin 把我从一个只会死编程的码农转变为了一个计算机语言的爱好者。</li>
+</ul>
+<p>总之，你就这么想：我收拾东西搬家，然后碰到了邻居 Kotlin。我之前也算见过的一堆计算机语言，但是只有 Kotlin，能够让我在那么短的时间内重写我的游戏服务器代码。而我现在则是在用 Kotlin 重写我之前写过的一切。</p>
+<p>我也知道还有好多其他的程序员也对 Kotlin 感觉非常好，打算成为 Kotlin 程序员。其中大部分的人应该在 1-2 年之内水平就能超过我了。我们私下里谈论过，互相都说“Kotlin 让编程感觉美好的感觉又回来了。”还不错，再我们尚未对编程全部失去兴趣之前，Kotlin 来了。就仿佛你只要把语言的语法学会了。这回把你带回到那种第一次学编程的感觉，无论写什么都觉得自己很牛逼。</p>
+<p>再一次，向 JetBrains 致敬。他们对计算机语言做出了巨大的贡献！我脱帽致敬。</p>
+<p>那么 Kotlin 比你用的任何其他编程语言都好吗？我想对我来说是的。因为，如果你碰巧是在用 Java 的话。如果你一整天就是泡在椅子面前写 Java，那么你会发现 Kotlin 简直就是一股清流。所以也让我知道你们是怎么想的吧。</p>
+<p>免责声明：本文只是阐述Steve Yegge对 Android 开发的观点，并不代表Google或者 JetBrains 的观点。</p>
+
+      
+    </div>
+    
+    
+    
+    <div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script type="text/javascript" src="http://jslibs.wuxubj.cn/sweetalert_mini/jquery-1.7.1.min.js"></script>
+  <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
+  <p><span>本文标题:</span>为什么 Kotlin 比你们用的那些垃圾语言都好</a></p>
+  <p><span>文章作者:</span>Tuski</a></p>
+  <p><span>发布时间:</span>2017年11月21日 - 13:49:41</p>
+  <p><span>最后更新:</span>2017年12月17日 - 13:45:03</p>
+  <p><span>原始链接:</span><a href="/为什么Kotlin-比你们用的那些垃圾语言都好/" title="为什么 Kotlin 比你们用的那些垃圾语言都好">http://www.perpeht.com/为什么Kotlin-比你们用的那些垃圾语言都好/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://www.perpeht.com/为什么Kotlin-比你们用的那些垃圾语言都好/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script>
+    var clipboard = new Clipboard('.fa-clipboard');
+    clipboard.on('success', $(function(){
+      $(".fa-clipboard").click(function(){
+        swal({   
+          title: "",   
+          text: '复制成功',   
+          html: false,
+          timer: 500,   
+          showConfirmButton: false
+        });
+      });
+    }));  
+</script>
+
+      
+    </div>
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>大佬给点钱吧QAQ</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="https://i.loli.net/2017/12/16/5a33fd668ce7c.png" alt="Tuski 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="https://i.loli.net/2017/12/16/5a33fdbe62e6f.png" alt="Tuski 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Kotlin/" rel="tag"><i class="fa fa-tag"></i> Kotlin</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+         
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/c指针详解/" rel="next" title="c指针详解">
+                <i class="fa fa-chevron-left"></i> c指针详解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/c语言课后作业实验5/" rel="prev" title="c语言课后作业实验5">
+                c语言课后作业实验5 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a35fec5ad889f1e" async = "async" ></script>
+</div>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+    <div class="comments" id="comments">
+      <div id="hypercomments_widget"></div>
+    </div>
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="Tuski" />
+            
+              <p class="site-author-name" itemprop="name">Tuski</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/thevenomsnake" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:thevenomsnake@icloud.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plus.google.com/u/0/104624402456467592306" target="_blank" title="Google">
+                    
+                      <i class="fa fa-fw fa-google"></i>Google</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/perphet" target="_blank" title="Twitter">
+                    
+                      <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.youtube.com/channel/UComQu3jg43YgIvm2PqAG1tA" target="_blank" title="YouTube">
+                    
+                      <i class="fa fa-fw fa-youtube"></i>YouTube</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+      <iframe src="https://open.spotify.com/embed?uri=spotify:user:spotifycharts:playlist:37i9dQZEVXbMDoHDwVN2tF&theme=white" width="215" height="325" frameborder="0" allowtransparency="true"></iframe>  
+       
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么说-Kotlin-比你们用的那些垃圾语言都好"><span class="nav-text">为什么说 Kotlin 比你们用的那些垃圾语言都好</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#历史代码的灾难"><span class="nav-text">历史代码的灾难</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#来自俄罗斯的救星"><span class="nav-text">来自俄罗斯的救星</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对-Kotlin-的第一印象"><span class="nav-text">对 Kotlin 的第一印象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#从-Java-叛逃到-Kotlin"><span class="nav-text">从 Java 叛逃到 Kotlin</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Android：Kotlin-的杀手锏"><span class="nav-text">Android：Kotlin 的杀手锏</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#我特别喜欢-Kotlin-的地方有哪些？"><span class="nav-text">我特别喜欢 Kotlin 的地方有哪些？</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+  <span class="with-love" id="heart">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tuski</span>
+
+
+
+  
+</div>
+
+
+
+<!--
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.3</div>
+
+
+-->
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+		<script type="text/javascript">
+		_hcwp = window._hcwp || [];
+
+		_hcwp.push({widget:"Bloggerstream", widget_id: 99037, selector:".hc-comment-count", label: "{\%COUNT%\}" });
+
+		
+		_hcwp.push({widget:"Stream", widget_id: 99037, xid: "为什么Kotlin-比你们用的那些垃圾语言都好/"});
+		
+
+		(function() {
+		if("HC_LOAD_INIT" in window)return;
+		HC_LOAD_INIT = true;
+		var lang = (navigator.language || navigator.systemLanguage || navigator.userLanguage || "en").substr(0, 2).toLowerCase();
+		var hcc = document.createElement("script"); hcc.type = "text/javascript"; hcc.async = true;
+		hcc.src = ("https:" == document.location.protocol ? "https" : "http")+"://w.hypercomments.com/widget/hc/99037/"+lang+"/widget.js";
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(hcc, s.nextSibling);
+		})();
+		</script>
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("c6sjJ6fGADGrCVC48k5MVQcD-gzGzoHsz", "YuTcQ8aPXftmtmeC4VvTrK9B");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+  <script type="text/javascript">
+  wpac_init = window.wpac_init || [];
+  wpac_init.push({widget: 'Rating', id: 8566,
+    el: 'wpac-rating',
+    color: 'fc6423'
+  });
+  (function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = '//embed.widgetpack.com/widget.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+  })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+<div id="hexo-helper-live2d">
+  <canvas id="live2dcanvas" width="150" height="350"></canvas>
+</div>
+<style>
+  #live2dcanvas{
+    position: fixed;
+    width: 150px;
+    height: 350px;
+    opacity:0.8;
+    right: 0px;
+    z-index: 999;
+    pointer-events: none;
+    bottom: -20px;
+  }
+</style>
+<script type="text/javascript" src="/live2d/device.min.js"></script>
+<script type="text/javascript">
+const loadScript = function loadScript(c,b){var a=document.createElement("script");a.type="text/javascript";"undefined"!=typeof b&&(a.readyState?a.onreadystatechange=function(){if("loaded"==a.readyState||"complete"==a.readyState)a.onreadystatechange=null,b()}:a.onload=function(){b()});a.src=c;document.body.appendChild(a)};
+(function(){
+  if((typeof(device) != 'undefined') && (device.mobile())){
+    document.getElementById("live2dcanvas").style.width = '75px';
+    document.getElementById("live2dcanvas").style.height = '175px';
+  }else
+    if (typeof(device) === 'undefined') console.error('Cannot find current-device script.');
+  loadScript("/live2d/script.js", function(){loadlive2d("live2dcanvas", "/live2d/assets/hibiki.model.json", 0.5);});
+})();
+</script>
+
+ <canvas class="fireworks" 
+        style="position: fixed; left: 0px; top: 0px; z-index: 99999999; pointer-events: none; width: 1158px; height: 916px;" 
+        width="2316" 
+        height="1832">
+</canvas>
+<script type="text/javascript" src="/js/src/anime.min.js"></script>
+<script type="text/javascript" src="/js/src/fireworks.js"></script>
+</body>
+</html>
