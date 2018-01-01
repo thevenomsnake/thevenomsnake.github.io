@@ -598,8 +598,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/11/Swift-自动布局SnapKit/" rel="next" title="Swift-自动布局SnapKit">
-                <i class="fa fa-chevron-left"></i> Swift-自动布局SnapKit
+              <a href="/2017/11/c语言课后实验作业6/" rel="next" title="c语言课后实验作业6">
+                <i class="fa fa-chevron-left"></i> c语言课后实验作业6
               </a>
             
           </div>
@@ -608,8 +608,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/12/c语言课后实验作业7/" rel="prev" title="c语言课后实验作业7">
-                c语言课后实验作业7 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/11/Swift-自动布局SnapKit/" rel="prev" title="Swift-自动布局SnapKit">
+                Swift-自动布局SnapKit <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -764,6 +764,47 @@
           
 
           
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-globe"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://blog.crazyforcode.org/" title="CFC" target="_blank">CFC</a>
+                  </li>
+                
+              </ul>
+          <div id="days"></div>
+</script>
+<script language="javascript">
+function show_date_time(){
+window.setTimeout("show_date_time()", 1000);
+BirthDay=new Date("10/01/2017 15:00:00");
+today=new Date();
+timeold=(today.getTime()-BirthDay.getTime());
+sectimeold=timeold/1000
+secondsold=Math.floor(sectimeold);
+msPerDay=24*60*60*1000
+e_daysold=timeold/msPerDay
+daysold=Math.floor(e_daysold);
+e_hrsold=(e_daysold-daysold)*24;
+hrsold=setzero(Math.floor(e_hrsold));
+e_minsold=(e_hrsold-hrsold)*60;
+minsold=setzero(Math.floor((e_hrsold-hrsold)*60));
+seconds=setzero(Math.floor((e_minsold-minsold)*60));
+document.getElementById('days').innerHTML="已运行"+daysold+"天"+hrsold+"小时"+minsold+"分"+seconds+"秒";
+}
+function setzero(i){
+if (i<10)
+{i="0" + i};
+return i;
+}
+show_date_time();
+</script>
+            </div>
           
 
       <iframe src="https://open.spotify.com/embed?uri=spotify:user:spotifycharts:playlist:37i9dQZEVXbMDoHDwVN2tF&theme=white" width="215" height="325" frameborder="0" allowtransparency="true"></iframe>  
