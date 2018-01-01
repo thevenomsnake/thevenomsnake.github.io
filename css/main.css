@@ -2031,7 +2031,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #9178cc;
+  background: #e8ff8b;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3229,7 +3229,7 @@ pre .javascript .function {
   animation: heartAnimate 1.33s ease-in-out infinite;
 }
 .with-love {
-  color: #ff71a8;
+  color: #363636;
 }
 #days {
   display: block;
