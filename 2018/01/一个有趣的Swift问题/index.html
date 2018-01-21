@@ -96,7 +96,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.loli.net/2018/01/21/5a647f3eea59a.jpg">
 <meta property="og:image" content="https://i.loli.net/2018/01/21/5a648457eb9f7.jpg">
-<meta property="og:updated_time" content="2018-01-21T12:32:25.249Z">
+<meta property="og:updated_time" content="2018-01-21T12:34:31.999Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一个有趣的Swift问题">
 <meta name="twitter:description" content="Paul Hudson‏ 最近在Twitter里提出了一个关于Swift的小问题，挺有意思">
@@ -434,14 +434,14 @@
         <script src="/assets/js/APlayer.min.js"> </script><blockquote class="blockquote-center"><a href="https://twitter.com/twostraws" target="_blank" rel="external"><strong>Paul Hudson</strong>‏ </a>最近在Twitter里提出了一个关于Swift的小问题，挺有意思</blockquote>
 
 <a id="more"></a>
-<h1 id="Q"><a href="#Q" class="headerlink" title="Q:"></a>Q:</h1><blockquote>
+<h1 id="Q1"><a href="#Q1" class="headerlink" title="Q1:"></a>Q1:</h1><blockquote>
 <p>All three match - how many ways can you think of to make this true in Swift?</p>
 <p>You’ll learn by trying 👍</p>
 <p><img src="https://i.loli.net/2018/01/21/5a647f3eea59a.jpg" alt="DT_PFimXcAYZq-Z.jpg"></p>
 </blockquote>
 <p><strong>PS</strong>:Code or it didn’t happen 😘</p>
 <p><span style="background: black; color: black"><em>目前我的想法就是就是改写get方法， get 的时候自加一</em></span></p>
-<h1 id="A"><a href="#A" class="headerlink" title="A:"></a>A:</h1><p><strong>目前收集了这样几种方法（持续更新）</strong></p>
+<h1 id="A1"><a href="#A1" class="headerlink" title="A1:"></a>A1:</h1><p><strong>目前收集了这样几种方法（持续更新）</strong></p>
 <h2 id="改写"><a href="#改写" class="headerlink" title="改写 =="></a>改写 ==</h2><p><strong>Joe Groff</strong>‏</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> == <span class="params">(a: <span class="keyword">inout</span> Int, b: Int)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">  <span class="keyword">defer</span> &#123; a += <span class="number">1</span> &#125;</div><div class="line">  <span class="keyword">return</span> ! (a != b)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p><strong>Andy Lee</strong>‏ </p>
@@ -483,7 +483,7 @@
   <p><span>本文标题:</span>一个有趣的Swift问题</a></p>
   <p><span>文章作者:</span>Tuski</a></p>
   <p><span>发布时间:</span>2018年01月21日 - 19:28:55</p>
-  <p><span>最后更新:</span>2018年01月21日 - 20:32:25</p>
+  <p><span>最后更新:</span>2018年01月21日 - 20:34:31</p>
   <p><span>原始链接:</span><a href="/2018/01/一个有趣的Swift问题/" title="一个有趣的Swift问题">http://www.perpeht.com/2018/01/一个有趣的Swift问题/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://www.perpeht.com/2018/01/一个有趣的Swift问题/"  aria-label="复制成功！"></i></span>
   </p>
@@ -786,7 +786,7 @@ show_date_time();
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Q"><span class="nav-text">Q:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#A"><span class="nav-text">A:</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#改写"><span class="nav-text">改写 ==</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用Unicode"><span class="nav-text">使用Unicode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他方法"><span class="nav-text">其他方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Q2"><span class="nav-text">Q2:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#A2"><span class="nav-text">A2:</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#改写-amp-amp"><span class="nav-text">改写 &&</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bool"><span class="nav-text">Bool</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Q1"><span class="nav-text">Q1:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#A1"><span class="nav-text">A1:</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#改写"><span class="nav-text">改写 ==</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用Unicode"><span class="nav-text">使用Unicode</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#其他方法"><span class="nav-text">其他方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Q2"><span class="nav-text">Q2:</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#A2"><span class="nav-text">A2:</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#改写-amp-amp"><span class="nav-text">改写 &&</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Bool"><span class="nav-text">Bool</span></a></li></ol></li></ol></div>
             
 
           </div>
