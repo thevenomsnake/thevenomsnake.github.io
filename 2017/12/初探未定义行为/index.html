@@ -96,7 +96,7 @@
 <meta property="og:description" content="引子：C 语言中int main()和 void main() 有何区别？">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.loli.net/2017/12/28/5a43e4bca53f7.png">
-<meta property="og:updated_time" content="2017-12-27T19:44:54.303Z">
+<meta property="og:updated_time" content="2018-01-23T13:20:21.644Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="初探C&#x2F;C++标准&amp;&amp;未定义行为">
 <meta name="twitter:description" content="引子：C 语言中int main()和 void main() 有何区别？">
@@ -394,7 +394,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  4,702
+                  5,652
                 </span>
               
 
@@ -410,7 +410,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  23
+                  26
                 </span>
               
             </div>
@@ -437,6 +437,10 @@
 <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><blockquote>
 <p>文章基于官方文档汇总而成，引用地址会放在文章末尾，若有修改意见欢迎评论指出～</p>
 </blockquote>
+<center><strong><em>渣翻译请见谅，如果翻译有定义性错误，还请评论指出，谢谢 !</em></strong></center>
+
+
+
 <p>刚开始上课的时候，难免会接触到<code>int main()</code>和<code>void main()</code>，当初我只是初步认识到了<code>void main()</code>是一种    <em>不标准</em> 的写法，但是今天进一步认识到<code>void main()</code>算是一种Undefined behavior(未定义行为)。</p>
 <h1 id="main函数原型-amp-amp-终止行为"><a href="#main函数原型-amp-amp-终止行为" class="headerlink" title="main函数原型&amp;&amp;终止行为"></a>main函数原型&amp;&amp;终止行为</h1><p>在C和C++中流传着很多版本的<code>main</code>函数原型，不同的书里也有不同的写法。今天我从几种标准(C89/99/11以及C++98/03/11/14)的角度来寻找一下什么是“<strong>标准行为</strong>”以及在主函数中<strong>return</strong>后发生了什么。</p>
 <p>比较常见的是下面几种：</p>
@@ -484,21 +488,37 @@
 <p>The empty list in a function declarator that is not part of a definition of that function specifies that no information about the number or types of theparameters is supplied.</p>
 </blockquote>
 <h2 id="C99-11-Standard"><a href="#C99-11-Standard" class="headerlink" title="C99/11 Standard"></a>C99/11 Standard</h2><p>在C99/11标准中，明确定义了对于标准的main函数的两个原型：</p>
-<blockquote>
-<p>摘自ISO/IEC 9899:201x 中5.1.2.2.1<a href="http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1570.pdf" target="_blank" rel="external">在线查阅&amp;&amp;下载</a></p>
-</blockquote>
 <p>The function called at program startup is named main. The implementation declares no prototype for this function. It shall be defined with a return type of <strong>int</strong> and with <strong>no parameters</strong>:</p>
+<blockquote>
+<p><em>程序启动时调用的函数名为main，这种实现声明了这个函数没有原型。 它应该用<strong>int</strong>的返回类型来定义，并且<strong>不带参数</strong>：</em></p>
+</blockquote>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span> </span>&#123; <span class="comment">/* ... */</span> &#125;</div></pre></td></tr></table></figure>
 <p>or with <strong>two parameters</strong> (referred to here as <strong>argc</strong> and <strong>argv</strong>, though any names may be used, as they are local to the function in which they are declared):</p>
+<blockquote>
+<p><em>或者带有两个参数（这里称为argc和argv，尽管使用任何名称，因为它们是本地声明的函数）：</em></p>
+</blockquote>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> *argv[])</span> </span>&#123; <span class="comment">/* ... */</span> &#125;</div></pre></td></tr></table></figure>
 <p>or equivalent;or in some other implementation-defined manner.<br>If they are declared, the parameters to the main function shall obey the following constraints:</p>
+<blockquote>
+<p><em>或者等价;或者以某种其他编译器相关实现的方式。</em></p>
+<p><em>如果被声明，主函数的参数应该遵守以下约束条件：</em></p>
+</blockquote>
 <ul>
 <li>The value of argc shall be nonnegative.</li>
-<li><strong>argv[argc]</strong> shall be a null pointer.</li>
+<li>argv<strong>[argc]</strong> shall be a null pointer.</li>
 <li>If the value of argc is <strong>greater than zero</strong>, the array members <strong>argv[0]</strong> through <strong>argv[argc-1]</strong> inclusive shall contain pointers to strings, which are given implementation-defined values by the host environment prior to program startup. The intent is to supply to the program information determined prior to program startup from elsewhere in the hosted environment. If the host environment is not capable of supplying strings with letters in both uppercase and lowercase, the implementation shall ensure that the strings are received in lowercase.</li>
-<li>If the value of argc is <strong>greater than zero</strong>, the string pointed to by <strong>argv[0]</strong><br>represents the program name; <code>argv[0][0]</code> shall be the null character if the program name is not available from the host environment. If the value of argc is greater than one, the strings pointed to by <strong>argv[1]</strong> through <strong>argv[argc-1]</strong><br>represent the program parameters.</li>
-<li>The parameters argc and argv and the strings pointed to by the argv array shall be modifiable by the program, and retain their last-stored values between program startup and program termination.</li>
+<li>If the value of argc is <strong>greater than zero</strong>, the string pointed to by <strong>argv[0]</strong><br>represents the program name; <strong>argv[0][0]</strong> shall be the null character if the program name is not available from the host environment. If the value of <strong>argc</strong> is greater than one, the strings pointed to by <strong>argv[1]</strong> through <strong>argv[argc-1]</strong><br>represent the program parameters.</li>
+<li>The parameters <strong>argc</strong> and <strong>argv</strong> and the strings pointed to by the <strong>argv</strong> array shall be modifiable by the program, and retain their last-stored values between program startup and program termination.</li>
 </ul>
+<blockquote>
+<ul>
+<li><em>argc的值应该是非负的。</em></li>
+<li><em>argv<strong>[argc]</strong> 应该是一个空指针。</em></li>
+<li><em>如果argc的值<strong>大于零</strong>，则<strong>argv [0]</strong>至<strong>argv [argc-1]</strong>包含的数组成员应该包含指向字符串的指针，这些字符串在程序启动之前由系统环境给定已被定义的值。 其目的是向程序提供在程序启动之前从托管环境中的其他地方确定的信息。 如果系统环境不能提供大小写字母的字符串，则这类实现应确保字符串以小写形式接收。</em></li>
+<li><em>如果argc的值<strong>大于零</strong>，则<strong>argv [0]</strong>指向的字符串代表程序名称; 如果程序名称在主机环境中不可用，那么<strong>argv [0][0]</strong>应为空字符。 如果<strong>argc</strong>的值大于1，<strong>argv [1]</strong>至<strong>argv [argc-1]</strong>指向的字符串则代表程序参数。</em></li>
+<li><em>参数<strong>argc</strong>和<strong>argv</strong>以及<strong>argv</strong>数组所指向的字符串应该可以被程序修改，并在程序启动和程序终止之间保留它们的最后存储的值。</em></li>
+</ul>
+</blockquote>
 <h2 id="C-Strandard"><a href="#C-Strandard" class="headerlink" title="C++ Strandard"></a>C++ Strandard</h2><p>由于C和C++中对于函数参数列表的规则并不一致(C++中参数列表为空代表不接收任何参数)。所以C++中main的原型和ISO C也并不太一样：</p>
 <ul>
 <li>a function of <strong>()</strong> returning <strong>int</strong> and</li>
@@ -509,40 +529,56 @@
 <p>If status is zero or EXIT_SUCCESS, an implementation-defined form of the status successful termination is returned.</p>
 </blockquote>
 <p><strong>ISO C99/11:</strong><br>If the return type of the <strong>main</strong> function is a type compatible with <strong>int</strong>, a return from the initial call to the <strong>main</strong> function is equivalent to calling the <strong>exit</strong> function with the value returned by the <strong>main</strong> function as its argument;reaching the <strong>}</strong> that terminates the <strong>main</strong> function returns a value of 0. If the return type is not compatible with <strong>int</strong>, the termination status returned to the host environment is unspecified.</p>
+<blockquote>
+<p><em>如果<strong>main</strong>函数的返回类型是与<strong>int</strong>兼容的类型，则从初始调用返回到主函数相当于以<strong>main</strong>函数返回的值为参数来调用<strong>exit</strong>函数;到达终止 <strong>}</strong>主函数返回值 0.如果返回类型与<strong>int</strong>不兼容，则返回到主机环境的终止状态是未指定的。</em></p>
+</blockquote>
 <p><em>Forward references: definition of terms (ISO/IEC 9899:201x 7.1.1), the exit function (ISO/IEC 9899:201x 7.22.4.4).</em></p>
 <h3 id="注意："><a href="#注意：" class="headerlink" title="注意："></a>注意：</h3><blockquote>
 <p>ISO/IEC 9899:201x -6.9.1 #12</p>
 <p>If the <strong>}</strong> that terminates a function is reached, and the value of the function call is used by<br>the caller, the behavior is undefined.</p>
+<blockquote>
+<p><em>如果 <strong>}</strong>到达终止函数，并且函数调用的值被使用的行为是未定义的。</em></p>
 </blockquote>
-<p>所以函数结尾不写return是undefined behavior</p>
+</blockquote>
+<p>所以函数结尾不写return是<strong>undefined behavior</strong></p>
 <center><em>在Xcode9.0环境下，不写return的函数无法通过编译</em></center>
 
-<p><strong>但是：</strong></p>
-<blockquote>
-<p>ISO/IEC 9899:201x</p>
-<p><strong>5.1.2.2.3 Program termination</strong></p>
-<p>1 If the return type of the <strong>main</strong> function is a type compatible with <strong>int</strong>, a return from the<br>initial call to the <strong>main</strong> function is equivalent to calling the <strong>exit</strong> function with the value<br>returned by the <strong>main</strong> function as its argument;(11) reaching the <strong>}</strong> that terminates the<br><strong>main</strong> function returns a value of 0. If the return type is not compatible with <strong>int</strong>, the<br>termination status returned to the host environment is unspecified.<br><strong>Forward references: </strong>definition of terms (7.1.1), the exit function (7.22.4.4)</p>
-</blockquote>
-<p>main函数是一个特例，可以不用return</p>
+
+
 <p><strong>ISO C++11/14:</strong><br>A return statement in main has the eﬀect of leaving the main function (destroying any objects with automatic storage duration) and calling <strong>std::exit</strong> with the return value as the argument. If control reaches the end of main without encountering a return statement, the eﬀect is that of executing</p>
+<blockquote>
+<p><em>main中的return语句具有离开main函数的功能（销毁具有自动存储持续时间的任何对象）并以返回值作为参数调用 <strong>std :: exit</strong>。 如果控制到达主函数的末尾而没有遇到return语句，那么就是执行：</em></p>
+</blockquote>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">return</span> <span class="number">0</span>;</div></pre></td></tr></table></figure>
 <p><del>待补充</del></p>
 <h2 id="exit"><a href="#exit" class="headerlink" title="exit"></a>exit</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">exit</span><span class="params">(<span class="keyword">int</span> status)</span></span>;</div></pre></td></tr></table></figure>
 <p>The <strong>exit</strong> function causes normal program termination to occur. If more than one call to the <strong>exit</strong> function is executed by a program, the behavior is undefined.</p>
+<blockquote>
+<p><em>.<strong>exit</strong> 函数使正常的程序终止执行。如果一个程序执行多个对 <strong>exit</strong> 函数的调用，其行为将是不确定的。</em></p>
+</blockquote>
 <ul>
 <li>First, all functions registered by the <strong>atexit</strong> function are called, in the reverse order of their registration,except that a function is called after any previously registered functions that had already been called at the time it was registered. If, during the call to any such function, a call to the <strong>longjmp</strong> function is made that would terminate the call to the registered function, the behavior is undefined.</li>
+</ul>
+<ul>
 <li>Next, all open streams with unwritten buffered data are ﬂushed, all open streams are closed, and all files created by the <strong>tmpfile</strong> function are removed.</li>
 <li>Finally, control is returned to the host environment. If the value of <strong>status</strong> is <strong>zero</strong> or <strong>EXIT_SUCCESS</strong>, an implementation-defined form of the status <em>successful termination</em> is returned. If the value of <strong>status</strong> is <strong>EXIT_FAILURE</strong>, an implementation-defined form of the status <em>unsuccessful termination</em> is returned. Otherwise the status returned is implementation-defined.</li>
 </ul>
+<blockquote>
+<ul>
+<li><em>首先，按照相反的顺序调用 <strong>atexit</strong> 函数所注册的所有函数，除非在注册时调用了之前已经调用的任何已经注册的函数。 如果在调用任何这样的函数期间调用 <strong>longjmp</strong> 函数来终止对已注册函数的调用，则其行为是不确定的。</em></li>
+<li><em>接下来，所有开放的未写入的缓冲区数据流被擦除，并关闭所有开放的数据流，并移除由 <strong>tmpfile</strong> 函数创建的所有文件。</em></li>
+<li><em>最后，控制权返回到主机环境。 如果<strong>状态值</strong>为<strong>zero</strong>或<strong>EXIT_SUCCESS</strong>，则返回状态 successful termination的自定义形式。 如果状态值为<strong>EXIT_FAILURE</strong>，则返回状态不成功终止的实现定义形式。 否则，返回的状态是实现其定义的。</em></li>
+</ul>
+</blockquote>
 <p><strong>The exit function cannot return to its caller.</strong></p>
 <h2 id="Exit"><a href="#Exit" class="headerlink" title="_Exit"></a>_Exit</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></div><div class="line"><span class="keyword">void</span> _Exit(<span class="keyword">int</span> status);</div></pre></td></tr></table></figure>
-<p>The <code>_Exit</code> function causes normal program termination to occur and control to be returned to the host environment. No functions registered by the atexit function or signal handlers registered by the signal function are called. The status returned to the host environment is determined in the same way as for the exit function (7.20.4.3).Whether open streams with unwritten buffered data are ﬂushed, open streams are closed,or temporary files are removed is implementation-defined.<br>The <code>_Exit</code> function cannot return to its caller.</p>
+<p>The <code>_Exit</code> function causes normal program termination to occur and control to be returned to the host environment. No functions registered by the <strong>atexit</strong> function or signal handlers registered by the signal function are called. The status returned to the host environment is determined in the same way as for the exit function (7.20.4.3).Whether open streams with unwritten buffered data are ﬂushed, open streams are closed,or temporary files are removed is implementation-defined.<br>The <code>_Exit</code> function cannot return to its caller.</p>
+<blockquote>
+<p><code>_Exit</code> 函数使正常的程序终止发生，然后控制返回到主机环境。 没有被 <strong>atexit</strong> 函数注册的函数或者被信号函数注册的信号处理程序将会被调用。 返回到主机环境的状态的确定方式与退出函数（7.20.4.3）的方式相同。无论开放且具有未写入缓冲区的数据流是否被擦除，开放的流是否是关闭的，或者临时文件是否被移除，都是实现其定义的。</p>
+<p><code>_Exit</code> 函数不能返回给它的调用者。</p>
+</blockquote>
 <p><img src="https://i.loli.net/2017/12/28/5a43e4bca53f7.png" alt="StartAndterminatesACProgram.png"></p>
-<h1 id="Undefined-behavior"><a href="#Undefined-behavior" class="headerlink" title="Undefined behavior"></a>Undefined behavior</h1><center><strong><em>渣翻译请见谅，如果翻译有定义性错误，还请评论指出，谢谢 ! <a href="https://en.wikipedia.org/wiki/Undefined_behavior#cite_note-6" target="_blank" rel="external">原文链接</a></em></strong></center>
-
-
-
-<h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><blockquote>
+<h1 id="Undefined-behavior"><a href="#Undefined-behavior" class="headerlink" title="Undefined behavior"></a>Undefined behavior</h1><h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><blockquote>
 <p>在计算机程序设计中，<strong>未定义行为</strong>（英语：undefined behavior）是指行为不可预测的计算机代码。这是一些编程语言的一个特点，最有名的是在C语言中。在这些语言中，为了简化标准，并给予实现一定的灵活性，标准特别地规定某些操作的结果是<em>未定义的</em>，这意味着程序员不能预测会发生什么事。</p>
 <p>例如，在C语言中，在任何自动对象被初始化之前，通过非字符类型的左值表达式读取这个变量存储的值会产生未定义行为，除以零或访问数组定义的界限之外的元素（参见缓冲区溢出）也会产生未定义行为。在一般情况下，之后的任何行为是不确定的；甚至只要程序的执行存在未定义行为，在引起未定义行为操作发生之前也可能不要求保证程序的行为可预测（如ISO C++）。特别地，标准从来没有要求编译器判断未定义行为，因此，如果程序调用未定义行为，可能会成功编译，甚至一开始运行时没有错误，只会在另一个系统上，甚至是在另一个日期运行失败。当一个未定义行为的实例发生时，正如语言标准所说，“什么事情都可能发生”，也许什么都没有发生。</p>
 <p>和未指定行为(unspecified behavior)不同，未定义行为强调基于不可移植或错误的程序构造，或使用错误的数据。一个符合标准的实现可以在假定未定义行为永远不发生（除了显式使用不严格遵守标准的扩展）的基础上进行优化，可能导致原本存在未定义行为（例如有符号数溢出）的程序经过优化后显示出更加明显的错误（例如死循环）。因此，这种未定义行为一般应被视为bug。</p>
@@ -610,14 +646,20 @@
 <h2 id="Risks"><a href="#Risks" class="headerlink" title="Risks"></a>Risks</h2><p>C and C++ standards have several forms of undefined behavior throughout, which offers increased liberty in compiler implementations and compile-time checks at the expense of undefined run-time behavior if present. In particular, there is an appendix section dedicated to a non-exhaustive listing of common sources of undefined behavior in C. Moreoever, compilers are not required to diagnose code that relies on undefined behavior, due to current static analysis limitations. Hence, it is common for programmers, even experienced ones, to unintentionally rely on undefined behavior either by mistake, or simply because they are not well-versed in the rules of the language that can span over hundreds of pages. This can result in bugs that are exposed when optimizations are enabled on the compiler, or when a compiler of a different vendor or version is used. Testing or fuzzing with dynamic undefined behavior checks enabled, e.g. the Clang sanitizers, can help to catch undefined behavior not diagnosed by the compiler or static analyzers.</p>
 <p>In scenarios where security is critical, undefined behavior can lead to security vulnerabilities in software. When GCC’s developers changed their compiler in 2008 such that it omitted certain overflow checks that relied on undefined behavior, CERT issued a warning against the newer versions of the compiler. Linux Weekly News pointed out that the same behavior was observed in PathScale C, Microsoft Visual C++ 2005 and several other compilers; the warning was later amended to warn about various compilers.</p>
 <blockquote>
-<p><em>C和C ++标准在整个制定过程中都有几种不确定的行为，如果存在未定义的运行行为，则会增加编译器执行和编译时检查的自由度。特别是有一个附录部分，专门用于列举C中不确定行为的常见来源。不过，由于当前的静态分析限制，编译器不需要诊断依赖于未定义行为的代码。因此，甚至经验丰富的程序员通常会无意中依赖未定义的行为，或者是因为他们不熟悉可能长达数百页的语言规则。这可能会导致在编译器上启用优化时或在使用不同供应商或版本的编译器时公开的bug。启用动态未定义行为检查（例如Clang sanitizers）的测试或模糊测试可以帮助捕获未经编译器或静态分析器诊断的未定义行为。</em></p>
-<p><em>在安全性至关重要的情况下，未定义的行为会导致软件中出现安全漏洞。当GCC的开发人员在2008年修改了他们的编译器，从而忽略了某些依赖于未定义行为的溢出检查时，CERT对新版本的编译器发出警告。 Linux Weekly News指出，同样的行为是在 PathScale C, Microsoft Visual C++ 2005和其他一些编译器; 警告规则在后来已经被修订，用来警告各种编译器.</em></p>
+<p><em>C和C ++标准在整个制定过程中都有几种不确定的行为，如果存在未定义的运行行为，则会增加编译器执行和编译时检查的自由度。特别是有一个附录部分，专门用于列举C中不确定行为的常见来源。不过，由于当前的静态分析限制，编译器不需要诊断依赖于未定义行为的代码。因此，甚至经验丰富的程序员通常会无意中依赖未定义的行为，或者是因为他们不熟悉可能长达数百页的语言规则。这可能会导致在编译器上启用优化时或在使用不同发行商或不同版本的编译器时公开的bug。启用动态未定义行为检查（例如Clang sanitizers）的测试或模糊测试可以帮助捕获未经编译器或静态分析器诊断的未定义行为。</em></p>
+<p><em>在安全性至关重要的情况下，未定义的行为会导致软件中出现安全漏洞。GCC的开发人员在2008年修改了他们的编译器，忽略了某些依赖于未定义行为的溢出检查时，CERT会对新版本的编译器发出警告。 Linux Weekly News 指出，同样的行为存在于 PathScale C, Microsoft Visual C++ 2005和其他一些编译器; 警告规则在后来已经被修订，用来警告各种编译器.</em></p>
 </blockquote>
-<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><ul>
-<li><strong>ISO/IEC 9899:2011</strong> ，Information technology – Programming languages – C</li>
-<li><strong>ISO/IEC 9899:1999</strong>，Programming languages – C</li>
-<li><a href="https://zh.wikipedia.org/wiki/%E6%9C%AA%E5%AE%9A%E4%B9%89%E8%A1%8C%E4%B8%BA" target="_blank" rel="external">https://zh.wikipedia.org/wiki/%E6%9C%AA%E5%AE%9A%E4%B9%89%E8%A1%8C%E4%B8%BA</a></li>
+<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><ul>
+<li><strong><a href="https://en.wikipedia.org/wiki/International_Organization_for_Standardization" target="_blank" rel="external">ISO</a>/<a href="https://en.wikipedia.org/wiki/International_Electrotechnical_Commission" target="_blank" rel="external">IEC</a> (1999). </strong>ISO/IEC 9899:1999(E): <em>Programming Languages - C §6.5 Expressions para. 2</em></li>
+<li><strong><a href="https://en.wikipedia.org/wiki/International_Organization_for_Standardization" target="_blank" rel="external">ISO</a>/<a href="https://en.wikipedia.org/wiki/International_Electrotechnical_Commission" target="_blank" rel="external">IEC</a> (2003)</strong>. <em>ISO/IEC 14882:2003(E): Programming Languages - C++ §2.13.4 String literals [lex.string]</em> para. 2</li>
+<li><strong><a href="https://en.wikipedia.org/wiki/International_Organization_for_Standardization" target="_blank" rel="external">ISO</a>/<a href="https://en.wikipedia.org/wiki/International_Electrotechnical_Commission" target="_blank" rel="external">IEC</a> (2003)</strong>. <em>ISO/IEC 14882:2003(E): Programming Languages - C++ §5.6 Multiplicative operators [expr.mul]</em> para. 4</li>
+<li><strong><a href="https://en.wikipedia.org/wiki/International_Organization_for_Standardization" target="_blank" rel="external">ISO</a>/<a href="https://en.wikipedia.org/wiki/International_Electrotechnical_Commission" target="_blank" rel="external">IEC</a> (2007). </strong>ISO/IEC 9899:2007(E): <em>Programming Languages - C §6.9 External definitions   para. 1</em></li>
+<li><strong><a href="http://www.open-std.org/jtc1/sc22/wg14/www/docs/n1570.pdf" target="_blank" rel="external">ISO/IEC</a> (2011) .</strong>ISO/IEC 9899:201x(E): <em>Programming Languages - C § 5.1.2.2.1Program startup para. 1,2</em></li>
+<li>ANSI X3.159-1989 <em>Programming Language C</em>, footnote 26</li>
 <li><a href="https://imzlp.me/posts/15272/" target="_blank" rel="external">https://imzlp.me/posts/15272/</a></li>
+<li><a href="https://web.archive.org/web/20080409224149/http://www.kb.cert.org/vuls/id/162289" target="_blank" rel="external">“Vulnerability Note VU#162289 — gcc silently discards some wraparound checks”</a>. <em>Vulnerability Notes Database</em>. CERT. 4 April 2008. Archived from <a href="http://www.kb.cert.org/vuls/id/162289" target="_blank" rel="external">the original</a> on 9 April 2014.</li>
+<li><a href="http://en.cppreference.com/w/cpp/language/eval_order" target="_blank" rel="external">“Order of evaluation - cppreference.com”</a>. <em>en.cppreference.com</em>. Retrieved 2016-08-09.</li>
+<li><a href="https://zh.wikipedia.org/wiki/%E6%9C%AA%E5%AE%9A%E4%B9%89%E8%A1%8C%E4%B8%BA" target="_blank" rel="external">https://zh.wikipedia.org/wiki/%E6%9C%AA%E5%AE%9A%E4%B9%89%E8%A1%8C%E4%B8%BA</a></li>
 <li><a href="https://en.wikipedia.org/wiki/Undefined_behavior#Examples_in_C_and_C++" target="_blank" rel="external">https://en.wikipedia.org/wiki/Undefined_behavior#Examples_in_C_and_C++</a></li>
 <li><a href="http://blogs.msdn.com/b/oldnewthing/archive/2014/06/27/10537746.aspx" target="_blank" rel="external">Undefined behavior can result in time travel</a>. 27 Jun 2014 [2015-03-09].</li>
 <li>Lattner, Chris. <a href="http://blog.llvm.org/2011/05/what-every-c-programmer-should-know.html" target="_blank" rel="external">What Every C Programmer Should Know About Undefined Behavior</a>. LLVM Project Blog. LLVM.org. May 13, 2011 [May 24, 2011].</li>
@@ -641,7 +683,7 @@
   <p><span>本文标题:</span>初探C/C++标准&&未定义行为</a></p>
   <p><span>文章作者:</span>Tuski</a></p>
   <p><span>发布时间:</span>2017年12月27日 - 23:05:59</p>
-  <p><span>最后更新:</span>2017年12月28日 - 03:44:54</p>
+  <p><span>最后更新:</span>2018年01月23日 - 21:20:21</p>
   <p><span>原始链接:</span><a href="/2017/12/初探未定义行为/" title="初探C/C++标准&&未定义行为">http://www.perpeht.com/2017/12/初探未定义行为/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://www.perpeht.com/2017/12/初探未定义行为/"  aria-label="复制成功！"></i></span>
   </p>
@@ -954,7 +996,7 @@ show_date_time();
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#main函数原型-amp-amp-终止行为"><span class="nav-text">main函数原型&&终止行为</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#void-main"><span class="nav-text">void main()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#main"><span class="nav-text">main()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#int-main"><span class="nav-text">int main()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C99-11-Standard"><span class="nav-text">C99/11 Standard</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-Strandard"><span class="nav-text">C++ Strandard</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#main-返回的值"><span class="nav-text">main 返回的值</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#注意："><span class="nav-text">注意：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#exit"><span class="nav-text">exit</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Exit"><span class="nav-text">_Exit</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Undefined-behavior"><span class="nav-text">Undefined behavior</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#定义"><span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Example-in-C-and-C"><span class="nav-text">Example  in C and C++</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Benefits"><span class="nav-text">Benefits</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Risks"><span class="nav-text">Risks</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-text">参考资料</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#main函数原型-amp-amp-终止行为"><span class="nav-text">main函数原型&&终止行为</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#void-main"><span class="nav-text">void main()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#main"><span class="nav-text">main()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#int-main"><span class="nav-text">int main()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C99-11-Standard"><span class="nav-text">C99/11 Standard</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#C-Strandard"><span class="nav-text">C++ Strandard</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#main-返回的值"><span class="nav-text">main 返回的值</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#注意："><span class="nav-text">注意：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#exit"><span class="nav-text">exit</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Exit"><span class="nav-text">_Exit</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Undefined-behavior"><span class="nav-text">Undefined behavior</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#定义"><span class="nav-text">定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Example-in-C-and-C"><span class="nav-text">Example  in C and C++</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Benefits"><span class="nav-text">Benefits</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Risks"><span class="nav-text">Risks</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#References"><span class="nav-text">References</span></a></li></ol></div>
             
 
           </div>
