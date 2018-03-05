@@ -907,7 +907,7 @@ hrsold=setzero(Math.floor(e_hrsold));
 e_minsold=(e_hrsold-hrsold)*60;
 minsold=setzero(Math.floor((e_hrsold-hrsold)*60));
 seconds=setzero(Math.floor((e_minsold-minsold)*60));
-document.getElementById('days').innerHTML="This site is running "+daysold+" d"+hrsold+" h"+minsold+" min"+seconds+" sec";
+document.getElementById('days').innerHTML="This site is running "+daysold+" d "+hrsold+" h "+minsold+" min "+seconds+" sec";
 }
 function setzero(i){
 if (i<10)
