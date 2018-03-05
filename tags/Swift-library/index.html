@@ -494,7 +494,7 @@ show_date_time();
  
 
           
-      <iframe src="https://open.spotify.com/embed?uri=spotify:user:spotifycharts:playlist:37i9dQZEVXbMDoHDwVN2tF&theme=white" width="215" height="305" frameborder="0" allowtransparency="true"></iframe>  
+      <iframe src="https://open.spotify.com/embed?uri=spotify:user:spotify:playlist:37i9dQZF1DXcBWIGoYBM5M&theme=white" width="215" height="305" frameborder="0" allowtransparency="true"></iframe>  
        
       </section>
 
@@ -1157,24 +1157,6 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
 (function(){
   if((typeof(device) != 'undefined') && (device.mobile())){
     var trElement = document.getElementById('hexo-helper-live2d');
-    trElement.parentNode.removeChild(trElement);
-    return;
-  }else
-    if (typeof(device) === 'undefined') console.error('Cannot find current-device script.');
-  loadScript("/live2d/script.js", function(){loadlive2d("live2dcanvas", "/live2d/assets/hibiki.model.json", 0.5);});
-})();
-</script>
-
- <canvas class="fireworks" 
-        style="position: fixed; left: 0px; top: 0px; z-index: 99999999; pointer-events: none; width: 1158px; height: 916px;" 
-        width="2316" 
-        height="1832">
-</canvas>
-<script type="text/javascript" src="/js/src/anime.min.js"></script>
-<script type="text/javascript" src="/js/src/fireworks.js"></script>
-</body>
-</html>
-;
     trElement.parentNode.removeChild(trElement);
     return;
   }else
