@@ -98,7 +98,7 @@
 <meta property="og:image" content="https://i.loli.net/2017/11/23/5a16bba1e27d9.gif">
 <meta property="og:image" content="https://i.loli.net/2017/11/23/5a16bc1ae1a89.gif">
 <meta property="og:image" content="https://i.loli.net/2017/11/23/5a16bc4539f0c.jpg">
-<meta property="og:updated_time" content="2018-03-05T08:17:49.177Z">
+<meta property="og:updated_time" content="2018-04-02T07:50:47.981Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="c语言struct结构体简介">
 <meta name="twitter:description" content="这篇文章简要的介绍了c语言结构体的一些用法和定义=。=">
@@ -396,7 +396,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  2,902
+                  2,903
                 </span>
               
 
@@ -452,7 +452,7 @@
 <p>就像刚才的第二种提到的，结构体变量的声明可以用：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">stuff</span> <span class="title">yourname</span>;</span></div></pre></td></tr></table></figure>
 <p>其成员变量的定义可以随声明进行：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">stuff</span> <span class="title">bang</span> = &#123;</span><span class="string">"manager"</span>,<span class="number">30</span>,<span class="number">185</span>&#125;;</div></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">stuff</span> <span class="title">bang</span> = &#123;</span><span class="string">"manager"</span>,<span class="number">30</span>,<span class="number">185.0</span>&#125;;</div></pre></td></tr></table></figure>
 <p>也可以考虑结构体之间的赋值：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">stuff</span> <span class="title">faker</span> = <span class="title">bang</span>;</span></div><div class="line"><span class="comment">//或    struct stuff faker2;</span></div><div class="line"><span class="comment">//      faker2 = faker;</span></div><div class="line">    可见结构体的每一个成员变量一模一样</div></pre></td></tr></table></figure>
 <p>如果不使用上边两种方法，那么成员数组的操作会稍微麻烦（用for循环可能好点）</p>
@@ -507,7 +507,7 @@
 <h3 id="PS：结构体的声明也要注意位置的，作用域不一样。"><a href="#PS：结构体的声明也要注意位置的，作用域不一样。" class="headerlink" title="PS：结构体的声明也要注意位置的，作用域不一样。"></a>PS：结构体的声明也要注意位置的，作用域不一样。</h3><p>C++的结构体变量的声明定义和C有略微不同，说白了就是更“面向对象”风格化，要求更低。</p>
 <p><img src="https://i.loli.net/2017/11/23/5a16bc4539f0c.jpg" alt="FE386B018D56744EE3E56CB0CCA13168.jpg"></p>
 <h3 id="PSS：typedef定义结构体"><a href="#PSS：typedef定义结构体" class="headerlink" title="PSS：typedef定义结构体"></a>PSS：typedef定义结构体</h3><p><strong>例如</strong></p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span>  <span class="title">person</span> &#123;</span></div><div class="line"><span class="keyword">int</span> age ;</div><div class="line"><span class="keyword">char</span> *name;</div><div class="line"><span class="keyword">char</span> *sex;</div><div class="line">&#125; student;</div></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">person</span> &#123;</span></div><div class="line"><span class="keyword">int</span> age ;</div><div class="line"><span class="keyword">char</span> *name;</div><div class="line"><span class="keyword">char</span> *sex;</div><div class="line">&#125; student;</div></pre></td></tr></table></figure>
 <p><strong>我们可以用student来定义一个结构体变量：student stu1；typedef的作用就相当于给你struct person取了一个别名，如果我们不用typedef定义我们就不能用student定义，此时student就是一个结构体变量，如果要定义结构体变量的话就得用struct person来定义 struct person stu1.</strong></p>
 <p>####typedef的其它定义：</p>
 <blockquote>
@@ -534,7 +534,7 @@
   <p><span>Title:  </span>c语言struct结构体简介</a></p>
   <p><span>Author:  </span>Tuski</a></p>
   <p><span>Published:  </span>11/23/2017 - 19:16:52</p>
-  <p><span>Updated:  </span>03/05/2018 - 16:17:49</p>
+  <p><span>Updated:  </span>04/02/2018 - 15:50:47</p>
   <p><span>Link:  </span><a href="/2017/11/c语言struct结构体简介/" title="c语言struct结构体简介">http://www.perpeht.com/2017/11/c语言struct结构体简介/</a>
     <span class="copy-path"  title="Click to Copy article link"><i class="fa fa-clipboard" data-clipboard-text="http://www.perpeht.com/2017/11/c语言struct结构体简介/"  aria-label="Copy successfully！"></i></span>
   </p>
