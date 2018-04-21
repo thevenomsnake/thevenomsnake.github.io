@@ -95,20 +95,20 @@
 <meta property="og:site_name" content="Tuski&#39;s Blog">
 <meta property="og:description" content="I bought a new server today and there is always an error when using SCP">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="https://i.loli.net/2018/04/22/5adb753cb8d01.png">
-<meta property="og:image" content="https://i.loli.net/2018/04/22/5adb753cb8d01.png">
+<meta property="og:image" content="https://i.loli.net/2018/04/22/5adb8027d00e6.png">
+<meta property="og:image" content="https://i.loli.net/2018/04/22/5adb8027d00e6.png">
 <meta property="og:image" content="https://i.loli.net/2018/04/22/5adb7acc868d3.png">
-<meta property="og:image" content="https://i.loli.net/2018/04/22/5adb753cb8d01.png">
+<meta property="og:image" content="https://i.loli.net/2018/04/22/5adb8027d00e6.png">
 <meta property="og:image" content="https://i.loli.net/2018/04/22/5adb7b6d5a8eb.jpg">
 <meta property="og:image" content="https://i.loli.net/2018/04/22/5adb7cc334208.png">
 <meta property="og:image" content="https://i.loli.net/2018/04/22/5adb7d0283f18.png">
 <meta property="og:image" content="https://i.loli.net/2018/04/22/5adb7f0871e79.png">
 <meta property="og:image" content="https://i.loli.net/2018/04/22/5adb7f5d16b5a.jpg">
-<meta property="og:updated_time" content="2018-04-21T18:14:04.727Z">
+<meta property="og:updated_time" content="2018-04-21T18:17:53.074Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SCP Permission denied ?">
 <meta name="twitter:description" content="I bought a new server today and there is always an error when using SCP">
-<meta name="twitter:image" content="https://i.loli.net/2018/04/22/5adb753cb8d01.png">
+<meta name="twitter:image" content="https://i.loli.net/2018/04/22/5adb8027d00e6.png">
 
 
 
@@ -443,7 +443,7 @@
 
 <a id="more"></a>
 <h1 id="Error"><a href="#Error" class="headerlink" title="Error"></a>Error</h1><p>As you can see ,Terminal throw a error :scp: /var/www/html/123321.zip: Permission denied</p>
-<p><img src="https://i.loli.net/2018/04/22/5adb753cb8d01.png" alt="1111error.png"></p>
+<p><img src="https://i.loli.net/2018/04/22/5adb8027d00e6.png" alt="QQ20180422-021653@2x.png"></p>
 <p><strong><em>So……how to fix that ?</em></strong></p>
 <h1 id="Fix"><a href="#Fix" class="headerlink" title="Fix"></a>Fix</h1><p>The first problem that we should think of is the folder permissions issue. This folder is may created by the Root user. Normal users do not have that permission.</p>
 <h2 id="Solve"><a href="#Solve" class="headerlink" title="Solve:"></a>Solve:</h2><p>These are the examples from the symbolic notationsection given in octal notation:</p>
@@ -516,14 +516,14 @@
 <p>So , we need <strong>777</strong></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chmod 777 /your_folder</div></pre></td></tr></table></figure>
 <p>So let’s try again:</p>
-<p><img src="https://i.loli.net/2018/04/22/5adb753cb8d01.png" alt="1111error.png"></p>
+<p><img src="https://i.loli.net/2018/04/22/5adb8027d00e6.png" alt="QQ20180422-021653@2x.png"></p>
 <p>w..wait..what ? Why there is still error ?</p>
 <p>I am using QCloud. Emm…..Could it be that….?</p>
 <h2 id="Find"><a href="#Find" class="headerlink" title="Find"></a>Find</h2><p>Folder permissions are resolved, is it the server’s security settings?</p>
 <p>So I decide to open all the ports……</p>
 <p><img src="https://i.loli.net/2018/04/22/5adb7acc868d3.png" alt="tenc.png"></p>
 <p>let’s try again…….</p>
-<p><img src="https://i.loli.net/2018/04/22/5adb753cb8d01.png" alt="1111error.png"></p>
+<p><img src="https://i.loli.net/2018/04/22/5adb8027d00e6.png" alt="QQ20180422-021653@2x.png"></p>
 <p><img src="https://i.loli.net/2018/04/22/5adb7b6d5a8eb.jpg" alt="IMG_6912.JPG"></p>
 <h2 id="まさか"><a href="#まさか" class="headerlink" title="まさか ?"></a><strong>まさか ?</strong></h2><p>Find the <code>sshd_config</code></p>
 <p><img src="https://i.loli.net/2018/04/22/5adb7cc334208.png" alt="nano.png"></p>
@@ -555,7 +555,7 @@
   <p><span>Title:  </span>SCP Permission denied ?</a></p>
   <p><span>Author:  </span>Tuski</a></p>
   <p><span>Published:  </span>04/22/2018 - 01:17:34</p>
-  <p><span>Updated:  </span>04/22/2018 - 02:14:04</p>
+  <p><span>Updated:  </span>04/22/2018 - 02:17:53</p>
   <p><span>Link:  </span><a href="/2018/04/SCP-Permission-denied/" title="SCP Permission denied ?">http://www.perpeht.com/2018/04/SCP-Permission-denied/</a>
     <span class="copy-path"  title="Click to Copy article link"><i class="fa fa-clipboard" data-clipboard-text="http://www.perpeht.com/2018/04/SCP-Permission-denied/"  aria-label="Copy successfully！"></i></span>
   </p>
