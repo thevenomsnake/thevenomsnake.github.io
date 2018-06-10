@@ -1,0 +1,1548 @@
+<!DOCTYPE html>
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+<script type="text/javascript">var OriginTitile=document.title,st;document.addEventListener("visibilitychange",function(){document.hidden?(document.title="(/≧▽≦/)Aw, Snap!",clearTimeout(st)):(document.title="(ฅ>ω<*ฅ) Fixed~"+OriginTitile,st=setTimeout(function(){document.title=OriginTitile},3e3))})</script>
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-bounce.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="iOS 12 brings with it huge leaps forward in machine learning, new ways to work with text, alert grouping so that users are bothered less frequently, and more. Part of this comes through huge improveme">
+<meta property="og:type" content="article">
+<meta property="og:title" content="What’s new in iOS 12?">
+<meta property="og:url" content="http://www.perpeht.com/2018/06/What’s-new-in-iOS-12/index.html">
+<meta property="og:site_name" content="Tuski&#39;s Blog">
+<meta property="og:description" content="iOS 12 brings with it huge leaps forward in machine learning, new ways to work with text, alert grouping so that users are bothered less frequently, and more. Part of this comes through huge improveme">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-06-10T09:56:09.653Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="What’s new in iOS 12?">
+<meta name="twitter:description" content="iOS 12 brings with it huge leaps forward in machine learning, new ways to work with text, alert grouping so that users are bothered less frequently, and more. Part of this comes through huge improveme">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.perpeht.com/2018/06/What’s-new-in-iOS-12/"/>
+
+
+
+<link rel="stylesheet" href="../live2d/css/live2d.css" />
+
+
+  <title>What’s new in iOS 12? | Tuski's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+<div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+   
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tuski's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">I code my life</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-music">
+          <a href="/music/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-music"></i> <br />
+            
+            Music
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.perpeht.com/2018/06/What’s-new-in-iOS-12/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tuski">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tuski's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">What’s new in iOS 12?</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-10T17:42:40+09:00">
+                2018-06-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+            <!--noindex-->
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/06/What’s-new-in-iOS-12/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="2018/06/What’s-new-in-iOS-12/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+              <!--/noindex-->
+            
+          
+
+          
+          
+             <span id="/2018/06/What’s-new-in-iOS-12/" class="leancloud_visitors" data-flag-title="What’s new in iOS 12?">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  3,144
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  20
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <script src="/assets/js/APlayer.min.js"> </script><blockquote class="blockquote-center">iOS 12 brings with it huge leaps forward in machine learning, new ways to work with text, alert grouping so that users are bothered less frequently, and more. Part of this comes through huge improvements to Xcode, but I’ll be covering it all here.</blockquote>
+
+<a id="more"></a>
+<p>In this article I’m going to walk you through the major changes, complete with code examples, so you can try it all for yourself. Right now you can try iOS 12 only using the beta version of Xcode, and you will also need macOS Mojave if you want to use the new Create ML tools.</p>
+<ul>
+<li>You might also want to watch <a href="https://www.youtube.com/watch?v=1mOLuK4v5w0" target="_blank" rel="external">what’s new in Swift 4.2</a>.</li>
+<li>Here is <a href="https://developer.apple.com/documentation?changes=latest_major&amp;utm_campaign=iOS%2BDev%2BWeekly&amp;utm_medium=web&amp;utm_source=iOS%2BDev%2BWeekly%2BIssue%2B355" target="_blank" rel="external">API diffs for iOS 12</a>.</li>
+</ul>
+<h3 id="Machine-learning-for-image-recognition"><a href="#Machine-learning-for-image-recognition" class="headerlink" title="Machine learning for image recognition"></a>Machine learning for image recognition</h3><p>Machine learning (ML) was one of several major announcements from iOS 11, but it wasn’t that easy to use – particularly for folks who hadn’t studied the topic previously.</p>
+<p>This is all changing now, because Apple introduced two important new pieces of functionality. The first – Create ML – is actually a macOS framework that’s designed to make it trivial for anyone to create Core ML models to use in their app. The second – prediction batching – allows Core ML to evaluate many input sources in a more efficient way, making it less likely that newcomers would make basic mistakes.</p>
+<p>Create ML has to seen to be believed. Although I suspect it will change a little as the Xcode 10 beta evolves – the current UI feels a bit last-minute, to be honest – it’s already quite remarkable in its features, performance, and results.</p>
+<p>If you want to try it out, first create a new macOS playground, then give it this code:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">import CreateMLUI </div><div class="line"></div><div class="line">let builder = MLImageClassifierBuilder()</div><div class="line">builder.showInLiveView()</div></pre></td></tr></table></figure>
+<p>Press the play button to run the code, then open the assistant editor to show the live view for Create ML. You should see “ImageClassifier” at the top, followed by “Drop Images To Begin Training” below.</p>
+<p>Now we need some training data. If you just want to take it for a quick test run I’ve provided some images for you: <a href="https://www.hackingwithswift.com/files/CreateMLTestData-Images.zip" target="_blank" rel="external">click here to download them</a>. These were all taken from <a href="https://unsplash.com/" target="_blank" rel="external">https://unsplash.com/</a>, and are available under a <a href="https://unsplash.com/license" target="_blank" rel="external">“do whatever you want” license</a>,</p>
+<p>If you’d rather create the data yourself, I think you’ll be pleasantly surprised how easy it is:</p>
+<ol>
+<li>Create a new folder somewhere such as your desktop.</li>
+<li>Inside there, create two new folders: Training Data and Test Data.</li>
+<li>Inside each of those, create new folders for each thing you want to identify.</li>
+<li>Now drag your photos into the appropriate folders.</li>
+</ol>
+<p>That’s it! The training data is used to create your trained model, and the testing data is there just to see how well the trained model does with pictures it hasn’t seen before.</p>
+<p><strong>Warning:</strong> Do not put the same image into both training data and test data – that rather undermines the test!</p>
+<p>As an example, n my example data, I’ve provided images of cats and dogs so we can use Create ML to train a model to distinguish the two. So, I have a folder structure like this:</p>
+<ul>
+<li>Training Data</li>
+<li>Training Data &gt; Cat</li>
+<li>Training Data &gt; Cat &gt; SomeCat.jpg</li>
+<li>Training Data &gt; Cat &gt; AnotherCat.jpg</li>
+<li>Training Data &gt; Dog</li>
+<li>Training Data &gt; Dog &gt; SomeDog.jpg</li>
+<li>Training Data &gt; Dog &gt; AnotherDog.jpg</li>
+<li>Testing Data &gt; Cat</li>
+<li>Testing Data &gt; Cat &gt; AThirdCat.jpg</li>
+</ul>
+<p>And so on. It’s a good idea to have at least 10 images in each data set, and you should try to have a roughly equal number of images in each category. Apple suggests you allocate about 80% of your images to training data, leaving 20% for testing.</p>
+<p>Now that you have your data ready, it’s time to have Create ML start its training process. To do that, drag the whole Training Data folder into the playground assistant editor window, over where it says”Drop Images To Begin Training”.</p>
+<p>What you’ll see now is Xcode flash through all the images repeatedly as it attempts to figure out what separates a cat from a dog visually. It takes under 10 seconds for me, and when it finishes you’ll see “SUCCESS: Optimal Solution found”, which means your model is ready.</p>
+<p>The next step is to figure out how <em>good</em> the model is, and to do that we need to give it some test images. You’ll see a new”Drop Images To Begin Testing”area has appeared, so drag the Testing Data folder into there. These are all images our model hasn’t seen before, so it needs to figure out cat vs dog based on what it learned from our training data.</p>
+<p>This testing process will take under a second to complete, but when it does you’ll see a breakdown of how well Core ML performed. Obviously we’re looking for 100% accuracy – and indeed that’s precisely what we get with my cat/dog sample data – but if you don’t reach that you might want to try adding more images for Create ML to learn from.</p>
+<p>Once you’re happy with your finished model, click the disclosure indicator to the right of”ImageClassifier” and provide a little metadata, then click Save to generate a Core ML model that you can then import to your app just like you would do with iOS 10.</p>
+<h3 id="Machine-learning-for-text-analysis"><a href="#Machine-learning-for-text-analysis" class="headerlink" title="Machine learning for text analysis"></a>Machine learning for text analysis</h3><p>As well as being able to process images, Create ML is also capable of analyzing text. The process quite different in practice, but conceptually it’s the same: provide some training data that teaches Create ML what various text”means”, then provide some testing data that lets you evaluate how well the model performs.</p>
+<p>Once again, I’ve provided some example training data so you can try it out yourself. This data comes from a paper called <em>A Sentimental Education: Sentiment Analysis Using Subjectivity Summarization Based on Minimum Cuts</em> by Bo Pang and Lillian Lee, published in the Proceedings of the ACL in 2004 – you can find out more <a href="http://www.cs.cornell.edu/people/pabo/movie-review-data/" target="_blank" rel="external">here</a>.</p>
+<p>I’ve taken that data, and converted it into the format Create ML expects so it’s ready to use. <a href="https://www.hackingwithswift.com/files/CreateMLTestData-Text.zip" target="_blank" rel="external">You can download it here</a>.</p>
+<p>If you’d rather create your own data, it’s easy. First, create a new file called yourdata.json. For example, car-prices.json, or reviews.json. Second, give it content like this:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">[</div><div class="line">    &#123;</div><div class="line">        <span class="string">"text"</span>: <span class="string">"Swift is an awesome language"</span>,</div><div class="line">        <span class="string">"label"</span>: <span class="string">"positive"</span></div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">        <span class="string">"text"</span>: <span class="string">"Swift is much worse than Objective-C."</span>,</div><div class="line">        <span class="string">"label"</span>: <span class="string">"negative"</span></div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">        <span class="string">"text"</span>: <span class="string">"I really hate Swift"</span>,</div><div class="line">        <span class="string">"label"</span>: <span class="string">"negative"</span></div><div class="line">    &#125;</div><div class="line">]</div></pre></td></tr></table></figure>
+<p>The “text” field is whatever free-form text you want to train with, and the “label” field is what you consider that text to be. In the above example it marks reviews of Swift as being either positive or negative, but in my example data it uses thousands of movie reviews.</p>
+<p>The next step is to create an <code>MLDataTable</code> from your data, which is just a structure that holds data ready to be processed. Once thats done, we can split the table in two parts so we have some training data and some testing data – again, the 80/20 rule is useful.</p>
+<p>In code, it looks like this:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> CreateML</div><div class="line"><span class="keyword">import</span> Foundation</div><div class="line"></div><div class="line"><span class="keyword">let</span> data = <span class="keyword">try</span> <span class="type">MLDataTable</span>(contentsOf: <span class="type">URL</span>(fileURLWithPath: <span class="string">"/Users/twostraws/Desktop/reviews.json"</span>))</div><div class="line"><span class="keyword">let</span> (trainingData, testingData) = data.randomSplit(by: <span class="number">0.8</span>, seed: <span class="number">5</span>)</div></pre></td></tr></table></figure>
+<p>You’ll need to change”twostraws” to whatever your username is – I just used a path to the file on my desktop.</p>
+<p>Now for the important: creating an <code>MLTextClassifier</code> from our data, telling it the name of the text column and label colum:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> classifier = <span class="keyword">try</span> <span class="type">MLTextClassifier</span>(trainingData: trainingData, textColumn: <span class="string">"text"</span>, labelColumn: <span class="string">"label"</span>)</div></pre></td></tr></table></figure>
+<p>At this point you can go ahead and save the finished model, but it’s usually a good idea to check your accuracy first just in case you have too little (or too much!) data.</p>
+<p>This is done using by reading the number of classification errors that Create ML detected when it was doing its training. These will return a number between 0 (no errors) and 100 (nothing but errors):</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> trainingErrorRate = classifier.trainingMetrics.classificationError * <span class="number">100</span></div><div class="line"><span class="keyword">let</span> validationErrorRate = classifier.validationMetrics.classificationError * <span class="number">100</span></div></pre></td></tr></table></figure>
+<p>This next line will then pass the testing data through the same model to see how it fares:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> evaluationMetrics = classifier.evaluation(on: testingData)</div><div class="line"><span class="keyword">let</span> errorRate = evaluationMetrics.classificationError * <span class="number">100</span></div></pre></td></tr></table></figure>
+<p>Again, a value of 0 means no errors, which is what we ideally want.</p>
+<p>Finally, we’re ready to save. This takes two steps: create some metadata describing our model, then writing it to a URL something on our drive.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> metadata = <span class="type">MLModelMetadata</span>(author: <span class="string">"Paul Hudson"</span>, shortDescription: <span class="string">"A model trained to handle sentiment analysis in movie reviews."</span>, version: <span class="string">"1.0"</span>)</div><div class="line"></div><div class="line"><span class="keyword">try</span> classifier.write(to: <span class="type">URL</span>(fileURLWithPath: <span class="string">"/Users/twostraws/Desktop/result.mlmodel"</span>), metadata: metadata)</div></pre></td></tr></table></figure>
+<p><strong>Note:</strong> All these fancy Create ML tools are only available in Swift – a first from Apple, I think.</p>
+<h3 id="Grouped-alerts"><a href="#Grouped-alerts" class="headerlink" title="Grouped alerts"></a>Grouped alerts</h3><p>Notifications can now be grouped by the system, so that one conversation between friends doesn’t end up occupying a meter’s worth of screen scrolling.</p>
+<p>Normally you’d create a notification like this:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">scheduleNotification</span><span class="params">()</span></span> &#123;</div><div class="line">    <span class="keyword">let</span> center = <span class="type">UNUserNotificationCenter</span>.current()</div><div class="line"></div><div class="line">    <span class="keyword">let</span> content = <span class="type">UNMutableNotificationContent</span>()</div><div class="line">    content.title = <span class="string">"Late wake up call"</span></div><div class="line">    content.body = <span class="string">"The early bird catches the worm, but the second mouse gets the cheese."</span></div><div class="line">    content.categoryIdentifier = <span class="string">"alarm"</span></div><div class="line">    content.sound = <span class="type">UNNotificationSound</span>.<span class="keyword">default</span></div><div class="line"></div><div class="line">    <span class="keyword">let</span> trigger = <span class="type">UNTimeIntervalNotificationTrigger</span>(timeInterval: <span class="number">5</span>, repeats: <span class="literal">false</span>)</div><div class="line"></div><div class="line">    <span class="keyword">let</span> request = <span class="type">UNNotificationRequest</span>(identifier: <span class="type">UUID</span>().uuidString, content: content, trigger: trigger)</div><div class="line">    center.add(request)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>This has changed in iOS 12 thanks to three new properties:</p>
+<ul>
+<li>The <code>threadIdentifier</code> property describes what group this message belongs to.</li>
+<li>The <code>summaryArgument</code> property lets you describe to the user what the message relates to – perhaps “from Andrew and Jill”, for example.</li>
+<li>The <code>summaryArgumentCount</code> is used when each message relates to more than one thing. For example, if you got a message saying “you have five invites” then another saying “you have three invites”, you have two messages but eight invites. So, you’d use 5 and 3 with <code>summaryArgumentCount</code>.</li>
+</ul>
+<p>If you don’t provide a thread identifier, iOS will automatically group all your notifications together. However, if you <em>do</em> provide one then it will group your notifications by identifier: three from Andrew and Jill, four from Steven, two from your husband, and so on.</p>
+<p>To try it out, we can create a simple loop:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="number">1</span>...<span class="number">10</span> &#123;</div><div class="line">    <span class="keyword">let</span> content = <span class="type">UNMutableNotificationContent</span>()</div><div class="line">    content.title = <span class="string">"Late wake up call"</span></div><div class="line">    content.body = <span class="string">"The early bird catches the worm, but the second mouse gets the cheese."</span></div><div class="line">    content.categoryIdentifier = <span class="string">"alarm"</span></div><div class="line">    content.userInfo = [<span class="string">"customData"</span>: <span class="string">"fizzbuzz"</span>]</div><div class="line">    content.sound = <span class="type">UNNotificationSound</span>.<span class="keyword">default</span></div><div class="line">    content.threadIdentifier = <span class="string">"Andrew"</span></div><div class="line">    content.summaryArgument = <span class="string">"from Andrew"</span></div><div class="line"></div><div class="line">    <span class="keyword">let</span> trigger = <span class="type">UNTimeIntervalNotificationTrigger</span>(timeInterval: <span class="number">5</span>, repeats: <span class="literal">false</span>)</div><div class="line"></div><div class="line">    <span class="keyword">let</span> request = <span class="type">UNNotificationRequest</span>(identifier: <span class="type">UUID</span>().uuidString, content: content, trigger: trigger)</div><div class="line">    center.add(request)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>That will create ten notifications, all grouped as “from Andrew”.</p>
+<p>There’s one extra new option, which is the ability to create and show critical alerts – alerts that be delivered loudly even when the system is set to Do Not Disturb. Critical messages require approval from Apple, and I doubt they will hand out permission easily!</p>
+<h3 id="Shortcuts"><a href="#Shortcuts" class="headerlink" title="Shortcuts"></a>Shortcuts</h3><p>iOS 12 introduces the ability for users to trigger actions in our app using Siri, regardless of what the action is.</p>
+<p>Apple has given us two APIs to use, one very easy and one very difficult. I suspect most folks will go with the easy option to begin with and gauge user feedback – if there’s enough usage they can then invest more time to implement the more complex solution, but there’s no reason to go for that unless you do see good engagement.</p>
+<p>If you want to try it out, most of the work is done using the same <code>NSUserActivity</code>class that does so much other work on iOS – Spotlight search, Handoff, and SiriKit. You can create as many of these as you need, attaching them to your view controllers as needed, however, you should only expose shortcuts that can be used at any time – Siri isn’t able to understand when an activity shouldn’t be available.</p>
+<p><strong>Note:</strong> At this time, shortcuts appear to work only on actual devices.</p>
+<p>First, we need to tell iOS what activities we support. So, open your project’s Info.plist file and add a new row called <strong>NSUserActivityTypes</strong>. Make it an array, then add a single item to it: <strong>com.hackingwithswift.example.showscores</strong>. This identifies one activity uniquely to iOS.</p>
+<p>Now we need to register that activity when the user does something interesting. If you’re just trying it out, try adding this in <code>viewDidAppear()</code>:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// give our activity a unique ID</span></div><div class="line"><span class="keyword">let</span> activity = <span class="type">NSUserActivity</span>(activityType: <span class="string">"com.hackingwithswift.example.showscores"</span>)</div><div class="line"></div><div class="line"><span class="comment">// give it a title that will be displayed to users</span></div><div class="line">activity.title = <span class="string">"Show the latest scores"</span></div><div class="line"></div><div class="line"><span class="comment">// allow Siri to index this and use it for voice-matched queries</span></div><div class="line">activity.isEligibleForSearch = <span class="literal">true</span></div><div class="line">activity.isEligibleForPrediction = <span class="literal">true</span></div><div class="line"></div><div class="line"><span class="comment">// attach some example information that we can use when loading the app from this activity</span></div><div class="line">activity.userInfo = [<span class="string">"message"</span>: <span class="string">"Important!"</span>]</div><div class="line"></div><div class="line"><span class="comment">// give the activity a unique identifier so we can delete it later if we need to</span></div><div class="line">activity.persistentIdentifier = <span class="type">NSUserActivityPersistentIdentifier</span>(<span class="string">"abc"</span>)</div><div class="line"></div><div class="line"><span class="comment">// make this activity active for the current view controller – this is what Siri will restore when the activity is triggered</span></div><div class="line"><span class="keyword">self</span>.userActivity = activity</div></pre></td></tr></table></figure>
+<p>That donates the activity to Siri – tells it what the user was doing so it can try to figure out a pattern. However, we still need to write some code that gets triggered when the action is selected. So, add this to your <code>AppDelegate</code> class:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">application</span><span class="params">(<span class="number">_</span> application: UIApplication, <span class="keyword">continue</span> userActivity: NSUserActivity, restorationHandler: @escaping <span class="params">([UIUserActivityRestoring]?)</span></span></span> -&gt; <span class="type">Void</span>) -&gt; <span class="type">Bool</span> &#123;</div><div class="line">    <span class="keyword">if</span> userActivity.activityType == <span class="string">"com.hackingwithswift.example.showscores"</span> &#123;</div><div class="line">        <span class="built_in">print</span>(<span class="string">"Show scores..."</span>)</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="literal">true</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>That’s all our code done, so if you’re using a real device you can run the app to register the shortcut, then add it to Siri. You can do this by going to the Settings app, then selecting Siri &amp; Search. You’ll see there any activities that have been registered by the system, and you can add any you please. You’ll need to record a voice command for each, but that only takes a couple of seconds.</p>
+<p>For shortcut testing purposes, there are two useful options you should enable. Both are in the Settings app, under Developer: Display Recent Shortcuts, and Display Donations On Lock Screen. These help you check exactly which donations were received by Siri, and will always show your shortcuts in the Siri search rather than whichever ones Siri recommends. Again, these only work on a real device for now.</p>
+<h3 id="Working-with-text"><a href="#Working-with-text" class="headerlink" title="Working with text"></a>Working with text</h3><p><code>NSLinguisticTagger</code> was fêted during last year’s WWDC, because it was now powered by Core ML and able to perform all sorts of clever calculations at incredible speed.</p>
+<p>Well, this year it’s gone. Well, not <em>gone</em> – you can still use it if you want. But we now have a better solution called the Natural Language framework. This is, for all intents and purposes, a Swiftified version of <code>NSLinguisticTagger</code>: apart from being more Swifty, its API is almost identical to the old linguistic tagger code.</p>
+<p>Let’s start with a simple example. To recognize the language of any text string, large or small, use this:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> NaturalLanguage</div><div class="line"></div><div class="line"><span class="keyword">let</span> string = <span class="string">""</span><span class="string">"</span></div><div class="line"><span class="string">He thrusts his fists</span></div><div class="line"><span class="string">Against the posts</span></div><div class="line"><span class="string">And still insists</span></div><div class="line"><span class="string">He sees the ghosts</span></div><div class="line"><span class="string">"</span><span class="string">""</span></div><div class="line"></div><div class="line"><span class="keyword">if</span> <span class="keyword">let</span> lang = <span class="type">NLLanguageRecognizer</span>.dominantLanguage(<span class="keyword">for</span>: string) &#123;</div><div class="line">    <span class="keyword">if</span> lang == .english &#123;</div><div class="line">        <span class="built_in">print</span>(<span class="string">"It's English!"</span>)</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="built_in">print</span>(<span class="string">"It's something else..."</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>As you can see, <code>dominantLanguage(for:)</code> returns an optional enum matching its best guess language.</p>
+<p>There are a few things to keep in mind:</p>
+<ol>
+<li>It looks for the <em>dominant</em> language, so if you provide a text string with multiple languages then it will return the most important one.</li>
+<li>Sending in very small amounts of text will likely be problematic – without any context, Core ML can’t make a good choice.”</li>
+<li>The result is optional because it’s possible no language will match your input string.</li>
+</ol>
+<p>This feature was also possible using <code>NSLinguisticTagger</code>. Another feature that you might recognize is the ability to scan through a sentence, paragraph, or even entire document looking for tokens such as individual words.</p>
+<p>For example, this code will load a string and break it up into individual words:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> Foundation</div><div class="line"><span class="keyword">import</span> NaturalLanguage</div><div class="line"></div><div class="line"><span class="keyword">let</span> string = <span class="string">""</span><span class="string">"</span></div><div class="line"><span class="string">He thrusts his fists</span></div><div class="line"><span class="string">Against the posts</span></div><div class="line"><span class="string">And still insists</span></div><div class="line"><span class="string">He sees the ghosts</span></div><div class="line"><span class="string">"</span><span class="string">""</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> tokenizer = <span class="type">NLTokenizer</span>(unit: .word)</div><div class="line">tokenizer.string = string</div><div class="line"></div><div class="line"><span class="keyword">let</span> tokens = tokenizer.tokens(<span class="keyword">for</span>: string.startIndex..&lt;string.endIndex).<span class="built_in">map</span> &#123; string[$<span class="number">0</span>] &#125;</div></pre></td></tr></table></figure>
+<p>If you’d prefer, you can also loop over each token by hand. This will pass a closure to you, and you need to return either true (“I want to carry on processing”) or false (“I’m done”).</p>
+<p>Here’s that in code:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">tokenizer.enumerateTokens(<span class="keyword">in</span>: string.startIndex ..&lt; string.endIndex) &#123; (range, attrs) -&gt; <span class="type">Bool</span> <span class="keyword">in</span></div><div class="line">    <span class="built_in">print</span>(string[range])</div><div class="line">    <span class="built_in">print</span>(attrs)</div><div class="line">    <span class="keyword">return</span> <span class="literal">true</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>In case you were wondering, the “attrs” value describes the attributes of the token – was it a letter, a symbol, or an emoji, for example.</p>
+<p>Another useful ability of Natural Language is that it can parse text looking for names of things. For example, this defines a simple text string and creates a name tagger to figure out what’s inside:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> text = <span class="string">"Steve Jobs, Steve Wozniak, and Ronald Wayne founded Apple Inc in California."</span></div><div class="line"><span class="keyword">let</span> tagger = <span class="type">NLTagger</span>(tagSchemes: [.nameType])</div><div class="line">tagger.string = text</div><div class="line"><span class="keyword">let</span> options: <span class="type">NLTagger</span>.<span class="type">Options</span> = [.omitPunctuation, .omitWhitespace, .joinNames]</div><div class="line"><span class="keyword">let</span> tags: [<span class="type">NLTag</span>] = [.personalName, .placeName, .organizationName]</div><div class="line">tagger.enumerateTags(<span class="keyword">in</span>: text.startIndex..&lt;text.endIndex, unit: .word, scheme: .nameType, options: options) &#123; tag, tokenRange <span class="keyword">in</span></div><div class="line">    <span class="keyword">if</span> <span class="keyword">let</span> tag = tag, tags.<span class="built_in">contains</span>(tag) &#123;</div><div class="line">        <span class="built_in">print</span>(<span class="string">"<span class="subst">\(text[tokenRange])</span>: <span class="subst">\(tag.rawValue)</span>"</span>)</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="literal">true</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>As you can see, it asks Natural Language to look for an array of tags: people’s name, any place names, and any organization name.</p>
+<p>When it finishes, that should produce the following output:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="type">Steve</span> <span class="type">Jobs</span>: <span class="type">PersonalName</span></div><div class="line"><span class="type">Steve</span> <span class="type">Wozniak</span>: <span class="type">PersonalName</span></div><div class="line"><span class="type">Ronald</span> <span class="type">Wayne</span>: <span class="type">PersonalName</span></div><div class="line"><span class="type">Apple</span> <span class="type">Inc</span>: <span class="type">OrganizationName</span></div><div class="line"><span class="type">California</span>: <span class="type">PlaceName</span></div></pre></td></tr></table></figure>
+<p>If all this seems eerily familiar to <code>NSLinguisticTagger</code>, you’re spot on: these two are almost identical, although Natural Language has a much nicer API for Swift users.</p>
+<h3 id="Small-extras"><a href="#Small-extras" class="headerlink" title="Small extras"></a>Small extras</h3><p>Those are the main features, but a few more stick out as being interesting.</p>
+<ol>
+<li><code>UIWebView</code> is deprecated for real now. It was marked as “Legacy” in Xcode 9.3, but is now formally deprecated. You should use <code>WKWebView</code> instead – perhaps start with my <a href="https://www.hackingwithswift.com/articles/112/the-ultimate-guide-to-wkwebview" target="_blank" rel="external">ultimate guide to WKWebView</a>.</li>
+<li>There is now <code>UIUserInterfaceStyle.dark</code> for when our iOS app is in dark mode. This cannot currently be activated on an iPhone, but the rest of the infrastructure is there – you can load dark mode images, read UI changes when dark mode is activated, and so on.</li>
+<li>Any text input files now support password rules to the system generate better, stronger passwords. This isn’t working too well in the current beta, but that should hopefully change soon.</li>
+<li>The <code>UIImagePNGRepresentation()</code> and <code>UIImageJPEGRepresentation()</code>functions have been replaced with <code>.pngData()</code> and <code>.jpegData(compressionQuality:)</code> methods.</li>
+</ol>
+<h3 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h3><p><a href="https://www.hackingwithswift.com/articles/121/whats-new-in-ios-12?utm_campaign=iOS%2BDev%2BWeekly&amp;utm_medium=web&amp;utm_source=iOS%2BDev%2BWeekly%2BIssue%2B355" target="_blank" rel="external">Paul Hudson’s Blog</a></p>
+
+      
+    </div>
+    
+    
+    
+    <div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script type="text/javascript" src="http://jslibs.wuxubj.cn/sweetalert_mini/jquery-1.7.1.min.js"></script>
+  <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
+  <p><span>Title:  </span>What’s new in iOS 12?</a></p>
+  <p><span>Author:  </span>Tuski</a></p>
+  <p><span>Published:  </span>06/10/2018 - 17:42:40</p>
+  <p><span>Updated:  </span>06/10/2018 - 17:56:09</p>
+  <p><span>Link:  </span><a href="/2018/06/What’s-new-in-iOS-12/" title="What’s new in iOS 12?">http://www.perpeht.com/2018/06/What’s-new-in-iOS-12/</a>
+    <span class="copy-path"  title="Click to Copy article link"><i class="fa fa-clipboard" data-clipboard-text="http://www.perpeht.com/2018/06/What’s-new-in-iOS-12/"  aria-label="Copy successfully！"></i></span>
+  </p>
+  <p><span>Protocol:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)</a> Reprinted please keep the original link and author</p>  
+</div>
+<script>
+    var clipboard = new Clipboard('.fa-clipboard');
+    clipboard.on('success', $(function(){
+      $(".fa-clipboard").click(function(){
+        swal({   
+          title: "",   
+          text: 'Copy successfully！',   
+          html: false,
+          timer: 500,   
+          showConfirmButton: false
+        });
+      });
+    }));  
+</script>
+
+      
+    </div>
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>Thx F Sup</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="https://i.loli.net/2017/12/16/5a33fd668ce7c.png" alt="Tuski WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="https://i.loli.net/2017/12/16/5a33fdbe62e6f.png" alt="Tuski Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+         
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/SCP-Permission-denied/" rel="next" title="SCP Permission denied ?">
+                <i class="fa fa-chevron-left"></i> SCP Permission denied ?
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a35fec5ad889f1e" async = "async" ></script>
+</div>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+    <div class="comments" id="comments">
+      <div id="hypercomments_widget"></div>
+    </div>
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="Tuski" />
+            
+              <p class="site-author-name" itemprop="name">Tuski</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">28</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/thevenomsnake" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:thevenomsnake@icloud.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plus.google.com/u/0/104624402456467592306" target="_blank" title="Google">
+                    
+                      <i class="fa fa-fw fa-google"></i>Google</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/perphet" target="_blank" title="Twitter">
+                    
+                      <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.youtube.com/channel/UComQu3jg43YgIvm2PqAG1tA" target="_blank" title="YouTube">
+                    
+                      <i class="fa fa-fw fa-youtube"></i>YouTube</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+
+  <div class="links-of-blogroll motion-element links-of-blogroll-block">
+    <div class="links-of-blogroll-title">
+      <i class="fa  fa-fw fa-globe"></i>
+      Links&nbsp;
+      <i class="fa  fa-fw fa-globe"></i>
+    </div>
+    <ul class="links-of-blogroll-list">
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.crazyforcode.org/" title="CFC" target="_blank">CFC</a>
+        </li>
+      
+    </ul>
+     
+  </div>
+ 
+
+          
+      <iframe src="https://open.spotify.com/embed?uri=spotify:user:spotify:playlist:37i9dQZF1DXcBWIGoYBM5M&theme=white" width="215" height="350" frameborder="0" allowtransparency="true"></iframe>
+       
+      </section>
+
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Machine-learning-for-image-recognition"><span class="nav-text">Machine learning for image recognition</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Machine-learning-for-text-analysis"><span class="nav-text">Machine learning for text analysis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Grouped-alerts"><span class="nav-text">Grouped alerts</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Shortcuts"><span class="nav-text">Shortcuts</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Working-with-text"><span class="nav-text">Working with text</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Small-extras"><span class="nav-text">Small extras</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Reference"><span class="nav-text">Reference</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="heart">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tuski</span>
+
+
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by </div>
+
+
+
+  <span class="post-meta-divider">Perphet</span>
+
+
+<!--
+
+  <div class="theme-info">Theme &mdash;  v{}</div>
+
+
+
+
+-->
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+		<script type="text/javascript">
+		_hcwp = window._hcwp || [];
+
+		_hcwp.push({widget:"Bloggerstream", widget_id: 99037, selector:".hc-comment-count", label: "{\%COUNT%\}" });
+
+		
+		_hcwp.push({widget:"Stream", widget_id: 99037, xid: "2018/06/What’s-new-in-iOS-12/"});
+		
+
+		(function() {
+		if("HC_LOAD_INIT" in window)return;
+		HC_LOAD_INIT = true;
+		var lang = (navigator.language || navigator.systemLanguage || navigator.userLanguage || "en").substr(0, 2).toLowerCase();
+		var hcc = document.createElement("script"); hcc.type = "text/javascript"; hcc.async = true;
+		hcc.src = ("https:" == document.location.protocol ? "https" : "http")+"://w.hypercomments.com/widget/hc/99037/"+lang+"/widget.js";
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(hcc, s.nextSibling);
+		})();
+		</script>
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("c6sjJ6fGADGrCVC48k5MVQcD-gzGzoHsz", "YuTcQ8aPXftmtmeC4VvTrK9B");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+  <script type="text/javascript">
+  wpac_init = window.wpac_init || [];
+  wpac_init.push({widget: 'Rating', id: 8566,
+    el: 'wpac-rating',
+    color: 'fc6423'
+  });
+  (function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = '//embed.widgetpack.com/widget.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+  })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+<div id="hexo-helper-live2d">
+  <canvas id="live2dcanvas" width="150" height="350"></canvas>
+</div>
+<style>
+  #live2dcanvas{
+    position: fixed;
+    width: 150px;
+    height: 350px;
+    opacity:0.8;
+    right: 0px;
+    z-index: 999;
+    pointer-events: none;
+    bottom: -20px;
+  }
+</style>
+<script type="text/javascript" src="/live2d/device.min.js"></script>
+<script type="text/javascript">
+const loadScript = function loadScript(c,b){var a=document.createElement("script");a.type="text/javascript";"undefined"!=typeof b&&(a.readyState?a.onreadystatechange=function(){if("loaded"==a.readyState||"complete"==a.readyState)a.onreadystatechange=null,b()}:a.onload=function(){b()});a.src=c;document.body.appendChild(a)};
+(function(){
+  if((typeof(device) != 'undefined') && (device.mobile())){
+    var trElement = document.getElementById('hexo-helper-live2d');
+    trElement.parentNode.removeChild(trElement);
+    return;
+  }else
+    if (typeof(device) === 'undefined') console.error('Cannot find current-device script.');
+  loadScript("/live2d/script.js", function(){loadlive2d("live2dcanvas", "/live2d/assets/shizuku.model.json", 0.5);});
+})();
+</script>
+
+ <canvas class="fireworks" 
+        style="position: fixed; left: 0px; top: 0px; z-index: 99999999; pointer-events: none; width: 1158px; height: 916px;" 
+        width="2316" 
+        height="1832">
+</canvas>
+<script type="text/javascript" src="/js/src/anime.min.js"></script>
+<script type="text/javascript" src="/js/src/fireworks.js"></script>
+</body>
+</html>
