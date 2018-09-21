@@ -335,7 +335,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-21T17:18:56+09:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-21T16:18:56+08:00">
                 2018-09-21
               </time>
             
@@ -428,69 +428,19 @@
 
       
         
-          
-            <script src="/assets/js/APlayer.min.js"> </script><a id="more"></a>
-<blockquote class="blockquote-center">At WWDC 2018 in San Jose, Apple announced Siri Shortcuts, a long-awaited feature which empowers developers to extend and augment the capabilities of Siri within their own apps. Previously, the SiriKit SDK was quite limited in its overall functionalities. With the onset of Siri Shortcuts, developers can extend Siri’s features and build custom voice actions to invoke apps.</blockquote>
+          <blockquote class="blockquote-center">At WWDC 2018 in San Jose, Apple announced Siri Shortcuts, a long-awaited feature which empowers developers to extend and augment the capabilities of Siri within their own apps. Previously, the SiriKit SDK was quite limited in its overall functionalities. With the onset of Siri Shortcuts, developers can extend Siri’s features and build custom voice actions to invoke apps.</blockquote>
 
 
 
 <p><span style="background: black; color: black">Too lazy to update.</span></p>
 <p><img src="https://i.loli.net/2018/09/21/5ba4baed28409.jpg" alt="CEA1C79D4D429BA00BACD59026613BCB.jpg"></p>
-<h1 id="A-Brief-History-of-Siri-Shortcuts"><a href="#A-Brief-History-of-Siri-Shortcuts" class="headerlink" title="A Brief History of Siri Shortcuts"></a>A Brief History of Siri Shortcuts</h1><p>At the heart of Siri Shortcuts is automation. In fact, Siri Shortcuts evolved out of Workflow, an iOS automation app built by former WWDC scholars. Apple <a href="https://techcrunch.com/2017/03/22/apple-has-acquired-workflow-a-powerful-automation-tool-for-ipad-and-iphone/" target="_blank" rel="external">acquired Workflow</a> in 2017 but in an uncharacteristic move, kept the app live on the App Store well after its acquisition.</p>
-<p><img src="https://appcoda.com/wp-content/uploads/2018/07/workflow-app.jpg" alt=""></p>
-<blockquote>
-<p>Shortcuts let you expose the capabilities of your apps to Siri.</p>
-</blockquote>
-<p>Today, Apple’s new Siri Shortcuts app borrows heavily from the Workflow app. However, it’s important to differentiate voice shortcuts from the Shortcuts app. While the shortcuts app allows users to create voice-based phrases for common everyday tasks, Siri shortcuts empowers developers to extend the functionality of Siri in their own native apps.</p>
-<p>At the time of writing, the Shortcuts app is not available for testing in the iOS 12 Beta 2 Build. Instead, we will explore the utility of Siri Shortcuts within a custom app we build.</p>
-<h1 id="Sample-Project"><a href="#Sample-Project" class="headerlink" title="Sample Project"></a>Sample Project</h1><div class="alert green"><strong>Note:</strong> This tutorial assumes you have a basic familiarity with the NSUserActivity API. If you do not, please refer to our excellent tutorial on the topic <a href="https://www.appcoda.com/core-spotlight-framework/" target="_blank" rel="external">here</a>.</div>
-
-<p>In this tutorial, we will explore how to leverage Siri Shortcuts in a simple and basic project that will let users say a phrase like “Say Hi” and then we will launch our app and present a UIAlertView.</p>
-<p>The purpose of this app is to provide a simple overview of how to integrate Siri Shortcuts within your app without adding the clutter of a large project. By the end of this tutorial, you should have a solid grasp on the use cases and technologies behind SiriShortcuts and know how to integrate them with your apps!</p>
-<h1 id="Defining-Your-Shortcut-in-the-New-Project"><a href="#Defining-Your-Shortcut-in-the-New-Project" class="headerlink" title="Defining Your Shortcut in the New Project"></a>Defining Your Shortcut in the New Project</h1><p>When starting any new project, it is important to first take a moment to set up the basic project structure. To begin, make sure you have the latest developer previews of iOS 12, macOS Mojave, and Xcode 10. If you do not have these tools, you will be unable to run the code in this tutorial as Siri Shortcuts is a new API introduced in the Xcode 10 and iOS 12 beta. If you are a registered Apple Developer, you can download these from the <a href="https://developer.apple.com/" target="_blank" rel="external">Developer Site</a>.</p>
-<p>Fire up Xcode and create a new Single View App, key in <em>SiriShortcuts</em> for the name (or any name you’d like). We included <code>com.appcoda</code> as the Organization Identifer, but feel free to change this to your own Organization Identifier. Once done, click <em>create</em> to load your Xcode project.</p>
-<p><img src="https://appcoda.com/wp-content/uploads/2018/07/2-1240x793.png" alt=""></p>
-<p>First off, navigate to the <em>Project Settings</em> section of your Xcode project, select <em>Capabilities</em>, and scroll down, and make sure you enable Siri as seen below. This will allow us to use the Siri SDK in our app and will add an entitlements file to the project.</p>
-<p><img src="https://appcoda.com/wp-content/uploads/2018/07/4-1240x793.png" alt=""></p>
-<p>Once you enable Siri, Xcode will add a <code>.entitlements</code> file to your project. Next, we’ll navigate to the <em>General</em> tab of our project’s build settings, scroll to the bottom, and select <code>Linked Frameworks and Libraries</code>. Make sure to click the <code>+</code> button here to add a framework. Search for <code>Intents.framework</code> and once selected, press the <code>Add</code> button. This will allow us to use the new Intents framework within our application.</p>
-<p><img src="https://appcoda.com/wp-content/uploads/2018/07/7-1240x793.png" alt=""></p>
-<p>Lastly, navigate to your <code>Info.plist</code> file and add a <code>NSUserActivityTypes</code>dictionary with a key-value pair. The value of your first item should include your bundle identifier with an appended action like “sayHi”.</p>
-<p><img src="https://appcoda.com/wp-content/uploads/2018/07/8-1240x775.png" alt=""></p>
-<h1 id="Donating-a-Shortcut"><a href="#Donating-a-Shortcut" class="headerlink" title="Donating a Shortcut"></a>Donating a Shortcut</h1><p>&gt;</p>
-<blockquote>
-<p>To create a shortcut, you first define the shortcut and then donate the shortcut.</p>
-</blockquote>
-<p>Now that our project is all set up with the shortcut defined, it’s time to get down to coding! In order to make our shortcut available to our users via Siri, we leverage a process called “Donating Shortcuts.”</p>
-<p>According to the <strong><a href="https://developer.apple.com/documentation/sirikit/donating_shortcuts" target="_blank" rel="external">official Apple developer documentation</a></strong>,</p>
-<blockquote>
-<p>You should donate a shortcut each time the user performs the action in your app. For example, if the user can order soup from a restaurant using your app, donate a shortcut for the order soup action after the user places their order. Don’t make donations for actions that the user has not completed in your app; if the user never places an order for soup, you should never donate a shortcut for the order soup action.</p>
-</blockquote>
-<p>Clearly, donations should only be used when they provide meaningful use cases and can enhance the overall functionality of your app.</p>
-<p>Okay, back to coding!</p>
-<p>Head to your <code>ViewController.swift</code> file. After the <code>viewDidLoad</code> method, create a new method called <code>setupIntents</code>. Inside this method, we’ll include our Siri Shortcuts code.</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">setupIntents</span><span class="params">()</span></span> &#123;</div><div class="line">        <span class="keyword">let</span> activity = <span class="type">NSUserActivity</span>(activityType: <span class="string">"com.AppCoda.SiriSortcuts.sayHi"</span>) <span class="comment">// 1</span></div><div class="line">        activity.title = <span class="string">"Say Hi"</span> <span class="comment">// 2</span></div><div class="line">        activity.userInfo = [<span class="string">"speech"</span> : <span class="string">"hi"</span>] <span class="comment">// 3</span></div><div class="line">        activity.isEligibleForSearch = <span class="literal">true</span> <span class="comment">// 4</span></div><div class="line">        activity.isEligibleForPrediction = <span class="literal">true</span> <span class="comment">// 5</span></div><div class="line">        activity.persistentIdentifier = <span class="type">NSUserActivityPersistentIdentifier</span>(rawValue: <span class="string">"com.AppCoda.SiriSortcuts.sayHi"</span>) <span class="comment">// 6</span></div><div class="line">        view.userActivity = activity <span class="comment">// 7</span></div><div class="line">        activity.becomeCurrent() <span class="comment">// 8</span></div><div class="line">    &#125;</div></pre></td></tr></table></figure>
-<p>Okay, so let’s take a look at what’s going on in this code snippet.</p>
-<ul>
-<li>In the first line, we setup an instance of NSUserActivity and assign the activityType parameter to the identifier we defined in our <code>Info.plist</code>file.</li>
-<li>In the second line, we define the activity title (what it will appear like in Settings and in Spotlight searches. If you’re unfamiliar with NSUserActivity and how spotlight indexes activities for searches, I recommend you read our <strong><a href="https://www.appcoda.com/core-spotlight-framework/" target="_blank" rel="external">other tutorials on the topic</a></strong>.</li>
-<li>In the third line, we add a <code>userInfo</code> dictionary. According to Apple, the userInfo dictionary is a “dictionary containing app-specific state information needed to continue an activity on another device.”</li>
-<li>Next, we set the <code>.isEligibleForSearch</code> property to <code>true</code> and in the following line enable <code>isEligibleForPrediction.</code> . These two properties allow iOS to search and suggest our NSUserActivity on the device.</li>
-<li>We next set the <code>persistentIdentifier</code> property to an instance of NSUserActivityPersistentIdentifier with the <code>rawValue</code> property assigned to our identifier from earlier.</li>
-<li>Lastly, we assign this view’s <code>userActivity</code> property to the activity we just created and invoke the <code>becomeCurrent()</code> method to activate our Activity.</li>
-</ul>
-<p>Create another method called <code>sayHi()</code> and paste in the following code. This code sets up a basic UIAlertController to display a message.</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">func</span> <span class="title">sayHi</span><span class="params">()</span></span> &#123;</div><div class="line">       <span class="keyword">let</span> alert = <span class="type">UIAlertController</span>(title: <span class="string">"Hi There!"</span>, message: <span class="string">"Hey there! Glad to see you got this working!"</span>, preferredStyle: <span class="type">UIAlertController</span>.<span class="type">Style</span>.alert)</div><div class="line">       alert.addAction(<span class="type">UIAlertAction</span>(title: <span class="string">"OK"</span>, style: <span class="type">UIAlertAction</span>.<span class="type">Style</span>.<span class="keyword">default</span>, handler: <span class="literal">nil</span>))</div><div class="line">       <span class="keyword">self</span>.present(alert, animated: <span class="literal">true</span>, completion: <span class="literal">nil</span>)</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
-<p>While the above method is quite basic, it is good enough to demonstrate how Siri Shortcuts work. It’s important to note that this is a <strong>public</strong> function because we need to use it outside the scope of this view controller.</p>
-<h1 id="Exposing-the-Activity"><a href="#Exposing-the-Activity" class="headerlink" title="Exposing the Activity"></a>Exposing the Activity</h1><p>Now that you’ve set up the basic functionality in <code>ViewController.swift</code>, navigate to the <code>AppDelegate.swift</code> file and add the <code>application(_:continueUserActivity:restorationHandler)</code> function as seen below.</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">application</span><span class="params">(<span class="number">_</span> application: UIApplication, <span class="keyword">continue</span> userActivity: NSUserActivity, restorationHandler: @escaping <span class="params">([UIUserActivityRestoring]?)</span></span></span> -&gt; <span class="type">Void</span>) -&gt; <span class="type">Bool</span> &#123;</div><div class="line">    <span class="keyword">let</span> viewController = window?.rootViewController <span class="keyword">as</span>! <span class="type">ViewController</span></div><div class="line">  viewController.sayHi()</div><div class="line">  <span class="keyword">return</span> <span class="literal">true</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>This code exposes our newly created activity within the app delegate and allows Siri to take action on this activity to launch the app if it isn’t opened.</p>
-<p>Okay, so let’s give it a spin now! Navigate to the Settings app and select Siri. You should see a new shortcut created called “Say Hi.” Click the <code>+</code> button to add it and then follow the on screen prompts to create a custom voice phrase to invoke this shortcut.</p>
-<p>Once you’re done, spin up Siri and say your phrase!</p>
-<p><img src="https://ws2.sinaimg.cn/large/006tNbRwgy1fvfvhpdhd4j31kw0jr1kx.jpg" alt=""></p>
-<h1 id="Wrapping-Up"><a href="#Wrapping-Up" class="headerlink" title="Wrapping Up"></a>Wrapping Up</h1><p>As you can see, it’s quite easy to use NSUserActivity in your project to leverage the power of Siri Shortcuts. In this tutorial, we set up a basic app that leverages this technology within your own apps. As you can see, the possibilities here are quite endless and developers will surely leverage this new technology in creative and unique ways. </p>
-<p><strong>Reference</strong>:<a href="https://goo.gl/KLhrf3" target="_blank" rel="external">https://goo.gl/KLhrf3</a></p>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/09/Introduction-to-Siri-Shortcuts-in-iOS-12/#more" rel="contents">
+              Read more &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
