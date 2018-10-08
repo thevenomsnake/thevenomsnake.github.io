@@ -1,0 +1,1587 @@
+<!DOCTYPE html>
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+<script type="text/javascript">var OriginTitile=document.title,st;document.addEventListener("visibilitychange",function(){document.hidden?(document.title="(/≧▽≦/)Aw, Snap!",clearTimeout(st)):(document.title="(ฅ>ω<*ฅ) Fixed~"+OriginTitile,st=setTimeout(function(){document.title=OriginTitile},3e3))})</script>
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-bounce.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Swift," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="All modern programming languages have support for Unicode strings, but that often only means that the native string type can store Unicode data — it’s not a promise that simple operations like getting">
+<meta name="keywords" content="Swift">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Strings in Swift 4">
+<meta property="og:url" content="http://www.perpeht.com/2018/10/Strings-in-Swift-4/index.html">
+<meta property="og:site_name" content="Tuski&#39;s Blog">
+<meta property="og:description" content="All modern programming languages have support for Unicode strings, but that often only means that the native string type can store Unicode data — it’s not a promise that simple operations like getting">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-10-08T14:48:20.308Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Strings in Swift 4">
+<meta name="twitter:description" content="All modern programming languages have support for Unicode strings, but that often only means that the native string type can store Unicode data — it’s not a promise that simple operations like getting">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.perpeht.com/2018/10/Strings-in-Swift-4/"/>
+
+
+
+<link rel="stylesheet" href="../live2d/css/live2d.css" />
+
+
+  <title>Strings in Swift 4 | Tuski's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+<div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+   
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tuski's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">I code my life</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-music">
+          <a href="/music/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-music"></i> <br />
+            
+            Music
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.perpeht.com/2018/10/Strings-in-Swift-4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tuski">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tuski's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Strings in Swift 4</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-08T22:28:36+09:00">
+                2018-10-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+            <!--noindex-->
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/Strings-in-Swift-4/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="2018/10/Strings-in-Swift-4/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+              <!--/noindex-->
+            
+          
+
+          
+          
+             <span id="/2018/10/Strings-in-Swift-4/" class="leancloud_visitors" data-flag-title="Strings in Swift 4">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  6,528
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  41
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <script src="/assets/js/APlayer.min.js"> </script><blockquote class="blockquote-center">All modern programming languages have support for Unicode strings, but that often only means that the native string type can store Unicode data — it’s not a promise that simple operations like getting the length of a string will return “sensible” results. </blockquote>
+
+<a id="more"></a>
+<h1 id=""><a href="#" class="headerlink" title="_"></a>_</h1><p>In fact, most languages, and in turn most string manipulation code written in those languages, exhibit a certain level of denial about Unicode’s inherent complexity. This can lead to some unpleasant bugs.</p>
+<p>Swift’s string implementation goes to heroic efforts to be as Unicode-correct as possible. A <a href="https://developer.apple.com/documentation/swift/string" target="_blank" rel="external"><code>String</code></a> in Swift is a collection of <a href="https://developer.apple.com/documentation/swift/character" target="_blank" rel="external"><code>Character</code></a> values, where a <code>Character</code> is what a human reader of a text would perceive as a single character, regardless of how many Unicode code points it’s composed of. As a result, all standard <code>Collection</code> operations like <a href="https://developer.apple.com/documentation/swift/string/2894926-count" target="_blank" rel="external"><code>count</code></a> or <a href="https://developer.apple.com/documentation/swift/string/2894830-prefix" target="_blank" rel="external"><code>prefix(5)</code></a> work on the level of user-perceived characters.</p>
+<p>This is great for correctness, but it comes at a price, mostly in terms of unfamiliarity; if you’re used to manipulating strings with integer indices in other languages, Swift’s design will seem unwieldy at first, leaving you wondering. Why can’t I write <code>str[999]</code> to access a string’s one-thousandth character? Why doesn’t <code>str[idx+1]</code> get the next character? Why can’t I loop over a range of <code>Character</code> values such as <code>&quot;a&quot;...&quot;z&quot;</code>?</p>
+<p>It also has performance implications: <code>String</code> does <em>not</em> support random access, i.e. jumping to an arbitrary character is not an <em>O(1)</em> operation. It can’t be — when characters have variable width, the string doesn’t know where the <em>n</em>th character is stored without looking at all characters that come before it.</p>
+<p>In this chapter, we’ll discuss the string architecture in detail, as well as some techniques for getting the most out of Swift strings in terms of functionality and performance. But we’ll start with an overview of the required Unicode terminology.</p>
+<h1 id="Unicode-Or-No-More-Fixed-Width"><a href="#Unicode-Or-No-More-Fixed-Width" class="headerlink" title="Unicode, Or: No More Fixed Width"></a>Unicode, Or: No More Fixed Width</h1><p>Things used to be so simple. <a href="https://en.wikipedia.org/wiki/ASCII" target="_blank" rel="external">ASCII</a> strings were a sequence of integers between 0 and 127. If you stored them in an 8-bit byte, you even had a bit to spare! Since every character was of a fixed size, ASCII strings could be random access.</p>
+<p>But ASCII wasn’t enough if you were writing in anything other than English or for a non-U.S. audience; other countries and languages needed other characters (even English-speaking Britain needed a £ sign). Most of them needed more characters than would fit into seven bits. <a href="https://en.wikipedia.org/wiki/ISO/IEC_8859" target="_blank" rel="external">ISO 8859</a> takes the extra bit and defines 16 different encodings above the ASCII range, such as Part 1 (ISO 8859-1, aka Latin-1), covering several Western European languages; and Part 5, covering languages that use the Cyrillic alphabet.</p>
+<p>This is still limiting, though. If you want to use ISO 8859 to write in Turkish about Ancient Greek, you’re out of luck, since you’d need to pick either Part 7 (Latin/Greek) or Part 9 (Turkish). And eight bits is still not enough to encode many languages. For example, Part 6 (Latin/Arabic) doesn’t include the characters needed to write Arabic-script languages such as Urdu or Persian. Meanwhile, Vietnamese — which is based on the Latin alphabet but with a large number of diacritic combinations — only fits into eight bits by replacing a handful of ASCII characters from the lower half. And this isn’t even an option for other East Asian languages.</p>
+<p>When you run out of room with a fixed-width encoding, you have a choice: either increase the size, or switch to variable-width encoding. Initially, <a href="https://en.wikipedia.org/wiki/Unicode" target="_blank" rel="external">Unicode</a> was defined as a 2-byte fixed-width format, now called <a href="https://en.wikipedia.org/wiki/Universal_Coded_Character_Set" target="_blank" rel="external">UCS-2</a>. This was before reality set in, and it was accepted that even two bytes would not be sufficient, while four would be horribly inefficient for most purposes.</p>
+<p>So today, Unicode is a variable-width format, and it’s variable in two different senses: in the combining of code units into Unicode scalars, and in the combining of scalars into characters.</p>
+<p>Unicode data can be encoded with many different widths of <em>code unit,</em> most commonly 8 (<a href="https://en.wikipedia.org/wiki/UTF-8" target="_blank" rel="external">UTF-8</a>) or 16 (<a href="https://en.wikipedia.org/wiki/UTF-16" target="_blank" rel="external">UTF-16</a>) bits. UTF-8 has the added benefit of being backwardly compatible with 8-bit ASCII — something that’s helped it overtake ASCII as the most popular encoding on the web. Swift represents UTF-16 and UTF-8 code units as <code>UInt16</code> and <code>UInt8</code> values, respectively (aliased as <a href="https://developer.apple.com/documentation/swift/unicode.utf8/codeunit" target="_blank" rel="external"><code>Unicode.UTF16.CodeUnit</code></a> and <a href="https://developer.apple.com/documentation/swift/unicode.utf16/codeunit" target="_blank" rel="external"><code>Unicode.UTF8.CodeUnit</code></a>).</p>
+<p>A <a href="https://www.unicode.org/glossary/#code_point" target="_blank" rel="external"><em>code point</em></a> in Unicode is a single value in the Unicode code space with a possible value from <code>0</code> to <code>0x10FFFF</code> (in decimal: 1,114,111). Only about 137,000 of the 1.1 million available code points are currently in use, so there’s a lot of room for more emoji. A given code point might take a single code unit if you’re using <a href="https://en.wikipedia.org/wiki/UTF-32" target="_blank" rel="external">UTF-32</a>, or it might take between one and four if you’re using UTF-8. The first 256 Unicode code points match the characters found in Latin-1.</p>
+<p><a href="https://www.unicode.org/glossary/#unicode_scalar_value" target="_blank" rel="external">Unicode <em>scalars</em></a> are almost, but not quite, the same as code points. They’re all the code points <em>except</em> the 2,048 <a href="https://en.wikipedia.org/wiki/UTF-16#U.2BD800_to_U.2BDFFF" target="_blank" rel="external"><em>surrogate code points</em></a> in the range <code>0xD800–0xDFFF</code>, i.e. the code points used for the leading and trailing codes that indicate pairs in UTF-16 encoding. Scalars are represented in Swift string literals as <code>&quot;\u{xxxx}&quot;</code>, where xxxx represents hex digits. So the euro sign can be written in Swift as either <code>&quot;€&quot;</code> or <code>&quot;\u{20AC}&quot;</code>. The corresponding Swift type is <a href="https://developer.apple.com/documentation/swift/unicode.scalar" target="_blank" rel="external"><code>Unicode.Scalar</code></a>, which is a wrapper around a <a href="https://developer.apple.com/documentation/swift/uint32" target="_blank" rel="external"><code>UInt32</code></a> value.</p>
+<p>To represent each Unicode scalar by a single code unit, you’d need a 21-bit encoding scheme (which usually gets rounded up to 32-bit, i.e. UTF-32), but even that wouldn’t get you a fixed-width encoding: Unicode is still a variable-width format when it comes to “characters.” What a user might consider “a single character” — as displayed on the screen — might require multiple scalars composed together. The Unicode term for such a user-perceived character is <em>(extended) grapheme cluster.</em></p>
+<p>The rules for how scalars form grapheme clusters determine how text is segmented. For example, if you hit the backspace key on your keyboard, you expect your text editor to delete exactly one grapheme cluster, even if that “character” is composed of multiple Unicode scalars, each of which may use a varying number of code units in the text’s representation in memory. Grapheme clusters are represented in Swift by the <code>Character</code> type, which can encode an arbitrary number of scalars, as long as they form a single user-perceived character. We’ll see some examples of this in the next section.</p>
+<h1 id="Grapheme-Clusters-and-Canonical-Equivalence"><a href="#Grapheme-Clusters-and-Canonical-Equivalence" class="headerlink" title="Grapheme Clusters and Canonical Equivalence"></a>Grapheme Clusters and Canonical Equivalence</h1><h2 id="Combining-Marks"><a href="#Combining-Marks" class="headerlink" title="Combining Marks"></a>Combining Marks</h2><p>A quick way to see how <code>String</code> handles Unicode data is to look at the two different ways to write é. Unicode defines <a href="https://codepoints.net/U+00E9" target="_blank" rel="external">U+00E9</a>, <em>Latin small letter e with acute,</em> as a single value. But you can also write it as the <a href="https://codepoints.net/U+0065" target="_blank" rel="external">plain letter e</a>, followed by <a href="https://codepoints.net/U+0301" target="_blank" rel="external">U+0301</a>, <em>combining acute accent.</em> In both cases, what’s displayed is é, and a user probably has a reasonable expectation that two strings displayed as “résumé” would not only be equal to each other but also have a “length” of six characters, no matter which technique was used to produce the é in either one. They would be what the Unicode specification describes as <em>canonically equivalent.</em></p>
+<p>And in Swift, this is exactly the behavior you get:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> single = <span class="string">"Pok\u&#123;00E9&#125;mon"</span></div><div class="line"><span class="keyword">let</span> double = <span class="string">"Poke\u&#123;0301&#125;mon"</span></div></pre></td></tr></table></figure>
+<p>They both display identically:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(single, double) <span class="comment">// → ("Pokémon", "Pokémon")</span></div></pre></td></tr></table></figure>
+<p>And both have the same character count:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">single.<span class="built_in">count</span> <span class="comment">// → 7</span></div><div class="line">double.<span class="built_in">count</span> <span class="comment">// → 7</span></div></pre></td></tr></table></figure>
+<p>Consequently, they also compare equal:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">single == double <span class="comment">// → true</span></div></pre></td></tr></table></figure>
+<p>Only if you drop down to a view of the underlying representation can you see that they’re different:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">single.utf16.<span class="built_in">count</span> <span class="comment">// → 7</span></div><div class="line">double.utf16.<span class="built_in">count</span> <span class="comment">// → 8</span></div></pre></td></tr></table></figure>
+<p>Contrast this with <a href="https://developer.apple.com/documentation/foundation/nsstring" target="_blank" rel="external"><code>NSString</code></a> in Foundation: the two strings aren’t equal, and the <a href="https://developer.apple.com/documentation/foundation/nsstring/1414212-length" target="_blank" rel="external"><code>length</code></a>property — which many programmers probably use to count the number of characters to be displayed on the screen — gives different results:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> Foundation</div><div class="line"></div><div class="line"><span class="keyword">let</span> nssingle = single <span class="keyword">as</span> <span class="type">NSString</span></div><div class="line">nssingle.length <span class="comment">// → 7</span></div><div class="line"><span class="keyword">let</span> nsdouble = double <span class="keyword">as</span> <span class="type">NSString</span></div><div class="line">nsdouble.length <span class="comment">// → 8</span></div><div class="line">nssingle == nsdouble <span class="comment">// → false</span></div></pre></td></tr></table></figure>
+<p>Here, <code>==</code> is defined as the version for comparing two <a href="https://developer.apple.com/documentation/objectivec/nsobject" target="_blank" rel="external"><code>NSObject</code></a>s:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">extension</span> <span class="title">NSObject</span>: <span class="title">Equatable</span> </span>&#123;</div><div class="line">    <span class="keyword">static</span> <span class="function"><span class="keyword">func</span> ==<span class="params">(lhs: NSObject, rhs: NSObject)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">        <span class="keyword">return</span> lhs.isEqual(rhs)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>In the case of <code>NSString</code>, this will do a literal comparison on the level of UTF-16 code units, rather than one accounting for equivalent but differently composed characters. Most string APIs in other languages work this way too. If you really want to perform a canonical comparison, you must use <a href="https://developer.apple.com/documentation/foundation/nsstring/1414082-compare" target="_blank" rel="external"><code>NSString.compare(_:)</code></a>. Didn’t know that? Enjoy your future undiagnosable bugs and grumpy international user base.</p>
+<p>Of course, there’s one big benefit to just comparing code units: it’s faster! This is an effect that can still be achieved with Swift strings, via the <code>utf16</code> view:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">single.utf16.elementsEqual(double.utf16) <span class="comment">// → false</span></div></pre></td></tr></table></figure>
+<p>Why does Unicode support multiple representations of the same character at all? The existence of precomposed characters is what enables the opening range of Unicode code points to be compatible with Latin-1, which already had characters like é and ñ. While they might be a pain to deal with, it makes conversion between the two encodings quick and simple.</p>
+<p>And ditching precomposed forms wouldn’t have helped anyway, because composition doesn’t just stop at pairs; you can compose more than one diacritic together. For example, <a href="https://en.wikipedia.org/wiki/Yoruba_language" target="_blank" rel="external">Yoruba</a> has the character ọ́, which could be written three different ways: by composing ó with a dot, or by composing ọ with an acute, or by composing o with both an acute and a dot. And for that last one, the two diacritics can be in either order! So these are all equal:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> chars: [<span class="type">Character</span>] = [</div><div class="line">    <span class="string">"\u&#123;1ECD&#125;\u&#123;300&#125;"</span>,      <span class="comment">// ọ́</span></div><div class="line">    <span class="string">"\u&#123;F2&#125;\u&#123;323&#125;"</span>,        <span class="comment">// ọ́</span></div><div class="line">    <span class="string">"\u&#123;6F&#125;\u&#123;323&#125;\u&#123;300&#125;"</span>, <span class="comment">// ọ́</span></div><div class="line">    <span class="string">"\u&#123;6F&#125;\u&#123;300&#125;\u&#123;323&#125;"</span>  <span class="comment">// ọ́</span></div><div class="line">]</div><div class="line"><span class="keyword">let</span> allEqual = chars.<span class="built_in">dropFirst</span>()</div><div class="line">    .all(matching: &#123; $<span class="number">0</span> == chars.first &#125;) <span class="comment">// → true</span></div></pre></td></tr></table></figure>
+<p>The <code>all(matching:)</code> method checks if the condition is true for all elements in a sequence:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Sequence</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">all</span><span class="params">(matching predicate: <span class="params">(Element)</span></span></span> <span class="keyword">throws</span> -&gt; <span class="type">Bool</span>) <span class="keyword">rethrows</span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">        <span class="keyword">for</span> element <span class="keyword">in</span> <span class="keyword">self</span> &#123;</div><div class="line">            <span class="keyword">if</span> <span class="keyword">try</span> !predicate(element) &#123;</div><div class="line">                <span class="keyword">return</span> <span class="literal">false</span></div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="literal">true</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>In fact, some diacritics can be added ad infinitum. A <a href="http://knowyourmeme.com/memes/zalgo" target="_blank" rel="external">famous internet meme</a> illustrates this nicely:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> zalgo = <span class="string">"s̼̐͗͜o̠̦̤ͯͥ̒ͫ́ͅo̺̪͖̗̽ͩ̃͟ͅn̢͔͖͇͇͉̫̰ͪ͑"</span></div><div class="line"></div><div class="line">zalgo.<span class="built_in">count</span> <span class="comment">// → 4</span></div><div class="line">zalgo.utf16.<span class="built_in">count</span> <span class="comment">// → 36</span></div></pre></td></tr></table></figure>
+<p>In the above, <code>zalgo.count</code> (correctly) returns 4, while <code>zalgo.utf16.count</code> returns 36. And if your code doesn’t work correctly with internet memes, then what good is it, really?</p>
+<p>Unicode’s grapheme breaking rules even affect you when all strings you deal with are pure ASCII: <a href="https://codepoints.net/U+000D" target="_blank" rel="external">CR</a>+<a href="https://codepoints.net/U+000A" target="_blank" rel="external">LF</a>, the character pair of carriage return and line feed that’s commonly used as a newline on Windows, is a single grapheme:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// CR+LF is a single Character</span></div><div class="line"><span class="keyword">let</span> crlf = <span class="string">"\r\n"</span></div><div class="line">crlf.<span class="built_in">count</span> <span class="comment">// → 1</span></div></pre></td></tr></table></figure>
+<h2 id="Emoji"><a href="#Emoji" class="headerlink" title="Emoji"></a>Emoji</h2><p>Strings containing emoji can also be surprising in many other programming languages. Many emoji are assigned Unicode scalars that don’t fit in a single UTF-16 code unit. Languages that represent strings as collections of UTF-16 code units, such as Java or C#, would say that the string <a href="https://emojipedia.org/face-with-tears-of-joy/" target="_blank" rel="external"><code>&quot;😂&quot;</code></a> is two “characters” long. Swift handles this case correctly:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> oneEmoji = <span class="string">"😂"</span> <span class="comment">// U+1F602</span></div><div class="line">oneEmoji.<span class="built_in">count</span> <span class="comment">// → 1</span></div></pre></td></tr></table></figure>
+<p>Notice that the important thing is how the string is exposed to the program, <em>not</em> how it’s stored in memory. Swift also uses UTF-16 as its internal encoding for non-ASCII strings, but that’s an implementation detail. The public API is based on grapheme clusters.</p>
+<p>Other emoji are composed of multiple scalars. An emoji flag is a combination of two <a href="https://en.wikipedia.org/wiki/Regional_Indicator_Symbol" target="_blank" rel="external">regional indicator letters</a> that correspond to an ISO country code. Swift treats it correctly as one <code>Character</code>:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> flags = <span class="string">"🇧🇷🇳🇿"</span></div><div class="line">flags.<span class="built_in">count</span> <span class="comment">// → 2</span></div></pre></td></tr></table></figure>
+<p>To inspect the Unicode scalars a string is composed of, use the <a href="https://developer.apple.com/documentation/swift/string/1539070-unicodescalars" target="_blank" rel="external"><code>unicodeScalars</code></a> view. Here, we format the scalar values as hex numbers in the common format for code points:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">flags.unicodeScalars.<span class="built_in">map</span> &#123;</div><div class="line">    <span class="string">"U+<span class="subst">\(String($<span class="number">0</span>.value, radix: <span class="number">16</span>, uppercase: <span class="literal">true</span>)</span>)"</span></div><div class="line">&#125;</div><div class="line"><span class="comment">// → ["U+1F1E7", "U+1F1F7", "U+1F1F3", "U+1F1FF"]</span></div></pre></td></tr></table></figure>
+<p>Skin tones combine a base character such as 👧 with one of five skin tone modifiers (e.g. 🏽, or the type-4 skin tone modifier) to yield the final emoji (e.g. 👧🏽). Again, Swift handles this correctly:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> skinTone = <span class="string">"👧🏽"</span> <span class="comment">// 👧 + 🏽</span></div><div class="line">skinTone.<span class="built_in">count</span> <span class="comment">// → 1</span></div></pre></td></tr></table></figure>
+<p>This time, let’s use a Foundation API to apply an <a href="https://oleb.net/blog/2016/01/icu-text-transforms/" target="_blank" rel="external">ICU string transform</a> that converts Unicode scalars to their official Unicode names:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">extension</span> <span class="title">StringTransform</span> </span>&#123;</div><div class="line">    <span class="keyword">static</span> <span class="keyword">let</span> toUnicodeName = <span class="type">StringTransform</span>(rawValue: <span class="string">"Any-Name"</span>)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Unicode</span>.<span class="title">Scalar</span> </span>&#123;</div><div class="line">    <span class="comment">/// The scalar’s Unicode name, e.g. "LATIN CAPITAL LETTER A".</span></div><div class="line">    <span class="keyword">var</span> unicodeName: <span class="type">String</span> &#123;</div><div class="line">        <span class="comment">// Force-unwrapping is safe because this transform always succeeds</span></div><div class="line">        <span class="keyword">let</span> name = <span class="type">String</span>(<span class="keyword">self</span>).applyingTransform(.toUnicodeName,</div><div class="line">            <span class="built_in">reverse</span>: <span class="literal">false</span>)!</div><div class="line"></div><div class="line">        <span class="comment">// The string transform returns the name wrapped in "\\N&#123;...&#125;". Remove those.</span></div><div class="line">        <span class="keyword">let</span> prefixPattern = <span class="string">"\\N&#123;"</span></div><div class="line">        <span class="keyword">let</span> suffixPattern = <span class="string">"&#125;"</span></div><div class="line">        <span class="keyword">let</span> prefixLength = name.hasPrefix(prefixPattern) ? prefixPattern.<span class="built_in">count</span> : <span class="number">0</span></div><div class="line">        <span class="keyword">let</span> suffixLength = name.hasSuffix(suffixPattern) ? suffixPattern.<span class="built_in">count</span> : <span class="number">0</span></div><div class="line">        <span class="keyword">return</span> <span class="type">String</span>(name.<span class="built_in">dropFirst</span>(prefixLength).<span class="built_in">dropLast</span>(suffixLength))</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">skinTone.unicodeScalars.<span class="built_in">map</span> &#123; $<span class="number">0</span>.unicodeName &#125;</div><div class="line"><span class="comment">// → ["GIRL", "EMOJI MODIFIER FITZPATRICK TYPE-4"]</span></div></pre></td></tr></table></figure>
+<p>The essential part of this code snippet is the <code>applyingTransform(.toUnicodeName, …)</code>call. The remaining lines clean up the name returned from the transform method by removing the wrapping braces. We code this defensively: we first check whether the string matches the expected pattern and compute the number of characters to strip from the start and end. If the format returned by the transform method changes in the future, it’s better to return the string unchanged than to remove characters we didn’t anticipate. Notice how we use the standard <code>Collection</code> methods <code>dropFirst</code> and <code>dropLast</code> to perform the stripping operation. This is a good example of how you can manipulate a string without doing manual index calculations. It’s also efficient, because <code>dropFirst</code> and <code>dropLast</code> return a <code>Substring</code>, which is a slice of the original string. No new memory allocations are needed until the final step when we create a new <code>String</code> from the substring. We’ll have more to say about substrings later in this chapter.</p>
+<p>Emoji depicting families and couples, such as <a href="https://emojipedia.org/family-man-woman-girl-boy/" target="_blank" rel="external">👨‍👩‍👧‍👦</a> and <a href="https://emojipedia.org/couple-with-heart-woman-woman/" target="_blank" rel="external">👩‍❤️‍👩</a>, present another challenge to the Unicode standards body. Due to the countless possible combinations of genders and the number of people in a group, providing a separate code point for each variation is problematic. Combine this with a distinct skin tone for each person and it becomes impossible. Unicode solves this by specifying that these emoji are actually sequences of multiple emoji, combined with the invisible <a href="https://codepoints.net/U+200D" target="_blank" rel="external"><em>zero-width joiner</em></a> (ZWJ) character (U+200D). So the family 👨‍👩‍👧‍👦 is really <a href="https://emojipedia.org/man/" target="_blank" rel="external"><em>man</em> 👨</a> + ZWJ + <a href="https://emojipedia.org/woman/" target="_blank" rel="external"><em>woman</em> 👩</a> + ZWJ + <a href="https://emojipedia.org/girl/" target="_blank" rel="external"><em>girl</em> 👧</a> + ZWJ + <a href="https://emojipedia.org/boy/" target="_blank" rel="external"><em>boy</em> 👦</a>. The ZWJ serves as an indicator to the operating system that it should use a single glyph if available.</p>
+<p>You can verify that this is really what’s going on:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> family1 = <span class="string">"👨‍👩‍👧‍👦"</span></div><div class="line"><span class="keyword">let</span> family2 = <span class="string">"👨\u&#123;200D&#125;👩\u&#123;200D&#125;👧\u&#123;200D&#125;👦"</span></div><div class="line">family1 == family2 <span class="comment">// → true</span></div></pre></td></tr></table></figure>
+<p>And once again, Swift is smart enough to treat such a sequence as a single <code>Character</code>:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">family1.<span class="built_in">count</span> <span class="comment">// → 1</span></div><div class="line">family2.<span class="built_in">count</span> <span class="comment">// → 1</span></div></pre></td></tr></table></figure>
+<p>New emoji for professions introduced in 2016 are ZWJ sequences too. For example, the <a href="https://emojipedia.org/female-firefighter/" target="_blank" rel="external"><em>female firefighter</em> 👩‍🚒</a> is composed of <a href="https://emojipedia.org/woman/" target="_blank" rel="external"><em>woman</em> 👩</a> + ZWJ + <a href="https://emojipedia.org/fire-engine/" target="_blank" rel="external"><em>fire engine</em> 🚒</a>, and the <a href="https://emojipedia.org/male-health-worker/" target="_blank" rel="external"><em>male health worker</em> 👨‍⚕️</a> is a sequence of <a href="https://emojipedia.org/man/" target="_blank" rel="external"><em>man</em> 👨</a> + ZWJ + <a href="https://emojipedia.org/staff-of-aesculapius/" target="_blank" rel="external"><em>staff of aesculapius</em> ⚕</a>.</p>
+<p>Rendering these sequences into a single glyph is the task of the operating system. On Apple platforms in 2017, the OS includes glyphs for the subset of sequences the Unicode standard lists as “<a href="https://unicode.org/emoji/charts/emoji-zwj-sequences.html" target="_blank" rel="external">recommended for general interchange</a>” (RGI), i.e. the ones “most likely to be widely supported across multiple platforms.” When no glyph is available for a syntactically valid sequence, the text rendering system falls back to rendering each component as a separate glyph. Notice that this can cause a mismatch “in the other direction” between user-perceived characters and what Swift sees as a grapheme cluster; all examples up until now were concerned with programming languages <em>overcounting</em> characters, but here we see the reverse. As an example, family sequences containing skin tones are currently not part of the RGI subset. But even though most operating systems currently render such a sequence as multiple glyphs, Swift still counts it as a single <code>Character</code> because the Unicode text segmentation rules are not concerned with rendering:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Family with skin tones is rendered as multiple glyphs</span></div><div class="line"><span class="comment">// on most platforms in 2017</span></div><div class="line"><span class="keyword">let</span> family3 = <span class="string">"👱🏾\u&#123;200D&#125;👩🏽\u&#123;200D&#125;👧🏿\u&#123;200D&#125;👦🏻"</span> <span class="comment">// → "👱🏾‍👩🏽‍👧🏿‍👦🏻"</span></div><div class="line"><span class="comment">// But Swift still counts it as a single Character</span></div><div class="line">family3.<span class="built_in">count</span> <span class="comment">// → 1</span></div></pre></td></tr></table></figure>
+<p><a href="https://blog.emojipedia.org/diverse-emoji-families-come-to-windows/" target="_blank" rel="external">Microsoft can already render this</a> and other variations as a single glyph, by the way, and the other OS vendors will almost certainly follow soon. But the point still stands: no matter how carefully a string API is designed, text is so complicated that it may never catch all edge cases.</p>
+<p>In the past, Swift had trouble keeping up with Unicode changes. Swift 3 handled skin tones and ZWJ sequences incorrectly because its grapheme breaking algorithm was based on an old version of the Unicode standard. As of Swift 4, Swift uses the operating system’s <a href="http://site.icu-project.org/" target="_blank" rel="external">ICU</a> library. As a result, your programs will automatically adopt new Unicode rules as users update their OSes. The other side of the coin is of course that you can’t rely on users seeing the same behavior you see during development.</p>
+<p>In the examples we discussed in this section, we treated the length of a string as a proxy for all sorts of things that can go wrong when a language doesn’t take the full complexity of Unicode into account. Just think of the gibberish a simple task such as reversing a string can produce in a programming language that doesn’t process strings by grapheme clusters when the string contains composed character sequences. This isn’t a new problem, but the emoji explosion has made it much more likely that bugs caused by sloppy text handling will come to the surface, even if your user base is predominantly English-speaking. And the magnitude of errors has increased as well: whereas a decade ago a botched accented character would cause an off-by-one error, messing up a modern emoji can easily cause results to be off by 10 or more “characters.” For example, a four-person family emoji is 11 (UTF-16) or 25 (UTF-8) code units long:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">family1.<span class="built_in">count</span> <span class="comment">// → 1</span></div><div class="line">family1.utf16.<span class="built_in">count</span> <span class="comment">// → 11</span></div><div class="line">family1.utf8.<span class="built_in">count</span> <span class="comment">// → 25</span></div></pre></td></tr></table></figure>
+<p>It’s not that other languages don’t have Unicode-correct APIs at all — most do. For instance, <code>NSString</code> has the <a href="https://developer.apple.com/documentation/foundation/nsstring/1416774-enumeratesubstrings" target="_blank" rel="external"><code>enumerateSubstrings</code></a> method that can be used to walk through a string by grapheme clusters. But defaults matter; Swift’s priority is to do the correct thing by default. And if you ever need to drop down to a lower level of abstraction, <code>String</code> provides views that let you operate directly on Unicode scalars or code units. We’ll say more about those below.</p>
+<h1 id="Strings-and-Collections"><a href="#Strings-and-Collections" class="headerlink" title="Strings and Collections"></a>Strings and Collections</h1><p>As we’ve seen, <code>String</code> is a collection of <code>Character</code> values. In Swift’s first three years of existence, <code>String</code> went back and forth between conforming and not conforming to the <a href="https://developer.apple.com/documentation/swift/collection#" target="_blank" rel="external"><code>Collection</code></a> protocol. The argument for <em>not</em> adding the conformance was that programmers would expect all generic collection-processing algorithms to be completely safe and Unicode-correct, which wouldn’t necessarily be true for all edge cases.</p>
+<p>As a simple example, you might assume that if you concatenate two collections, the resulting collection’s length would be the sum of the lengths of the two source collections. But this doesn’t hold for strings if a suffix of the first string forms a grapheme cluster with a prefix of the second string:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> flagLetterJ = <span class="string">"🇯"</span></div><div class="line"><span class="keyword">let</span> flagLetterP = <span class="string">"🇵"</span></div><div class="line"><span class="keyword">let</span> flag = flagLetterJ + flagLetterP <span class="comment">// → "🇯🇵"</span></div><div class="line">flag.<span class="built_in">count</span> <span class="comment">// → 1</span></div><div class="line">flag.<span class="built_in">count</span> == flagLetterJ.<span class="built_in">count</span> + flagLetterP.<span class="built_in">count</span> <span class="comment">// → false</span></div></pre></td></tr></table></figure>
+<p>To this end, <code>String</code> itself was not made a <code>Collection</code> in Swift 2 and 3; a collection-of-characters view was moved to a property, <a href="https://developer.apple.com/documentation/swift/string/1540072-characters" target="_blank" rel="external"><code>characters</code></a>, which put it on a footing similar to the other collection views: <a href="https://developer.apple.com/documentation/swift/string/1539070-unicodescalars" target="_blank" rel="external"><code>unicodeScalars</code></a>, <a href="https://developer.apple.com/documentation/swift/string/1539703-utf8" target="_blank" rel="external"><code>utf8</code></a>, and <a href="https://developer.apple.com/documentation/swift/string/1541301-utf16" target="_blank" rel="external"><code>utf16</code></a>. Picking a specific view prompted you to acknowledge you were moving into a “collection-processing” mode and that you should consider the consequences of the algorithm you were about to run.</p>
+<p>In practice, the loss in usability and learnability caused by this change turned out to vastly outweigh the gain in correctness for a few edge cases that are rarely relevant in real code (unless you’re writing a text editor). So <code>String</code> was made a <code>Collection</code> again in Swift 4. The <code>characters</code> view still exists, but only for backward compatibility.</p>
+<h2 id="Bidirectional-Not-Random-Access"><a href="#Bidirectional-Not-Random-Access" class="headerlink" title="Bidirectional, Not Random Access"></a>Bidirectional, Not Random Access</h2><p>However, for reasons that should be clear from the examples in the previous section, <code>String</code> is <em>not</em> a random-access collection. How could it be, when knowing where the <em>n</em>thcharacter of a particular string is involves evaluating just how many Unicode scalars precede that character? For this reason, <code>String</code> conforms only to <a href="https://developer.apple.com/documentation/swift/bidirectionalcollection" target="_blank" rel="external"><code>BidirectionalCollection</code></a>. You can start at either end of the string, moving forward or backward, and the code will look at the composition of the adjacent characters and skip over the correct number of bytes. However, you need to iterate up and down one character at a time.</p>
+<p>Keep the performance implications of this in mind when writing string-processing code. Algorithms that depend on random access to maintain their performance guarantees aren’t a good match for Unicode strings. Consider this <code>String</code> extension for generating a list of a string’s prefixes, which works by generating an integer range from zero to the string’s length and then mapping over the range to create the prefix for each length:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">extension</span> <span class="title">String</span> </span>&#123;</div><div class="line">    <span class="keyword">var</span> allPrefixes1: [<span class="type">Substring</span>] &#123;</div><div class="line">        <span class="keyword">return</span> (<span class="number">0</span>...<span class="keyword">self</span>.<span class="built_in">count</span>).<span class="built_in">map</span>(<span class="keyword">self</span>.<span class="keyword">prefix</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">let</span> hello = <span class="string">"Hello"</span></div><div class="line">hello.allPrefixes1 <span class="comment">// → ["", "H", "He", "Hel", "Hell", "Hello"]</span></div></pre></td></tr></table></figure>
+<p>As simple as this code looks, it’s very inefficient. It first walks over the string once to calculate the length, which is fine. But then each of the n + 1 calls to <a href="https://developer.apple.com/documentation/swift/substring/2893985-prefix" target="_blank" rel="external"><code>prefix</code></a> is another <em>O(n)</em>operation because <code>prefix</code> always starts at the beginning and has to work its way through the string to count the desired number of characters. Running a linear process inside another linear loop means this algorithm is accidentally <em>O(n2)</em> — as the length of the string increases, the time this algorithm takes increases quadratically.</p>
+<p>If possible, an efficient string algorithm should walk over a string only once and then operate on string indices to denote the substrings it’s interested in. Here’s another version of the same algorithm:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">extension</span> <span class="title">String</span> </span>&#123;</div><div class="line">    <span class="keyword">var</span> allPrefixes2: [<span class="type">Substring</span>] &#123;</div><div class="line">        <span class="keyword">return</span> [<span class="string">""</span>] + <span class="keyword">self</span>.<span class="built_in">indices</span>.<span class="built_in">map</span> &#123; index <span class="keyword">in</span> <span class="keyword">self</span>[...index] &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">hello.allPrefixes2 <span class="comment">// → ["", "H", "He", "Hel", "Hell", "Hello"]</span></div></pre></td></tr></table></figure>
+<p>This code also has to iterate over the string once to generate the <a href="https://developer.apple.com/documentation/swift/string/2894806-indices" target="_blank" rel="external"><code>indices</code></a> collection. But once that’s done, the subscripting operation inside <code>map</code> is <em>O(1)</em>. This makes the whole algorithm <em>O(n)</em>.</p>
+<h2 id="Range-Replaceable-Not-Mutable"><a href="#Range-Replaceable-Not-Mutable" class="headerlink" title="Range-Replaceable, Not Mutable"></a>Range-Replaceable, Not Mutable</h2><p><code>String</code> also conforms to <a href="https://developer.apple.com/documentation/swift/rangereplaceablecollection" target="_blank" rel="external"><code>RangeReplaceableCollection</code></a>. Here’s an example of how you’d replace part of a string by first identifying the appropriate range in terms of string indices and then calling <a href="https://developer.apple.com/documentation/swift/string/1641462-replacesubrange" target="_blank" rel="external"><code>replaceSubrange</code></a>. The replacement string can have a different length or could even be empty (which would be equivalent to calling <a href="https://developer.apple.com/documentation/swift/string/2893740-removesubrange" target="_blank" rel="external"><code>removeSubrange</code></a>):</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> greeting = <span class="string">"Hello, world!"</span></div><div class="line"><span class="keyword">if</span> <span class="keyword">let</span> comma = greeting.index(of: <span class="string">","</span>) &#123;</div><div class="line">    greeting[..&lt;comma] <span class="comment">// → "Hello"</span></div><div class="line">    greeting.replaceSubrange(comma..., with: <span class="string">" again."</span>)</div><div class="line">&#125;</div><div class="line">greeting <span class="comment">// → "Hello again."</span></div></pre></td></tr></table></figure>
+<p>As always, keep in mind that results may be surprising if parts of the replacement string form new grapheme clusters with adjacent characters in the original string.</p>
+<p>One collection-like feature strings do <em>not</em> provide is that of <a href="https://developer.apple.com/documentation/swift/mutablecollection" target="_blank" rel="external"><code>MutableCollection</code></a>. This protocol adds one feature to a collection — that of the single-element <a href="https://developer.apple.com/documentation/swift/mutablecollection/1640969-subscript" target="_blank" rel="external">subscript <code>set</code></a> — in addition to <code>get</code>. This isn’t to say strings aren’t mutable — as we’ve just seen, they have several mutation methods. But what you can’t do is replace a single character using the subscript operator. The reason comes back to variable-length characters. Most people can probably intuit that a single-element subscript update would happen in constant time, as it does for <a href="https://developer.apple.com/documentation/swift/array" target="_blank" rel="external"><code>Array</code></a>. But since a character in a string may be of variable width, updating a single character could take linear time in proportion to the length of the string: changing the width of a single element would require shuffling all the later elements up or down in memory. Moreover, indices that come after the replaced index would become invalid through the shuffling, which is equally unintuitive. For these reasons, you have to use <code>replaceSubrange</code>, even if the range you pass in is only a single element.</p>
+<h1 id="String-Indices"><a href="#String-Indices" class="headerlink" title="String Indices"></a>String Indices</h1><p>Most programming languages use integers for subscripting strings, e.g. <code>str[5]</code> would return the sixth “character” of <code>str</code> (for whatever that language’s idea of a “character” is). Swift doesn’t allow this. Why? The answer should sound familiar to you by now: subscripting is supposed to take constant time (intuitively as well as per the requirements of the <code>Collection</code> protocol), and looking up the <em>n</em>th <code>Character</code> is impossible without looking at all bytes that come before it.</p>
+<p><a href="https://developer.apple.com/documentation/swift/string.index" target="_blank" rel="external"><code>String.Index</code></a>, the index type used by <code>String</code> and its views, is an opaque value that essentially stores a byte offset from the beginning of the string. It’s still an <em>O(n)</em> operation if you want to compute the index for the <em>n</em>th character and have to start at the beginning of the string, but once you have a valid index, subscripting the string with it now only takes <em>O(1)</em>time. And crucially, finding the next index after an existing index is also fast because you can start at the existing index’s byte offset — you don’t need to go back to the beginning again. This is why iterating over the characters in a string in order (forward or backward) is efficient.</p>
+<p>String index manipulation is based on the same <code>Collection</code> APIs you’d use with any other collection. It’s easy to miss this equivalence since the collections we use by far the most — arrays — use integer indices, and we usually use simple arithmetic to manipulate those. The <a href="https://developer.apple.com/documentation/swift/string/1782583-index" target="_blank" rel="external"><code>index(after:)</code></a> method returns the index of the next character:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> s = <span class="string">"abcdef"</span></div><div class="line"><span class="keyword">let</span> second = s.index(after: s.startIndex)</div><div class="line">s[second] <span class="comment">// → "b"</span></div></pre></td></tr></table></figure>
+<p>You can automate iterating over multiple characters in one go via the <a href="https://developer.apple.com/documentation/swift/string/1786175-index" target="_blank" rel="external"><code>index(_:offsetBy:)</code></a>method:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Advance 4 more characters</span></div><div class="line"><span class="keyword">let</span> sixth = s.index(second, offsetBy: <span class="number">4</span>)</div><div class="line">s[sixth] <span class="comment">// → "f"</span></div></pre></td></tr></table></figure>
+<p>If there’s a risk of advancing past the end of the string, you can add a <a href="https://developer.apple.com/documentation/swift/anybidirectionalcollection/1781464-index" target="_blank" rel="external"><code>limitedBy:</code></a>parameter. The method returns <code>nil</code> if it hits the limit before reaching the target index:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> safeIdx = s.index(s.startIndex, offsetBy: <span class="number">400</span>, limitedBy: s.endIndex)</div><div class="line">safeIdx <span class="comment">// → nil</span></div></pre></td></tr></table></figure>
+<p>This is undoubtedly more code than simple integer indices would require, but again, that’s the point. If Swift allowed integer subscripting of strings, the temptation to accidentally write horribly inefficient code (e.g. by using integer subscripting inside a loop) would be too big.</p>
+<p>Nevertheless, to someone used to dealing with fixed-width characters, working with strings in Swift seems challenging at first — how will you navigate without integer indices? And indeed, some seemingly simple tasks like extracting the first four characters of a string can turn into monstrosities like this one:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">s[..&lt;s.index(s.startIndex, offsetBy: <span class="number">4</span>)] <span class="comment">// → "abcd"</span></div></pre></td></tr></table></figure>
+<p>But thankfully, being able to access the string via the <code>Collection</code> interface also means you have several helpful techniques at your disposal. Many of the methods that operate on <code>Array</code> also work on <code>String</code>. Using the <code>prefix</code> method, the same thing looks much clearer:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">s.<span class="keyword">prefix</span>(<span class="number">4</span>) <span class="comment">// → "abcd"</span></div></pre></td></tr></table></figure>
+<p>(Note that either expression returns a <a href="https://developer.apple.com/documentation/swift/substring" target="_blank" rel="external"><code>Substring</code></a>; you can convert it back into a <code>String</code> by wrapping it in a <code>String.init</code>. We’ll talk more about substrings in the next section.)</p>
+<p>Iterating over characters in a string is easy without integer indices; just use a <code>for</code> loop. If you want to number each character in turn, use <a href="https://developer.apple.com/documentation/swift/sequence/1641222-enumerated" target="_blank" rel="external"><code>enumerated()</code></a>:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> (i, <span class="built_in">c</span>) <span class="keyword">in</span> s.enumerated() &#123;</div><div class="line">    <span class="built_in">print</span>(<span class="string">"<span class="subst">\(i)</span>: <span class="subst">\(<span class="built_in">c</span>)</span>"</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Or say you want to find a specific character. In that case, you can use <a href="https://developer.apple.com/documentation/swift/string/2893264-index" target="_blank" rel="external"><code>index(of:)</code></a>:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> hello = <span class="string">"Hello!"</span></div><div class="line"><span class="keyword">if</span> <span class="keyword">let</span> idx = hello.index(of: <span class="string">"!"</span>) &#123;</div><div class="line">    hello.insert(contentsOf: <span class="string">", world"</span>, at: idx)</div><div class="line">&#125;</div><div class="line">hello <span class="comment">// → "Hello, world!"</span></div></pre></td></tr></table></figure>
+<p>The <a href="https://developer.apple.com/documentation/swift/string/2893571-insert" target="_blank" rel="external"><code>insert(contentsOf:at:)</code></a> method inserts another collection of the same element type (e.g. <code>Character</code> for strings) before a given index. This doesn’t have to be another <code>String</code>; you could insert an array of characters into a string just as easily.</p>
+<h1 id="Substrings"><a href="#Substrings" class="headerlink" title="Substrings"></a>Substrings</h1><p>Like all collections, <code>String</code> has a specific slice or <a href="https://developer.apple.com/documentation/swift/collection/1641276-subsequence" target="_blank" rel="external"><code>SubSequence</code></a> type named <a href="https://developer.apple.com/documentation/swift/substring" target="_blank" rel="external"><code>Substring</code></a>. A substring is much like an <a href="https://developer.apple.com/documentation/swift/arrayslice" target="_blank" rel="external"><code>ArraySlice</code></a>: it’s a view of a base string with different start and end indices. Substrings share the text storage of their base strings. This has the huge benefit that slicing a string is a very cheap operation. Creating the <code>firstWord</code> variable in the following example requires no expensive copies or memory allocations:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> sentence = <span class="string">"The quick brown fox jumped over the lazy dog."</span></div><div class="line"><span class="keyword">let</span> firstSpace = sentence.index(of: <span class="string">" "</span>) ?? sentence.endIndex</div><div class="line"><span class="keyword">let</span> firstWord = sentence[..&lt;firstSpace] <span class="comment">// → "The"</span></div><div class="line">type(of: firstWord) <span class="comment">// → Substring.Type</span></div></pre></td></tr></table></figure>
+<p>Slicing being cheap is especially important in loops where you iterate over the entire (potentially long) string to extract its components. Tasks like finding all occurrences of a word in a text or parsing a CSV file come to mind. A very useful string processing operation in this context is splitting. The <a href="https://developer.apple.com/documentation/swift/string/2894564-split" target="_blank" rel="external"><code>split</code></a> method is defined on <code>Collection</code> and returns an array of subsequences (i.e. <code>[Substring]</code>). Its most common variant is defined like so:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Collection</span> <span class="title">where</span> <span class="title">Element</span>: <span class="title">Equatable</span> </span>&#123;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">func</span> <span class="title">split</span><span class="params">(separator: Element, maxSplits: Int = Int.<span class="built_in">max</span>,</span></span></div><div class="line"><span class="function"><span class="params">        omittingEmptySubsequences: Bool = <span class="literal">true</span>)</span></span> -&gt; [<span class="type">SubSequence</span>]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>You can use it like this:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> poem = <span class="string">""</span><span class="string">"</span></div><div class="line"><span class="string">    Over the wintry</span></div><div class="line"><span class="string">    forest, winds howl in rage</span></div><div class="line"><span class="string">    with no leaves to blow.</span></div><div class="line"><span class="string">    "</span><span class="string">""</span></div><div class="line"><span class="keyword">let</span> lines = poem.<span class="built_in">split</span>(separator: <span class="string">"\n"</span>)</div><div class="line"><span class="comment">// → ["Over the wintry", "forest, winds howl in rage", "with no leaves to blow."]</span></div><div class="line">type(of: lines) <span class="comment">// → Array&lt;Substring&gt;.Type</span></div></pre></td></tr></table></figure>
+<p>This can serve a function similar to the <a href="https://developer.apple.com/documentation/swift/stringprotocol/2923413-components" target="_blank" rel="external"><code>components(separatedBy:)</code></a> method <code>String</code>inherits from <code>NSString</code>, with added configurations for whether or not to drop empty components. Again, no copies of the input string are made. And since there’s another variant of <code>split</code> that takes a closure, it can do more than just compare characters. Here’s an example of a primitive word wrap algorithm, where the closure captures a count of the length of the line thus far:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">extension</span> <span class="title">String</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">wrapped</span><span class="params">(after: Int = <span class="number">70</span>)</span></span> -&gt; <span class="type">String</span> &#123;</div><div class="line">        <span class="keyword">var</span> i = <span class="number">0</span></div><div class="line">        <span class="keyword">let</span> lines = <span class="keyword">self</span>.<span class="built_in">split</span>(omittingEmptySubsequences: <span class="literal">false</span>) &#123;</div><div class="line">            character <span class="keyword">in</span></div><div class="line">            <span class="keyword">switch</span> character &#123;</div><div class="line">            <span class="keyword">case</span> <span class="string">"\n"</span>, <span class="string">" "</span> <span class="keyword">where</span> i &gt;= after:</div><div class="line">                i = <span class="number">0</span></div><div class="line">                <span class="keyword">return</span> <span class="literal">true</span></div><div class="line">            <span class="keyword">default</span>:</div><div class="line">                i += <span class="number">1</span></div><div class="line">                <span class="keyword">return</span> <span class="literal">false</span></div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> lines.joined(separator: <span class="string">"\n"</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">sentence.wrapped(after: <span class="number">15</span>)</div><div class="line"><span class="comment">// → "The quick brown\nfox jumped over\nthe lazy dog."</span></div></pre></td></tr></table></figure>
+<p>Or, consider writing a version that takes a sequence of multiple separators:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Collection</span> <span class="title">where</span> <span class="title">Element</span>: <span class="title">Equatable</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">split</span>&lt;S: Sequence&gt;<span class="params">(separators: S)</span></span> -&gt; [<span class="type">SubSequence</span>]</div><div class="line">        <span class="keyword">where</span> <span class="type">Element</span> == <span class="type">S</span>.<span class="type">Element</span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">return</span> <span class="built_in">split</span> &#123; separators.<span class="built_in">contains</span>($<span class="number">0</span>) &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>This way, you can write the following:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">"Hello, world!"</span>.<span class="built_in">split</span>(separators: <span class="string">",! "</span>) <span class="comment">// → ["Hello", "world"]</span></div></pre></td></tr></table></figure>
+<h2 id="StringProtocol"><a href="#StringProtocol" class="headerlink" title="StringProtocol"></a><code>StringProtocol</code></h2><p><code>Substring</code> has almost the same interface as <code>String</code>. This is achieved through a common protocol named <a href="https://developer.apple.com/documentation/swift/stringprotocol" target="_blank" rel="external"><code>StringProtocol</code></a>, which both types conform to. Since almost the entire string API is defined on <code>StringProtocol</code>, you can mostly work with a <code>Substring</code> as you would with a <code>String</code>. At some point, though, you’ll have to turn your substrings back into <code>String</code> instances; like all slices, substrings are only intended for short-term storage, in order to avoid expensive copies during an operation. When the operation is complete and you want to store the results or pass them on to another subsystem, you should create a new <code>String</code>. You can do this by initializing a <code>String</code> with a <code>Substring</code>, as we do in this example:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">lastWord</span><span class="params">(<span class="keyword">in</span> input: String)</span></span> -&gt; <span class="type">String</span>? &#123;</div><div class="line">    <span class="comment">// Process the input, working on substrings</span></div><div class="line">    <span class="keyword">let</span> words = input.<span class="built_in">split</span>(separators: [<span class="string">","</span>, <span class="string">" "</span>])</div><div class="line">    <span class="keyword">guard</span> <span class="keyword">let</span> lastWord = words.last <span class="keyword">else</span> &#123; <span class="keyword">return</span> <span class="literal">nil</span> &#125;</div><div class="line">    <span class="comment">// Convert to String for return</span></div><div class="line">    <span class="keyword">return</span> <span class="type">String</span>(lastWord)</div><div class="line">&#125;</div><div class="line"></div><div class="line">lastWord(<span class="keyword">in</span>: <span class="string">"one, two, three, four, five"</span>) <span class="comment">// → "five"</span></div></pre></td></tr></table></figure>
+<p>The rationale for discouraging long-term storage of substrings is that a substring always holds on to the entire original string. A substring representing a single character of a huge string will hold the entire string in memory, even after the original string’s lifetime would normally have ended. Long-term storage of substrings would therefore effectively cause memory leaks because the original strings have to be kept in memory even when they’re no longer accessible.</p>
+<p>By working with substrings during an operation and only creating new strings at the end, we defer copies until the last moment and make sure to only incur the cost of those copies that are actually necessary. In the example above, we split the entire (potentially long) string into substrings, but only pay the cost for a single copy of one short substring at the end. (Ignore for a moment that this algorithm isn’t efficient anyway; iterating backward from the end until we find the first separator would be the better approach.)</p>
+<p>Encountering a function that only accepts a <code>Substring</code> when you want to pass a <code>String</code> is less common — most functions should either take a <code>String</code> or any <code>StringProtocol</code>-conforming type. But if you do need to pass a <code>String</code>, the quickest way is to subscript the string with the range operator <code>...</code> without specifying any bounds:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Substring with identical start and end index as the base string</span></div><div class="line"><span class="keyword">let</span> substring = sentence[...]</div></pre></td></tr></table></figure>
+<p>The <code>Substring</code> type is new in Swift 4. In Swift 3, <code>String.CharacterView</code> used to be its own slice type. This had the advantage that users only had to understand a single type, but it meant that a stored substring would keep the entire original string buffer alive even after it normally would’ve been released. Swift 4 trades a small loss in convenience for cheap slicing operations and predictable memory usage.</p>
+<p>The Swift team does recognize that requiring explicit conversions from <code>Substring</code> to <code>String</code> is a little annoying. If this turns out to be a big problem in practical use, the team is considering wiring an <a href="https://github.com/apple/swift/blob/master/docs/StringManifesto.md#substrings" target="_blank" rel="external">implicit subtype relationship</a> between <code>Substring</code> and <code>String</code> directly into the compiler, in the same way that <code>Int</code> is a subtype of <code>Optional&lt;Int&gt;</code>. This would allow you to pass a <code>Substring</code> anywhere a <code>String</code> is expected, and the compiler would perform the conversion for you.</p>
+<p>You may be tempted to take full advantage of the existence of <code>StringProtocol</code> and convert all your APIs to take <code>StringProtocol</code> instances rather than plain <code>String</code>s. But the advice of the Swift team is <a href="https://lists.swift.org/pipermail/swift-evolution/Week-of-Mon-20170626/037828.html" target="_blank" rel="external">not to do that</a>:</p>
+<blockquote>
+<p>Our general advice is to stick with <code>String</code>. Most APIs would be simpler and clearer just using <code>String</code> rather than being made generic (which itself can come at a cost), and user conversion on the way in on the few occasions that’s needed isn’t much of a burden.</p>
+</blockquote>
+<p>APIs that are extremely likely to be used with substrings, and at the same time aren’t further generalizable to the <code>Sequence</code> or <code>Collection</code> level, are an exception to this rule. An example of this in the standard library is the <a href="https://developer.apple.com/documentation/swift/sequence/1641243-joined" target="_blank" rel="external"><code>joined</code></a> method. Swift 4 added an overload for sequences with <code>StringProtocol</code>-conforming elements:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Sequence</span> <span class="title">where</span> <span class="title">Element</span>: <span class="title">StringProtocol</span> </span>&#123;</div><div class="line">    <span class="comment">/// Returns a new string by concatenating the elements of the sequence,</span></div><div class="line">    <span class="comment">/// adding the given separator between each element.</span></div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">func</span> <span class="title">joined</span><span class="params">(separator: String = <span class="string">""</span>)</span></span> -&gt; <span class="type">String</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>This lets you call <code>joined</code> directly on an array of substrings (which you got from a call to <code>split</code>, for example) without having to map over the array and copy every substring into a new string. This is more convenient and much faster.</p>
+<p>The number type initializers that take a string and convert it into a number also take <code>StringProtocol</code> values in Swift 4. Again, this is especially handy if you want to process an array of substrings:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> commaSeparatedNumbers = <span class="string">"1,2,3,4,5"</span></div><div class="line"><span class="keyword">let</span> numbers = commaSeparatedNumbers</div><div class="line">    .<span class="built_in">split</span>(separator: <span class="string">","</span>).flatMap &#123; <span class="type">Int</span>($<span class="number">0</span>) &#125;</div><div class="line"><span class="comment">// → [1, 2, 3, 4, 5]</span></div></pre></td></tr></table></figure>
+<p>Since substrings are intended to be short-lived, it’s generally not advisable to return one from a function unless we’re talking about <code>Sequence</code> or <code>Collection</code> APIs that return slices. If you write a similar function that only makes sense for strings, having it return a substring tells readers that it doesn’t make a copy. Functions that create new strings requiring memory allocations, such as <a href="https://developer.apple.com/documentation/swift/stringprotocol/2908613-uppercased" target="_blank" rel="external"><code>uppercased()</code></a>, should always return <code>String</code> instances.</p>
+<p>If you want to extend <code>String</code> with new functionality, placing the extension on <code>StringProtocol</code> is a good idea to keep the API surface between <code>String</code> and <code>Substring</code>consistent. <code>StringProtocol</code> is explicitly designed to be used whenever you would’ve previously extended <code>String</code>. If you want to move existing extensions from <code>String</code> to <code>StringProtocol</code>, the only change you should have to make is to replace any passing of <code>self</code> into an API that takes a concrete <code>String</code> with <code>String(self)</code>.</p>
+<p>Keep in mind, though, that as of Swift 4, <code>StringProtocol</code> is not yet intended as a conformance target for your own custom string types. The documentation explicitly warns against it:</p>
+<blockquote>
+<p>Do not declare new conformances to <code>StringProtocol</code>. Only the <code>String</code> and <code>Substring</code> types of the standard library are valid conforming types.</p>
+</blockquote>
+<p>Allowing developers to write their own string types (with special storage or performance optimizations, for instance) is the eventual goal, but the protocol design hasn’t yet been finalized, so adopting it now may break your code in Swift 5.</p>
+<p><em>… <snip> …</snip></em></p>
+<h1 id="Recap"><a href="#Recap" class="headerlink" title="Recap"></a>Recap</h1><p>Strings in Swift are very different than their counterparts in almost all other mainstream programming languages. When you’re used to strings effectively being arrays of code units, it’ll take a while to switch your mindset to Swift’s approach of prioritizing Unicode correctness over simplicity.</p>
+<p>Ultimately, we think Swift makes the right choice. Unicode text is much more complicated than what those other languages pretend it is. In the long run, the time savings from avoided bugs you’d otherwise have written will probably outweigh the time it takes to unlearn integer indexing.</p>
+<p>We’re so used to random “character” access that we may not realize how rarely this feature is really needed in string processing code. We hope the examples in this chapter convince you that simple in-order traversal is perfectly fine for most common operations. Forcing you to be explicit about which representation of a string you want to work on — grapheme clusters, Unicode scalars, UTF-16 or UTF-8 code units — is another safety measure; readers of your code will be grateful for it.</p>
+<p>When Chris Lattner outlined <a href="https://lists.swift.org/pipermail/swift-evolution/Week-of-Mon-20160725/025676.html" target="_blank" rel="external">the goals for Swift’s string implementation</a> in July 2016, he ended with this:</p>
+<blockquote>
+<p>Our goal is to be better at string processing than Perl!</p>
+</blockquote>
+<p>Swift 4 isn’t quite there yet — too many desirable features are missing, including moving more string APIs from Foundation into the standard library, native language support for regular expressions, string formatting and parsing APIs, and more powerful string interpolation. The good news it that the Swift team has expressed interest in <a href="https://github.com/apple/swift/blob/master/docs/StringManifesto.md" target="_blank" rel="external">tackling all these topics in the future</a>.</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a href="https://goo.gl/VXiEBg" target="_blank" rel="external">https://goo.gl/VXiEBg</a></p>
+
+      
+    </div>
+    
+    
+    
+    <div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script type="text/javascript" src="http://jslibs.wuxubj.cn/sweetalert_mini/jquery-1.7.1.min.js"></script>
+  <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
+  <p><span>Title:  </span>Strings in Swift 4</a></p>
+  <p><span>Author:  </span>Tuski</a></p>
+  <p><span>Published:  </span>10/08/2018 - 22:28:36</p>
+  <p><span>Updated:  </span>10/08/2018 - 22:48:20</p>
+  <p><span>Link:  </span><a href="/2018/10/Strings-in-Swift-4/" title="Strings in Swift 4">http://www.perpeht.com/2018/10/Strings-in-Swift-4/</a>
+    <span class="copy-path"  title="Click to Copy article link"><i class="fa fa-clipboard" data-clipboard-text="http://www.perpeht.com/2018/10/Strings-in-Swift-4/"  aria-label="Copy successfully！"></i></span>
+  </p>
+  <p><span>Protocol:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)</a> Reprinted please keep the original link and author</p>  
+</div>
+<script>
+    var clipboard = new Clipboard('.fa-clipboard');
+    clipboard.on('success', $(function(){
+      $(".fa-clipboard").click(function(){
+        swal({   
+          title: "",   
+          text: 'Copy successfully！',   
+          html: false,
+          timer: 500,   
+          showConfirmButton: false
+        });
+      });
+    }));  
+</script>
+
+      
+    </div>
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>Thx F Sup</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="https://i.loli.net/2017/12/16/5a33fd668ce7c.png" alt="Tuski WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="https://i.loli.net/2017/12/16/5a33fdbe62e6f.png" alt="Tuski Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Swift/" rel="tag"><i class="fa fa-tag"></i> Swift</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+         
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/Introduction-to-Siri-Shortcuts-in-iOS-12/" rel="next" title="Introduction to Siri Shortcuts in iOS 12">
+                <i class="fa fa-chevron-left"></i> Introduction to Siri Shortcuts in iOS 12
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a35fec5ad889f1e" async = "async" ></script>
+</div>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+    <div class="comments" id="comments">
+      <div id="hypercomments_widget"></div>
+    </div>
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="Tuski" />
+            
+              <p class="site-author-name" itemprop="name">Tuski</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">27</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/thevenomsnake" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:thevenomsnake@icloud.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plus.google.com/u/0/104624402456467592306" target="_blank" title="Google">
+                    
+                      <i class="fa fa-fw fa-google"></i>Google</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/perphet" target="_blank" title="Twitter">
+                    
+                      <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.youtube.com/channel/UComQu3jg43YgIvm2PqAG1tA" target="_blank" title="YouTube">
+                    
+                      <i class="fa fa-fw fa-youtube"></i>YouTube</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+
+  <div class="links-of-blogroll motion-element links-of-blogroll-block">
+    <div class="links-of-blogroll-title">
+      <i class="fa  fa-fw fa-globe"></i>
+      Links&nbsp;
+      <i class="fa  fa-fw fa-globe"></i>
+    </div>
+    <ul class="links-of-blogroll-list">
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.crazyforcode.org/" title="CFC" target="_blank">CFC</a>
+        </li>
+      
+    </ul>
+     
+  </div>
+ 
+
+          
+      <iframe src="https://open.spotify.com/embed?uri=spotify:user:spotify:playlist:37i9dQZF1DXcBWIGoYBM5M&theme=white" width="215" height="350" frameborder="0" allowtransparency="true"></iframe>
+       
+      </section>
+
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-text">_</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Unicode-Or-No-More-Fixed-Width"><span class="nav-text">Unicode, Or: No More Fixed Width</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Grapheme-Clusters-and-Canonical-Equivalence"><span class="nav-text">Grapheme Clusters and Canonical Equivalence</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Combining-Marks"><span class="nav-text">Combining Marks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Emoji"><span class="nav-text">Emoji</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Strings-and-Collections"><span class="nav-text">Strings and Collections</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Bidirectional-Not-Random-Access"><span class="nav-text">Bidirectional, Not Random Access</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Range-Replaceable-Not-Mutable"><span class="nav-text">Range-Replaceable, Not Mutable</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#String-Indices"><span class="nav-text">String Indices</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Substrings"><span class="nav-text">Substrings</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#StringProtocol"><span class="nav-text">StringProtocol</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Recap"><span class="nav-text">Recap</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-text">Reference</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="heart">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tuski</span>
+
+
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by </div>
+
+
+
+  <span class="post-meta-divider">Perphet</span>
+
+
+<!--
+
+  <div class="theme-info">Theme &mdash;  v{}</div>
+
+
+
+
+-->
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+		<script type="text/javascript">
+		_hcwp = window._hcwp || [];
+
+		_hcwp.push({widget:"Bloggerstream", widget_id: 99037, selector:".hc-comment-count", label: "{\%COUNT%\}" });
+
+		
+		_hcwp.push({widget:"Stream", widget_id: 99037, xid: "2018/10/Strings-in-Swift-4/"});
+		
+
+		(function() {
+		if("HC_LOAD_INIT" in window)return;
+		HC_LOAD_INIT = true;
+		var lang = (navigator.language || navigator.systemLanguage || navigator.userLanguage || "en").substr(0, 2).toLowerCase();
+		var hcc = document.createElement("script"); hcc.type = "text/javascript"; hcc.async = true;
+		hcc.src = ("https:" == document.location.protocol ? "https" : "http")+"://w.hypercomments.com/widget/hc/99037/"+lang+"/widget.js";
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(hcc, s.nextSibling);
+		})();
+		</script>
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("c6sjJ6fGADGrCVC48k5MVQcD-gzGzoHsz", "YuTcQ8aPXftmtmeC4VvTrK9B");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+  <script type="text/javascript">
+  wpac_init = window.wpac_init || [];
+  wpac_init.push({widget: 'Rating', id: 8566,
+    el: 'wpac-rating',
+    color: 'fc6423'
+  });
+  (function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = '//embed.widgetpack.com/widget.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+  })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+<div id="hexo-helper-live2d">
+  <canvas id="live2dcanvas" width="150" height="350"></canvas>
+</div>
+<style>
+  #live2dcanvas{
+    position: fixed;
+    width: 150px;
+    height: 350px;
+    opacity:0.8;
+    right: 0px;
+    z-index: 999;
+    pointer-events: none;
+    bottom: -20px;
+  }
+</style>
+<script type="text/javascript" src="/live2d/device.min.js"></script>
+<script type="text/javascript">
+const loadScript = function loadScript(c,b){var a=document.createElement("script");a.type="text/javascript";"undefined"!=typeof b&&(a.readyState?a.onreadystatechange=function(){if("loaded"==a.readyState||"complete"==a.readyState)a.onreadystatechange=null,b()}:a.onload=function(){b()});a.src=c;document.body.appendChild(a)};
+(function(){
+  if((typeof(device) != 'undefined') && (device.mobile())){
+    var trElement = document.getElementById('hexo-helper-live2d');
+    trElement.parentNode.removeChild(trElement);
+    return;
+  }else
+    if (typeof(device) === 'undefined') console.error('Cannot find current-device script.');
+  loadScript("/live2d/script.js", function(){loadlive2d("live2dcanvas", "/live2d/assets/shizuku.model.json", 0.5);});
+})();
+</script>
+
+ <canvas class="fireworks" 
+        style="position: fixed; left: 0px; top: 0px; z-index: 99999999; pointer-events: none; width: 1158px; height: 916px;" 
+        width="2316" 
+        height="1832">
+</canvas>
+<script type="text/javascript" src="/js/src/anime.min.js"></script>
+<script type="text/javascript" src="/js/src/fireworks.js"></script>
+</body>
+</html>
