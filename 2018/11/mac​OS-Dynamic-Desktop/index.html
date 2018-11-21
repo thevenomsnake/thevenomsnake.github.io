@@ -1,0 +1,1562 @@
+<!DOCTYPE html>
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+<script type="text/javascript">var OriginTitile=document.title,st;document.addEventListener("visibilitychange",function(){document.hidden?(document.title="(/≧▽≦/)Aw, Snap!",clearTimeout(st)):(document.title="(ฅ>ω<*ฅ) Fixed~"+OriginTitile,st=setTimeout(function(){document.title=OriginTitile},3e3))})</script>
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-bounce.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Swift,macOs," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Dark Mode is one of the most popular additions to macOS — especially among us developer types, who tend towards light-on-dark color themes in text editors and appreciate this new visual consistency ac">
+<meta name="keywords" content="Swift,macOs">
+<meta property="og:type" content="article">
+<meta property="og:title" content="macOS Dynamic Desktop">
+<meta property="og:url" content="http://www.perphet.com/2018/11/mac​OS-Dynamic-Desktop/index.html">
+<meta property="og:site_name" content="Tuski&#39;s Blog">
+<meta property="og:description" content="Dark Mode is one of the most popular additions to macOS — especially among us developer types, who tend towards light-on-dark color themes in text editors and appreciate this new visual consistency ac">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://nshipster.com/assets/desktop-and-screen-saver-preference-pane-b457c3a4bc26017c8d555506333d5b73244adaf8b7060f0cadd450f39b279c88.png">
+<meta property="og:image" content="https://nshipster.com/assets/go-to-library-desktop-pictures-3992f8efa1d14dd3bf092ec7eb298c6c1855dcc8e0cf57c0e494a840a8cb4713.png">
+<meta property="og:image" content="https://nshipster.com/assets/mojave-heic-abd6b67d8941ad50a9bcd7dd6657994174d4be713bb3c2cfbc9e24ffff7ad129.png">
+<meta property="og:image" content="https://nshipster.com/assets/mojave-dynamic-desktop-images-c8bc3aab78c049d74abd46240445f82c3d0cf0ad043bcc9da6f3fda066776034.png">
+<meta property="og:image" content="https://nshipster.com/assets/mojave-heic-preview-info-b71c5e4084bd43f1e6b34852c4c757493627eb8b66ee44b282e2f53d274dda02.png">
+<meta property="og:image" content="https://nshipster.com/assets/solar-position-watch-faces-1815d6d3c84f42ff4588fa47cd59841f4de15be2b219f6f4ec9a83e13ea0f08b.jpg">
+<meta property="og:updated_time" content="2018-11-21T15:37:05.704Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="macOS Dynamic Desktop">
+<meta name="twitter:description" content="Dark Mode is one of the most popular additions to macOS — especially among us developer types, who tend towards light-on-dark color themes in text editors and appreciate this new visual consistency ac">
+<meta name="twitter:image" content="https://nshipster.com/assets/desktop-and-screen-saver-preference-pane-b457c3a4bc26017c8d555506333d5b73244adaf8b7060f0cadd450f39b279c88.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.perphet.com/2018/11/mac​OS-Dynamic-Desktop/"/>
+
+
+
+<link rel="stylesheet" href="../live2d/css/live2d.css" />
+
+
+  <title>macOS Dynamic Desktop | Tuski's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+<div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+   
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tuski's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">I code my life</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-music">
+          <a href="/music/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-music"></i> <br />
+            
+            Music
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.perphet.com/2018/11/mac​OS-Dynamic-Desktop/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tuski">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tuski's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">macOS Dynamic Desktop</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-11-21T22:29:11+08:00">
+                2018-11-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+            <!--noindex-->
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/11/mac​OS-Dynamic-Desktop/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="2018/11/mac​OS-Dynamic-Desktop/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+              <!--/noindex-->
+            
+          
+
+          
+          
+             <span id="/2018/11/mac​OS-Dynamic-Desktop/" class="leancloud_visitors" data-flag-title="macOS Dynamic Desktop">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  2,067
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  13
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <script src="/assets/js/APlayer.min.js"> </script><blockquote class="blockquote-center">Dark Mode is one of the most popular additions to macOS — especially among us developer types, who tend towards light-on-dark color themes in text editors and appreciate this new visual consistency across the system.<br>A couple of years back, there was similar fanfare for Night Shift, which helped to reduce eye strain from hacking late into the night (or early in the morning, as it were).<br>If you triangulate from those two macOS features, you get Dynamic Desktops, also new in Mojave. Now when you go to “System Preferences&gt; Desktop &amp; Screen Saver”, you have the option to select a “Dynamic” desktop picture that changes throughout the day, based on your location.</blockquote>
+
+<a id="more"></a>
+<p><img src="https://nshipster.com/assets/desktop-and-screen-saver-preference-pane-b457c3a4bc26017c8d555506333d5b73244adaf8b7060f0cadd450f39b279c88.png" alt="img"></p>
+<p>The result is subtle and delightful. Having a background that tracks the passage of time makes the desktop feel alive; in tune with the natural world. (If nothing else, it makes for a lovely visual effect when switching dark mode on and off)</p>
+<p><em>But how does it work, exactly?</em><br>That’s the question for this week’s NSHipster article.</p>
+<p>The answer involves a deep dive into image formats, a little bit of reverse-engineering and even some spherical trigonometry.</p>
+<hr>
+<p>The first step to understanding how Dynamic Desktop works is to get hold of a dynamic image.</p>
+<p>If you’re running macOS Mojave open Finder, select “Go&gt; Go to Folder…” (⇧⌘G), and enter “/Library/Desktop Pictures/”.</p>
+<p><img src="https://nshipster.com/assets/go-to-library-desktop-pictures-3992f8efa1d14dd3bf092ec7eb298c6c1855dcc8e0cf57c0e494a840a8cb4713.png" alt="img"></p>
+<p>In this directory, you should find a file named “Mojave.heic”. Double-click it to open it in Preview.</p>
+<p><img src="https://nshipster.com/assets/mojave-heic-abd6b67d8941ad50a9bcd7dd6657994174d4be713bb3c2cfbc9e24ffff7ad129.png" alt="img"></p>
+<p>In Preview, the sidebar shows a list of thumbnails numbered 1 through 16, each showing a different view of the desert scene.</p>
+<p><img src="https://nshipster.com/assets/mojave-dynamic-desktop-images-c8bc3aab78c049d74abd46240445f82c3d0cf0ad043bcc9da6f3fda066776034.png" alt="img"></p>
+<p>If we select “Tools&gt; Show Inspector” (⌘I), we get some general information about what we’re looking at:</p>
+<p><img src="https://nshipster.com/assets/mojave-heic-preview-info-b71c5e4084bd43f1e6b34852c4c757493627eb8b66ee44b282e2f53d274dda02.png" alt="img"></p>
+<p>Unfortunately, that’s about all Preview gives us (at least at the time of writing). If we click on the next panel over, “More Info Inspector”, we don’t learn a whole lot more about our subject:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Color Model</td>
+<td>RGB</td>
+</tr>
+<tr>
+<td>Depth:</td>
+<td>8</td>
+</tr>
+<tr>
+<td>Pixel Height</td>
+<td>2,880</td>
+</tr>
+<tr>
+<td>Pixel Width</td>
+<td>5,120</td>
+</tr>
+<tr>
+<td>Profile Name</td>
+<td>Display P3</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p> The <code>.heic</code> file extension corresponds to image containers encoded using the HEIF, or High-Efficiency Image File Format (which is itself based on HEVC, or High-Efficiency Video Compression — also known as H.265 video). For more information, check out <a href="https://developer.apple.com/videos/play/wwdc2017/503/" target="_blank" rel="external">WWDC 2017 Session 503 “Introducing HEIF and HEVC”</a></p>
+</blockquote>
+<p>If we want to learn more, we’ll need to roll up our sleeves and get our hands dirty with some low-level APIs.</p>
+<h2 id="Digging-Deeper-with-CoreGraphics"><a href="#Digging-Deeper-with-CoreGraphics" class="headerlink" title="Digging Deeper with CoreGraphics"></a>Digging Deeper with CoreGraphics</h2><p>Let’s start our investigation by creating a new Xcode Playground. For simplicity, we can hard-code a URL to the “Mojave.heic” file on our system.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> Foundation</div><div class="line"><span class="keyword">import</span> CoreGraphics</div><div class="line"></div><div class="line"><span class="comment">// macOS 10.14 Mojave Required</span></div><div class="line"><span class="keyword">let</span> url = <span class="type">URL</span>(fileURLWithPath: <span class="string">"/Library/Desktop Pictures/Mojave.heic"</span>)</div></pre></td></tr></table></figure>
+<p>Next, create a <code>CGImageSource</code>, copy its metadata, and enumerate over each of its tags:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> source = <span class="type">CGImageSourceCreateWithURL</span>(url <span class="keyword">as</span> <span class="type">CFURL</span>, <span class="literal">nil</span>)!</div><div class="line"><span class="keyword">let</span> metadata = <span class="type">CGImageSourceCopyMetadataAtIndex</span>(source, <span class="number">0</span>, <span class="literal">nil</span>)!</div><div class="line"><span class="keyword">let</span> tags = <span class="type">CGImageMetadataCopyTags</span>(metadata) <span class="keyword">as</span>! [<span class="type">CGImageMetadataTag</span>]</div><div class="line"><span class="keyword">for</span> tag <span class="keyword">in</span> tags &#123;</div><div class="line">    <span class="keyword">guard</span> <span class="keyword">let</span> name = <span class="type">CGImageMetadataTagCopyName</span>(tag),</div><div class="line">        <span class="keyword">let</span> value = <span class="type">CGImageMetadataTagCopyValue</span>(tag)</div><div class="line">    <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">continue</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="built_in">print</span>(name, value)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>When we run this code, we get two results: <code>hasXMP</code>, which has a value of <code>&quot;True&quot;</code>, and <code>solar</code>, which has a decidedly less understandable value:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">YnBsaXN0MDDRAQJSc2mvEBADDBAUGBwgJCgsMDQ4PEFF1AQFBgcICQoLUWlRelFh</div><div class="line">UW8QACNAcO7vOubr3yO/1e+pmkOtXBAB1AQFBgcNDg8LEAEjQFRxqCKOFiAjwCR6</div><div class="line">waUkDgHUBAUGBxESEwsQAiNAVZV4BI4c+CPAEP2uFrMcrdQEBQYHFRYXCxADI0BW</div><div class="line">tALKmrjwIz/2ObLnx6l21AQFBgcZGhsLEAQjQFfTrJlEjnwjQByrLle1Q0rUBAUG</div><div class="line">Bx0eHwsQBSNAWPrrmI0ISCNAKiwhpSRpc9QEBQYHISIjCxAGI0BgJff9KDpyI0BE</div><div class="line">NTOsilht1AQFBgclJicLEAcjQGbHdYIVQKojQEq3fAg86lXUBAUGBykqKwsQCCNA</div><div class="line">bTGmpC2YRiNAQ2WFOZGjntQEBQYHLS4vCxAJI0BwXfII2B+SI0AmLcjfuC7g1AQF</div><div class="line">BgcxMjMLEAojQHCnF6YrsxcjQBS9AVBLTq3UBAUGBzU2NwsQCyNAcTcSnimmjCPA</div><div class="line">GP5E0ASXJtQEBQYHOTo7CxAMI0BxgSADjxK2I8AoalieOTyE1AQFBgc9Pj9AEA0j</div><div class="line">QHNWsnnMcWIjwEO+oq1pXr8QANQEBQYHQkNEQBAOI0ABZpkFpAcAI8BKYGg/VvMf</div><div class="line">1AQFBgdGR0hAEA8jQErBKblRzPgjwEMGElBIUO0ACAALAA4AIQAqACwALgAwADIA</div><div class="line">NAA9AEYASABRAFMAXABlAG4AcAB5AIIAiwCNAJYAnwCoAKoAswC8AMUAxwDQANkA</div><div class="line">4gDkAO0A9gD/AQEBCgETARwBHgEnATABOQE7AUQBTQFWAVgBYQFqAXMBdQF+AYcB</div><div class="line">kAGSAZsBpAGtAa8BuAHBAcMBzAHOAdcB4AHpAesB9AAAAAAAAAIBAAAAAAAAAEkA</div><div class="line">AAAAAAAAAAAAAAAAAAH9</div></pre></td></tr></table></figure>
+<h3 id="Shining-Light-on-Solar"><a href="#Shining-Light-on-Solar" class="headerlink" title="Shining Light on Solar"></a>Shining Light on Solar</h3><p>Most of us would look at that wall of text and quietly close the lid of our MacBook Pro. But, as some of you surely noticed, this text looks an awful lot like it’s <a href="https://en.wikipedia.org/wiki/Base64" target="_blank" rel="external">Base64-encoded</a>.</p>
+<p>Let’s test out our hypothesis in code:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> name == <span class="string">"solar"</span> &#123;</div><div class="line">    <span class="keyword">let</span> data = <span class="type">Data</span>(base64Encoded: value)!</div><div class="line">    <span class="built_in">print</span>(<span class="type">String</span>(data: data, encoding: .ascii))</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>​               bplist00Ò\u{01}\u{02}\u{03}…             </p>
+<p>What’s that? <code>bplist</code>, followed by a bunch of garbled nonsense?</p>
+<p>By golly, that’s the <a href="https://en.wikipedia.org/wiki/File_format#Magic_number" target="_blank" rel="external">file signature</a> for a <a href="https://en.wikipedia.org/wiki/Property_list" target="_blank" rel="external">binary property list</a>.</p>
+<p>Let’s see if <code>PropertyListSerialization</code> can make any sense of it…</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> name == <span class="string">"solar"</span> &#123;</div><div class="line">    <span class="keyword">let</span> data = <span class="type">Data</span>(base64Encoded: value)!</div><div class="line">    <span class="keyword">let</span> propertyList = <span class="keyword">try</span> <span class="type">PropertyListSerialization</span></div><div class="line">                            .propertyList(from: data,</div><div class="line">                                          options: [],</div><div class="line">                                          format: <span class="literal">nil</span>)</div><div class="line">    <span class="built_in">print</span>(propertyList)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><em>Now we’re talking!</em></p>
+<p>We have two top-level keys:</p>
+<p>The <code>ap</code> key corresponds to a dictionary containing integers for the <code>d</code> and <code>l</code> keys.</p>
+<p>The <code>si</code> key corresponds to an array of dictionaries with integer and floating-point values. Of the nested dictionary keys, <code>i</code> is the easiest to understand: incrementing from 0 to 15, they’re the index of the image in the sequence. It’d be hard to guess <code>a</code> and <code>z</code> without any additional information, but they turn out to represent the altitude (<code>a</code>) and azimuth (<code>z</code>) of the sun in the corresponding pictures.</p>
+<h3 id="Calculating-Solar-Position"><a href="#Calculating-Solar-Position" class="headerlink" title="Calculating Solar Position"></a>Calculating Solar Position</h3><p>At the time of writing, those of us in the northern hemisphere are settling into the season of autumn and its shorter, colder days, whereas those of us in the southern hemisphere are gearing up for hotter and longer days. The changing of the seasons reminds us that the duration of a solar day depends where you are on the planet and where the planet is in its orbit around the sun.</p>
+<p>The good news is that astronomers can tell you — with perfect accuracy — where the sun is in the sky for any location or time. The bad news is that the necessary calculations are <a href="https://en.wikipedia.org/wiki/Position_of_the_Sun" target="_blank" rel="external">complicated</a> to say the least.</p>
+<p>Honestly, we don’t really understand it ourselves, and are pretty much just porting whatever code we manage to find online. After some trial and error, we were able to arrive at <a href="https://github.com/NSHipster/DynamicDesktop/blob/master/SolarPosition.playground" target="_blank" rel="external">something that seems to work</a> (PRs welcome!):</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> Foundation</div><div class="line"><span class="keyword">import</span> CoreLocation</div><div class="line"></div><div class="line"><span class="comment">// Apple Park, Cupertino, CA</span></div><div class="line"><span class="keyword">let</span> location = <span class="type">CLLocation</span>(latitude: <span class="number">37.3327</span>, longitude: -<span class="number">122.0053</span>)</div><div class="line"><span class="keyword">let</span> time = <span class="type">Date</span>()</div><div class="line"></div><div class="line"><span class="keyword">let</span> position = solarPosition(<span class="keyword">for</span>: location, at: time)</div><div class="line"><span class="keyword">let</span> formattedDate = <span class="type">DateFormatter</span>.localizedString(from: time,</div><div class="line">                                                    dateStyle: .medium,</div><div class="line">                                                    timeStyle: .short)</div><div class="line"><span class="built_in">print</span>(<span class="string">"Solar Position on <span class="subst">\(formattedDate)</span>"</span>)</div><div class="line"><span class="built_in">print</span>(<span class="string">"<span class="subst">\(position.azimuth)</span>° Az / <span class="subst">\(position.elevation)</span>° El"</span>)</div></pre></td></tr></table></figure>
+<p>​                   Solar Position on Oct 1, 2018 at 12:00 </p>
+<p>​        180.73470025840783° Az / 49.27482549913847° El         </p>
+<p>At noon on October 1, 2018, the sun shines on Apple Park from the south, about halfway between the horizon and directly overhead.</p>
+<p>If track the position of the sun over an entire day, we get a sinusoidal shape reminiscent of the Apple Watch “Solar” face.</p>
+<p><img src="https://nshipster.com/assets/solar-position-watch-faces-1815d6d3c84f42ff4588fa47cd59841f4de15be2b219f6f4ec9a83e13ea0f08b.jpg" alt="img"></p>
+<h3 id="Extending-Our-Understanding-of-XMP"><a href="#Extending-Our-Understanding-of-XMP" class="headerlink" title="Extending Our Understanding of XMP"></a>Extending Our Understanding of XMP</h3><p>Alright, enough astronomy for the moment. Let’s ground ourselves in something much more banal:<em>de facto</em> XML metadata standards.</p>
+<p>Remember the <code>hasXMP</code> metadata key from before? Yeah, <em>that</em>.</p>
+<p>XMP, or Extensible Metadata Platform, is a standard format for tagging files with metadata. What does XMP look like? Brace yourself:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> xmpData = <span class="type">CGImageMetadataCreateXMPData</span>(metadata, <span class="literal">nil</span>)</div><div class="line"><span class="keyword">let</span> xmp = <span class="type">String</span>(data: xmpData <span class="keyword">as</span>! <span class="type">Data</span>, encoding: .utf8)!</div><div class="line"><span class="built_in">print</span>(xmp)</div></pre></td></tr></table></figure>
+<p><em>Yuck.</em></p>
+<p>But it’s a good thing that we checked. We’ll need to honor that <code>apple_desktop</code> namespace to make our own Dynamic Desktop images work correctly.</p>
+<p>Speaking of, let’s get started on that.</p>
+<h2 id="Creating-Our-Own-Dynamic-Desktop"><a href="#Creating-Our-Own-Dynamic-Desktop" class="headerlink" title="Creating Our Own Dynamic Desktop"></a>Creating Our Own Dynamic Desktop</h2><p>Let’s create a data model to represent a Dynamic Desktop:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">DynamicDesktop</span> </span>&#123;</div><div class="line">    <span class="keyword">let</span> images: [<span class="type">Image</span>]</div><div class="line"></div><div class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Image</span> </span>&#123;</div><div class="line">        <span class="keyword">let</span> cgImage: <span class="type">CGImage</span></div><div class="line">        <span class="keyword">let</span> metadata: <span class="type">Metadata</span></div><div class="line"></div><div class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">Metadata</span>: <span class="title">Codable</span> </span>&#123;</div><div class="line">            <span class="keyword">let</span> index: <span class="type">Int</span></div><div class="line">            <span class="keyword">let</span> altitude: <span class="type">Double</span></div><div class="line">            <span class="keyword">let</span> azimuth: <span class="type">Double</span></div><div class="line"></div><div class="line">            <span class="keyword">private</span> <span class="class"><span class="keyword">enum</span> <span class="title">CodingKeys</span>: <span class="title">String</span>, <span class="title">CodingKey</span> </span>&#123;</div><div class="line">                <span class="keyword">case</span> index = <span class="string">"i"</span></div><div class="line">                <span class="keyword">case</span> altitude = <span class="string">"a"</span></div><div class="line">                <span class="keyword">case</span> azimuth = <span class="string">"z"</span></div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Each Dynamic Desktop comprises an ordered sequence of images, each of which has image data, stored in a <code>CGImage</code> object, and metadata, as discussed before. We adopt <code>Codable</code> in the <code>Metadata</code>declaration in order for the compiler to automatically synthesize conformance. We’ll take advantage of that when it comes time to generate the Base64-encoded binary property list.</p>
+<h3 id="Writing-to-an-Image-Destination"><a href="#Writing-to-an-Image-Destination" class="headerlink" title="Writing to an Image Destination"></a>Writing to an Image Destination</h3><p>First, create a <code>CGImageDestination</code> with a specified output URL. The file type is <code>heic</code> and the source count is equal to the number of images to be included.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">guard</span> <span class="keyword">let</span> imageDestination = <span class="type">CGImageDestinationCreateWithURL</span>(</div><div class="line">                                outputURL <span class="keyword">as</span> <span class="type">CFURL</span>,</div><div class="line">                                <span class="type">AVFileType</span>.heic <span class="keyword">as</span> <span class="type">CFString</span>,</div><div class="line">                                dynamicDesktop.images.<span class="built_in">count</span>,</div><div class="line">                                <span class="literal">nil</span></div><div class="line">                             )</div><div class="line"><span class="keyword">else</span> &#123;</div><div class="line">    <span class="built_in">fatalError</span>(<span class="string">"Error creating image destination"</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Next, enumerate over each image in the dynamic desktop object. By using the <code>enumerated()</code> method, we also get the current <code>index</code> for each loop so that we can set the image metadata on the first image:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> (index, image) <span class="keyword">in</span> dynamicDesktop.images.enumerated() &#123;</div><div class="line">    <span class="keyword">if</span> index == <span class="number">0</span> &#123;</div><div class="line">        <span class="keyword">let</span> imageMetadata = <span class="type">CGImageMetadataCreateMutable</span>()</div><div class="line">        <span class="keyword">guard</span> <span class="keyword">let</span> tag = <span class="type">CGImageMetadataTagCreate</span>(</div><div class="line">                            <span class="string">"http://ns.apple.com/namespace/1.0/"</span> <span class="keyword">as</span> <span class="type">CFString</span>,</div><div class="line">                            <span class="string">"apple_desktop"</span> <span class="keyword">as</span> <span class="type">CFString</span>,</div><div class="line">                            <span class="string">"solar"</span> <span class="keyword">as</span> <span class="type">CFString</span>,</div><div class="line">                            .string,</div><div class="line">                            <span class="keyword">try</span>! dynamicDesktop.base64EncodedMetadata() <span class="keyword">as</span> <span class="type">CFString</span></div><div class="line">                        ),</div><div class="line">            <span class="type">CGImageMetadataSetTagWithPath</span>(</div><div class="line">                imageMetadata, <span class="literal">nil</span>, <span class="string">"xmp:solar"</span> <span class="keyword">as</span> <span class="type">CFString</span>, tag</div><div class="line">            )</div><div class="line">        <span class="keyword">else</span> &#123;</div><div class="line">            <span class="built_in">fatalError</span>(<span class="string">"Error creating image metadata"</span>)</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="type">CGImageDestinationAddImageAndMetadata</span>(imageDestination,</div><div class="line">                                              image.cgImage,</div><div class="line">                                              imageMetadata,</div><div class="line">                                              <span class="literal">nil</span>)</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="type">CGImageDestinationAddImage</span>(imageDestination,</div><div class="line">                                   image.cgImage,</div><div class="line">                                   <span class="literal">nil</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Aside from the unrefined nature of Core Graphics APIs, the code is pretty straightforward. The only part that requires further explanation is the call to <code>CGImageMetadataTagCreate(_:_:_:_:_:)</code>.</p>
+<p>Because of a mismatch between how image and container metadata are structured and how they’re represented in code, we have to implement <code>Encodable</code> for <code>DynamicDesktop</code> ourselves:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">extension</span> <span class="title">DynamicDesktop</span>: <span class="title">Encodable</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="class"><span class="keyword">enum</span> <span class="title">CodingKeys</span>: <span class="title">String</span>, <span class="title">CodingKey</span> </span>&#123;</div><div class="line">        <span class="keyword">case</span> ap, si</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">private</span> <span class="class"><span class="keyword">enum</span> <span class="title">NestedCodingKeys</span>: <span class="title">String</span>, <span class="title">CodingKey</span> </span>&#123;</div><div class="line">        <span class="keyword">case</span> d, l</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">encode</span><span class="params">(to encoder: Encoder)</span></span> <span class="keyword">throws</span> &#123;</div><div class="line">        <span class="keyword">var</span> keyedContainer =</div><div class="line">            encoder.container(keyedBy: <span class="type">CodingKeys</span>.<span class="keyword">self</span>)</div><div class="line"></div><div class="line">        <span class="keyword">var</span> nestedKeyedContainer =</div><div class="line">            keyedContainer.nestedContainer(keyedBy: <span class="type">NestedCodingKeys</span>.<span class="keyword">self</span>,</div><div class="line">                                           forKey: .ap)</div><div class="line"></div><div class="line">        <span class="comment">// <span class="doctag">FIXME:</span> Not sure what `l` and `d` keys indicate</span></div><div class="line">        <span class="keyword">try</span> nestedKeyedContainer.encode(<span class="number">0</span>, forKey: .l)</div><div class="line">        <span class="keyword">try</span> nestedKeyedContainer.encode(<span class="keyword">self</span>.images.<span class="built_in">count</span>, forKey: .d)</div><div class="line"></div><div class="line">        <span class="keyword">var</span> unkeyedContainer =</div><div class="line">            keyedContainer.nestedUnkeyedContainer(forKey: .si)</div><div class="line">        <span class="keyword">for</span> image <span class="keyword">in</span> <span class="keyword">self</span>.images &#123;</div><div class="line">            <span class="keyword">try</span> unkeyedContainer.encode(image.metadata)</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>With that in place, we can implement the aforementioned <code>base64EncodedMetadata()</code> method like so:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">extension</span> <span class="title">DynamicDesktop</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">base64EncodedMetadata</span><span class="params">()</span></span> <span class="keyword">throws</span> -&gt; <span class="type">String</span> &#123;</div><div class="line">        <span class="keyword">let</span> encoder = <span class="type">PropertyListEncoder</span>()</div><div class="line">        encoder.outputFormat = .binary</div><div class="line"></div><div class="line">        <span class="keyword">let</span> binaryPropertyListData = <span class="keyword">try</span> encoder.encode(<span class="keyword">self</span>)</div><div class="line">        <span class="keyword">return</span> binaryPropertyListData.base64EncodedString()</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Once the for-in loop is exhausted, and all images and metadata are written, we call <code>CGImageDestinationFinalize(_:)</code> to finalize the image source and write the image to disk.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">guard</span> <span class="type">CGImageDestinationFinalize</span>(imageDestination) <span class="keyword">else</span> &#123;</div><div class="line">    <span class="built_in">fatalError</span>(<span class="string">"Error finalizing image"</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>If everything worked as expected, you should now be the proud owner of a brand new Dynamic Desktop. Nice!</p>
+<hr>
+<p>We love the Dynamic Desktop feature in Mojave, and are excited to see the same proliferation of them that we saw when wallpapers hit the mainstream with Windows 95.</p>
+<p>If you’re so inclined, here are a few ideas for where to go from here:</p>
+<h3 id="Automatically-Generating-a-Dynamic-Desktop-from-Photos"><a href="#Automatically-Generating-a-Dynamic-Desktop-from-Photos" class="headerlink" title="Automatically Generating a Dynamic Desktop from Photos"></a>Automatically Generating a Dynamic Desktop from Photos</h3><p>It’s mind-blowing to think that something as transcendent as the movement of celestial bodies can be reduced to a system of equations with two inputs: time and place.</p>
+<p>In the example before, this information is hard-coded, but you could ostensibly extract that information from images automatically.</p>
+<p>By default, the camera on most phones captures <a href="https://en.wikipedia.org/wiki/Exif" target="_blank" rel="external">Exif metadata</a> each time a photo is snapped. This metadata can include the time which the photo was taken and the GPS coordinates of the device at the time.</p>
+<p>By reading time and location information directly from image metadata, you can automatically determine solar position and simplify the process of generating a Dynamic Desktop from a series of photos.</p>
+<h3 id="Shooting-a-Time-Lapse-on-Your-iPhone"><a href="#Shooting-a-Time-Lapse-on-Your-iPhone" class="headerlink" title="Shooting a Time Lapse on Your iPhone"></a>Shooting a Time Lapse on Your iPhone</h3><p>Want to put your new iPhone Xs to good use? (Or more accurately, “Want to use your old iPhone for something productive while you procrastinate selling it?”)</p>
+<p>Mount your phone against a window, plug it into a charger, set the Camera to Timelapse mode, and hit the “Record” button. By extracting key frames from the resulting video, you can make your very own <em>bespoke</em> Dynamic Desktop.</p>
+<p>You might also want to check out <a href="https://itunes.apple.com/us/app/skyflow-time-lapse-shooting/id937208291?mt=8" target="_blank" rel="external">Skyflow</a> or similar apps that more easily allow you to take still photos at predefined intervals.</p>
+<h3 id="Generating-Landscapes-from-GIS-Data"><a href="#Generating-Landscapes-from-GIS-Data" class="headerlink" title="Generating Landscapes from GIS Data"></a>Generating Landscapes from GIS Data</h3><p>If you can’t stand to be away from your phone for an entire day (sad) or don’t have anything remarkable to look (also sad), you could always create your own reality (sounds sadder than it is).</p>
+<p>Using an app like <a href="https://planetside.co.uk/" target="_blank" rel="external">Terragen</a>, you can render photo-realistic 3D landscapes, with fine-tuned control over the earth, sun, and sky.</p>
+<p>You can make it even easier for yourself by downloading an elevation map from the U.S. Geological Survey’s <a href="https://viewer.nationalmap.gov/basic/" target="_blank" rel="external">National Map website</a> and using that as a template for your 3D rendering project.</p>
+<h3 id="Downloading-Pre-Made-Dynamic-Desktops"><a href="#Downloading-Pre-Made-Dynamic-Desktops" class="headerlink" title="Downloading Pre-Made Dynamic Desktops"></a>Downloading Pre-Made Dynamic Desktops</h3><p>Or if you have actual work to do and can’t be bothered to spend your time making pretty pictures, you can always just pay someone else to do it for you.</p>
+<p>We’re personally fans of the the <a href="https://www.jetsoncreative.com/24hourwallpaper/" target="_blank" rel="external">24 Hour Wallpaper</a> app. If you have any other recommendations, <a href="https://twitter.com/NSHipster/" target="_blank" rel="external">@ us on Twitter!</a>.</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p>Written by <a href="https://nshipster.com/authors/mattt/" target="_blank" rel="external">Mattt</a> — October 1st, 2018</p>
+<p><a href="https://nshipster.com/macos-dynamic-desktop/" target="_blank" rel="external">https://nshipster.com/macos-dynamic-desktop/</a></p>
+
+      
+    </div>
+    
+    
+    
+    <div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script type="text/javascript" src="http://jslibs.wuxubj.cn/sweetalert_mini/jquery-1.7.1.min.js"></script>
+  <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
+  <p><span>Title:  </span>macOS Dynamic Desktop</a></p>
+  <p><span>Author:  </span>Tuski</a></p>
+  <p><span>Published:  </span>11/21/2018 - 23:29:11</p>
+  <p><span>Updated:  </span>11/21/2018 - 23:37:05</p>
+  <p><span>Link:  </span><a href="/2018/11/mac​OS-Dynamic-Desktop/" title="macOS Dynamic Desktop">http://www.perphet.com/2018/11/mac​OS-Dynamic-Desktop/</a>
+    <span class="copy-path"  title="Click to Copy article link"><i class="fa fa-clipboard" data-clipboard-text="http://www.perphet.com/2018/11/mac​OS-Dynamic-Desktop/"  aria-label="Copy successfully！"></i></span>
+  </p>
+  <p><span>Protocol:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)</a> Reprinted please keep the original link and author</p>  
+</div>
+<script>
+    var clipboard = new Clipboard('.fa-clipboard');
+    clipboard.on('success', $(function(){
+      $(".fa-clipboard").click(function(){
+        swal({   
+          title: "",   
+          text: 'Copy successfully！',   
+          html: false,
+          timer: 500,   
+          showConfirmButton: false
+        });
+      });
+    }));  
+</script>
+
+      
+    </div>
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>Thx F Sup</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="https://i.loli.net/2017/12/16/5a33fd668ce7c.png" alt="Tuski WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="https://i.loli.net/2017/12/16/5a33fdbe62e6f.png" alt="Tuski Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Swift/" rel="tag"><i class="fa fa-tag"></i> Swift</a>
+          
+            <a href="/tags/macOs/" rel="tag"><i class="fa fa-tag"></i> macOs</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+         
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/Creating-and-Modifying-a-URL-in-your-Swift-App/" rel="next" title="Creating and Modifying a URL in your Swift App">
+                <i class="fa fa-chevron-left"></i> Creating and Modifying a URL in your Swift App
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a35fec5ad889f1e" async = "async" ></script>
+</div>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+    <div class="comments" id="comments">
+      <div id="hypercomments_widget"></div>
+    </div>
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="Tuski" />
+            
+              <p class="site-author-name" itemprop="name">Tuski</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">29</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/thevenomsnake" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:thevenomsnake@icloud.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plus.google.com/u/0/104624402456467592306" target="_blank" title="Google">
+                    
+                      <i class="fa fa-fw fa-google"></i>Google</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/perphet" target="_blank" title="Twitter">
+                    
+                      <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.youtube.com/channel/UComQu3jg43YgIvm2PqAG1tA" target="_blank" title="YouTube">
+                    
+                      <i class="fa fa-fw fa-youtube"></i>YouTube</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+
+  <div class="links-of-blogroll motion-element links-of-blogroll-block">
+    <div class="links-of-blogroll-title">
+      <i class="fa  fa-fw fa-globe"></i>
+      Links&nbsp;
+      <i class="fa  fa-fw fa-globe"></i>
+    </div>
+    <ul class="links-of-blogroll-list">
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.crazyforcode.org/" title="CFC" target="_blank">CFC</a>
+        </li>
+      
+    </ul>
+     
+  </div>
+ 
+
+          
+      <iframe src="https://open.spotify.com/embed?uri=spotify:user:spotify:playlist:37i9dQZF1DXcBWIGoYBM5M&theme=white" width="215" height="350" frameborder="0" allowtransparency="true"></iframe>
+       
+      </section>
+
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Digging-Deeper-with-CoreGraphics"><span class="nav-text">Digging Deeper with CoreGraphics</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Shining-Light-on-Solar"><span class="nav-text">Shining Light on Solar</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Calculating-Solar-Position"><span class="nav-text">Calculating Solar Position</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Extending-Our-Understanding-of-XMP"><span class="nav-text">Extending Our Understanding of XMP</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Creating-Our-Own-Dynamic-Desktop"><span class="nav-text">Creating Our Own Dynamic Desktop</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Writing-to-an-Image-Destination"><span class="nav-text">Writing to an Image Destination</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Automatically-Generating-a-Dynamic-Desktop-from-Photos"><span class="nav-text">Automatically Generating a Dynamic Desktop from Photos</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Shooting-a-Time-Lapse-on-Your-iPhone"><span class="nav-text">Shooting a Time Lapse on Your iPhone</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Generating-Landscapes-from-GIS-Data"><span class="nav-text">Generating Landscapes from GIS Data</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Downloading-Pre-Made-Dynamic-Desktops"><span class="nav-text">Downloading Pre-Made Dynamic Desktops</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Reference"><span class="nav-text">Reference</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="heart">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tuski</span>
+
+
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by </div>
+
+
+
+  <span class="post-meta-divider">Perphet</span>
+
+
+<!--
+
+  <div class="theme-info">Theme &mdash;  v{}</div>
+
+
+
+
+-->
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+		<script type="text/javascript">
+		_hcwp = window._hcwp || [];
+
+		_hcwp.push({widget:"Bloggerstream", widget_id: 99037, selector:".hc-comment-count", label: "{\%COUNT%\}" });
+
+		
+		_hcwp.push({widget:"Stream", widget_id: 99037, xid: "2018/11/mac​OS-Dynamic-Desktop/"});
+		
+
+		(function() {
+		if("HC_LOAD_INIT" in window)return;
+		HC_LOAD_INIT = true;
+		var lang = (navigator.language || navigator.systemLanguage || navigator.userLanguage || "en").substr(0, 2).toLowerCase();
+		var hcc = document.createElement("script"); hcc.type = "text/javascript"; hcc.async = true;
+		hcc.src = ("https:" == document.location.protocol ? "https" : "http")+"://w.hypercomments.com/widget/hc/99037/"+lang+"/widget.js";
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(hcc, s.nextSibling);
+		})();
+		</script>
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("c6sjJ6fGADGrCVC48k5MVQcD-gzGzoHsz", "YuTcQ8aPXftmtmeC4VvTrK9B");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+  <script type="text/javascript">
+  wpac_init = window.wpac_init || [];
+  wpac_init.push({widget: 'Rating', id: 8566,
+    el: 'wpac-rating',
+    color: 'fc6423'
+  });
+  (function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = '//embed.widgetpack.com/widget.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+  })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+<div id="hexo-helper-live2d">
+  <canvas id="live2dcanvas" width="150" height="350"></canvas>
+</div>
+<style>
+  #live2dcanvas{
+    position: fixed;
+    width: 150px;
+    height: 350px;
+    opacity:0.8;
+    right: 0px;
+    z-index: 999;
+    pointer-events: none;
+    bottom: -20px;
+  }
+</style>
+<script type="text/javascript" src="/live2d/device.min.js"></script>
+<script type="text/javascript">
+const loadScript = function loadScript(c,b){var a=document.createElement("script");a.type="text/javascript";"undefined"!=typeof b&&(a.readyState?a.onreadystatechange=function(){if("loaded"==a.readyState||"complete"==a.readyState)a.onreadystatechange=null,b()}:a.onload=function(){b()});a.src=c;document.body.appendChild(a)};
+(function(){
+  if((typeof(device) != 'undefined') && (device.mobile())){
+    var trElement = document.getElementById('hexo-helper-live2d');
+    trElement.parentNode.removeChild(trElement);
+    return;
+  }else
+    if (typeof(device) === 'undefined') console.error('Cannot find current-device script.');
+  loadScript("/live2d/script.js", function(){loadlive2d("live2dcanvas", "/live2d/assets/shizuku.model.json", 0.5);});
+})();
+</script>
+
+ <canvas class="fireworks" 
+        style="position: fixed; left: 0px; top: 0px; z-index: 99999999; pointer-events: none; width: 1158px; height: 916px;" 
+        width="2316" 
+        height="1832">
+</canvas>
+<script type="text/javascript" src="/js/src/anime.min.js"></script>
+<script type="text/javascript" src="/js/src/fireworks.js"></script>
+</body>
+</html>
