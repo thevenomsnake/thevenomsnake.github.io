@@ -1,0 +1,199 @@
+<hr>
+<p>title: What is SwiftSyntax?<br>copyright: true<br>date: 2019-02-03 12:02:48<br>tags:</p>
+<h2 id="Swift"><a href="#Swift" class="headerlink" title="- Swift"></a>- Swift</h2><blockquote class="blockquote-center">SwiftSyntax is a Swift library that lets you parse, analyze, generate, and transform Swift source code. It’s based on the libSyntax library, and was spun out from the main Swift language repository in August 2017.</blockquote>
+
+<!-- more -->
+<p>Together, the goal of these projects is to provide safe, correct, and intuitive facilities for structured editing, which is described thusly:</p>
+<blockquote>
+<p>What is structured editing? It’s an editing strategy that is keenly aware of the <em>structure</em> of source code, not necessarily its <em>representation</em> (i.e. characters or bytes). This can be achieved at different granularities: replacing an identifier, changing a call to global function to a method call, or indenting and formatting an entire source file based on declarative rules.</p>
+</blockquote>
+<p>At the time of writing, SwiftSyntax is still in development and subject to API changes. But you can start using it today to work with Swift source code in a programmatic way.</p>
+<p>It’s currently used by the <a href="https://github.com/apple/swift/tree/master/lib/Migrator">Swift Migrator</a>, and there are ongoing efforts to adopt the tool, both internally and externally.</p>
+<h1 id="How-Does-It-Work"><a href="#How-Does-It-Work" class="headerlink" title="How Does It Work?"></a>How Does It Work?</h1><p>To understand how SwiftSyntax works, let’s take a step back and look at the Swift compiler architecture:</p>
+<p><img src="https://i.loli.net/2019/02/03/5c56690b3724e.png" alt="swift-compilation-diagram-8af7d0078f72cdaa8f50430e608f15a9d4214f5772439d2fd6904bb5a8a53c60.png"></p>
+<p>The Swift compiler is primarily responsible for turning Swift code into executable machine code. The process is divided up into several discrete steps, starting with the <a href="https://github.com/apple/swift/tree/master/lib/Parse">parser</a>, which generates an abstract syntax tree, (AST). From there, semantic analysis is performed on the syntax to produce a type-checked AST, which lowered into <a href="https://github.com/apple/swift/blob/master/docs/SIL.rst">Swift Intermediate Language</a>; the SILis transformed and optimized and itself lowered into <a href="http://llvm.org/docs/LangRef.html">LLVM IR</a>, which is ultimately compiled into machine code.</p>
+<p>The most important takeaway for our discussion is that SwiftSyntax operates on the AST generated at the first step of the compilation process. As such, it can’t tell you any semantic or type information about code.</p>
+<p>Contrast this with something like <a href="https://github.com/apple/swift/tree/master/tools/SourceKit">SourceKit</a>, which operates with a much more complete understanding of Swift code. This additional information can be helpful for implementing editor features like code-completion or navigating across files. But there are plenty of important use cases that can be satisfied on a purely syntactic level, such as code formatting and syntax highlighting.</p>
+<h2 id="Demystifying-the-AST"><a href="#Demystifying-the-AST" class="headerlink" title="Demystifying the AST"></a>Demystifying the AST</h2><p>Abstract syntax trees can be difficult to understand in the abstract. So let’s generate one and see what it looks like.</p>
+<p>Consider the following single-line Swift file, which declares a function named <code>one()</code> that returns the value <code>1</code>:</p>
+<pre><code class="swift"><span class="function"><span class="keyword">func</span> <span class="title">one</span><span class="params">()</span></span> -&gt; <span class="type">Int</span> { <span class="keyword">return</span> <span class="number">1</span> }
+</code></pre>
+<p>Run the <code>swiftc</code> command on this file passing the <code>-frontend -emit-syntax</code>arguments:</p>
+<pre><code class="bash">$ xcrun swiftc -frontend -emit-syntax ./One.swift
+</code></pre>
+<p>The result is a chunk of JSON representing the AST. Its structure becomes much clearer once you reformat the JSON:</p>
+<pre><code class="json">{
+    <span class="attr">"kind"</span>: <span class="string">"SourceFile"</span>,
+    <span class="attr">"layout"</span>: [{
+        <span class="attr">"kind"</span>: <span class="string">"CodeBlockItemList"</span>,
+        <span class="attr">"layout"</span>: [{
+            <span class="attr">"kind"</span>: <span class="string">"CodeBlockItem"</span>,
+            <span class="attr">"layout"</span>: [{
+                <span class="attr">"kind"</span>: <span class="string">"FunctionDecl"</span>,
+                <span class="attr">"layout"</span>: [<span class="literal">null</span>, <span class="literal">null</span>, {
+                    <span class="attr">"tokenKind"</span>: {
+                        <span class="attr">"kind"</span>: <span class="string">"kw_func"</span>
+                    },
+                    <span class="attr">"leadingTrivia"</span>: [],
+                    <span class="attr">"trailingTrivia"</span>: [{
+                        <span class="attr">"kind"</span>: <span class="string">"Space"</span>,
+                        <span class="attr">"value"</span>: <span class="number">1</span>
+                    }],
+                    <span class="attr">"presence"</span>: <span class="string">"Present"</span>
+                }, {
+                    <span class="attr">"tokenKind"</span>: {
+                        <span class="attr">"kind"</span>: <span class="string">"identifier"</span>,
+                        <span class="attr">"text"</span>: <span class="string">"one"</span>
+                    },
+                    <span class="attr">"leadingTrivia"</span>: [],
+                    <span class="attr">"trailingTrivia"</span>: [],
+                    <span class="attr">"presence"</span>: <span class="string">"Present"</span>
+                }, ...
+</code></pre>
+<blockquote>
+<p>The Python <code>json.tool</code> module offers a convenient way to format JSON. It comes standard in macOS releases going back as far as anyone can recall. For example, here’s how you could use it with the redirected compiler output:</p>
+</blockquote>
+<pre><code class="bash">$ xcrun swiftc -frontend -emit-syntax ./One.swift | python -m json.tool
+</code></pre>
+<p>At the top-level, we have a <code>SourceFile</code> consisting of <code>CodeBlockItemList</code>elements and their constituent <code>CodeBlockItem</code> parts. This example has a single <code>CodeBlockItem</code> for the function declaration (<code>FunctionDecl</code>), which itself comprises subcomponents including a function signature, parameter clause, and return clause.</p>
+<p>The term trivia is used to describe anything that isn’t syntactically meaningful, like whitespace. Each token can have one or more pieces of leading and trailing trivia. For example, the space after the <code>Int</code> in the return clause (<code>-&gt; Int</code>) is represented by the following piece of trailing trivia.</p>
+<pre><code class="swift">{
+    <span class="string">"kind"</span>: <span class="string">"Space"</span>,
+    <span class="string">"value"</span>: <span class="number">1</span>
+}
+</code></pre>
+<h2 id="Working-Around-File-System-Constraints"><a href="#Working-Around-File-System-Constraints" class="headerlink" title="Working Around File System Constraints"></a>Working Around File System Constraints</h2><p>SwiftSyntax generates abstract syntax trees by delegating system calls to <code>swiftc</code>. However, this requires code to be associated with a file in order to be processed, and it’s often useful to work with code as a string.</p>
+<p>One way to work around this constraint is to write code to a temporary file and pass that to the compiler.</p>
+<p><a href="https://nshipster.com/nstemporarydirectory/">We’ve written about temporary files in the past</a>, but nowadays, there’s a much nicer API for working with them that’s provided by the <a href="https://github.com/apple/swift-package-manager">Swift Package Manager</a> itself. In your <code>Package.swift</code> file, add the following package dependency, and add the <code>&quot;Utility&quot;</code> dependency to the appropriate target:</p>
+<pre><code>.package(url: &quot;https://github.com/apple/swift-package-manager.git&quot;, from: &quot;0.3.0&quot;),
+</code></pre><p>Now, you can import the <code>Basic</code> module and use its <code>TemporaryFile</code> API like so:</p>
+<pre><code class="swift"><span class="keyword">import</span> Basic
+<span class="keyword">import</span> Foundation
+
+<span class="keyword">let</span> code: <span class="type">String</span>
+
+<span class="keyword">let</span> tempfile = <span class="keyword">try</span> <span class="type">TemporaryFile</span>(deleteOnClose: <span class="literal">true</span>)
+<span class="keyword">defer</span> { tempfile.fileHandle.closeFile() }
+tempfile.fileHandle.write(code.data(using: .utf8)!)
+
+<span class="keyword">let</span> url = <span class="type">URL</span>(fileURLWithPath: tempfile.path.asString)
+<span class="keyword">let</span> sourceFile = <span class="keyword">try</span> <span class="type">SyntaxTreeParser</span>.parse(url)
+</code></pre>
+<h1 id="What-Can-You-Do-With-It"><a href="#What-Can-You-Do-With-It" class="headerlink" title="What Can You Do With It?"></a>What Can You Do With It?</h1><p>Now that we have a reasonable idea of how SwiftSyntax works, let’s talk about some of the ways that you can use it!</p>
+<h2 id="Writing-Swift-Code-The-Hard-Way"><a href="#Writing-Swift-Code-The-Hard-Way" class="headerlink" title="Writing Swift Code: The Hard Way"></a>Writing Swift Code: The Hard Way</h2><p>The first and <em>least</em> compelling use case for SwiftSyntax is to make writing Swift code an order of magnitude more difficult.</p>
+<p>SwiftSyntax, by way of its <code>SyntaxFactory</code> APIs, allows you to generate entirely new Swift code from scratch. Unfortunately, doing this programmatically isn’t exactly a walk in the park.</p>
+<p>For example, consider the following code:</p>
+<pre><code class="swift"><span class="keyword">import</span> SwiftSyntax
+
+<span class="keyword">let</span> structKeyword = <span class="type">SyntaxFactory</span>.makeStructKeyword(trailingTrivia: .spaces(<span class="number">1</span>))
+
+<span class="keyword">let</span> identifier = <span class="type">SyntaxFactory</span>.makeIdentifier(<span class="string">"Example"</span>, trailingTrivia: .spaces(<span class="number">1</span>))
+
+<span class="keyword">let</span> leftBrace = <span class="type">SyntaxFactory</span>.makeLeftBraceToken()
+<span class="keyword">let</span> rightBrace = <span class="type">SyntaxFactory</span>.makeRightBraceToken(leadingTrivia: .newlines(<span class="number">1</span>))
+<span class="keyword">let</span> members = <span class="type">MemberDeclBlockSyntax</span> { builder <span class="keyword">in</span>
+    builder.useLeftBrace(leftBrace)
+    builder.useRightBrace(rightBrace)
+}
+
+<span class="keyword">let</span> structureDeclaration = <span class="type">StructDeclSyntax</span> { builder <span class="keyword">in</span>
+    builder.useStructKeyword(structKeyword)
+    builder.useIdentifier(identifier)
+    builder.useMembers(members)
+}
+
+<span class="built_in">print</span>(structureDeclaration)
+</code></pre>
+<p><em>Whew.</em> So what did all of that effort get us?</p>
+<pre><code class="swift"><span class="class"><span class="keyword">struct</span> <span class="title">Example</span> </span>{
+}
+</code></pre>
+<p><em>Oofa doofa.</em></p>
+<p>This certainly isn’t going to replace <a href="https://nshipster.com/swift-gyb/">GYB</a> for everyday code generation purposes. (In fact, <a href="https://github.com/apple/swift/blob/master/lib/Syntax/SyntaxKind.cpp.gyb">libSyntax</a> and <a href="https://github.com/apple/swift-syntax/blob/master/Sources/SwiftSyntax/SyntaxKind.swift.gyb">SwiftSyntax</a> both make extensive use of <code>gyb</code>to generate its interfaces.)</p>
+<p>But this interface can be quite useful when precision matters. For instance, you might use SwiftSyntax to implement a <a href="https://en.wikipedia.org/wiki/Fuzzing">fuzzer</a> for the Swift compiler, using it to randomly generate arbitrarily-complex-but-ostensibly-valid programs to stress test its internals.</p>
+<h1 id="Rewriting-Swift-Code"><a href="#Rewriting-Swift-Code" class="headerlink" title="Rewriting Swift Code"></a>Rewriting Swift Code</h1><p><a href="https://github.com/apple/swift-syntax#example">The example provided in the SwiftSyntax README</a> shows how to write a program to take each integer literal in a source file and increment its value by one.</p>
+<p>Looking at that, you can already extrapolate out to how this might be used to create a canonical <code>swift-format</code> tool.</p>
+<p>But for the moment, let’s consider a considerably <em>less</em> productive — and more seasonally appropriate (🎃) — use of source rewriting:</p>
+<pre><code class="swift"><span class="keyword">import</span> SwiftSyntax
+
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ZalgoRewriter</span>: <span class="title">SyntaxRewriter</span> </span>{
+    <span class="keyword">public</span> <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">visit</span><span class="params">(<span class="number">_</span> token: TokenSyntax)</span></span> -&gt; <span class="type">Syntax</span> {
+        <span class="keyword">guard</span> <span class="keyword">case</span> <span class="keyword">let</span> .stringLiteral(text) = token.tokenKind <span class="keyword">else</span> {
+            <span class="keyword">return</span> token
+        }
+
+        <span class="keyword">return</span> token.withKind(.stringLiteral(zalgo(text)))
+    }
+}
+</code></pre>
+<p>What’s that <a href="https://gist.github.com/mattt/b46ab5027f1ee6ab1a45583a41240033"><code>zalgo</code></a> function all about? You’re probably better off not knowing…</p>
+<p>Anyway, running this rewriter on your source code transforms all string literals in the following manner:</p>
+<pre><code class="swift"><span class="comment">// Before 👋😄</span>
+<span class="built_in">print</span>(<span class="string">"Hello, world!"</span>)
+
+<span class="comment">// After 🦑😵</span>
+<span class="built_in">print</span>(<span class="string">"H͞͏̟̂ͩel̵ͬ͆͜ĺ͎̪̣͠ơ̡̼͓̋͝, w͎̽̇ͪ͢ǒ̩͔̲̕͝r̷̡̠͓̉͂l̘̳̆ͯ̊d!"</span>)
+</code></pre>
+<p><em>Spooky, right?</em></p>
+<h1 id="Highting-Swift-Code"><a href="#Highting-Swift-Code" class="headerlink" title="Highting Swift Code"></a>Highting Swift Code</h1><p>Let’s conclude our look at SwiftSyntax with something that’s actually useful: a Swift syntax highlighter.</p>
+<p>A syntax highlighter, in this sense, describes any tool that takes source code and formats it in a way that’s more suitable for display in HTML.</p>
+<p><a href="https://github.com/NSHipster/nshipster.com">NSHipster is built on top of Jekyll</a>, and uses the Ruby library <a href="https://github.com/jneen/rouge">Rouge</a> to colorize the example code you see in every article. However, due to Swift’s relatively complex syntax and rapid evolution, the generated HTML isn’t always 100% correct.</p>
+<p>Instead of <a href="https://github.com/jneen/rouge/blob/master/lib/rouge/lexers/swift.rb">messing with a pile of regular expressions</a>, we could instead <a href="https://github.com/NSHipster/SwiftSyntaxHighlighter">build a syntax highlighter</a> that leverages SwiftSyntax’s superior understanding of the language.</p>
+<p>At its core, the implementation is rather straightforward: implement a subclass of <code>SyntaxRewriter</code> and override the <code>visit(_:)</code> method that’s called for each token as a source file is traversed. By switching over each of the different kinds of tokens, you can map them to the HTML markup for their<a href="https://github.com/jneen/rouge/wiki/List-of-tokens">corresponding highlighter tokens</a>.</p>
+<p>For example, numeric literals are represented with <code>&lt;span&gt;</code> elements whose class name begins with the letter <code>m</code> (<code>mf</code> for floating-point, <code>mi</code> for integer, etc.). Here’s the corresponding code in our <code>SyntaxRewriter</code> subclass:</p>
+<pre><code class="swift"><span class="keyword">import</span> SwiftSyntax
+
+<span class="class"><span class="keyword">class</span> <span class="title">SwiftSyntaxHighlighter</span>: <span class="title">SyntaxRewriter</span> </span>{
+    <span class="keyword">var</span> html: <span class="type">String</span> = <span class="string">""</span>
+
+    <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">visit</span><span class="params">(<span class="number">_</span> token: TokenSyntax)</span></span> -&gt; <span class="type">Syntax</span> {
+        <span class="keyword">switch</span> token.tokenKind {
+        <span class="comment">// ...</span>
+        <span class="keyword">case</span> .floatingLiteral(<span class="keyword">let</span> string):
+            html += <span class="string">"&lt;span class=\"mf\"&gt;<span class="subst">\(string)</span>&lt;/span&gt;"</span>
+        <span class="keyword">case</span> .integerLiteral(<span class="keyword">let</span> string):
+            <span class="keyword">if</span> string.hasPrefix(<span class="string">"0b"</span>) {
+                html += <span class="string">"&lt;span class=\"mb\"&gt;<span class="subst">\(string)</span>&lt;/span&gt;"</span>
+            } <span class="keyword">else</span> <span class="keyword">if</span> string.hasPrefix(<span class="string">"0o"</span>) {
+                html += <span class="string">"&lt;span class=\"mo\"&gt;<span class="subst">\(string)</span>&lt;/span&gt;"</span>
+            } <span class="keyword">else</span> <span class="keyword">if</span> string.hasPrefix(<span class="string">"0x"</span>) {
+                html += <span class="string">"&lt;span class=\"mh\"&gt;<span class="subst">\(string)</span>&lt;/span&gt;"</span>
+            } <span class="keyword">else</span> {
+                html += <span class="string">"&lt;span class=\"mi\"&gt;<span class="subst">\(string)</span>&lt;/span&gt;"</span>
+            }
+        <span class="comment">// ...</span>
+        <span class="keyword">default</span>:
+            <span class="keyword">break</span>
+        }
+
+        <span class="keyword">return</span> token
+    }
+}
+</code></pre>
+<p>Although <code>SyntaxRewriter</code> has specialized <code>visit(_:)</code> methods for each of the different kinds of syntax elements, I found it easier to handle everything in a single <code>switch</code> statement. (Printing unhandled tokens in the <code>default</code> branch was a really helpful way to find any cases that I wasn’t already handling). It’s not the most elegant of implementations, but it was a convenient place to start given my limited understanding of the library.</p>
+<p>Anyway, after a few hours of development, I was able to generate reasonable colorized output for a wide range of Swift syntactic features:</p>
+<pre><code class="swift"><span class="keyword">import</span> Foundation
+
+#<span class="keyword">if</span> os(macOS)
+<span class="class"><span class="keyword">class</span> <span class="title">Class</span>: <span class="title">NSObject</span> </span>{
+    pravate <span class="keyword">static</span> <span class="keyword">let</span> message = <span class="string">""</span><span class="string">"</span>
+<span class="string">        Hello, world!</span>
+<span class="string">    "</span><span class="string">""</span>
+    @obj <span class="keyword">var</span> storedProperty: <span class="type">Int</span> = <span class="number">0</span>
+
+    <span class="keyword">override</span> <span class="keyword">init</span>() {
+        <span class="keyword">self</span>.storeProperty = <span class="number">0b10101010</span>
+        <span class="keyword">super</span>.<span class="keyword">init</span>()
+    }
+
+    <span class="function"><span class="keyword">func</span> <span class="title">printSelectorAndKeyPath</span><span class="params">()</span></span> {
+        <span class="built_in">print</span>(#selector(emptyFunction))
+        <span class="built_in">print</span>(#keyPath(storedProperty))
+    }
+
+    <span class="meta">@objc</span> <span class="function"><span class="keyword">func</span> <span class="title">emptyFunction</span><span class="params">()</span></span> {}
+}
+#endif
+</code></pre>
+<p>The project comes with a library and a command line tool. Go ahead and <a href="https://github.com/NSHipster/SwiftSyntaxHighlighter">try it out</a> and let me know what you think!</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a id="download" href="https://nshipster.com/swiftsyntax/#writing-swift-code-the-hard-way"><i class="fa fa-download"></i><span> Click me to visit</span> </a></p>

@@ -1,0 +1,1501 @@
+<!DOCTYPE html>
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+<script type="text/javascript">var OriginTitile=document.title,st;document.addEventListener("visibilitychange",function(){document.hidden?(document.title="(/≧▽≦/)Aw, Snap!",clearTimeout(st)):(document.title="(ฅ>ω<*ฅ) Fixed~"+OriginTitile,st=setTimeout(function(){document.title=OriginTitile},3e3))})</script>
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-bounce.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Swift," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="SwiftSyntax is a Swift library that lets you parse, analyze, generate, and transform Swift source code. It’s based on the libSyntax library, and was spun out from the main Swift language repository in">
+<meta name="keywords" content="Swift">
+<meta property="og:type" content="article">
+<meta property="og:title" content="What is SwiftSyntax?">
+<meta property="og:url" content="http://www.perphet.com/2019/02/What-is-SwiftSyntax/index.html">
+<meta property="og:site_name" content="Tuski&#39;s Blog">
+<meta property="og:description" content="SwiftSyntax is a Swift library that lets you parse, analyze, generate, and transform Swift source code. It’s based on the libSyntax library, and was spun out from the main Swift language repository in">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://i.loli.net/2019/02/03/5c56690b3724e.png">
+<meta property="og:updated_time" content="2019-02-03T04:24:06.060Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="What is SwiftSyntax?">
+<meta name="twitter:description" content="SwiftSyntax is a Swift library that lets you parse, analyze, generate, and transform Swift source code. It’s based on the libSyntax library, and was spun out from the main Swift language repository in">
+<meta name="twitter:image" content="https://i.loli.net/2019/02/03/5c56690b3724e.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.perphet.com/2019/02/What-is-SwiftSyntax/"/>
+
+
+
+<link rel="stylesheet" href="../live2d/css/live2d.css" />
+
+
+  <title>What is SwiftSyntax? | Tuski's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+<div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+   
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tuski's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">I code my life</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-music">
+          <a href="/music/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-music"></i> <br />
+            
+            Music
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.perphet.com/2019/02/What-is-SwiftSyntax/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tuski">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tuski's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">What is SwiftSyntax?</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-03T12:02:48+09:00">
+                2019-02-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+            <!--noindex-->
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/02/What-is-SwiftSyntax/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="2019/02/What-is-SwiftSyntax/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+              <!--/noindex-->
+            
+          
+
+          
+          
+             <span id="/2019/02/What-is-SwiftSyntax/" class="leancloud_visitors" data-flag-title="What is SwiftSyntax?">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  1,625
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  10
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <script src="/assets/js/APlayer.min.js"> </script><blockquote class="blockquote-center">SwiftSyntax is a Swift library that lets you parse, analyze, generate, and transform Swift source code. It’s based on the libSyntax library, and was spun out from the main Swift language repository in August 2017.</blockquote>
+
+<a id="more"></a>
+<p>Together, the goal of these projects is to provide safe, correct, and intuitive facilities for structured editing, which is described thusly:</p>
+<blockquote>
+<p>What is structured editing? It’s an editing strategy that is keenly aware of the <em>structure</em> of source code, not necessarily its <em>representation</em> (i.e. characters or bytes). This can be achieved at different granularities: replacing an identifier, changing a call to global function to a method call, or indenting and formatting an entire source file based on declarative rules.</p>
+</blockquote>
+<p>At the time of writing, SwiftSyntax is still in development and subject to API changes. But you can start using it today to work with Swift source code in a programmatic way.</p>
+<p>It’s currently used by the <a href="https://github.com/apple/swift/tree/master/lib/Migrator" target="_blank" rel="external">Swift Migrator</a>, and there are ongoing efforts to adopt the tool, both internally and externally.</p>
+<h1 id="How-Does-It-Work"><a href="#How-Does-It-Work" class="headerlink" title="How Does It Work?"></a>How Does It Work?</h1><p>To understand how SwiftSyntax works, let’s take a step back and look at the Swift compiler architecture:</p>
+<p><img src="https://i.loli.net/2019/02/03/5c56690b3724e.png" alt="swift-compilation-diagram-8af7d0078f72cdaa8f50430e608f15a9d4214f5772439d2fd6904bb5a8a53c60.png"></p>
+<p>The Swift compiler is primarily responsible for turning Swift code into executable machine code. The process is divided up into several discrete steps, starting with the <a href="https://github.com/apple/swift/tree/master/lib/Parse" target="_blank" rel="external">parser</a>, which generates an abstract syntax tree, (AST). From there, semantic analysis is performed on the syntax to produce a type-checked AST, which lowered into <a href="https://github.com/apple/swift/blob/master/docs/SIL.rst" target="_blank" rel="external">Swift Intermediate Language</a>; the SILis transformed and optimized and itself lowered into <a href="http://llvm.org/docs/LangRef.html" target="_blank" rel="external">LLVM IR</a>, which is ultimately compiled into machine code.</p>
+<p>The most important takeaway for our discussion is that SwiftSyntax operates on the AST generated at the first step of the compilation process. As such, it can’t tell you any semantic or type information about code.</p>
+<p>Contrast this with something like <a href="https://github.com/apple/swift/tree/master/tools/SourceKit" target="_blank" rel="external">SourceKit</a>, which operates with a much more complete understanding of Swift code. This additional information can be helpful for implementing editor features like code-completion or navigating across files. But there are plenty of important use cases that can be satisfied on a purely syntactic level, such as code formatting and syntax highlighting.</p>
+<h2 id="Demystifying-the-AST"><a href="#Demystifying-the-AST" class="headerlink" title="Demystifying the AST"></a>Demystifying the AST</h2><p>Abstract syntax trees can be difficult to understand in the abstract. So let’s generate one and see what it looks like.</p>
+<p>Consider the following single-line Swift file, which declares a function named <code>one()</code> that returns the value <code>1</code>:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">one</span><span class="params">()</span></span> -&gt; <span class="type">Int</span> &#123; <span class="keyword">return</span> <span class="number">1</span> &#125;</div></pre></td></tr></table></figure>
+<p>Run the <code>swiftc</code> command on this file passing the <code>-frontend -emit-syntax</code>arguments:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ xcrun swiftc -frontend -emit-syntax ./One.swift</div></pre></td></tr></table></figure>
+<p>The result is a chunk of JSON representing the AST. Its structure becomes much clearer once you reformat the JSON:</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attr">"kind"</span>: <span class="string">"SourceFile"</span>,</div><div class="line">    <span class="attr">"layout"</span>: [&#123;</div><div class="line">        <span class="attr">"kind"</span>: <span class="string">"CodeBlockItemList"</span>,</div><div class="line">        <span class="attr">"layout"</span>: [&#123;</div><div class="line">            <span class="attr">"kind"</span>: <span class="string">"CodeBlockItem"</span>,</div><div class="line">            <span class="attr">"layout"</span>: [&#123;</div><div class="line">                <span class="attr">"kind"</span>: <span class="string">"FunctionDecl"</span>,</div><div class="line">                <span class="attr">"layout"</span>: [<span class="literal">null</span>, <span class="literal">null</span>, &#123;</div><div class="line">                    <span class="attr">"tokenKind"</span>: &#123;</div><div class="line">                        <span class="attr">"kind"</span>: <span class="string">"kw_func"</span></div><div class="line">                    &#125;,</div><div class="line">                    <span class="attr">"leadingTrivia"</span>: [],</div><div class="line">                    <span class="attr">"trailingTrivia"</span>: [&#123;</div><div class="line">                        <span class="attr">"kind"</span>: <span class="string">"Space"</span>,</div><div class="line">                        <span class="attr">"value"</span>: <span class="number">1</span></div><div class="line">                    &#125;],</div><div class="line">                    <span class="attr">"presence"</span>: <span class="string">"Present"</span></div><div class="line">                &#125;, &#123;</div><div class="line">                    <span class="attr">"tokenKind"</span>: &#123;</div><div class="line">                        <span class="attr">"kind"</span>: <span class="string">"identifier"</span>,</div><div class="line">                        <span class="attr">"text"</span>: <span class="string">"one"</span></div><div class="line">                    &#125;,</div><div class="line">                    <span class="attr">"leadingTrivia"</span>: [],</div><div class="line">                    <span class="attr">"trailingTrivia"</span>: [],</div><div class="line">                    <span class="attr">"presence"</span>: <span class="string">"Present"</span></div><div class="line">                &#125;, ...</div></pre></td></tr></table></figure>
+<blockquote>
+<p>The Python <code>json.tool</code> module offers a convenient way to format JSON. It comes standard in macOS releases going back as far as anyone can recall. For example, here’s how you could use it with the redirected compiler output:</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ xcrun swiftc -frontend -emit-syntax ./One.swift | python -m json.tool</div></pre></td></tr></table></figure>
+<p>At the top-level, we have a <code>SourceFile</code> consisting of <code>CodeBlockItemList</code>elements and their constituent <code>CodeBlockItem</code> parts. This example has a single <code>CodeBlockItem</code> for the function declaration (<code>FunctionDecl</code>), which itself comprises subcomponents including a function signature, parameter clause, and return clause.</p>
+<p>The term trivia is used to describe anything that isn’t syntactically meaningful, like whitespace. Each token can have one or more pieces of leading and trailing trivia. For example, the space after the <code>Int</code> in the return clause (<code>-&gt; Int</code>) is represented by the following piece of trailing trivia.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="string">"kind"</span>: <span class="string">"Space"</span>,</div><div class="line">    <span class="string">"value"</span>: <span class="number">1</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="Working-Around-File-System-Constraints"><a href="#Working-Around-File-System-Constraints" class="headerlink" title="Working Around File System Constraints"></a>Working Around File System Constraints</h2><p>SwiftSyntax generates abstract syntax trees by delegating system calls to <code>swiftc</code>. However, this requires code to be associated with a file in order to be processed, and it’s often useful to work with code as a string.</p>
+<p>One way to work around this constraint is to write code to a temporary file and pass that to the compiler.</p>
+<p><a href="https://nshipster.com/nstemporarydirectory/" target="_blank" rel="external">We’ve written about temporary files in the past</a>, but nowadays, there’s a much nicer API for working with them that’s provided by the <a href="https://github.com/apple/swift-package-manager" target="_blank" rel="external">Swift Package Manager</a> itself. In your <code>Package.swift</code> file, add the following package dependency, and add the <code>&quot;Utility&quot;</code> dependency to the appropriate target:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">.package(url: &quot;https://github.com/apple/swift-package-manager.git&quot;, from: &quot;0.3.0&quot;),</div></pre></td></tr></table></figure>
+<p>Now, you can import the <code>Basic</code> module and use its <code>TemporaryFile</code> API like so:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> Basic</div><div class="line"><span class="keyword">import</span> Foundation</div><div class="line"></div><div class="line"><span class="keyword">let</span> code: <span class="type">String</span></div><div class="line"></div><div class="line"><span class="keyword">let</span> tempfile = <span class="keyword">try</span> <span class="type">TemporaryFile</span>(deleteOnClose: <span class="literal">true</span>)</div><div class="line"><span class="keyword">defer</span> &#123; tempfile.fileHandle.closeFile() &#125;</div><div class="line">tempfile.fileHandle.write(code.data(using: .utf8)!)</div><div class="line"></div><div class="line"><span class="keyword">let</span> url = <span class="type">URL</span>(fileURLWithPath: tempfile.path.asString)</div><div class="line"><span class="keyword">let</span> sourceFile = <span class="keyword">try</span> <span class="type">SyntaxTreeParser</span>.parse(url)</div></pre></td></tr></table></figure>
+<h1 id="What-Can-You-Do-With-It"><a href="#What-Can-You-Do-With-It" class="headerlink" title="What Can You Do With It?"></a>What Can You Do With It?</h1><p>Now that we have a reasonable idea of how SwiftSyntax works, let’s talk about some of the ways that you can use it!</p>
+<h2 id="Writing-Swift-Code-The-Hard-Way"><a href="#Writing-Swift-Code-The-Hard-Way" class="headerlink" title="Writing Swift Code: The Hard Way"></a>Writing Swift Code: The Hard Way</h2><p>The first and <em>least</em> compelling use case for SwiftSyntax is to make writing Swift code an order of magnitude more difficult.</p>
+<p>SwiftSyntax, by way of its <code>SyntaxFactory</code> APIs, allows you to generate entirely new Swift code from scratch. Unfortunately, doing this programmatically isn’t exactly a walk in the park.</p>
+<p>For example, consider the following code:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> SwiftSyntax</div><div class="line"></div><div class="line"><span class="keyword">let</span> structKeyword = <span class="type">SyntaxFactory</span>.makeStructKeyword(trailingTrivia: .spaces(<span class="number">1</span>))</div><div class="line"></div><div class="line"><span class="keyword">let</span> identifier = <span class="type">SyntaxFactory</span>.makeIdentifier(<span class="string">"Example"</span>, trailingTrivia: .spaces(<span class="number">1</span>))</div><div class="line"></div><div class="line"><span class="keyword">let</span> leftBrace = <span class="type">SyntaxFactory</span>.makeLeftBraceToken()</div><div class="line"><span class="keyword">let</span> rightBrace = <span class="type">SyntaxFactory</span>.makeRightBraceToken(leadingTrivia: .newlines(<span class="number">1</span>))</div><div class="line"><span class="keyword">let</span> members = <span class="type">MemberDeclBlockSyntax</span> &#123; builder <span class="keyword">in</span></div><div class="line">    builder.useLeftBrace(leftBrace)</div><div class="line">    builder.useRightBrace(rightBrace)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">let</span> structureDeclaration = <span class="type">StructDeclSyntax</span> &#123; builder <span class="keyword">in</span></div><div class="line">    builder.useStructKeyword(structKeyword)</div><div class="line">    builder.useIdentifier(identifier)</div><div class="line">    builder.useMembers(members)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="built_in">print</span>(structureDeclaration)</div></pre></td></tr></table></figure>
+<p><em>Whew.</em> So what did all of that effort get us?</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Example</span> </span>&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><em>Oofa doofa.</em></p>
+<p>This certainly isn’t going to replace <a href="https://nshipster.com/swift-gyb/" target="_blank" rel="external">GYB</a> for everyday code generation purposes. (In fact, <a href="https://github.com/apple/swift/blob/master/lib/Syntax/SyntaxKind.cpp.gyb" target="_blank" rel="external">libSyntax</a> and <a href="https://github.com/apple/swift-syntax/blob/master/Sources/SwiftSyntax/SyntaxKind.swift.gyb" target="_blank" rel="external">SwiftSyntax</a> both make extensive use of <code>gyb</code>to generate its interfaces.)</p>
+<p>But this interface can be quite useful when precision matters. For instance, you might use SwiftSyntax to implement a <a href="https://en.wikipedia.org/wiki/Fuzzing" target="_blank" rel="external">fuzzer</a> for the Swift compiler, using it to randomly generate arbitrarily-complex-but-ostensibly-valid programs to stress test its internals.</p>
+<h1 id="Rewriting-Swift-Code"><a href="#Rewriting-Swift-Code" class="headerlink" title="Rewriting Swift Code"></a>Rewriting Swift Code</h1><p><a href="https://github.com/apple/swift-syntax#example" target="_blank" rel="external">The example provided in the SwiftSyntax README</a> shows how to write a program to take each integer literal in a source file and increment its value by one.</p>
+<p>Looking at that, you can already extrapolate out to how this might be used to create a canonical <code>swift-format</code> tool.</p>
+<p>But for the moment, let’s consider a considerably <em>less</em> productive — and more seasonally appropriate (🎃) — use of source rewriting:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> SwiftSyntax</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ZalgoRewriter</span>: <span class="title">SyntaxRewriter</span> </span>&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">visit</span><span class="params">(<span class="number">_</span> token: TokenSyntax)</span></span> -&gt; <span class="type">Syntax</span> &#123;</div><div class="line">        <span class="keyword">guard</span> <span class="keyword">case</span> <span class="keyword">let</span> .stringLiteral(text) = token.tokenKind <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">return</span> token</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">return</span> token.withKind(.stringLiteral(zalgo(text)))</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>What’s that <a href="https://gist.github.com/mattt/b46ab5027f1ee6ab1a45583a41240033" target="_blank" rel="external"><code>zalgo</code></a> function all about? You’re probably better off not knowing…</p>
+<p>Anyway, running this rewriter on your source code transforms all string literals in the following manner:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Before 👋😄</span></div><div class="line"><span class="built_in">print</span>(<span class="string">"Hello, world!"</span>)</div><div class="line"></div><div class="line"><span class="comment">// After 🦑😵</span></div><div class="line"><span class="built_in">print</span>(<span class="string">"H͞͏̟̂ͩel̵ͬ͆͜ĺ͎̪̣͠ơ̡̼͓̋͝, w͎̽̇ͪ͢ǒ̩͔̲̕͝r̷̡̠͓̉͂l̘̳̆ͯ̊d!"</span>)</div></pre></td></tr></table></figure>
+<p><em>Spooky, right?</em></p>
+<h1 id="Highting-Swift-Code"><a href="#Highting-Swift-Code" class="headerlink" title="Highting Swift Code"></a>Highting Swift Code</h1><p>Let’s conclude our look at SwiftSyntax with something that’s actually useful: a Swift syntax highlighter.</p>
+<p>A syntax highlighter, in this sense, describes any tool that takes source code and formats it in a way that’s more suitable for display in HTML.</p>
+<p><a href="https://github.com/NSHipster/nshipster.com" target="_blank" rel="external">NSHipster is built on top of Jekyll</a>, and uses the Ruby library <a href="https://github.com/jneen/rouge" target="_blank" rel="external">Rouge</a> to colorize the example code you see in every article. However, due to Swift’s relatively complex syntax and rapid evolution, the generated HTML isn’t always 100% correct.</p>
+<p>Instead of <a href="https://github.com/jneen/rouge/blob/master/lib/rouge/lexers/swift.rb" target="_blank" rel="external">messing with a pile of regular expressions</a>, we could instead <a href="https://github.com/NSHipster/SwiftSyntaxHighlighter" target="_blank" rel="external">build a syntax highlighter</a> that leverages SwiftSyntax’s superior understanding of the language.</p>
+<p>At its core, the implementation is rather straightforward: implement a subclass of <code>SyntaxRewriter</code> and override the <code>visit(_:)</code> method that’s called for each token as a source file is traversed. By switching over each of the different kinds of tokens, you can map them to the HTML markup for their<a href="https://github.com/jneen/rouge/wiki/List-of-tokens" target="_blank" rel="external">corresponding highlighter tokens</a>.</p>
+<p>For example, numeric literals are represented with <code>&lt;span&gt;</code> elements whose class name begins with the letter <code>m</code> (<code>mf</code> for floating-point, <code>mi</code> for integer, etc.). Here’s the corresponding code in our <code>SyntaxRewriter</code> subclass:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> SwiftSyntax</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">SwiftSyntaxHighlighter</span>: <span class="title">SyntaxRewriter</span> </span>&#123;</div><div class="line">    <span class="keyword">var</span> html: <span class="type">String</span> = <span class="string">""</span></div><div class="line"></div><div class="line">    <span class="keyword">override</span> <span class="function"><span class="keyword">func</span> <span class="title">visit</span><span class="params">(<span class="number">_</span> token: TokenSyntax)</span></span> -&gt; <span class="type">Syntax</span> &#123;</div><div class="line">        <span class="keyword">switch</span> token.tokenKind &#123;</div><div class="line">        <span class="comment">// ...</span></div><div class="line">        <span class="keyword">case</span> .floatingLiteral(<span class="keyword">let</span> string):</div><div class="line">            html += <span class="string">"&lt;span class=\"mf\"&gt;<span class="subst">\(string)</span>&lt;/span&gt;"</span></div><div class="line">        <span class="keyword">case</span> .integerLiteral(<span class="keyword">let</span> string):</div><div class="line">            <span class="keyword">if</span> string.hasPrefix(<span class="string">"0b"</span>) &#123;</div><div class="line">                html += <span class="string">"&lt;span class=\"mb\"&gt;<span class="subst">\(string)</span>&lt;/span&gt;"</span></div><div class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> string.hasPrefix(<span class="string">"0o"</span>) &#123;</div><div class="line">                html += <span class="string">"&lt;span class=\"mo\"&gt;<span class="subst">\(string)</span>&lt;/span&gt;"</span></div><div class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> string.hasPrefix(<span class="string">"0x"</span>) &#123;</div><div class="line">                html += <span class="string">"&lt;span class=\"mh\"&gt;<span class="subst">\(string)</span>&lt;/span&gt;"</span></div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                html += <span class="string">"&lt;span class=\"mi\"&gt;<span class="subst">\(string)</span>&lt;/span&gt;"</span></div><div class="line">            &#125;</div><div class="line">        <span class="comment">// ...</span></div><div class="line">        <span class="keyword">default</span>:</div><div class="line">            <span class="keyword">break</span></div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">return</span> token</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Although <code>SyntaxRewriter</code> has specialized <code>visit(_:)</code> methods for each of the different kinds of syntax elements, I found it easier to handle everything in a single <code>switch</code> statement. (Printing unhandled tokens in the <code>default</code> branch was a really helpful way to find any cases that I wasn’t already handling). It’s not the most elegant of implementations, but it was a convenient place to start given my limited understanding of the library.</p>
+<p>Anyway, after a few hours of development, I was able to generate reasonable colorized output for a wide range of Swift syntactic features:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> Foundation</div><div class="line"></div><div class="line">#<span class="keyword">if</span> os(macOS)</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Class</span>: <span class="title">NSObject</span> </span>&#123;</div><div class="line">    pravate <span class="keyword">static</span> <span class="keyword">let</span> message = <span class="string">""</span><span class="string">"</span></div><div class="line"><span class="string">    	Hello, world!</span></div><div class="line"><span class="string">    "</span><span class="string">""</span></div><div class="line">    @obj <span class="keyword">var</span> storedProperty: <span class="type">Int</span> = <span class="number">0</span></div><div class="line">    </div><div class="line">    <span class="keyword">override</span> <span class="keyword">init</span>() &#123;</div><div class="line">        <span class="keyword">self</span>.storeProperty = <span class="number">0b10101010</span></div><div class="line">        <span class="keyword">super</span>.<span class="keyword">init</span>()</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">printSelectorAndKeyPath</span><span class="params">()</span></span> &#123;</div><div class="line">        <span class="built_in">print</span>(#selector(emptyFunction))</div><div class="line">        <span class="built_in">print</span>(#keyPath(storedProperty))</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="meta">@objc</span> <span class="function"><span class="keyword">func</span> <span class="title">emptyFunction</span><span class="params">()</span></span> &#123;&#125;</div><div class="line">&#125;</div><div class="line">#endif</div></pre></td></tr></table></figure>
+<p>The project comes with a library and a command line tool. Go ahead and <a href="https://github.com/NSHipster/SwiftSyntaxHighlighter" target="_blank" rel="external">try it out</a> and let me know what you think!</p>
+<h1 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h1><p><a id="download" href="https://nshipster.com/swiftsyntax/#writing-swift-code-the-hard-way" target="_blank" rel="external"><i class="fa fa-download"></i><span> Click me to visit</span> </a></p>
+
+      
+    </div>
+    
+    
+    
+    <div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script type="text/javascript" src="http://jslibs.wuxubj.cn/sweetalert_mini/jquery-1.7.1.min.js"></script>
+  <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
+  <p><span>Title:  </span>What is SwiftSyntax?</a></p>
+  <p><span>Author:  </span>Tuski</a></p>
+  <p><span>Published:  </span>02/03/2019 - 12:02:48</p>
+  <p><span>Updated:  </span>02/03/2019 - 12:24:06</p>
+  <p><span>Link:  </span><a href="/2019/02/What-is-SwiftSyntax/" title="What is SwiftSyntax?">http://www.perphet.com/2019/02/What-is-SwiftSyntax/</a>
+    <span class="copy-path"  title="Click to Copy article link"><i class="fa fa-clipboard" data-clipboard-text="http://www.perphet.com/2019/02/What-is-SwiftSyntax/"  aria-label="Copy successfully！"></i></span>
+  </p>
+  <p><span>Protocol:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)</a> Reprinted please keep the original link and author</p>  
+</div>
+<script>
+    var clipboard = new Clipboard('.fa-clipboard');
+    clipboard.on('success', $(function(){
+      $(".fa-clipboard").click(function(){
+        swal({   
+          title: "",   
+          text: 'Copy successfully！',   
+          html: false,
+          timer: 500,   
+          showConfirmButton: false
+        });
+      });
+    }));  
+</script>
+
+      
+    </div>
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>Thx F Sup</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="https://i.loli.net/2017/12/16/5a33fd668ce7c.png" alt="Tuski WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="https://i.loli.net/2017/12/16/5a33fdbe62e6f.png" alt="Tuski Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Swift/" rel="tag"><i class="fa fa-tag"></i> Swift</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+         
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/What-is-SwiftSyntax/What-is-SwiftSyntax/" rel="next" title="What is SwiftSyntax?">
+                <i class="fa fa-chevron-left"></i> What is SwiftSyntax?
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a35fec5ad889f1e" async = "async" ></script>
+</div>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+    <div class="comments" id="comments">
+      <div id="hypercomments_widget"></div>
+    </div>
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="Tuski" />
+            
+              <p class="site-author-name" itemprop="name">Tuski</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">32</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">33</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/thevenomsnake" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:thevenomsnake@icloud.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plus.google.com/u/0/104624402456467592306" target="_blank" title="Google">
+                    
+                      <i class="fa fa-fw fa-google"></i>Google</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/perphet" target="_blank" title="Twitter">
+                    
+                      <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.youtube.com/channel/UComQu3jg43YgIvm2PqAG1tA" target="_blank" title="YouTube">
+                    
+                      <i class="fa fa-fw fa-youtube"></i>YouTube</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+
+  <div class="links-of-blogroll motion-element links-of-blogroll-block">
+    <div class="links-of-blogroll-title">
+      <i class="fa  fa-fw fa-globe"></i>
+      Links&nbsp;
+      <i class="fa  fa-fw fa-globe"></i>
+    </div>
+    <ul class="links-of-blogroll-list">
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.crazyforcode.org/" title="CFC" target="_blank">CFC</a>
+        </li>
+      
+    </ul>
+     
+  </div>
+ 
+
+          
+      <iframe src="https://open.spotify.com/embed?uri=spotify:user:spotify:playlist:37i9dQZF1DXcBWIGoYBM5M&theme=white" width="215" height="350" frameborder="0" allowtransparency="true"></iframe>
+       
+      </section>
+
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#How-Does-It-Work"><span class="nav-text">How Does It Work?</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Demystifying-the-AST"><span class="nav-text">Demystifying the AST</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Working-Around-File-System-Constraints"><span class="nav-text">Working Around File System Constraints</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#What-Can-You-Do-With-It"><span class="nav-text">What Can You Do With It?</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Writing-Swift-Code-The-Hard-Way"><span class="nav-text">Writing Swift Code: The Hard Way</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Rewriting-Swift-Code"><span class="nav-text">Rewriting Swift Code</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Highting-Swift-Code"><span class="nav-text">Highting Swift Code</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference"><span class="nav-text">Reference</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="heart">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tuski</span>
+
+
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by </div>
+
+
+
+  <span class="post-meta-divider">Perphet</span>
+
+
+<!--
+
+  <div class="theme-info">Theme &mdash;  v{}</div>
+
+
+
+
+-->
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+		<script type="text/javascript">
+		_hcwp = window._hcwp || [];
+
+		_hcwp.push({widget:"Bloggerstream", widget_id: 99037, selector:".hc-comment-count", label: "{\%COUNT%\}" });
+
+		
+		_hcwp.push({widget:"Stream", widget_id: 99037, xid: "2019/02/What-is-SwiftSyntax/"});
+		
+
+		(function() {
+		if("HC_LOAD_INIT" in window)return;
+		HC_LOAD_INIT = true;
+		var lang = (navigator.language || navigator.systemLanguage || navigator.userLanguage || "en").substr(0, 2).toLowerCase();
+		var hcc = document.createElement("script"); hcc.type = "text/javascript"; hcc.async = true;
+		hcc.src = ("https:" == document.location.protocol ? "https" : "http")+"://w.hypercomments.com/widget/hc/99037/"+lang+"/widget.js";
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(hcc, s.nextSibling);
+		})();
+		</script>
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("c6sjJ6fGADGrCVC48k5MVQcD-gzGzoHsz", "YuTcQ8aPXftmtmeC4VvTrK9B");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+  <script type="text/javascript">
+  wpac_init = window.wpac_init || [];
+  wpac_init.push({widget: 'Rating', id: 8566,
+    el: 'wpac-rating',
+    color: 'fc6423'
+  });
+  (function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = '//embed.widgetpack.com/widget.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+  })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+<div id="hexo-helper-live2d">
+  <canvas id="live2dcanvas" width="150" height="350"></canvas>
+</div>
+<style>
+  #live2dcanvas{
+    position: fixed;
+    width: 150px;
+    height: 350px;
+    opacity:0.8;
+    right: 0px;
+    z-index: 999;
+    pointer-events: none;
+    bottom: -20px;
+  }
+</style>
+<script type="text/javascript" src="/live2d/device.min.js"></script>
+<script type="text/javascript">
+const loadScript = function loadScript(c,b){var a=document.createElement("script");a.type="text/javascript";"undefined"!=typeof b&&(a.readyState?a.onreadystatechange=function(){if("loaded"==a.readyState||"complete"==a.readyState)a.onreadystatechange=null,b()}:a.onload=function(){b()});a.src=c;document.body.appendChild(a)};
+(function(){
+  if((typeof(device) != 'undefined') && (device.mobile())){
+    var trElement = document.getElementById('hexo-helper-live2d');
+    trElement.parentNode.removeChild(trElement);
+    return;
+  }else
+    if (typeof(device) === 'undefined') console.error('Cannot find current-device script.');
+  loadScript("/live2d/script.js", function(){loadlive2d("live2dcanvas", "/live2d/assets/shizuku.model.json", 0.5);});
+})();
+</script>
+
+ <canvas class="fireworks" 
+        style="position: fixed; left: 0px; top: 0px; z-index: 99999999; pointer-events: none; width: 1158px; height: 916px;" 
+        width="2316" 
+        height="1832">
+</canvas>
+<script type="text/javascript" src="/js/src/anime.min.js"></script>
+<script type="text/javascript" src="/js/src/fireworks.js"></script>
+</body>
+</html>
