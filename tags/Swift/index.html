@@ -1175,7 +1175,9 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
 <script type="text/javascript" src="/js/src/fireworks.js"></script>
 </body>
 </html>
-var counter = results[0];
+lts) {
+          if (results.length > 0) {
+            var counter = results[0];
             counter.fetchWhenSave(true);
             counter.increment("time");
             counter.save(null, {
