@@ -101,7 +101,7 @@
 <meta property="og:image" content="https://nshipster.com/assets/mojave-dynamic-desktop-images-c8bc3aab78c049d74abd46240445f82c3d0cf0ad043bcc9da6f3fda066776034.png">
 <meta property="og:image" content="https://nshipster.com/assets/mojave-heic-preview-info-b71c5e4084bd43f1e6b34852c4c757493627eb8b66ee44b282e2f53d274dda02.png">
 <meta property="og:image" content="https://nshipster.com/assets/solar-position-watch-faces-1815d6d3c84f42ff4588fa47cd59841f4de15be2b219f6f4ec9a83e13ea0f08b.jpg">
-<meta property="og:updated_time" content="2018-11-21T15:37:05.704Z">
+<meta property="og:updated_time" content="2019-02-23T14:07:01.273Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="macOS Dynamic Desktop">
 <meta name="twitter:description" content="Dark Mode is one of the most popular additions to macOS — especially among us developer types, who tend towards light-on-dark color themes in text editors and appreciate this new visual consistency ac">
@@ -497,8 +497,8 @@
 <h3 id="Shining-Light-on-Solar"><a href="#Shining-Light-on-Solar" class="headerlink" title="Shining Light on Solar"></a>Shining Light on Solar</h3><p>Most of us would look at that wall of text and quietly close the lid of our MacBook Pro. But, as some of you surely noticed, this text looks an awful lot like it’s <a href="https://en.wikipedia.org/wiki/Base64" target="_blank" rel="external">Base64-encoded</a>.</p>
 <p>Let’s test out our hypothesis in code:</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> name == <span class="string">"solar"</span> &#123;</div><div class="line">    <span class="keyword">let</span> data = <span class="type">Data</span>(base64Encoded: value)!</div><div class="line">    <span class="built_in">print</span>(<span class="type">String</span>(data: data, encoding: .ascii))</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>​               bplist00Ò\u{01}\u{02}\u{03}…             </p>
-<p>What’s that? <code>bplist</code>, followed by a bunch of garbled nonsense?</p>
+<pre><code>bplist00Ò\u{01}\u{02}\u{03}...             
+</code></pre><p>What’s that? <code>bplist</code>, followed by a bunch of garbled nonsense?</p>
 <p>By golly, that’s the <a href="https://en.wikipedia.org/wiki/File_format#Magic_number" target="_blank" rel="external">file signature</a> for a <a href="https://en.wikipedia.org/wiki/Property_list" target="_blank" rel="external">binary property list</a>.</p>
 <p>Let’s see if <code>PropertyListSerialization</code> can make any sense of it…</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> name == <span class="string">"solar"</span> &#123;</div><div class="line">    <span class="keyword">let</span> data = <span class="type">Data</span>(base64Encoded: value)!</div><div class="line">    <span class="keyword">let</span> propertyList = <span class="keyword">try</span> <span class="type">PropertyListSerialization</span></div><div class="line">                            .propertyList(from: data,</div><div class="line">                                          options: [],</div><div class="line">                                          format: <span class="literal">nil</span>)</div><div class="line">    <span class="built_in">print</span>(propertyList)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -510,9 +510,10 @@
 <p>The good news is that astronomers can tell you — with perfect accuracy — where the sun is in the sky for any location or time. The bad news is that the necessary calculations are <a href="https://en.wikipedia.org/wiki/Position_of_the_Sun" target="_blank" rel="external">complicated</a> to say the least.</p>
 <p>Honestly, we don’t really understand it ourselves, and are pretty much just porting whatever code we manage to find online. After some trial and error, we were able to arrive at <a href="https://github.com/NSHipster/DynamicDesktop/blob/master/SolarPosition.playground" target="_blank" rel="external">something that seems to work</a> (PRs welcome!):</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> Foundation</div><div class="line"><span class="keyword">import</span> CoreLocation</div><div class="line"></div><div class="line"><span class="comment">// Apple Park, Cupertino, CA</span></div><div class="line"><span class="keyword">let</span> location = <span class="type">CLLocation</span>(latitude: <span class="number">37.3327</span>, longitude: -<span class="number">122.0053</span>)</div><div class="line"><span class="keyword">let</span> time = <span class="type">Date</span>()</div><div class="line"></div><div class="line"><span class="keyword">let</span> position = solarPosition(<span class="keyword">for</span>: location, at: time)</div><div class="line"><span class="keyword">let</span> formattedDate = <span class="type">DateFormatter</span>.localizedString(from: time,</div><div class="line">                                                    dateStyle: .medium,</div><div class="line">                                                    timeStyle: .short)</div><div class="line"><span class="built_in">print</span>(<span class="string">"Solar Position on <span class="subst">\(formattedDate)</span>"</span>)</div><div class="line"><span class="built_in">print</span>(<span class="string">"<span class="subst">\(position.azimuth)</span>° Az / <span class="subst">\(position.elevation)</span>° El"</span>)</div></pre></td></tr></table></figure>
-<p>​                   Solar Position on Oct 1, 2018 at 12:00 </p>
-<p>​        180.73470025840783° Az / 49.27482549913847° El         </p>
-<p>At noon on October 1, 2018, the sun shines on Apple Park from the south, about halfway between the horizon and directly overhead.</p>
+<pre><code>           Solar Position on Oct 1, 2018 at 12:00 
+
+180.73470025840783° Az / 49.27482549913847° El         
+</code></pre><p>At noon on October 1, 2018, the sun shines on Apple Park from the south, about halfway between the horizon and directly overhead.</p>
 <p>If track the position of the sun over an entire day, we get a sinusoidal shape reminiscent of the Apple Watch “Solar” face.</p>
 <p><img src="https://nshipster.com/assets/solar-position-watch-faces-1815d6d3c84f42ff4588fa47cd59841f4de15be2b219f6f4ec9a83e13ea0f08b.jpg" alt="img"></p>
 <h3 id="Extending-Our-Understanding-of-XMP"><a href="#Extending-Our-Understanding-of-XMP" class="headerlink" title="Extending Our Understanding of XMP"></a>Extending Our Understanding of XMP</h3><p>Alright, enough astronomy for the moment. Let’s ground ourselves in something much more banal:<em>de facto</em> XML metadata standards.</p>
@@ -563,36 +564,6 @@
     <div>
       
         
-<div class="my_post_copyright">
-  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
-  <!-- JS库 sweetalert 可修改路径 -->
-  <script type="text/javascript" src="http://jslibs.wuxubj.cn/sweetalert_mini/jquery-1.7.1.min.js"></script>
-  <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
-  <p><span>Title:  </span>macOS Dynamic Desktop</a></p>
-  <p><span>Author:  </span>Tuski</a></p>
-  <p><span>Published:  </span>11/21/2018 - 23:29:11</p>
-  <p><span>Updated:  </span>11/21/2018 - 23:37:05</p>
-  <p><span>Link:  </span><a href="/2018/11/mac​OS-Dynamic-Desktop/" title="macOS Dynamic Desktop">http://www.perphet.com/2018/11/mac​OS-Dynamic-Desktop/</a>
-    <span class="copy-path"  title="Click to Copy article link"><i class="fa fa-clipboard" data-clipboard-text="http://www.perphet.com/2018/11/mac​OS-Dynamic-Desktop/"  aria-label="Copy successfully！"></i></span>
-  </p>
-  <p><span>Protocol:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)</a> Reprinted please keep the original link and author</p>  
-</div>
-<script>
-    var clipboard = new Clipboard('.fa-clipboard');
-    clipboard.on('success', $(function(){
-      $(".fa-clipboard").click(function(){
-        swal({   
-          title: "",   
-          text: 'Copy successfully！',   
-          html: false,
-          timer: 500,   
-          showConfirmButton: false
-        });
-      });
-    }));  
-</script>
-
       
     </div>
 
