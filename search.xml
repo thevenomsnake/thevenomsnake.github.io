@@ -3,7 +3,10 @@
   <entry>
     <title><![CDATA[A Study Records]]></title>
     <url>%2F2019%2F02%2FA-Study-Records%2F</url>
-    <content type="text"><![CDATA[居中 Download Now 黑条]]></content>
+    <content type="text"><![CDATA[I am gonna set a post of my learning schedule. 2019MarchThe 1st week Read the new features of Swift5 and review Swift4 Review the basic data structures and algorithms Re-learning the basic OS knowledge The 2nd week]]></content>
+      <tags>
+        <tag>study</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[The Beauty of Swift 5 String Interpolation]]></title>
