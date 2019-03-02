@@ -1,0 +1,1575 @@
+<!DOCTYPE html>
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+<script type="text/javascript">var OriginTitile=document.title,st;document.addEventListener("visibilitychange",function(){document.hidden?(document.title="(/≧▽≦/)Aw, Snap!",clearTimeout(st)):(document.title="(ฅ>ω<*ฅ) Fixed~"+OriginTitile,st=setTimeout(function(){document.title=OriginTitile},3e3))})</script>
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-bounce.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="swift," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Swift too uses Automatic Reference Counting (ARC) to keep track and manage all the objects created by the application. This signifies that it handles Memory Management itself and we do not need to tak">
+<meta name="keywords" content="swift">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Automatic Reference Counting (ARC) — Part 1">
+<meta property="og:url" content="http://www.perphet.com/2019/03/Automatic-Reference-Counting-ARC/index.html">
+<meta property="og:site_name" content="Tuski&#39;s Blog">
+<meta property="og:description" content="Swift too uses Automatic Reference Counting (ARC) to keep track and manage all the objects created by the application. This signifies that it handles Memory Management itself and we do not need to tak">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://i.loli.net/2019/03/02/5c7a771cc8d56.png">
+<meta property="og:image" content="https://i.loli.net/2019/03/02/5c7a77e67d77c.png">
+<meta property="og:image" content="https://i.loli.net/2019/03/02/5c7a78369e53d.png">
+<meta property="og:image" content="https://i.loli.net/2019/03/02/5c7a78c1d367a.png">
+<meta property="og:image" content="https://i.loli.net/2019/03/02/5c7a79abb1ea4.png">
+<meta property="og:image" content="https://i.loli.net/2019/03/02/5c7a79809f17c.png">
+<meta property="og:image" content="https://i.loli.net/2019/03/02/5c7a7a5114b9b.png">
+<meta property="og:image" content="https://i.loli.net/2019/03/02/5c7a7a80e3413.png">
+<meta property="og:image" content="https://i.loli.net/2019/03/02/5c7a7aeb5ca07.png">
+<meta property="og:image" content="https://i.loli.net/2019/03/02/5c7a7dd7e41f4.png">
+<meta property="og:image" content="https://i.loli.net/2019/03/02/5c7a7e3052c49.png">
+<meta property="og:image" content="https://i.loli.net/2019/03/02/5c7a7f560ee17.png">
+<meta property="og:image" content="https://i.loli.net/2019/03/02/5c7a7fab2ec6a.png">
+<meta property="og:image" content="https://i.loli.net/2019/03/02/5c7a803804245.png">
+<meta property="og:image" content="https://i.loli.net/2019/03/02/5c7a80efa4bb7.png">
+<meta property="og:updated_time" content="2019-03-02T13:13:24.701Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Automatic Reference Counting (ARC) — Part 1">
+<meta name="twitter:description" content="Swift too uses Automatic Reference Counting (ARC) to keep track and manage all the objects created by the application. This signifies that it handles Memory Management itself and we do not need to tak">
+<meta name="twitter:image" content="https://i.loli.net/2019/03/02/5c7a771cc8d56.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.perphet.com/2019/03/Automatic-Reference-Counting-ARC/"/>
+
+
+
+<link rel="stylesheet" href="../live2d/css/live2d.css" />
+
+
+  <title>Automatic Reference Counting (ARC) — Part 1 | Tuski's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+<div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+   
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tuski's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">I code my life</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-music">
+          <a href="/music/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-music"></i> <br />
+            
+            Music
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.perphet.com/2019/03/Automatic-Reference-Counting-ARC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tuski">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tuski's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Automatic Reference Counting (ARC) — Part 1</h1>
+        
+
+        <div class="post-meta">
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-02T20:21:34+09:00">
+                2019-03-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+            <!--noindex-->
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/03/Automatic-Reference-Counting-ARC/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="2019/03/Automatic-Reference-Counting-ARC/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+              <!--/noindex-->
+            
+          
+
+          
+          
+             <span id="/2019/03/Automatic-Reference-Counting-ARC/" class="leancloud_visitors" data-flag-title="Automatic Reference Counting (ARC) — Part 1">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  2,869
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  18
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <script src="/assets/js/APlayer.min.js"> </script><blockquote class="blockquote-center">Swift too uses Automatic Reference Counting (ARC) to keep track and manage all the objects created by the application. This signifies that it handles Memory Management itself and we do not need to take care of it. But there are few situations where we as a developer need to provide few other information, in particularly, the relationship between objects, to avoid Memory Leaks. We would be discussing those situations here.</blockquote>
+
+<a id="more"></a>
+<blockquote>
+<p>Reference Counting applies only to the instances of the <code>Class</code> because it is Reference Type. This means that multiple objects can refer to the same object. Where as <code>Structures</code> and <code>Enumerations</code> are Value Types.</p>
+</blockquote>
+<p><a id="download" href="https://medium.com/swift-india/swift-4-0-automatic-reference-counting-arc-part-1-d21d3ccf12b5" target="_blank" rel="external"><i class="fa fa-download"></i><span> Click 2 Origin</span> </a></p>
+<h1 id="Part-1"><a href="#Part-1" class="headerlink" title="Part 1"></a>Part 1</h1><h2 id="How-ARC-works"><a href="#How-ARC-works" class="headerlink" title="How ARC works?"></a>How ARC works?</h2><p>Every time we create an instance of a Class, ARC allocates memory that holds information about the Type and Value it holds to. Whenever we assign a class instance to a constant or variable, that particluar constant or variable makes a <code>strong</code> reference to the instance and does not allow it to be deallocated as long as that strong reference exists. ARC keeps track of all the constants and variables currently it is referring to and will not deallocate until the last active reference is released. Once, all the active references are removed, ARC frees up the memory by removing the instance. This ensures that class instances do not take up unnecessary memory when not required.</p>
+<p>Let’s see with an Example:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Employee</span> </span>&#123;</div><div class="line">    <span class="keyword">let</span> empName: <span class="type">String</span></div><div class="line">    <span class="keyword">init</span>(employeeName empName: <span class="type">String</span>) &#123;</div><div class="line">        <span class="keyword">self</span>.empName = empName</div><div class="line">        <span class="built_in">print</span>(<span class="string">"<span class="subst">\(empName)</span> is being initialized"</span>)</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">deinit</span> &#123;</div><div class="line">        <span class="built_in">print</span>(<span class="string">"<span class="subst">\(empName)</span> is being deinitialized"</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> emp1: <span class="type">Employee</span>?</div><div class="line"><span class="keyword">var</span> emp2: <span class="type">Employee</span>?</div><div class="line"><span class="keyword">var</span> emp3: <span class="type">Employee</span>?</div></pre></td></tr></table></figure>
+<p>In the above Class named <strong>Employee</strong>, we have an initialiser that sets the instance and prints a message to indicate that initialisation is in process. This also has a de-initialiser that prints out a message when an insance of the Class is deallocated.</p>
+<p>Now, let’s create <strong>Employee</strong> instance and assign it to the first variable <strong>emp1</strong>.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">emp1 =  <span class="type">Employee</span>(employeeName: <span class="string">"John Appleseed"</span>)</div><div class="line"><span class="comment">// Prints "John Appleseed is being initialized"</span></div></pre></td></tr></table></figure>
+<p>Now that <strong>Employee</strong> instance is assigned to the <code>emp1.</code> There is a strong reference from <code>**emp1**</code> to the new <strong>Employee</strong> instance and ARC ensures that this <strong>Employee</strong> is kept in memory and not deallocated. <strong>Retain Count</strong> has increased by <strong>1</strong>.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">emp2 = emp1</div><div class="line">emp3 = emp1</div></pre></td></tr></table></figure>
+<p>Now, there are 3 strong references to <strong>Employee</strong> instance that we created at the beginning. The <strong>Retain Count</strong> would now be <strong>3</strong>.</p>
+<p>Now, lets break <strong>2</strong> of these strong references (including the original reference) by assigning <code>nil</code>. The <strong>Retain Count</strong> would now be 1. <strong>Employee</strong> instance would not deallocate as there is still exisits 1 last strong reference (<code>emp3</code>).<br>ARC would not deallocate the <strong>Employee</strong> instance until the 3rd and final strong reference is broken.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">emp1 = <span class="literal">nil</span> <span class="comment">// Retain Count would decrease by 1</span></div><div class="line">emp2 = <span class="literal">nil</span> <span class="comment">// Retain Count would decrease by 1</span></div></pre></td></tr></table></figure>
+<p>As soon as 3rd and final strong reference is set to <code>nil</code>, no further strong reference exisits. ARC is now free to remove the <strong>Employee</strong> instance from the Memory. Pretty Simple Huh!!. Lets dive deep in.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">emp3 = <span class="literal">nil</span></div><div class="line"><span class="comment">// Prints "John Appleseed is being deinitialized"</span></div></pre></td></tr></table></figure>
+<h2 id="What-are-Reference-Cycles"><a href="#What-are-Reference-Cycles" class="headerlink" title="What are Reference Cycles?"></a>What are Reference Cycles?</h2><p>There could be a scenario where two class instance holds a strong Reference to each other and there is no way for the system to deallocate them. This means that the <strong>Retain Count</strong> of both the class insance would never come down to 0. This is known as <code>Strong Refernce Cycle</code>. Let us see this with an example.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Employee</span> </span>&#123;</div><div class="line">    <span class="keyword">let</span> empName: <span class="type">String</span></div><div class="line">    <span class="keyword">var</span> dept: <span class="type">Department</span>?</div><div class="line">    </div><div class="line">    <span class="keyword">init</span>(employeeName empName: <span class="type">String</span>) &#123;</div><div class="line">        <span class="keyword">self</span>.empName = empName</div><div class="line">        <span class="built_in">print</span>(<span class="string">"<span class="subst">\(empName)</span> is being initialized"</span>)</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">deinit</span> &#123;</div><div class="line">        <span class="built_in">print</span>(<span class="string">"<span class="subst">\(empName)</span> is being deinitialized"</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Department</span> </span>&#123;</div><div class="line">    <span class="keyword">let</span> deptName: <span class="type">String</span></div><div class="line">    <span class="keyword">var</span> emp: <span class="type">Employee</span>?</div><div class="line">    <span class="keyword">init</span>(departmentName deptName: <span class="type">String</span>) &#123;</div><div class="line">        <span class="keyword">self</span>.deptName = deptName</div><div class="line">        <span class="built_in">print</span>(<span class="string">"<span class="subst">\(deptName)</span> is being initialized"</span>)</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="keyword">deinit</span> &#123;</div><div class="line">        <span class="built_in">print</span>(<span class="string">"<span class="subst">\(deptName)</span> is being deinitialized"</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>In the above code, we have created 2 class. One for <strong>Employee</strong> and other for <strong>Department</strong>. Both these classes have strong reference to <strong>Department(</strong><code>dept</code><strong>)</strong>and <strong>Employee(</strong><code>emp</code><strong>)</strong> instance respectively. The <strong>Retain Count</strong> for <code>john</code> and <code>iOS</code> variable would be <strong>1</strong>.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> john: <span class="type">Employee</span>? = <span class="type">Employee</span>(employeeName: <span class="string">"john"</span>)</div><div class="line"><span class="keyword">var</span> iOS: <span class="type">Department</span>? = <span class="type">Department</span>(departmentName: <span class="string">"iOS"</span>)</div><div class="line"><span class="comment">// Prints "john is being initialized"</span></div><div class="line"><span class="comment">// Prints "iOS is being initialized"</span></div></pre></td></tr></table></figure>
+<p>We would create an <strong>Employee</strong> and <strong>Department</strong> instance. This in turn would create a strong reference to <code>john</code> and <code>iOS</code> variable (<strong>Image 1–1</strong>).</p>
+ <div align="center"><img src="https://i.loli.net/2019/03/02/5c7a771cc8d56.png" alt="Image 1-1.png"></div>
+
+
+
+<p>Now assign the two instances together so that Employee is associated with Department and Department is linked to Employee. This would create a strong reference cycle among each other and the <strong>Retain Count</strong> for <code>john</code> and <code>iOS</code> variable would increase by 1. <strong>Retain</strong> <strong>Count</strong> for <code>john</code> and <code>iOS</code> variable is <strong>2</strong> (<strong>Image 1-2</strong>).</p>
+<div align="center"><img src="https://i.loli.net/2019/03/02/5c7a77e67d77c.png" alt="Image 1-2.png"></div>
+
+
+
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">john!.dept = iOS</div><div class="line">iOS!.emp = john</div></pre></td></tr></table></figure>
+<p>If we set the <code>john</code> and <code>iOS</code> variable to <code>nil</code> , there would still exisits a strong reference between the Employee and Department instance which now cannot be broken. <strong>Retain</strong> <strong>Count</strong> now would be <strong>1</strong>. Since, the <strong>Retain Count</strong> did not drop to <strong>0</strong>, ARC did not deallocate the instances. Such scenarios causes memory leaks in our application (<strong>Image 1-3</strong>).</p>
+<div align="center"><img src="https://i.loli.net/2019/03/02/5c7a78369e53d.png" alt="Image 1-3.png"></div>
+
+
+
+<h2 id="How-to-Resolve-these-Reference-Cycles"><a href="#How-to-Resolve-these-Reference-Cycles" class="headerlink" title="How to Resolve these Reference Cycles?"></a>How to Resolve these Reference Cycles?</h2><p>Swift provides two ways of resolving these Strong Reference Cycles: <code>weak</code>and <code>unowned</code> <strong>reference</strong>.</p>
+<h3 id="Weak-Reference"><a href="#Weak-Reference" class="headerlink" title="Weak Reference"></a>Weak Reference</h3><p>Apple Doc states that a <code>weak reference</code> is a reference that does not keep a strong hold on the instance it refers to, and so does not stop <strong>ARC</strong> from disposing of the referenced instance. This behavior prevents the reference from becoming part of a strong reference cycle. You indicate a weak reference by placing the <code>weak</code> keyword before a property or variable declaration.</p>
+<p><strong>Weak Reference</strong> should be used in cases where other instance can be deallocated first without any issue. Confused!!! Let us see this with an example.</p>
+<p>Just add <code>weak</code> before <code>emp</code> variable in the <strong>Deparment</strong> Class. The class would look like the below.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Department</span> </span>&#123;</div><div class="line">    <span class="keyword">let</span> deptName: <span class="type">String</span></div><div class="line">    <span class="keyword">weak</span> <span class="keyword">var</span> emp: <span class="type">Employee</span>?</div><div class="line"><span class="keyword">init</span>(departmentName deptName: <span class="type">String</span>) &#123;</div><div class="line">        <span class="keyword">self</span>.deptName = deptName</div><div class="line">        <span class="built_in">print</span>(<span class="string">"<span class="subst">\(deptName)</span> is being initialized"</span>)</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="keyword">deinit</span> &#123;</div><div class="line">        <span class="built_in">print</span>(<span class="string">"<span class="subst">\(deptName)</span> is being deinitialized"</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Now, if we create instance variable of <strong>Employee</strong> and <strong>Deparment</strong> and assign these instances to each other, <strong>Employee</strong> instance would hold a <code>strong</code>reference to the <strong>Deparment</strong> but <strong>Department</strong> insatance would hold a <code>weak</code>reference to the <strong>Employee</strong> instance. <strong>Retain Count</strong> of <strong>Employee</strong> would be <strong>1</strong>where as <strong>Retain Count</strong> of <strong>Department</strong> would be <strong>2</strong> (<strong>Image 1-4</strong>).</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> john: <span class="type">Employee</span>? = <span class="type">Employee</span>(employeeName: <span class="string">"john"</span>)</div><div class="line"><span class="keyword">var</span> iOS: <span class="type">Department</span>? = <span class="type">Department</span>(departmentName: <span class="string">"iOS"</span>)</div><div class="line">john!.dept = iOS</div><div class="line">iOS!.emp = john</div></pre></td></tr></table></figure>
+<div align="center"><img src="https://i.loli.net/2019/03/02/5c7a78c1d367a.png" alt="Image 1-4.png"></div>
+
+
+
+<p>Since <strong>Employee</strong> instance has only one strong reference, as soon as we set the <strong>Employee</strong> instance to <code>nil</code>, the <strong>Retain Count</strong> would become <strong>0</strong> and it would be deallocated. Also, the <code>emp</code> variable of the <strong>Department</strong> would be set to <code>nil</code> reducing the <strong>Retain Count</strong> to <strong>1</strong>(<strong>Image 1-5</strong>).</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">john = <span class="literal">nil</span></div><div class="line"><span class="comment">// Prints "john is being deinitialized"</span></div></pre></td></tr></table></figure>
+<div align="center"><img src="https://i.loli.net/2019/03/02/5c7a79abb1ea4.png" alt="Image 1-5.png"></div>
+
+
+
+<p>Now, the only strong Reference left to the <strong>Deparment</strong> is from the <code>iOS</code>variable. Setting <code>nil</code> to the <code>iOS</code> variable would reduce the <strong>Retain Count</strong> by 1, thus making it 0. Hence, <strong>ARC</strong> would <strong>deallocate</strong> the <strong>Department</strong> instance (<strong>Image 1-6</strong>).</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">iOS = <span class="literal">nil</span></div><div class="line"><span class="comment">// Prints "iOS is being deinitialized"</span></div></pre></td></tr></table></figure>
+<div align="center"><img src="https://i.loli.net/2019/03/02/5c7a79809f17c.png" alt="Image 1-6.png"></div>
+
+
+
+<h3 id="Unowned-Reference"><a href="#Unowned-Reference" class="headerlink" title="Unowned Reference"></a>Unowned Reference</h3><p><code>Unowned</code> reference too does not keep a strong hold on the instance it refers to. However, there is one major difference between <code>Week</code> and <code>Unowned</code>Reference. It should only be used when we are sure that both the instance has almost same or more life span. A <code>Weak</code> references must be defined using <code>optional</code> whereas <code>Unowned</code> references must be defined using <code>non-optional</code>types. Both do not increase the <strong>Retain Count</strong>. Lets see an example.</p>
+<p>Suppose we are creating an application for a car Company where they need to keep track of every vehicle sold to the People. We would have <strong>Vehicle</strong> and <strong>Driver</strong> Model class.</p>
+<p>In the following we have created 2 Class. <code>Owner</code> and <code>Vehicle</code> class. In this <code>Owner</code> may or may not <code>Vehicle</code> but <code>Vehicle</code> to come on Road would need to have a <code>Owner</code> . In such case, the <code>Owner</code> should hold a <code>strong</code> reference to the <code>Vechicle</code> but the <code>Vehicle</code> should just have a unowned reference to the <code>Owner</code>. This is because there is no<code>Vehicle</code> which doen’t have an <code>Owner</code> . So, its existence only lies till the Owner owns the Vehicle. But the same doesn’t hold true for Owner.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Owner</span> </span>&#123;</div><div class="line">    <span class="keyword">let</span> ownerName: <span class="type">String</span></div><div class="line">    <span class="keyword">var</span> vehicle: <span class="type">Vehicle</span>?</div><div class="line"></div><div class="line">    <span class="keyword">init</span>(ownerName name: <span class="type">String</span>) &#123;</div><div class="line">        <span class="keyword">self</span>.ownerName = name</div><div class="line">        <span class="built_in">print</span>(<span class="string">"<span class="subst">\(ownerName)</span> is being initialized"</span>)</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">deinit</span> &#123;</div><div class="line">        <span class="built_in">print</span>(<span class="string">"<span class="subst">\(ownerName)</span> is being deinitialized"</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Vehicle</span> </span>&#123;</div><div class="line">    <span class="keyword">let</span> vehicleNumber: <span class="type">String</span></div><div class="line">    <span class="keyword">unowned</span> <span class="keyword">let</span> owner: <span class="type">Owner</span></div><div class="line">    <span class="keyword">init</span>(vehicleNumber number: <span class="type">String</span>, owner: <span class="type">Owner</span>) &#123;</div><div class="line">        <span class="keyword">self</span>.vehicleNumber = number</div><div class="line">        <span class="keyword">self</span>.owner = owner</div><div class="line">        <span class="built_in">print</span>(<span class="string">"<span class="subst">\(vehicleNumber)</span> is being initialized"</span>)</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">deinit</span> &#123;</div><div class="line">        <span class="built_in">print</span>(<span class="string">"<span class="subst">\(vehicleNumber)</span> is being deinitialized"</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Now, lets create the <code>Owner</code> and <code>Vehicle</code> instance and associate with each other. The <strong>Retain Count</strong> for the <code>Owner</code> instance is 1 which is held by variable. In case of <code>Vehicle</code>, its just the <code>Owner</code> who is holding the <strong>strong</strong> reference to it (<strong>Image 1–7</strong>).</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> appleseed: <span class="type">Owner</span>?</div><div class="line">appleseed = <span class="type">Owner</span>(ownerName: <span class="string">"John Appleseed"</span>)</div><div class="line">appleseed?.vehicle = <span class="type">Vehicle</span>(vehicleNumber: <span class="string">"TE 12 MP 5678"</span>, owner: appleseed!)</div><div class="line"><span class="comment">// Prints "John Appleseed is being initialized"</span></div><div class="line"><span class="comment">// Prints "TE 12 MP 5678 is being initialized"</span></div></pre></td></tr></table></figure>
+<div align="center"><img src="https://i.loli.net/2019/03/02/5c7a7a5114b9b.png" alt="Image 1-7 .png"></div>
+
+
+
+<p>Its existence is only till the existence of the Owner. Once, the Owner instance is deallocated, the Vehicle instance would automatically be deallocated as there is no strong reference associated to it (<strong>Image 1–8, Image 1–9</strong>).</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">appleseed = <span class="literal">nil</span></div><div class="line"><span class="comment">// Prints "John Appleseed is being deinitialized"</span></div><div class="line"><span class="comment">// Prints "TE 12 MP 5678 is being deinitialized"</span></div></pre></td></tr></table></figure>
+<div align="center"><img src="https://i.loli.net/2019/03/02/5c7a7a80e3413.png" alt="Image 1-8.png"></div>
+
+
+
+<div align="center"><img src="https://i.loli.net/2019/03/02/5c7a7aeb5ca07.png" alt="Image 1-9.png"></div>
+
+
+
+
+
+<h1 id="Part-2"><a href="#Part-2" class="headerlink" title="Part 2"></a>Part 2</h1><p>In the <a href="https://medium.com/@rahulsingh05/swift-4-0-automatic-reference-counting-arc-part-1-d21d3ccf12b5" target="_blank" rel="external"><strong>First Part</strong></a>, you learned about some fundamental concepts of ARC such as <code>weak</code>, <code>Unowned</code> and how to resolve Reference Cycle using <code>weak</code> and <code>unowned</code>.</p>
+<p>In this final part, you’ll learn about one last scenario, where both the <code>properties</code> should have a value and neither property should ever be <code>nil</code>once the initialization is complete. Also, you would learn how to overcome the <strong>Strong Reference Cycle</strong> in <code>Closures</code>. Let’s dive straight into it.</p>
+<p>Suppose we have a <code>Country</code> and <code>President</code> class. Each of these class stores an instance of the other class as a variable. This means that every <strong>Country</strong>should have a <strong>President</strong> and every <strong>President</strong> should be associated with a <strong>Country</strong>.</p>
+<p>To fulfil this requirement without causing a memory Leak, you would need to declare one property (In our case <code>countryPresident</code> in the <code>Country</code> Class) as an <strong>implicitly unwrapped optional Property</strong>. This can be done by placing the exclamation mark at the end of its type annotation(<code>President!</code>). While for the other, you would need to declare it as an <strong>unowned</strong> property (In our case <code>country</code> in the <code>President</code> Class).</p>
+<p>Suppose we have a <code>Country</code> and <code>President</code> class. Each of these class stores an instance of the other class as a variable. This means that every <strong>Country</strong>should have a <strong>President</strong> and every <strong>President</strong> should be associated with a <strong>Country</strong>.</p>
+<p>To fulfil this requirement without causing a memory Leak, you would need to declare one property (In our case <code>countryPresident</code> in the <code>Country</code> Class) as an <strong>implicitly unwrapped optional Property</strong>. This can be done by placing the exclamation mark at the end of its type annotation(<code>President!</code>). While for the other, you would need to declare it as an <strong>unowned</strong> property (In our case <code>country</code> in the <code>President</code> Class).</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Country</span> </span>&#123;</div><div class="line">    <span class="keyword">let</span> countryName: <span class="type">String</span></div><div class="line">    <span class="keyword">var</span> countryPresident: <span class="type">President</span>!</div><div class="line">    <span class="keyword">init</span>(countryName: <span class="type">String</span>, presidentName: <span class="type">String</span>) &#123;</div><div class="line">        <span class="keyword">self</span>.countryName = countryName</div><div class="line">        <span class="keyword">self</span>.countryPresident = <span class="type">President</span>(presidentName: presidentName, country: <span class="keyword">self</span>)</div><div class="line">        <span class="built_in">print</span>(<span class="string">"Country is being initialised"</span>)</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">deinit</span> &#123;</div><div class="line">        <span class="built_in">print</span>(<span class="string">"Country is being de-initialised"</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">President</span> </span>&#123;</div><div class="line">    <span class="keyword">let</span> presidentName: <span class="type">String</span></div><div class="line">    <span class="keyword">unowned</span> <span class="keyword">let</span> country: <span class="type">Country</span></div><div class="line"></div><div class="line">    <span class="keyword">init</span>(presidentName: <span class="type">String</span>, country: <span class="type">Country</span>) &#123;</div><div class="line">        <span class="keyword">self</span>.presidentName = presidentName</div><div class="line">        <span class="keyword">self</span>.country = country</div><div class="line">        <span class="built_in">print</span>(<span class="string">"President is being initialised"</span>)</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">deinit</span> &#123;</div><div class="line">        <span class="built_in">print</span>(<span class="string">"President is being de-initialised"</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Because <code>countryPresident</code> has a default <code>nil</code> value, a new <strong>Country</strong> instance is considered fully initialized as soon as the <strong>Country</strong> instance sets its <code>countryName</code> property within its initializer. This means that the Country initializer can start to reference and pass around the implicit <code>self</code> property as soon as the <code>countryName</code> property is set. The Country initializer can therefore pass <code>self</code> as one of the parameters for the <strong>President</strong> initializer when the Country initializer is setting its own <strong>countryPresident</strong> property. Doing so doesn’t create any strong Reference (<strong>Image 2–1</strong>).</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> country:<span class="type">Country</span>? = <span class="type">Country</span>(countryName: <span class="string">"India"</span>, presidentName: <span class="string">"Ram Nath Kovind"</span>)</div><div class="line"><span class="comment">// Prints "President is being initialised"</span></div><div class="line"><span class="comment">// Prints "Country is being initialised"</span></div></pre></td></tr></table></figure>
+<div align="center"><img src="https://i.loli.net/2019/03/02/5c7a7dd7e41f4.png" alt="Image 2-1.png"></div>
+
+
+
+<p>Now, when the country is set to <code>nil</code>, president would also be automatically nullified (<strong>Image 2-2</strong>).</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">country = <span class="literal">nil</span></div><div class="line"><span class="comment">// Prints "President is being de-initialised"</span></div><div class="line"><span class="comment">// Prints "Country is being de-initialised"</span></div></pre></td></tr></table></figure>
+<div align="center"><img src="https://i.loli.net/2019/03/02/5c7a7e3052c49.png" alt="Image 2-2.png"></div>
+
+
+
+<p>Try removing <code>unowned</code> from the <strong>President</strong> Class’s <code>country</code> property. Observe the leak caused when setting <code>country</code> as <code>nil</code> .</p>
+<h2 id="Strong-Reference-Cycle-in-Closures"><a href="#Strong-Reference-Cycle-in-Closures" class="headerlink" title="Strong Reference Cycle in Closures"></a><strong>Strong Reference Cycle</strong> in <code>Closures</code></h2><p>A strong reference cycle can also occur if you assign a closure to a property of a class instance and the body of that closure captures the instance. This capture might occur because the closure’s body accesses a property of the instance, such as <code>self.someProperty</code>, or because the closure called a method on the instance, such as <code>self.someMethod()</code>. In either of the case, these access would cause the closure to “capture” <code>self</code>, creating a strong reference cycle.</p>
+<blockquote>
+<p>This strong reference cycle occurs because closures, like classes, are reference types.</p>
+</blockquote>
+<p>Lets see how this strong reference cycle is caused. Suppose you have a <strong>Person</strong>Class with <code>firstName</code>, <code>lastName</code> property. You also have a <code>lazy</code> closure property which would return you a full name by combining <code>firstName</code> and <code>lastName</code>. Lets name it as <code>fullName</code> of type <strong>()-&gt;String</strong> To know more about closure, you can read the <a href="https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/Closures.html" target="_blank" rel="external"><strong>Apple Documentation</strong></a>.</p>
+<p>The <strong>Person</strong> Class provides a single initializer, which takes a 2 argument (<strong>firstName</strong> and <strong>lastName</strong>). The class also defines a deinitializer, which prints a message to show when an <strong>Person</strong> instance is deallocated.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</div><div class="line">    <span class="keyword">var</span> firstName: <span class="type">String</span>?</div><div class="line">    <span class="keyword">var</span> lastName: <span class="type">String</span>?</div><div class="line">    <span class="built_in">lazy</span> <span class="keyword">var</span> fullName: ()-&gt;<span class="type">String</span> = &#123;</div><div class="line">        <span class="keyword">return</span> (<span class="string">"<span class="subst">\(<span class="keyword">self</span>.firstName!)</span> <span class="subst">\(<span class="keyword">self</span>.lastName!)</span>"</span>)</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">init</span>(firstName: <span class="type">String</span>, lastName: <span class="type">String</span>) &#123;</div><div class="line">        <span class="keyword">self</span>.firstName = firstName</div><div class="line">        <span class="keyword">self</span>.lastName = lastName</div><div class="line">        <span class="built_in">print</span>(<span class="string">"Person Class is being initialised"</span>)</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">deinit</span> &#123;</div><div class="line">        <span class="built_in">print</span>(<span class="string">"Person Class is being de-initialised"</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>The <strong>person</strong> variable above is defined as an optional <strong>Person</strong>, so that it can be set to <code>nil</code> to demonstrate the presence of a strong reference cycle.</p>
+</blockquote>
+<p>The <strong>Person</strong> instance’s <code>fullName</code> property holds a strong reference to its closure. Also, because the closure refers to <code>self</code> within its body (as a way to reference <code>self.firstName</code> and <code>self.lastName</code>), the closure captures <code>self</code> . This means that it also holds a strong reference to the <strong>Person</strong> instance. As a result, strong reference cycle is created between the two (<strong>Image 2–3</strong>).</p>
+<blockquote>
+<p>Even though the closure refers to <code>self</code> multiple times, Swift ensures that it only captures <strong>one</strong> strong reference to the <strong>Person</strong> instance.</p>
+</blockquote>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> person: <span class="type">Person</span>? = <span class="type">Person</span>(firstName: <span class="string">"Rahul"</span>, lastName: <span class="string">"Singh"</span>)</div><div class="line"><span class="comment">// Prints "Person Class is being initialised"</span></div><div class="line"><span class="built_in">print</span>(person!.fullName())</div><div class="line"><span class="comment">// Prints "Rahul Singh"</span></div></pre></td></tr></table></figure>
+<div align="center"><img src="https://i.loli.net/2019/03/02/5c7a7f560ee17.png" alt="Image 2-3.png"></div>
+
+
+
+<p>No message is logged while setting the person variable to <code>nil</code> . This shows that neither the <strong>Person</strong> instance nor its closure were deallocated. This is because of the <strong>Strong Reference Cycle</strong> created between the variable and closure (<strong>Image 2–4</strong>).</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">person = <span class="literal">nil</span></div></pre></td></tr></table></figure>
+<div align="center"><img src="https://i.loli.net/2019/03/02/5c7a7fab2ec6a.png" alt="Image 2-4.png"></div>
+
+
+
+<h2 id="How-to-resolve-the-Strong-Reference-between-Class-and-Closure"><a href="#How-to-resolve-the-Strong-Reference-between-Class-and-Closure" class="headerlink" title="How to resolve the Strong Reference between Class and Closure?"></a>How to resolve the Strong Reference between Class and Closure?</h2><p>To solve this problem, Swift has an elegent way called as <strong>Closure Capture List</strong>. You can define the <strong>capture list</strong> as a part of closure’s definition. A <strong>capture list</strong> defines a rule to use when capturing one or more reference types within the closure’s body. The way strong reference cycles between two class instances is resolved, ie, you declare each captured reference either to be a <code>weak</code> or <code>unowned</code> , likewise you can choose theses referneces depending on the relationships between the different parts of your code.</p>
+<blockquote>
+<p>Each item in a <strong>capture list</strong> is a pairing of the <code>weak</code> or <code>unowned</code> keyword with a reference to a class instance (such as <code>self</code>) or a variable initialized with some value (such as <code>delegate</code> = <code>self.delegate!</code>). These pairings are written within a pair of square braces, separated by commas.</p>
+</blockquote>
+<p>The implementation of <strong>Person</strong> Class remains same to the previous implementation, apart from the addition of a <strong>capture list</strong> within the <code>fullName</code> closure (<strong>Image 2–5)</strong>. The <strong>capture list</strong> is <code>[unowned self]</code>, which means “capture self as an unowned reference rather than a strong reference”.</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</div><div class="line">    <span class="keyword">var</span> firstName: <span class="type">String</span>?</div><div class="line">    <span class="keyword">var</span> lastName: <span class="type">String</span>?</div><div class="line">    </div><div class="line">    <span class="built_in">lazy</span> <span class="keyword">var</span> fullName: ()-&gt; <span class="type">String</span> = &#123;[<span class="keyword">unowned</span> <span class="keyword">self</span>] <span class="keyword">in</span></div><div class="line">        <span class="keyword">return</span> (<span class="string">"<span class="subst">\(<span class="keyword">self</span>.firstName!)</span> <span class="subst">\(<span class="keyword">self</span>.lastName!)</span>"</span>)</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">init</span>(firstName: <span class="type">String</span>, lastName: <span class="type">String</span>) &#123;</div><div class="line">        <span class="keyword">self</span>.firstName = firstName</div><div class="line">        <span class="keyword">self</span>.lastName = lastName</div><div class="line">        <span class="built_in">print</span>(<span class="string">"Person Class is being initialised"</span>)</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">deinit</span> &#123;</div><div class="line">        <span class="built_in">print</span>(<span class="string">"Person Class is being de-initialised"</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> person: <span class="type">Person</span>? = <span class="type">Person</span>(firstName: <span class="string">"Rahul"</span>, lastName: <span class="string">"Singh"</span>)</div><div class="line"><span class="comment">// Prints "Person Class is being initialised"</span></div><div class="line"><span class="built_in">print</span>(person!.fullName())</div><div class="line"><span class="comment">// Prints "Rahul Singh"</span></div></pre></td></tr></table></figure>
+<div align="center"><img src="https://i.loli.net/2019/03/02/5c7a803804245.png" alt="Image 2-5.png"></div>
+
+
+
+<p>In contrast to earlier, this time setting <strong>person</strong> variable to <code>nil</code> would deallocate the Person Instance and print the desired message (<strong>Image 2-6</strong>).</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">person = <span class="literal">nil</span></div><div class="line"><span class="comment">// Prints "Person Class is being de-initialised"</span></div></pre></td></tr></table></figure>
+<div align="center"><img src="https://i.loli.net/2019/03/02/5c7a80efa4bb7.png" alt="Image 2-6.png"></div>
+
+
+
+<blockquote>
+<p><strong>Source:</strong> <strong>Apple Docs</strong> <em>and of course</em> <strong>Internet</strong> <em>😄</em></p>
+</blockquote>
+<p>The Playground file can be found <a href="https://www.dropbox.com/s/ylxupdq9fuppq0f/Automatic%20Reference%20Counting-2.zip?dl=0" target="_blank" rel="external"><strong>here</strong></a>. Feel free to play around with it. Now, poke in if we can use <code>weak</code> instead of <code>unowned</code> in the Closure of the Person Class? If yes, how can this be achieved?</p>
+<p>Hope you have liked my tutorial on <strong>Automatic Reference Counting</strong>.</p>
+<p>Do write your comments, if you enjoyed this post. I’d like to grow my readership. Can you help me out by sharing this blog post?</p>
+<p><a href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3A//medium.com/%40rahulsingh05/swift-4-0-automatic-reference-counting-arc-part-2-848d42cf5819&amp;title=Automatic%20Reference%20Counting%28ARC%29%20-%20Part%202&amp;summary=&amp;source=" target="_blank" rel="external">LinkedIn</a> <a href="https://twitter.com/home?status=https%3A//medium.com/%40rahulsingh05/swift-4-0-automatic-reference-counting-arc-part-2-848d42cf5819" target="_blank" rel="external">Twitter</a> <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A//medium.com/%40rahulsingh05/swift-4-0-automatic-reference-counting-arc-part-2-848d42cf5819" target="_blank" rel="external">Facebook</a></p>
+
+      
+    </div>
+    
+    
+    
+    <div>
+      
+        
+      
+    </div>
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>Thx F Sup</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="https://i.loli.net/2017/12/16/5a33fd668ce7c.png" alt="Tuski WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="https://i.loli.net/2017/12/16/5a33fdbe62e6f.png" alt="Tuski Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/swift/" rel="tag"><i class="fa fa-tag"></i> swift</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+         
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/Write-a-function-that-add-two-numbers-A-and-B/" rel="next" title="Write a function that add two numbers A and B">
+                <i class="fa fa-chevron-left"></i> Write a function that add two numbers A and B
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a35fec5ad889f1e" async = "async" ></script>
+</div>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+    <div class="comments" id="comments">
+      <div id="hypercomments_widget"></div>
+    </div>
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="Tuski" />
+            
+              <p class="site-author-name" itemprop="name">Tuski</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">34</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/thevenomsnake" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:thevenomsnake@icloud.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plus.google.com/u/0/104624402456467592306" target="_blank" title="Google">
+                    
+                      <i class="fa fa-fw fa-google"></i>Google</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/perphet" target="_blank" title="Twitter">
+                    
+                      <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.youtube.com/channel/UComQu3jg43YgIvm2PqAG1tA" target="_blank" title="YouTube">
+                    
+                      <i class="fa fa-fw fa-youtube"></i>YouTube</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+
+  <div class="links-of-blogroll motion-element links-of-blogroll-block">
+    <div class="links-of-blogroll-title">
+      <i class="fa  fa-fw fa-globe"></i>
+      Links&nbsp;
+      <i class="fa  fa-fw fa-globe"></i>
+    </div>
+    <ul class="links-of-blogroll-list">
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.crazyforcode.org/" title="CFC" target="_blank">CFC</a>
+        </li>
+      
+    </ul>
+     
+  </div>
+ 
+
+          
+      <iframe src="https://open.spotify.com/embed?uri=spotify:user:spotify:playlist:37i9dQZF1DXcBWIGoYBM5M&theme=white" width="215" height="350" frameborder="0" allowtransparency="true"></iframe>
+       
+      </section>
+
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Part-1"><span class="nav-text">Part 1</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#How-ARC-works"><span class="nav-text">How ARC works?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#What-are-Reference-Cycles"><span class="nav-text">What are Reference Cycles?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How-to-Resolve-these-Reference-Cycles"><span class="nav-text">How to Resolve these Reference Cycles?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Weak-Reference"><span class="nav-text">Weak Reference</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Unowned-Reference"><span class="nav-text">Unowned Reference</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Part-2"><span class="nav-text">Part 2</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Strong-Reference-Cycle-in-Closures"><span class="nav-text">Strong Reference Cycle in Closures</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#How-to-resolve-the-Strong-Reference-between-Class-and-Closure"><span class="nav-text">How to resolve the Strong Reference between Class and Closure?</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="heart">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tuski</span>
+
+
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by </div>
+
+
+
+  <span class="post-meta-divider">Perphet</span>
+
+
+<!--
+
+  <div class="theme-info">Theme &mdash;  v{}</div>
+
+
+
+
+-->
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+		<script type="text/javascript">
+		_hcwp = window._hcwp || [];
+
+		_hcwp.push({widget:"Bloggerstream", widget_id: 99037, selector:".hc-comment-count", label: "{\%COUNT%\}" });
+
+		
+		_hcwp.push({widget:"Stream", widget_id: 99037, xid: "2019/03/Automatic-Reference-Counting-ARC/"});
+		
+
+		(function() {
+		if("HC_LOAD_INIT" in window)return;
+		HC_LOAD_INIT = true;
+		var lang = (navigator.language || navigator.systemLanguage || navigator.userLanguage || "en").substr(0, 2).toLowerCase();
+		var hcc = document.createElement("script"); hcc.type = "text/javascript"; hcc.async = true;
+		hcc.src = ("https:" == document.location.protocol ? "https" : "http")+"://w.hypercomments.com/widget/hc/99037/"+lang+"/widget.js";
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(hcc, s.nextSibling);
+		})();
+		</script>
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("c6sjJ6fGADGrCVC48k5MVQcD-gzGzoHsz", "YuTcQ8aPXftmtmeC4VvTrK9B");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+  <script type="text/javascript">
+  wpac_init = window.wpac_init || [];
+  wpac_init.push({widget: 'Rating', id: 8566,
+    el: 'wpac-rating',
+    color: 'fc6423'
+  });
+  (function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = '//embed.widgetpack.com/widget.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+  })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+<div id="hexo-helper-live2d">
+  <canvas id="live2dcanvas" width="150" height="350"></canvas>
+</div>
+<style>
+  #live2dcanvas{
+    position: fixed;
+    width: 150px;
+    height: 350px;
+    opacity:0.8;
+    right: 0px;
+    z-index: 999;
+    pointer-events: none;
+    bottom: -20px;
+  }
+</style>
+<script type="text/javascript" src="/live2d/device.min.js"></script>
+<script type="text/javascript">
+const loadScript = function loadScript(c,b){var a=document.createElement("script");a.type="text/javascript";"undefined"!=typeof b&&(a.readyState?a.onreadystatechange=function(){if("loaded"==a.readyState||"complete"==a.readyState)a.onreadystatechange=null,b()}:a.onload=function(){b()});a.src=c;document.body.appendChild(a)};
+(function(){
+  if((typeof(device) != 'undefined') && (device.mobile())){
+    var trElement = document.getElementById('hexo-helper-live2d');
+    trElement.parentNode.removeChild(trElement);
+    return;
+  }else
+    if (typeof(device) === 'undefined') console.error('Cannot find current-device script.');
+  loadScript("/live2d/script.js", function(){loadlive2d("live2dcanvas", "/live2d/assets/shizuku.model.json", 0.5);});
+})();
+</script>
+
+ <canvas class="fireworks" 
+        style="position: fixed; left: 0px; top: 0px; z-index: 99999999; pointer-events: none; width: 1158px; height: 916px;" 
+        width="2316" 
+        height="1832">
+</canvas>
+<script type="text/javascript" src="/js/src/anime.min.js"></script>
+<script type="text/javascript" src="/js/src/fireworks.js"></script>
+</body>
+</html>
