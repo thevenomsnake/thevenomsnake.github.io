@@ -1,0 +1,1573 @@
+<!DOCTYPE html>
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+<script type="text/javascript">var OriginTitile=document.title,st;document.addEventListener("visibilitychange",function(){document.hidden?(document.title="(/≧▽≦/)Aw, Snap!",clearTimeout(st)):(document.title="(ฅ>ω<*ฅ) Fixed~"+OriginTitile,st=setTimeout(function(){document.title=OriginTitile},3e3))})</script>
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-bounce.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="swift,algorithm," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="或许你需要同时打开两份此文章，上下对照理解 || Maybe you need to open two copies of this article at the same time.">
+<meta name="keywords" content="swift,algorithm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Red-Black Tree (ZH &amp;&amp; EN)">
+<meta property="og:url" content="http://www.perphet.com/2019/03/Red-Black-Tree-ZH-EN/index.html">
+<meta property="og:site_name" content="Tuski&#39;s Blog">
+<meta property="og:description" content="或许你需要同时打开两份此文章，上下对照理解 || Maybe you need to open two copies of this article at the same time.">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://i.loli.net/2019/03/18/5c8f2a89944e9.png">
+<meta property="og:updated_time" content="2019-03-18T05:25:28.461Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Red-Black Tree (ZH &amp;&amp; EN)">
+<meta name="twitter:description" content="或许你需要同时打开两份此文章，上下对照理解 || Maybe you need to open two copies of this article at the same time.">
+<meta name="twitter:image" content="https://i.loli.net/2019/03/18/5c8f2a89944e9.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.perphet.com/2019/03/Red-Black-Tree-ZH-EN/"/>
+
+
+
+<link rel="stylesheet" href="../live2d/css/live2d.css" />
+
+
+  <title>Red-Black Tree (ZH && EN) | Tuski's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+<div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+   
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tuski's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">I code my life</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-music">
+          <a href="/music/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-music"></i> <br />
+            
+            Music
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.perphet.com/2019/03/Red-Black-Tree-ZH-EN/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tuski">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tuski's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Red-Black Tree (ZH && EN)</h1>
+        
+
+        <div class="post-meta">
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-17T21:06:55+09:00">
+                2019-03-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+            <!--noindex-->
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/03/Red-Black-Tree-ZH-EN/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="2019/03/Red-Black-Tree-ZH-EN/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+              <!--/noindex-->
+            
+          
+
+          
+          
+             <span id="/2019/03/Red-Black-Tree-ZH-EN/" class="leancloud_visitors" data-flag-title="Red-Black Tree (ZH && EN)">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  5,558
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  29
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <script src="/assets/js/APlayer.min.js"> </script><blockquote class="blockquote-center">或许你需要同时打开两份此文章，上下对照理解 || Maybe you need to open two copies of this article at the same time.</blockquote>
+
+<a id="more"></a>
+<div align="center"> <img src="https://i.loli.net/2019/03/18/5c8f2a89944e9.png" alt="mahamah.png"> </div>
+
+<h1 id="Introduction-介绍"><a href="#Introduction-介绍" class="headerlink" title="Introduction || 介绍"></a>Introduction || 介绍</h1><p>A red-black tree (RBT) is a balanced version of a Binary Search Tree guaranteeing that the basic operations (search, predecessor, successor, minimum, maximum, insert and delete) have a logarithmic worst case performance.<br>红黑树（RBT）是二叉搜索树的平衡版本，能保证基本操作（搜索，前驱，后继，最小，最大，插入和删除）具有对数最坏情况的性能。</p>
+<p>Binary search trees (BSTs) have the disadvantage that they can become unbalanced after some insert or delete operations. In the worst case, this could lead to a tree where the nodes build a linked list as shown in the following example:</p>
+<p>二叉搜索树（BST）的缺点是它们在一些插入或删除操作之后可能变得不平衡。 在最坏的情况下，这可能会变成链接列表的树，如以下示例所示：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">a</div><div class="line">  \</div><div class="line">   b</div><div class="line">    \</div><div class="line">     c</div><div class="line">      \</div><div class="line">       d</div></pre></td></tr></table></figure>
+<p>To prevent this issue, RBTs perform rebalancing operations after an insert or delete and store an additional color property at each node which can either be red or black. After each operation a RBT satisfies the following properties:</p>
+<p>为了防止出现此问题，RBT在插入或删除后执行重新平衡操作，并在每个节点上存储其他颜色属性，可以是红色或黑色。 每次操作后，RBT都满足以下属性：</p>
+<h2 id="Properties-属性"><a href="#Properties-属性" class="headerlink" title="Properties || 属性"></a>Properties || 属性</h2><ol>
+<li><p>Every node is either red or black</p>
+</li>
+<li><p>The root is black</p>
+</li>
+<li><p>Every leaf (nullLeaf) is black</p>
+</li>
+<li><p>If a node is red, then both its children are black</p>
+</li>
+<li><p>For each node, all paths from the node to descendant leaves contain the same number of black nodes</p>
+</li>
+</ol>
+<ol>
+<li><p>每个节点都是红色或黑色</p>
+</li>
+<li><p>根是黑色的</p>
+</li>
+<li><p>叶节点（nullLeaf）都是黑色的</p>
+</li>
+<li><p>如果节点为红色，则其子节点均为黑色</p>
+</li>
+<li><p>对于每个节点，从节点到后代叶子的所有路径都包含相同数量的黑色节点</p>
+</li>
+</ol>
+<p>Property 5 includes the definition of the black-height of a node x, bh(x), which is the number of black nodes on a path from this node down to a leaf not counting the node itself.<br>From [CLRS]<br>属性5包括节点x的黑色高度的定义，bh(x)，它是从该节点到不计算节点本身的叶子的路径上的黑色节点的数量。（来自 [CLRS]）</p>
+<blockquote>
+<p><strong>译注：</strong> CLRS 是指《算法导论》</p>
+</blockquote>
+<h2 id="Methods-方法"><a href="#Methods-方法" class="headerlink" title="Methods || 方法"></a>Methods || 方法</h2><p><strong>Nodes:</strong></p>
+<ul>
+<li><code>nodeX.getSuccessor()</code> Returns the inorder successor of nodeX</li>
+<li><code>nodeX.minimum()</code> Returns the node with the minimum key of the subtree of nodeX</li>
+<li><code>nodeX.maximum()</code> Returns the node with the maximum key of the subtree of nodeX<br><strong>Tree:</strong></li>
+<li><code>search(input:)</code> Returns the node with the given key value</li>
+<li><code>minValue()</code> Returns the minimum key value of the whole tree</li>
+<li><code>maxValue()</code> Returns the maximum key value of the whole tree</li>
+<li><code>insert(key:)</code> Inserts the key value into the tree</li>
+<li><code>delete(key:)</code> Delete the node with the respective key value from the tree</li>
+<li><code>verify()</code> Verifies that the given tree fulfills the red-black tree properties</li>
+</ul>
+<p>The rotation, insertion and deletion algorithms are implemented based on the pseudo-code provided in [CLRS]</p>
+<p><strong>节点：</strong></p>
+<ul>
+<li><code>nodeX.getSuccessor()</code> 返回nodeX的inorder后继</li>
+<li><code>nodeX.minimum()</code> 返回具有nodeX子树最小键的节点</li>
+<li><code>nodeX.maximum()</code> 返回具有nodeX子树的最大键的节点<br><strong>树：</strong></li>
+<li><code>search(input:)</code> 返回具有给定键值的节点</li>
+<li><code>minValue()</code> 返回整个树的最小键值</li>
+<li><code>maxValue()</code>返回整个树的最大键值</li>
+<li><code>insert(key:)</code> 将键值插入树中</li>
+<li><code>delete(key:)</code> 使用树中相应的键值删除节点</li>
+<li><code>verify()</code> 验证给定的树是否满足红黑树属性</li>
+</ul>
+<p>旋转，插入和删除算法基于[CLRS]中提供的伪代码实现</p>
+<h2 id="Implementation-Details-实施细节"><a href="#Implementation-Details-实施细节" class="headerlink" title="Implementation Details || 实施细节"></a>Implementation Details || 实施细节</h2><p>For convenience, all nil-pointers to children or the parent (except the parent of the root) of a node are exchanged with a nullLeaf. This is an ordinary node object, like all other nodes in the tree, but with a black color, and in this case a nil value for its children, parent and key. Therefore, an empty tree consists of exactly one nullLeaf at the root.<br>为方便起见，所有指向子节点的nil指针或节点的父节点（根节点的父节点）都与nullLeaf交换。 这是一个普通的节点对象，就像树中的所有其他节点一样，但是使用黑色，在这种情况下，它的子节点是父节点和键的nil值。 因此，空树在根处只包含一个nullLeaf。</p>
+<h2 id="Rotation-旋转"><a href="#Rotation-旋转" class="headerlink" title="Rotation || 旋转"></a>Rotation || 旋转</h2><p><strong>Left rotation (around x):</strong><br>Assumes that x.rightChild y is not a nullLeaf, rotates around the link from x to y, makes y the new root of the subtree with x as y’s left child and y’s left child as x’s right child, where n = a node, [n] = a subtree</p>
+<p><strong>左旋（围绕x）：</strong><br>假设x.rightChild y不是nullLeaf，围绕从x到y的链接旋转，使y成为子树的新根，x为y的左子，y的左子为x的右子，其中 n = a node, [n] = a subtree</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">    |                |</div><div class="line">    x                y</div><div class="line">  /   \     ~&gt;     /   \</div><div class="line">[A]    y          x    [C]</div><div class="line">      / \        / \</div><div class="line">    [B] [C]    [A] [B]</div></pre></td></tr></table></figure>
+<p><strong>Right rotation (around y):</strong><br>Assumes that y.leftChild x is not a nullLeaf, rotates around the link from y to x, makes x the new root of the subtree with y as x’s right child and x’s right child as y’s left child, where n = a node, [n] = a subtree</p>
+<p><strong>右旋（围绕y）：</strong><br>假设y.leftChild x不是nullLeaf，围绕从y到x的链接旋转，使x成为子树的新根，其中y为x的右子，x的右子为y的左子，其中 n = a node, [n] = a subtree</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">    |                |</div><div class="line">    x                y</div><div class="line">  /   \     &lt;~     /   \</div><div class="line">[A]    y          x    [C]</div><div class="line">      / \        / \</div><div class="line">    [B] [C]    [A] [B]</div></pre></td></tr></table></figure>
+<p>As rotation is a local operation only exchanging pointers it’s runtime is O(1).<br>由于旋转是仅交换指针的本地操作，因此它的运行时为O(1)。</p>
+<h2 id="Insertion-插入"><a href="#Insertion-插入" class="headerlink" title="Insertion || 插入"></a>Insertion || 插入</h2><p>We create a node with the given key and set its color to red. Then we insert it into the the tree by performing a standard insert into a BST. After this, the tree might not be a valid RBT anymore, so we fix the red-black properties by calling the insertFixup algorithm.<br>The only violation of the red-black properties occurs at the inserted node z and its parent. Either both are red, or the parent does not exist (so there is a violation since the root must be black).</p>
+<p>我们用给定的键创建一个节点，并将其颜色设置为红色。 然后我们通过在BST中执行标准插入将其插入树中。 在此之后，树可能不再是有效的RBT，因此我们通过调用insertFixup算法来修复红黑属性。<br>唯一违反红黑属性的情况发生在插入的节点z及其父节点上。 两者都是红色，或者父级不存在（因此存在违规，因为根必须是黑色）。</p>
+<p>We have three distinct cases:<br><strong>Case 1:</strong> The uncle of z is red. If z.parent is left child, z’s uncle is z.grandparent’s right child. If this is the case, we recolor and move z to z.grandparent, then we check again for this new z. In the following cases, we denote a red node with (x) and a black node with {x}, p = parent, gp = grandparent and u = uncle</p>
+<p>我们有三个不同的案例：<br><strong>案例1：</strong> z的叔叔是红色的。 如果z.parent留给孩子，z的叔叔是z.grandparent的右孩子。 如果是这种情况，我们重新着色并将z移动到z.grandparent，然后我们再次检查这个新z。 在下面的例子中，我们用（x）表示红色节点，用{x}表示黑色节点，p =父，gp =祖父母，u =叔叔</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">         |                   |</div><div class="line">        &#123;gp&#125;               (newZ)</div><div class="line">       /    \     ~&gt;       /    \</div><div class="line">    (p)     (u)         &#123;p&#125;     &#123;u&#125;</div><div class="line">    / \     / \         / \     / \</div><div class="line">  (z)  [C] [D] [E]    (z) [C] [D] [E]</div><div class="line">  / \                 / \</div><div class="line">[A] [B]             [A] [B]</div></pre></td></tr></table></figure>
+<p><strong>Case 2a:</strong> The uncle of z is black and z is right child. Here, we move z upwards, so z’s parent is the newZ and then we rotate around this newZ. After this, we have Case 2b.<br><strong>案例2a：</strong> z的叔叔是黑人，z是右孩子。 在这里，我们将z向上移动，因此z的父级是newZ，然后我们围绕这个newZ旋转。 在此之后，我们有案例2b。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">       |                   |</div><div class="line">      &#123;gp&#125;                &#123;gp&#125;</div><div class="line">     /    \     ~&gt;       /    \</div><div class="line">  (p)      &#123;u&#125;         (z)     &#123;u&#125;</div><div class="line">  / \      / \         / \     / \</div><div class="line">[A]  (z)  [D] [E]  (newZ) [C] [D] [E]</div><div class="line">     / \            / \</div><div class="line">   [B] [C]        [A] [B]</div></pre></td></tr></table></figure>
+<p><strong>Case 2b:</strong> The uncle of z is black and z is left child. In this case, we recolor z.parent to black and z.grandparent to red. Then we rotate around z’s grandparent. Afterwards we have valid red-black tree.<br><strong>案例2b：</strong> z的叔叔是黑人而z是小孩子。 在这种情况下，我们将z.parent重新着色为黑色，将z.grandparent重新着色为红色。 然后我们围绕z的祖父母转动。 之后我们有了有效的红黑树。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">         |                   |</div><div class="line">        &#123;gp&#125;                &#123;p&#125;</div><div class="line">       /    \     ~&gt;       /    \</div><div class="line">    (p)      &#123;u&#125;         (z)    (gp)</div><div class="line">    / \      / \         / \     / \</div><div class="line">  (z)  [C] [D] [E]    [A] [B]  [C]  &#123;u&#125;</div><div class="line">  / \                               / \</div><div class="line">[A] [B]                           [D] [E]</div></pre></td></tr></table></figure>
+<p>Running time of this algorithm: </p>
+<ul>
+<li>Only case 1 may repeat, but this only h/2 steps, where h is the height of the tree</li>
+<li>Case 2a -&gt; Case 2b -&gt; red-black tree</li>
+<li>Case 2b -&gt; red-black tree<br>As we perform case 1 at most O(log n) times and all other cases at most once, we have O(log n) recolorings and at most 2 rotations.<br>The overall runtime of insert is O(log n).<br>该算法的运行时间：</li>
+<li>只有案例1可以重复，但这只有h / 2步，其中h是树的高度</li>
+<li>案例2a -&gt; 案例2b -&gt; 红黑树</li>
+<li>案例2b -&gt; 红黑树<br>由于我们在最多O(log n)次执行情况1并且所有其他情况最多执行一次，我们有O(log n)重新着色并且最多2次旋转。<br>insert的整个运行时为O(log n)。</li>
+</ul>
+<h2 id="Deletion-删除"><a href="#Deletion-删除" class="headerlink" title="Deletion || 删除"></a>Deletion || 删除</h2><p>We search for the node with the given key, and if it exists we delete it by performing a standard delete from a BST. If the deleted nodes’ color was red everything is fine, otherwise red-black properties may be violated so we call the fixup procedure deleteFixup.<br>Violations can be that the parent and child of the deleted node x where red, so we now have two adjacent red nodes, or if we deleted the root, the root could now be red, or the black height property is violated.<br>We have 4 cases: We call deleteFixup on node x<br><strong>Case 1:</strong> The sibling of x is red. The sibling is the other child of x’s parent, which is not x itself. In this case, we recolor the parent of x and x.sibling then we left rotate around x’s parent. In the following cases s = sibling of x, (x) = red, {x} = black, |x| = red/black.</p>
+<p>我们使用给定密钥搜索节点，如果存在，我们通过从BST执行标准删除来删除它。 如果删除的节点的颜色为红色，则一切正常，否则可能会违反红黑属性，因此我们调用修复程序deleteFixup。<br>违规可以是已删除节点x的父节点和子节点为红色，因此我们现在有两个相邻的红色节点，或者如果我们删除了根节点，则根目录可能是红色，或者违反了黑色高度属性。<br>我们有4种情况：我们在节点x上调用deleteFixup<br><strong>案例1：</strong> x的兄弟是红色的。 兄弟姐妹是x的父母的另一个孩子，而不是x本身。 在这种情况下，我们重新着色x和x.sibling的父级，然后我们围绕x的父级旋转。 在下列情况下，s = x的兄弟，（x）=红色，{x} =黑色，| x | =红色/黑色。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">      |                   |</div><div class="line">     &#123;p&#125;                 &#123;s&#125;</div><div class="line">    /    \     ~&gt;       /    \</div><div class="line">  &#123;x&#125;    (s)         (p)     [D]</div><div class="line">  / \    / \         / \     </div><div class="line">[A] [B] [C] [D]    &#123;x&#125; [C]</div><div class="line">                   / \  </div><div class="line">                 [A] [B]</div></pre></td></tr></table></figure>
+<p><strong>Case 2:</strong> The sibling of x is black and has two black children. Here, we recolor x.sibling to red, move x upwards to x.parent and check again for this newX.</p>
+<p><strong>案例2：</strong> x的兄弟是黑人，有两个黑人孩子。 在这里，我们将x.sibling重新着色为红色，将x向上移动到x.parent并再次检查此newX。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">      |                    |</div><div class="line">     |p|                 |newX|</div><div class="line">    /    \     ~&gt;       /     \</div><div class="line">  &#123;x&#125;     &#123;s&#125;          &#123;x&#125;     (s)</div><div class="line">  / \    /   \          / \   /   \</div><div class="line">[A] [B] &#123;l&#125;  &#123;r&#125;     [A] [B] &#123;l&#125;  &#123;r&#125;</div><div class="line">        / \  / \             / \  / \</div><div class="line">      [C][D][E][F]         [C][D][E][F]</div></pre></td></tr></table></figure>
+<p><strong>Case 3:</strong> The sibling of x is black with one black child to the right. In this case, we recolor the sibling to red and sibling.leftChild to black, then we right rotate around the sibling. After this we have case 4.</p>
+<p><strong>案例3：</strong> x的兄弟是黑色，右边有一个黑人孩子。 在这种情况下，我们将兄弟重新着色为红色和sibling.leftChild为黑色，然后我们右旋转兄弟。 在此之后我们有案例4。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">      |                    |</div><div class="line">     |p|                  |p|</div><div class="line">    /    \     ~&gt;       /     \</div><div class="line">  &#123;x&#125;     &#123;s&#125;          &#123;x&#125;     &#123;l&#125;</div><div class="line">  / \    /   \         / \    /   \</div><div class="line">[A] [B] (l)  &#123;r&#125;     [A] [B] [C]  (s)</div><div class="line">        / \  / \                  / \</div><div class="line">      [C][D][E][F]               [D]&#123;e&#125;</div><div class="line">                                    / \</div><div class="line">                                  [E] [F]</div></pre></td></tr></table></figure>
+<p><strong>Case 4:</strong> The sibling of x is black with one red child to the right. Here, we recolor the sibling to the color of x.parent and x.parent and sibling.rightChild to black. Then we left rotate around x.parent. After this operation we have a valid red-black tree. Here, ||x|| denotes that x can have either color red or black, but that this can be different to |x| color. This is important, as s gets the same color as p.</p>
+<p><strong>案例4：</strong> x的兄弟是黑色的，右边是一个红色的孩子。 在这里，我们将兄弟重新着色为x.parent和x.parent以及sibling.rightChild的颜色为黑色。 然后我们左右旋转x.parent。 在此操作之后，我们有一个有效的红黑树。 这里，|| x || 表示x可以有红色或黑色，但这可能与| x |不同 颜色。 这很重要，因为s与p具有相同的颜色。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">      |                        |</div><div class="line">     ||p||                   ||s||</div><div class="line">    /    \     ~&gt;           /     \</div><div class="line">  &#123;x&#125;     &#123;s&#125;              &#123;p&#125;     &#123;r&#125;</div><div class="line">  / \    /   \            /  \     /  \</div><div class="line">[A] [B] |l|  (r)        &#123;x&#125;  |l|  [E] [F]</div><div class="line">        / \  / \        / \  / \</div><div class="line">      [C][D][E][F]    [A][B][C][D]</div></pre></td></tr></table></figure>
+<p><strong>Running time of this algorithm:</strong></p>
+<ul>
+<li>Only case 2 can repeat, but this only h many times, where h is the height of the tree</li>
+<li>Case 1 -&gt; case 2 -&gt; red-black tree<br>Case 1 -&gt; case 3 -&gt; case 4 -&gt; red-black tree<br>Case 1 -&gt; case 4 -&gt; red-black tree</li>
+<li>Case 3 -&gt; case 4 -&gt; red-black tree</li>
+<li>Case 4 -&gt; red-black tree<br>As we perform case 2 at most O(log n) times and all other steps at most once, we have O(log n) recolorings and at most 3 rotations.<br>The overall runtime of delete is O(log n).</li>
+</ul>
+<p><strong>该算法的运行时间：</strong></p>
+<ul>
+<li>只有情况2可以重复，但这只有很多次，其中h是树的高度</li>
+<li>案例1 -&gt; 案例2 -&gt; 红黑树<br>案例1 -&gt; 案例3 -&gt; 案例4 -&gt; 红黑树<br>案例1 -&gt; 案例4 -&gt; 红黑树</li>
+<li>案例3 -&gt; 案例4 -&gt; 红黑树</li>
+<li>案例4 -&gt; 红黑树<br>由于我们在最多O(log n)次执行情况2并且所有其他步骤最多执行一次，因此我们有O(log n)重新着色并且最多3次旋转。<br>删除的总体运行时间是O(log n)。</li>
+</ul>
+<h1 id="Code-代码"><a href="#Code-代码" class="headerlink" title="Code || 代码"></a>Code || 代码</h1><h2 id="Basic-基本"><a href="#Basic-基本" class="headerlink" title="Basic || 基本"></a>Basic || 基本</h2><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> Foundation</div><div class="line"></div><div class="line"><span class="keyword">private</span> <span class="class"><span class="keyword">enum</span> <span class="title">RBTreeColor</span> </span>&#123;</div><div class="line">    <span class="keyword">case</span> red</div><div class="line">    <span class="keyword">case</span> black</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">private</span> <span class="class"><span class="keyword">enum</span> <span class="title">RotationDirection</span> </span>&#123;</div><div class="line">    <span class="keyword">case</span> <span class="keyword">left</span></div><div class="line">    <span class="keyword">case</span> <span class="keyword">right</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// MARK: - RBNode</span></div><div class="line"><span class="comment">// 标记： - RBNode</span></div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RBTreeNode</span>&lt;<span class="title">T</span>: <span class="title">Comparable</span>&gt;: <span class="title">Equatable</span> </span>&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">typealias</span> <span class="type">RBNode</span> = <span class="type">RBTreeNode</span>&lt;<span class="type">T</span>&gt;</div><div class="line">    </div><div class="line">    <span class="keyword">fileprivate</span> <span class="keyword">var</span> color: <span class="type">RBTreeColor</span> = .black</div><div class="line">    <span class="keyword">fileprivate</span> <span class="keyword">var</span> key: <span class="type">T</span>?</div><div class="line">    <span class="keyword">var</span> leftChild: <span class="type">RBNode</span>?</div><div class="line">    <span class="keyword">var</span> rightChild: <span class="type">RBNode</span>?</div><div class="line">    <span class="keyword">fileprivate</span> <span class="keyword">weak</span> <span class="keyword">var</span> parent: <span class="type">RBNode</span>?</div><div class="line">    </div><div class="line">    <span class="keyword">public</span> <span class="keyword">init</span>(key: <span class="type">T</span>?, leftChild: <span class="type">RBNode</span>?, rightChild: <span class="type">RBNode</span>?, parent: <span class="type">RBNode</span>?) &#123;</div><div class="line">        <span class="keyword">self</span>.key = key</div><div class="line">        <span class="keyword">self</span>.leftChild = leftChild</div><div class="line">        <span class="keyword">self</span>.rightChild = rightChild</div><div class="line">        <span class="keyword">self</span>.parent = parent</div><div class="line">        </div><div class="line">        <span class="keyword">self</span>.leftChild?.parent = <span class="keyword">self</span></div><div class="line">        <span class="keyword">self</span>.rightChild?.parent = <span class="keyword">self</span></div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="comment">// nullleaf initialization</span></div><div class="line">    <span class="comment">// 初始化nullleaf</span></div><div class="line">    <span class="keyword">public</span> <span class="keyword">convenience</span> <span class="keyword">init</span>(key: <span class="type">T</span>?) &#123;</div><div class="line">        <span class="keyword">self</span>.<span class="keyword">init</span>(key: key, leftChild: <span class="literal">nil</span>, rightChild: <span class="literal">nil</span>, parent: <span class="literal">nil</span>)</div><div class="line">        <span class="keyword">self</span>.color = .black</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">var</span> isRoot: <span class="type">Bool</span> &#123;</div><div class="line">        <span class="keyword">return</span> parent == <span class="literal">nil</span></div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">var</span> isLeaf: <span class="type">Bool</span> &#123;</div><div class="line">        <span class="keyword">return</span> rightChild == <span class="literal">nil</span> &amp;&amp; leftChild == <span class="literal">nil</span></div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">var</span> isNullLeaf: <span class="type">Bool</span> &#123;</div><div class="line">        <span class="keyword">return</span> key == <span class="literal">nil</span> &amp;&amp; isLeaf &amp;&amp; color == .black</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">var</span> isRightChild: <span class="type">Bool</span> &#123;</div><div class="line">        <span class="keyword">return</span> parent?.rightChild == <span class="keyword">self</span></div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">var</span> isLeftChild: <span class="type">Bool</span> &#123;</div><div class="line">        <span class="keyword">return</span> parent?.leftChild == <span class="keyword">self</span></div><div class="line">    &#125;</div><div class="line">    <span class="comment">// Parent node of the parent node</span></div><div class="line">    <span class="comment">// 父节点的父节点</span></div><div class="line">    <span class="keyword">var</span> grandparent: <span class="type">RBNode</span>? &#123;</div><div class="line">        <span class="keyword">return</span> parent?.parent</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">var</span> sibling: <span class="type">RBNode</span>? &#123;</div><div class="line">        <span class="keyword">if</span> isLeftChild &#123;</div><div class="line">            <span class="keyword">return</span> parent?.rightChild</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">return</span> parent?.leftChild</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">var</span> uncle: <span class="type">RBNode</span>? &#123;</div><div class="line">        <span class="keyword">return</span> parent?.sibling</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="RedBlackTree-红黑树"><a href="#RedBlackTree-红黑树" class="headerlink" title="RedBlackTree || 红黑树"></a>RedBlackTree || 红黑树</h2><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RedBlackTree</span>&lt;<span class="title">T</span>: <span class="title">Comparable</span>&gt; </span>&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">typealias</span> <span class="type">RBNode</span> = <span class="type">RBTreeNode</span>&lt;<span class="type">T</span>&gt;</div><div class="line">    </div><div class="line">    <span class="keyword">fileprivate</span>(<span class="keyword">set</span>) <span class="keyword">var</span> root: <span class="type">RBNode</span></div><div class="line">    <span class="keyword">fileprivate</span>(<span class="keyword">set</span>) <span class="keyword">var</span> size = <span class="number">0</span></div><div class="line">    <span class="keyword">fileprivate</span> <span class="keyword">let</span> nullLeaf = <span class="type">RBNode</span>()</div><div class="line">    </div><div class="line">    <span class="keyword">public</span> <span class="keyword">init</span>() &#123;</div><div class="line">        root = nullLeaf</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="Equatable-Protocol-Equatable-协议"><a href="#Equatable-Protocol-Equatable-协议" class="headerlink" title="Equatable Protocol|| Equatable 协议"></a>Equatable Protocol|| Equatable 协议</h2><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">extension</span> <span class="title">RBTreeNode</span> </span>&#123;</div><div class="line">    <span class="keyword">static</span> <span class="keyword">public</span> <span class="function"><span class="keyword">func</span> == &lt;T&gt;<span class="params">(lhs: RBTreeNode&lt;T&gt;, rhs: RBTreeNode&lt;T&gt;)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">        <span class="keyword">return</span> lhs.key == rhs.key</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="Get-the-precursor-node-获取前驱节点"><a href="#Get-the-precursor-node-获取前驱节点" class="headerlink" title="Get the precursor node || 获取前驱节点"></a>Get the precursor node || 获取前驱节点</h2><h3 id="getSuccessor"><a href="#getSuccessor" class="headerlink" title=".getSuccessor()"></a>.getSuccessor()</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">extension</span> <span class="title">RBTreeNode</span> </span>&#123;</div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">func</span> <span class="title">getSuccessor</span><span class="params">()</span></span> -&gt; <span class="type">RBNode</span>? &#123;</div><div class="line">        <span class="keyword">if</span> <span class="keyword">let</span> rightChild = <span class="keyword">self</span>.rightChild &#123;</div><div class="line">            <span class="keyword">if</span> !rightChild.isNullLeaf &#123;</div><div class="line">                <span class="keyword">return</span> rightChild.minimun()</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">var</span> currentNode = <span class="keyword">self</span></div><div class="line">        <span class="keyword">var</span> parent = currentNode.parent</div><div class="line">        <span class="keyword">while</span> currentNode.isRightChild &#123;</div><div class="line">            <span class="keyword">if</span> <span class="keyword">let</span> parent = parent &#123;</div><div class="line">                currentNode = parent</div><div class="line">            &#125;</div><div class="line">            parent = currentNode.parent</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> parent</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="Searching-搜索"><a href="#Searching-搜索" class="headerlink" title="Searching || 搜索"></a>Searching || 搜索</h2><h3 id="minimun-amp-amp-maximum"><a href="#minimun-amp-amp-maximum" class="headerlink" title=".minimun() &amp;&amp; .maximum()"></a>.minimun() &amp;&amp; .maximum()</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">extension</span> <span class="title">RBTreeNode</span> </span>&#123;</div><div class="line">    </div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">func</span> <span class="title">minimun</span><span class="params">()</span></span> -&gt; <span class="type">RBNode</span>? &#123;</div><div class="line">        <span class="keyword">if</span> <span class="keyword">let</span> leftChild = leftChild &#123;</div><div class="line">            <span class="keyword">if</span> !leftChild.isNullLeaf &#123;</div><div class="line">                <span class="keyword">return</span> leftChild.minimun()</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">self</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">self</span></div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">func</span> <span class="title">maximum</span><span class="params">()</span></span> -&gt; <span class="type">RBNode</span>? &#123;</div><div class="line">        <span class="keyword">if</span> <span class="keyword">let</span> rightChild = rightChild &#123;</div><div class="line">            <span class="keyword">if</span> !rightChild.isNullLeaf &#123;</div><div class="line">                <span class="keyword">return</span> rightChild.maximum()</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">self</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">self</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="search-input"><a href="#search-input" class="headerlink" title=".search(input:)"></a>.search(input:)</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">extension</span> <span class="title">RedBlackTree</span> </span>&#123;</div><div class="line">    </div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">func</span> <span class="title">search</span><span class="params">(input: T)</span></span> -&gt; <span class="type">RBNode</span>? &#123;</div><div class="line">        <span class="keyword">return</span> search(key: input, node: root)</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">fileprivate</span> <span class="function"><span class="keyword">func</span> <span class="title">search</span><span class="params">(key: T, node: RBNode?)</span></span> -&gt; <span class="type">RBNode</span>? &#123;</div><div class="line">        <span class="keyword">guard</span> <span class="keyword">let</span> node = node <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">return</span> <span class="literal">nil</span></div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">if</span> !node.isNullLeaf &#123;</div><div class="line">            <span class="keyword">if</span> <span class="keyword">let</span> nodeKey = node.key &#123;</div><div class="line">                <span class="keyword">if</span> key == nodeKey &#123;</div><div class="line">                    <span class="keyword">return</span> node</div><div class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> key &lt; nodeKey &#123;</div><div class="line">                    <span class="keyword">return</span> search(key: key, node: node.leftChild)</div><div class="line">                &#125; <span class="keyword">else</span> &#123;</div><div class="line">                    <span class="keyword">return</span> search(key: key, node: node.rightChild)</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="literal">nil</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="minValue"><a href="#minValue" class="headerlink" title=".minValue()"></a>.minValue()</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">extension</span> <span class="title">RedBlackTree</span> </span>&#123;</div><div class="line">    </div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">func</span> <span class="title">minValue</span><span class="params">()</span></span> -&gt; <span class="type">T</span>? &#123;</div><div class="line">        <span class="keyword">guard</span> <span class="keyword">let</span> minNode = root.minimun() <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">return</span> <span class="literal">nil</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> minNode.key</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">func</span> <span class="title">maxValue</span><span class="params">()</span></span> -&gt; <span class="type">T</span>? &#123;</div><div class="line">        <span class="keyword">guard</span> <span class="keyword">let</span> maxNode = root.maximum() <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">return</span> <span class="literal">nil</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> maxNode.key</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="Insertion-插入-1"><a href="#Insertion-插入-1" class="headerlink" title="Insertion || 插入"></a>Insertion || 插入</h2><h3 id="insert-key"><a href="#insert-key" class="headerlink" title=".insert(key:)"></a>.insert(key:)</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">extension</span> <span class="title">RedBlackTree</span> </span>&#123;</div><div class="line">    </div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">func</span> <span class="title">insert</span><span class="params">(key: T)</span></span> &#123;</div><div class="line">        <span class="keyword">if</span> root.isNullLeaf &#123;</div><div class="line">            root = <span class="type">RBNode</span>(key: key)</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            insert(input: <span class="type">RBNode</span>(key: key), node: root)</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">func</span> <span class="title">insert</span><span class="params">(input: RBNode, node: RBNode)</span></span> &#123;</div><div class="line">        <span class="keyword">guard</span> <span class="keyword">let</span> inputKey = input.key, <span class="keyword">let</span> nodeKey = node.key <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">return</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> inputKey &lt; nodeKey &#123;</div><div class="line">            <span class="keyword">guard</span> <span class="keyword">let</span> child = node.leftChild <span class="keyword">else</span> &#123;</div><div class="line">                addAsLeftChild(child: input, parent: node)</div><div class="line">                <span class="keyword">return</span></div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span> child.isNullLeaf &#123;</div><div class="line">                addAsLeftChild(child: input, parent: node)</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                insert(input: input, node: child)</div><div class="line">            &#125;</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">guard</span> <span class="keyword">let</span> child = node.rightChild <span class="keyword">else</span> &#123;</div><div class="line">                addAsRightChild(child: input, parent: node)</div><div class="line">                <span class="keyword">return</span></div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span> child.isNullLeaf &#123;</div><div class="line">                addAsRightChild(child: input, parent: node)</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                insert(input: input, node: child)</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">func</span> <span class="title">addAsLeftChild</span><span class="params">(child: RBNode, parent: RBNode)</span></span> &#123;</div><div class="line">        parent.leftChild = child</div><div class="line">        child.parent = parent</div><div class="line">        child.color = .red</div><div class="line">        insertFixup(node: child)</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">func</span> <span class="title">addAsRightChild</span><span class="params">(child: RBNode, parent: RBNode)</span></span> &#123;</div><div class="line">        parent.rightChild = child</div><div class="line">        child.parent = parent</div><div class="line">        child.color = .red</div><div class="line">        insertFixup(node: child)</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">func</span> <span class="title">insertFixup</span><span class="params">(node z: RBNode)</span></span> &#123;</div><div class="line">        <span class="keyword">if</span> !z.isNullLeaf &#123;</div><div class="line">            <span class="keyword">guard</span> <span class="keyword">let</span> parentZ = z.parent <span class="keyword">else</span> &#123;</div><div class="line">                <span class="keyword">return</span></div><div class="line">            &#125;</div><div class="line">            <span class="comment">// If both |z| and his parent are red -&gt; violation of red-black property -&gt; need to fix it</span></div><div class="line">            <span class="comment">// 如果两个 | z |  且而他的父母是红色的 - &gt; 违反红黑属性 - &gt; 需要修复它</span></div><div class="line">            <span class="keyword">if</span> parentZ.color == .red &#123;</div><div class="line">                <span class="keyword">guard</span> <span class="keyword">let</span> uncle = z.uncle <span class="keyword">else</span> &#123;</div><div class="line">                    <span class="keyword">return</span></div><div class="line">                &#125;</div><div class="line">                <span class="comment">// Case 1: Uncle red -&gt; recolor + move z</span></div><div class="line">                <span class="comment">// 案例1: 叔叔是红色 -&gt; 重写着色 + 移动z</span></div><div class="line">                <span class="keyword">if</span> uncle.color == .red &#123;</div><div class="line">                    parentZ.color = .black</div><div class="line">                    uncle.color = .black</div><div class="line">                    <span class="keyword">if</span> <span class="keyword">let</span> grandparentZ = parentZ.parent &#123;</div><div class="line">                        grandparentZ.color = .red</div><div class="line">                        <span class="comment">// Move z to grandparent and check again</span></div><div class="line">                        <span class="comment">// 将 z 移至祖父母并再次检查</span></div><div class="line">                        insertFixup(node: grandparentZ)</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">                <span class="comment">// Case 2: Uncle black</span></div><div class="line">                <span class="comment">// 案例 2: 叔叔是黑色</span></div><div class="line">                <span class="keyword">else</span> &#123;</div><div class="line">                    <span class="keyword">var</span> zNew = z</div><div class="line">                    <span class="comment">// Case 2.a: z right child -&gt; rotate</span></div><div class="line">                    <span class="comment">// 案例 2.a: z 左边的孩子 -&gt; 回转</span></div><div class="line">                    <span class="keyword">if</span> parentZ.isLeftChild &amp;&amp; z.isRightChild &#123;</div><div class="line">                        zNew = parentZ</div><div class="line">                        leftRotate(node: zNew)</div><div class="line">                    &#125; <span class="keyword">else</span> <span class="keyword">if</span> parentZ.isRightChild &amp;&amp; z.isLeftChild &#123;</div><div class="line">                        zNew = parentZ</div><div class="line">                        rightRotate(node: zNew)</div><div class="line">                    &#125;</div><div class="line">                    <span class="comment">// Case 2.b: z left child -&gt; recolor + rotate</span></div><div class="line">                    <span class="comment">// 案例 2.a: z 左边的孩子 -&gt; 回转</span></div><div class="line">                    zNew.parent?.color = .black</div><div class="line">                    <span class="keyword">if</span> <span class="keyword">let</span> grandparentZnew = zNew.grandparent &#123;</div><div class="line">                        grandparentZnew.color = .red</div><div class="line">                        <span class="keyword">if</span> z.isLeftChild &#123;</div><div class="line">                            rightRotate(node: grandparentZnew)</div><div class="line">                        &#125; <span class="keyword">else</span> &#123;</div><div class="line">                            leftRotate(node: grandparentZnew)</div><div class="line">                        &#125;</div><div class="line">                        <span class="comment">// We have a valid red-black-tree</span></div><div class="line">                        <span class="comment">// 我们有一个有效的红黑树</span></div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        root.color = .black</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="Deletion-删除-1"><a href="#Deletion-删除-1" class="headerlink" title="Deletion || 删除"></a>Deletion || 删除</h2><h3 id="delete-amp-amp-deleteFixup"><a href="#delete-amp-amp-deleteFixup" class="headerlink" title=".delete() &amp;&amp; .deleteFixup()"></a>.delete() &amp;&amp; .deleteFixup()</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">extension</span> <span class="title">RedBlackTree</span> </span>&#123;</div><div class="line">    </div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">func</span> <span class="title">delete</span><span class="params">(key: T)</span></span> &#123;</div><div class="line">        <span class="keyword">if</span> size == <span class="number">1</span> &#123;</div><div class="line">            root = nullLeaf</div><div class="line">            size -= <span class="number">1</span></div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> <span class="keyword">let</span> node = search(key: key, node: root) &#123;</div><div class="line">            <span class="keyword">if</span> !node.isNullLeaf &#123;</div><div class="line">                delete(node: node)</div><div class="line">                size -= <span class="number">1</span></div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">func</span> <span class="title">delete</span><span class="params">(node z: RBNode)</span></span> &#123;</div><div class="line">        <span class="keyword">var</span> nodeY = <span class="type">RBNode</span>()</div><div class="line">        <span class="keyword">var</span> nodeX = <span class="type">RBNode</span>()</div><div class="line">        <span class="keyword">if</span> <span class="keyword">let</span> leftChild = z.leftChild, <span class="keyword">let</span> rightChild = z.rightChild &#123;</div><div class="line">            <span class="keyword">if</span> leftChild.isNullLeaf || rightChild.isNullLeaf &#123;</div><div class="line">                nodeY = z</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                <span class="keyword">if</span> <span class="keyword">let</span> successor = z.getSuccessor() &#123;</div><div class="line">                    nodeY = successor</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> <span class="keyword">let</span> leftChild = nodeY.leftChild &#123;</div><div class="line">            <span class="keyword">if</span> !leftChild.isNullLeaf &#123;</div><div class="line">                nodeX = leftChild</div><div class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> <span class="keyword">let</span> rightChild = nodeY.rightChild &#123;</div><div class="line">                nodeX = rightChild</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        nodeX.parent = nodeY.parent</div><div class="line">        <span class="keyword">if</span> <span class="keyword">let</span> parentY = nodeY.parent &#123;</div><div class="line">            <span class="comment">// Should never be the case, as parent of root = nil</span></div><div class="line">            <span class="comment">// </span></div><div class="line">            <span class="keyword">if</span> parentY.isNullLeaf &#123;</div><div class="line">                root = nodeX</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                <span class="keyword">if</span> nodeY.isLeftChild &#123;</div><div class="line">                    parentY.leftChild = nodeX</div><div class="line">                &#125; <span class="keyword">else</span> &#123;</div><div class="line">                    parentY.rightChild = nodeX</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            root = nodeX</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> nodeY != z &#123;</div><div class="line">            z.key = nodeY.key</div><div class="line">        &#125;</div><div class="line">        <span class="comment">// If sliced out node was red -&gt; nothing to do as red-black-property holds</span></div><div class="line">        <span class="comment">// If it was black -&gt; fix red-black-property</span></div><div class="line">        <span class="keyword">if</span> nodeY.color == .black &#123;</div><div class="line">            deleteFixup(node: nodeX)</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">func</span> <span class="title">deleteFixup</span><span class="params">(node x: RBNode)</span></span> &#123;</div><div class="line">        <span class="keyword">var</span> xTmp = x</div><div class="line">        <span class="keyword">if</span> !x.isRoot &amp;&amp; x.color == .black &#123;</div><div class="line">            <span class="keyword">guard</span> <span class="keyword">var</span> sibling = x.sibling <span class="keyword">else</span> &#123;</div><div class="line">                <span class="keyword">return</span></div><div class="line">            &#125;</div><div class="line">            <span class="comment">// Case 1: Sibling of x is red</span></div><div class="line">            <span class="keyword">if</span> sibling.color == .red &#123;</div><div class="line">                <span class="comment">// Recolor</span></div><div class="line">                sibling.color = .black</div><div class="line">                <span class="keyword">if</span> <span class="keyword">let</span> parentX = x.parent &#123;</div><div class="line">                    parentX.color = .red</div><div class="line">                    <span class="comment">// Rotation</span></div><div class="line">                    <span class="keyword">if</span> x.isLeftChild &#123;</div><div class="line">                        leftRotate(node: parentX)</div><div class="line">                    &#125; <span class="keyword">else</span> &#123;</div><div class="line">                        rightRotate(node: parentX)</div><div class="line">                    &#125;</div><div class="line">                    <span class="comment">// Update sibling</span></div><div class="line">                    <span class="keyword">if</span> <span class="keyword">let</span> sibl = x.sibling &#123;</div><div class="line">                        sibling = sibl</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            <span class="comment">// Case 2: Sibling is black with two black children</span></div><div class="line">            <span class="keyword">if</span> sibling.leftChild?.color == .black &amp;&amp; sibling.rightChild?.color == .black &#123;</div><div class="line">                <span class="comment">// Recolor</span></div><div class="line">                sibling.color = .red</div><div class="line">                <span class="comment">// Move fake black unit upwards</span></div><div class="line">                <span class="keyword">if</span> <span class="keyword">let</span> parentX = x.parent &#123;</div><div class="line">                    deleteFixup(node: parentX)</div><div class="line">                &#125;</div><div class="line">                <span class="comment">// We have a valid red-black-tree</span></div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                <span class="comment">// Case 3: a. Sibling black with one black child to the right</span></div><div class="line">                <span class="keyword">if</span> x.isLeftChild &amp;&amp; sibling.rightChild?.color == .black &#123;</div><div class="line">                    <span class="comment">// Recolor</span></div><div class="line">                    sibling.leftChild?.color = .black</div><div class="line">                    sibling.color = .red</div><div class="line">                    <span class="comment">// Rotate</span></div><div class="line">                    rightRotate(node: sibling)</div><div class="line">                    <span class="comment">// Update sibling of x</span></div><div class="line">                    <span class="keyword">if</span> <span class="keyword">let</span> sibl = x.sibling &#123;</div><div class="line">                        sibling = sibl</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">                    <span class="comment">// Still case 3: b. One black child to the left</span></div><div class="line">                <span class="keyword">else</span> <span class="keyword">if</span> x.isRightChild &amp;&amp; sibling.leftChild?.color == .black &#123;</div><div class="line">                    <span class="comment">// Recolor</span></div><div class="line">                    sibling.rightChild?.color = .black</div><div class="line">                    sibling.color = .red</div><div class="line">                    <span class="comment">// Rotate</span></div><div class="line">                    leftRotate(node: sibling)</div><div class="line">                    <span class="comment">// Update sibling of x</span></div><div class="line">                    <span class="keyword">if</span> <span class="keyword">let</span> sibl = x.sibling &#123;</div><div class="line">                        sibling = sibl</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">                <span class="comment">// Case 4: Sibling is black with red right child</span></div><div class="line">                <span class="comment">// Recolor</span></div><div class="line">                <span class="keyword">if</span> <span class="keyword">let</span> parentX = x.parent &#123;</div><div class="line">                    sibling.color = parentX.color</div><div class="line">                    parentX.color = .black</div><div class="line">                    <span class="comment">// a. x left and sibling with red right child</span></div><div class="line">                    <span class="keyword">if</span> x.isLeftChild &#123;</div><div class="line">                        sibling.rightChild?.color = .black</div><div class="line">                        <span class="comment">// Rotate</span></div><div class="line">                        leftRotate(node: parentX)</div><div class="line">                    &#125;</div><div class="line">                        <span class="comment">// b. x right and sibling with red left child</span></div><div class="line">                    <span class="keyword">else</span> &#123;</div><div class="line">                        sibling.leftChild?.color = .black</div><div class="line">                        <span class="comment">//Rotate</span></div><div class="line">                        rightRotate(node: parentX)</div><div class="line">                    &#125;</div><div class="line">                    <span class="comment">// We have a valid red-black-tree</span></div><div class="line">                    xTmp = root</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        xTmp.color = .black</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="Rotation-旋转-1"><a href="#Rotation-旋转-1" class="headerlink" title="Rotation || 旋转"></a>Rotation || 旋转</h2><h3 id="rotate"><a href="#rotate" class="headerlink" title=".rotate()"></a>.rotate()</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">extension</span> <span class="title">RedBlackTree</span> </span>&#123;</div><div class="line">    <span class="comment">/*</span></div><div class="line"><span class="comment">     * Left rotation around node x</span></div><div class="line"><span class="comment">     * Assumes that x.rightChild y is not a nullLeaf, rotates around the link from x to y,</span></div><div class="line"><span class="comment">     * makes y the new root of the subtree with x as y's left child and y's left child as x's right</span></div><div class="line"><span class="comment">     * child, where n = a node, [n] = a subtree</span></div><div class="line"><span class="comment">    </span></div><div class="line"><span class="comment">    * 左旋（围绕x）：</span></div><div class="line"><span class="comment">	*假设x.rightChild y不是nullLeaf，围绕从x到y的链接旋转，使y成为子树的新根</span></div><div class="line"><span class="comment">    *x为y的左子，y的左子为x的右子，其中 n = a node, [n] = a subtree</span></div><div class="line"><span class="comment">     *     |                |</span></div><div class="line"><span class="comment">     *     x                y</span></div><div class="line"><span class="comment">     *   /   \     ~&gt;     /   \</span></div><div class="line"><span class="comment">     * [A]    y          x    [C]</span></div><div class="line"><span class="comment">     *       / \        / \</span></div><div class="line"><span class="comment">     *     [B] [C]    [A] [B]</span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <span class="keyword">fileprivate</span> <span class="function"><span class="keyword">func</span> <span class="title">leftRotate</span><span class="params">(node x: RBNode)</span></span> &#123;</div><div class="line">        rotate(node: x, direction: .<span class="keyword">left</span>)</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="comment">/*</span></div><div class="line"><span class="comment">     * Right rotation around node y</span></div><div class="line"><span class="comment">     * Assumes that y.leftChild x is not a nullLeaf, rotates around the link from y to x,</span></div><div class="line"><span class="comment">     * makes x the new root of the subtree with y as x's right child and x's right child as y's left</span></div><div class="line"><span class="comment">     * child, where n = a node, [n] = a subtree</span></div><div class="line"><span class="comment">    </span></div><div class="line"><span class="comment">     *右旋（围绕y）：</span></div><div class="line"><span class="comment">	 *假设y.leftChild x不是nullLeaf，围绕从y到x的链接旋转，使x成为子树的新根</span></div><div class="line"><span class="comment">     *其中y为x的右子，x的右子为y的左子，其中 n = a node, [n] = a subtree</span></div><div class="line"><span class="comment">    </span></div><div class="line"><span class="comment">     *     |                |</span></div><div class="line"><span class="comment">     *     x                y</span></div><div class="line"><span class="comment">     *   /   \     &lt;~     /   \</span></div><div class="line"><span class="comment">     * [A]    y          x    [C]</span></div><div class="line"><span class="comment">     *       / \        / \</span></div><div class="line"><span class="comment">     *     [B] [C]    [A] [B]</span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <span class="keyword">fileprivate</span> <span class="function"><span class="keyword">func</span> <span class="title">rightRotate</span><span class="params">(node x: RBNode)</span></span> &#123;</div><div class="line">        rotate(node: x, direction: .<span class="keyword">right</span>)</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="comment">/*</span></div><div class="line"><span class="comment">     * Rotation around a node x</span></div><div class="line"><span class="comment">     * Is a local operation preserving the binary-search-tree property that only exchanges pointers.</span></div><div class="line"><span class="comment">     * Runntime: O(1)</span></div><div class="line"><span class="comment">    </span></div><div class="line"><span class="comment">     * 绕节点 x 旋转</span></div><div class="line"><span class="comment">     * 本地操作是否保留仅交换指针的 binary-search-tree 属性。</span></div><div class="line"><span class="comment">     * 运行时间：O（1）</span></div><div class="line"><span class="comment">     */</span></div><div class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">func</span> <span class="title">rotate</span><span class="params">(node x: RBNode, direction: RotationDirection)</span></span> &#123;</div><div class="line">        <span class="keyword">var</span> nodeY: <span class="type">RBNode</span>? = <span class="type">RBNode</span>()</div><div class="line">        </div><div class="line">        <span class="comment">// Set |nodeY| and turn |nodeY|'s left/right subtree into |x|'s right/left subtree</span></div><div class="line">        <span class="comment">// 设置 | nodeY |  并将 | nodeY | 的左 / 右子树转换为 | x | 的右 / 左子树</span></div><div class="line">        <span class="keyword">switch</span> direction &#123;</div><div class="line">        <span class="keyword">case</span> .<span class="keyword">left</span>:</div><div class="line">            nodeY = x.rightChild</div><div class="line">            x.rightChild = nodeY?.leftChild</div><div class="line">            x.rightChild?.parent = x</div><div class="line">        <span class="keyword">case</span> .<span class="keyword">right</span>:</div><div class="line">            nodeY = x.leftChild</div><div class="line">            x.leftChild = nodeY?.rightChild</div><div class="line">            x.leftChild?.parent = x</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="comment">// Link |x|'s parent to nodeY</span></div><div class="line">        <span class="comment">// 链接 | x | 的父节点到 nodeY</span></div><div class="line">        nodeY?.parent = x.parent</div><div class="line">        <span class="keyword">if</span> x.isRoot &#123;</div><div class="line">            <span class="keyword">if</span> <span class="keyword">let</span> node = nodeY &#123;</div><div class="line">                root = node</div><div class="line">            &#125;</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> x.isLeftChild &#123;</div><div class="line">            x.parent?.leftChild = nodeY</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> x.isRightChild &#123;</div><div class="line">            x.parent?.rightChild = nodeY</div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="comment">// Put |x| on |nodeY|'s left</span></div><div class="line">        <span class="comment">// 把 | x | on | nodeY | 的左边</span></div><div class="line">        <span class="keyword">switch</span> direction &#123;</div><div class="line">        <span class="keyword">case</span> .<span class="keyword">left</span>:</div><div class="line">            nodeY?.leftChild = x</div><div class="line">        <span class="keyword">case</span> .<span class="keyword">right</span>:</div><div class="line">            nodeY?.rightChild = x</div><div class="line">        &#125;</div><div class="line">        x.parent = nodeY</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="Verification-核查"><a href="#Verification-核查" class="headerlink" title="Verification || 核查"></a>Verification || 核查</h2><h3 id="verify"><a href="#verify" class="headerlink" title=".verify()"></a>.verify()</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">extension</span> <span class="title">RedBlackTree</span> </span>&#123;</div><div class="line">    <span class="comment">/*</span></div><div class="line"><span class="comment">     * Verifies that the existing tree fulfills all red-black properties</span></div><div class="line"><span class="comment">     * Returns true if the tree is a valid red-black tree, false otherwise</span></div><div class="line"><span class="comment">     */</span></div><div class="line">    </div><div class="line">    <span class="comment">/*</span></div><div class="line"><span class="comment">      * 验证现有树是否满足所有红黑属性</span></div><div class="line"><span class="comment">      * 如果树是有效的红黑树，则返回 true，否则返回 false</span></div><div class="line"><span class="comment">     */</span></div><div class="line">    </div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">func</span> <span class="title">verify</span><span class="params">()</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">        <span class="keyword">if</span> root.isNullLeaf &#123;</div><div class="line">            <span class="built_in">print</span>(<span class="string">"The tree is empty"</span>)</div><div class="line">            <span class="keyword">return</span> <span class="literal">true</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> property2() &amp;&amp; property4() &amp;&amp; property5()</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="comment">// Property 1: Every node is either red or black -&gt; fullfilled through setting node.color of type</span></div><div class="line">    <span class="comment">// 属性 1：每个节点都是红色或黑色 - &gt; 通过设置类型的 node.color 来填充</span></div><div class="line">    </div><div class="line">    <span class="comment">// RBTreeColor</span></div><div class="line">    </div><div class="line">    <span class="comment">// Property 2: The root is black</span></div><div class="line">    <span class="comment">// 属性 2：根是黑色的</span></div><div class="line">   </div><div class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">func</span> <span class="title">property2</span><span class="params">()</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">        <span class="keyword">if</span> root.color == .red &#123;</div><div class="line">            <span class="built_in">print</span>(<span class="string">"Property-Error: Root is red"</span>)</div><div class="line">            <span class="keyword">return</span> <span class="literal">false</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="literal">true</span></div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="comment">// Property 3: Every nullLeaf is black -&gt; fullfilled through initialising nullLeafs with color = black</span></div><div class="line">    <span class="comment">// 属性 3：每个 null Leaf 都是黑色的 - &gt; 通过初始化带有 color = black 的 null Leafs 来实现</span></div><div class="line">    </div><div class="line">    <span class="comment">// Property 4: If a node is red, then both its children are black</span></div><div class="line">    <span class="comment">// 属性 4：如果节点为红色，则其子节点均为黑色</span></div><div class="line">    </div><div class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">func</span> <span class="title">property4</span><span class="params">()</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">        <span class="keyword">return</span> property4(node: root)</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">func</span> <span class="title">property4</span><span class="params">(node: RBNode)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">        <span class="keyword">if</span> node.isNullLeaf &#123;</div><div class="line">            <span class="keyword">return</span> <span class="literal">true</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> <span class="keyword">let</span> leftChild = node.leftChild, <span class="keyword">let</span> rightChild = node.rightChild &#123;</div><div class="line">            <span class="keyword">if</span> node.color == .red &#123;</div><div class="line">                <span class="keyword">if</span> !leftChild.isNullLeaf &amp;&amp; leftChild.color == .red &#123;</div><div class="line">                    <span class="built_in">print</span>(<span class="string">"Property-Error: Red node with key <span class="subst">\(String(describing: node.key)</span>) has red left child"</span>)</div><div class="line">                    <span class="keyword">return</span> <span class="literal">false</span></div><div class="line">                &#125;</div><div class="line">                <span class="keyword">if</span> !rightChild.isNullLeaf &amp;&amp; rightChild.color == .red &#123;</div><div class="line">                    <span class="built_in">print</span>(<span class="string">"Property-Error: Red node with key <span class="subst">\(String(describing: node.key)</span>) has red right child"</span>)</div><div class="line">                    <span class="keyword">return</span> <span class="literal">false</span></div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">return</span> property4(node: leftChild) &amp;&amp; property4(node: rightChild)</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> <span class="literal">false</span></div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="comment">// Property 5: For each node, all paths from the node to descendant leaves contain the same number</span></div><div class="line">    <span class="comment">// 属性 5：对于每个节点，从节点到后代叶子的所有路径都包含相同的数字</span></div><div class="line">    </div><div class="line">    <span class="comment">// of black nodes (same blackheight)</span></div><div class="line">    <span class="comment">// 黑色节点（同样黑色高度）</span></div><div class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">func</span> <span class="title">property5</span><span class="params">()</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">        <span class="keyword">if</span> property5(node: root) == -<span class="number">1</span> &#123;</div><div class="line">            <span class="keyword">return</span> <span class="literal">false</span></div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">return</span> <span class="literal">true</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">func</span> <span class="title">property5</span><span class="params">(node: RBNode)</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">        <span class="keyword">if</span> node.isNullLeaf &#123;</div><div class="line">            <span class="keyword">return</span> <span class="number">0</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">guard</span> <span class="keyword">let</span> leftChild = node.leftChild, <span class="keyword">let</span> rightChild = node.rightChild <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">return</span> -<span class="number">1</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">let</span> <span class="keyword">left</span> = property5(node: leftChild)</div><div class="line">        <span class="keyword">let</span> <span class="keyword">right</span> = property5(node: rightChild)</div><div class="line">        </div><div class="line">        <span class="keyword">if</span> <span class="keyword">left</span> == -<span class="number">1</span> || <span class="keyword">right</span> == -<span class="number">1</span> &#123;</div><div class="line">            <span class="keyword">return</span> -<span class="number">1</span></div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> <span class="keyword">left</span> == <span class="keyword">right</span> &#123;</div><div class="line">            <span class="keyword">let</span> addedHeight = node.color == .black ? <span class="number">1</span> : <span class="number">0</span></div><div class="line">            <span class="keyword">return</span> <span class="keyword">left</span> + addedHeight</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="built_in">print</span>(<span class="string">"Property-Error: Black height violated at node with key <span class="subst">\(String(describing: node.key)</span>)"</span>)</div><div class="line">            <span class="keyword">return</span> -<span class="number">1</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="Debug-调试"><a href="#Debug-调试" class="headerlink" title="Debug || 调试"></a>Debug || 调试</h2><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">extension</span> <span class="title">RBTreeNode</span>: <span class="title">CustomDebugStringConvertible</span> </span>&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">var</span> debugDescription: <span class="type">String</span> &#123;</div><div class="line">        <span class="keyword">var</span> s = <span class="string">""</span></div><div class="line">        <span class="keyword">if</span> isNullLeaf &#123;</div><div class="line">            s = <span class="string">"nullLeaf"</span></div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">if</span> <span class="keyword">let</span> key = key &#123;</div><div class="line">                s = <span class="string">"key: <span class="subst">\(key)</span>"</span></div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                s = <span class="string">"key: nil"</span></div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span> <span class="keyword">let</span> parent = parent &#123;</div><div class="line">                s += <span class="string">", parent: <span class="subst">\(String(describing: parent.key)</span>)"</span></div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span> <span class="keyword">let</span> <span class="keyword">left</span> = leftChild &#123;</div><div class="line">                s += <span class="string">", left = ["</span> + <span class="keyword">left</span>.debugDescription + <span class="string">"]"</span></div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span> <span class="keyword">let</span> <span class="keyword">right</span> = rightChild &#123;</div><div class="line">                s += <span class="string">", right = ["</span> + <span class="keyword">right</span>.debugDescription + <span class="string">"]"</span></div><div class="line">            &#125;</div><div class="line">            s += <span class="string">", color = <span class="subst">\(color)</span>"</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> s</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">extension</span> <span class="title">RedBlackTree</span>: <span class="title">CustomDebugStringConvertible</span> </span>&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">var</span> debugDescription: <span class="type">String</span> &#123;</div><div class="line">        <span class="keyword">return</span> root.debugDescription</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">extension</span> <span class="title">RBTreeNode</span>: <span class="title">CustomStringConvertible</span> </span>&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">var</span> description: <span class="type">String</span> &#123;</div><div class="line">        <span class="keyword">var</span> s = <span class="string">""</span></div><div class="line">        <span class="keyword">if</span> isNullLeaf &#123;</div><div class="line">            s += <span class="string">"nullLeaf"</span></div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">if</span> <span class="keyword">let</span> <span class="keyword">left</span> = leftChild &#123;</div><div class="line">                s += <span class="string">"(<span class="subst">\(<span class="keyword">left</span>.description)</span>) &lt;- "</span></div><div class="line">            &#125;</div><div class="line">            <span class="keyword">if</span> <span class="keyword">let</span> key = key &#123;</div><div class="line">                s += <span class="string">"<span class="subst">\(key)</span>"</span></div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                s += <span class="string">"nil"</span></div><div class="line">            &#125;</div><div class="line">            s += <span class="string">", <span class="subst">\(color)</span>"</span></div><div class="line">            <span class="keyword">if</span> <span class="keyword">let</span> <span class="keyword">right</span> = rightChild &#123;</div><div class="line">                s += <span class="string">" -&gt; (<span class="subst">\(<span class="keyword">right</span>.description)</span>)"</span></div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> s</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">extension</span> <span class="title">RedBlackTree</span>: <span class="title">CustomStringConvertible</span> </span>&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">var</span> description: <span class="type">String</span> &#123;</div><div class="line">        <span class="keyword">if</span> root.isNullLeaf &#123;</div><div class="line">            <span class="keyword">return</span> <span class="string">"[]"</span></div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">return</span> root.description</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="Reference-引用："><a href="#Reference-引用：" class="headerlink" title="Reference || 引用："></a>Reference || 引用：</h1><p>[CLRS]  T. Cormen, C. Leiserson, R. Rivest, and C. Stein. “Introduction to Algorithms”, Third Edition. 2009</p>
+<p>[CLRS]  T. Cormen, C. Leiserson, R. Rivest, and C. Stein. 《算法导论》, 第三版. 2009</p>
+<p><a href="https://github.com/raywenderlich/swift-algorithm-club/tree/master/Red-Black%20Tree" target="_blank" rel="external">https://github.com/raywenderlich/swift-algorithm-club/tree/master/Red-Black%20Tree</a></p>
+<p><a href="https://github.com/andyRon/swift-algorithm-club-cn" target="_blank" rel="external">https://github.com/andyRon/swift-algorithm-club-cn</a></p>
+
+      
+    </div>
+    
+    
+    
+    <div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script type="text/javascript" src="http://jslibs.wuxubj.cn/sweetalert_mini/jquery-1.7.1.min.js"></script>
+  <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
+  <p><span>Title:  </span>Red-Black Tree (ZH && EN)</a></p>
+  <p><span>Author:  </span>Tuski</a></p>
+  <p><span>Published:  </span>03/17/2019 - 21:06:55</p>
+  <p><span>Updated:  </span>03/18/2019 - 13:25:28</p>
+  <p><span>Link:  </span><a href="/2019/03/Red-Black-Tree-ZH-EN/" title="Red-Black Tree (ZH && EN)">http://www.perphet.com/2019/03/Red-Black-Tree-ZH-EN/</a>
+    <span class="copy-path"  title="Click to Copy article link"><i class="fa fa-clipboard" data-clipboard-text="http://www.perphet.com/2019/03/Red-Black-Tree-ZH-EN/"  aria-label="Copy successfully！"></i></span>
+  </p>
+  <p><span>Protocol:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)</a> Reprinted please keep the original link and author</p>  
+</div>
+<script>
+    var clipboard = new Clipboard('.fa-clipboard');
+    clipboard.on('success', $(function(){
+      $(".fa-clipboard").click(function(){
+        swal({   
+          title: "",   
+          text: 'Copy successfully！',   
+          html: false,
+          timer: 500,   
+          showConfirmButton: false
+        });
+      });
+    }));  
+</script>
+
+      
+    </div>
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>Thx F Sup</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="https://i.loli.net/2017/12/16/5a33fd668ce7c.png" alt="Tuski WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="https://i.loli.net/2017/12/16/5a33fdbe62e6f.png" alt="Tuski Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/swift/" rel="tag"><i class="fa fa-tag"></i> swift</a>
+          
+            <a href="/tags/algorithm/" rel="tag"><i class="fa fa-tag"></i> algorithm</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+         
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/Void/" rel="next" title="Void">
+                <i class="fa fa-chevron-left"></i> Void
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a35fec5ad889f1e" async = "async" ></script>
+</div>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+    <div class="comments" id="comments">
+      <div id="hypercomments_widget"></div>
+    </div>
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="Tuski" />
+            
+              <p class="site-author-name" itemprop="name">Tuski</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/thevenomsnake" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:thevenomsnake@icloud.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plus.google.com/u/0/104624402456467592306" target="_blank" title="Google">
+                    
+                      <i class="fa fa-fw fa-google"></i>Google</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/perphet" target="_blank" title="Twitter">
+                    
+                      <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.youtube.com/channel/UComQu3jg43YgIvm2PqAG1tA" target="_blank" title="YouTube">
+                    
+                      <i class="fa fa-fw fa-youtube"></i>YouTube</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+
+  <div class="links-of-blogroll motion-element links-of-blogroll-block">
+    <div class="links-of-blogroll-title">
+      <i class="fa  fa-fw fa-globe"></i>
+      Links&nbsp;
+      <i class="fa  fa-fw fa-globe"></i>
+    </div>
+    <ul class="links-of-blogroll-list">
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.crazyforcode.org/" title="CFC" target="_blank">CFC</a>
+        </li>
+      
+    </ul>
+     
+  </div>
+ 
+
+          
+      <iframe src="https://open.spotify.com/embed?uri=spotify:user:spotify:playlist:37i9dQZF1DXcBWIGoYBM5M&theme=white" width="215" height="350" frameborder="0" allowtransparency="true"></iframe>
+       
+      </section>
+
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Introduction-介绍"><span class="nav-text">Introduction || 介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Properties-属性"><span class="nav-text">Properties || 属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Methods-方法"><span class="nav-text">Methods || 方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Implementation-Details-实施细节"><span class="nav-text">Implementation Details || 实施细节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Rotation-旋转"><span class="nav-text">Rotation || 旋转</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Insertion-插入"><span class="nav-text">Insertion || 插入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Deletion-删除"><span class="nav-text">Deletion || 删除</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Code-代码"><span class="nav-text">Code || 代码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic-基本"><span class="nav-text">Basic || 基本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RedBlackTree-红黑树"><span class="nav-text">RedBlackTree || 红黑树</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Equatable-Protocol-Equatable-协议"><span class="nav-text">Equatable Protocol|| Equatable 协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Get-the-precursor-node-获取前驱节点"><span class="nav-text">Get the precursor node || 获取前驱节点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#getSuccessor"><span class="nav-text">.getSuccessor()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Searching-搜索"><span class="nav-text">Searching || 搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#minimun-amp-amp-maximum"><span class="nav-text">.minimun() && .maximum()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#search-input"><span class="nav-text">.search(input:)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#minValue"><span class="nav-text">.minValue()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Insertion-插入-1"><span class="nav-text">Insertion || 插入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#insert-key"><span class="nav-text">.insert(key:)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Deletion-删除-1"><span class="nav-text">Deletion || 删除</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#delete-amp-amp-deleteFixup"><span class="nav-text">.delete() && .deleteFixup()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Rotation-旋转-1"><span class="nav-text">Rotation || 旋转</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#rotate"><span class="nav-text">.rotate()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Verification-核查"><span class="nav-text">Verification || 核查</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#verify"><span class="nav-text">.verify()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Debug-调试"><span class="nav-text">Debug || 调试</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Reference-引用："><span class="nav-text">Reference || 引用：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="heart">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tuski</span>
+
+
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by </div>
+
+
+
+  <span class="post-meta-divider">Perphet</span>
+
+
+<!--
+
+  <div class="theme-info">Theme &mdash;  v{}</div>
+
+
+
+
+-->
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+		<script type="text/javascript">
+		_hcwp = window._hcwp || [];
+
+		_hcwp.push({widget:"Bloggerstream", widget_id: 99037, selector:".hc-comment-count", label: "{\%COUNT%\}" });
+
+		
+		_hcwp.push({widget:"Stream", widget_id: 99037, xid: "2019/03/Red-Black-Tree-ZH-EN/"});
+		
+
+		(function() {
+		if("HC_LOAD_INIT" in window)return;
+		HC_LOAD_INIT = true;
+		var lang = (navigator.language || navigator.systemLanguage || navigator.userLanguage || "en").substr(0, 2).toLowerCase();
+		var hcc = document.createElement("script"); hcc.type = "text/javascript"; hcc.async = true;
+		hcc.src = ("https:" == document.location.protocol ? "https" : "http")+"://w.hypercomments.com/widget/hc/99037/"+lang+"/widget.js";
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(hcc, s.nextSibling);
+		})();
+		</script>
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("c6sjJ6fGADGrCVC48k5MVQcD-gzGzoHsz", "YuTcQ8aPXftmtmeC4VvTrK9B");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+  <script type="text/javascript">
+  wpac_init = window.wpac_init || [];
+  wpac_init.push({widget: 'Rating', id: 8566,
+    el: 'wpac-rating',
+    color: 'fc6423'
+  });
+  (function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = '//embed.widgetpack.com/widget.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+  })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+<div id="hexo-helper-live2d">
+  <canvas id="live2dcanvas" width="150" height="350"></canvas>
+</div>
+<style>
+  #live2dcanvas{
+    position: fixed;
+    width: 150px;
+    height: 350px;
+    opacity:0.8;
+    right: 0px;
+    z-index: 999;
+    pointer-events: none;
+    bottom: -20px;
+  }
+</style>
+<script type="text/javascript" src="/live2d/device.min.js"></script>
+<script type="text/javascript">
+const loadScript = function loadScript(c,b){var a=document.createElement("script");a.type="text/javascript";"undefined"!=typeof b&&(a.readyState?a.onreadystatechange=function(){if("loaded"==a.readyState||"complete"==a.readyState)a.onreadystatechange=null,b()}:a.onload=function(){b()});a.src=c;document.body.appendChild(a)};
+(function(){
+  if((typeof(device) != 'undefined') && (device.mobile())){
+    var trElement = document.getElementById('hexo-helper-live2d');
+    trElement.parentNode.removeChild(trElement);
+    return;
+  }else
+    if (typeof(device) === 'undefined') console.error('Cannot find current-device script.');
+  loadScript("/live2d/script.js", function(){loadlive2d("live2dcanvas", "/live2d/assets/shizuku.model.json", 0.5);});
+})();
+</script>
+
+ <canvas class="fireworks" 
+        style="position: fixed; left: 0px; top: 0px; z-index: 99999999; pointer-events: none; width: 1158px; height: 916px;" 
+        width="2316" 
+        height="1832">
+</canvas>
+<script type="text/javascript" src="/js/src/anime.min.js"></script>
+<script type="text/javascript" src="/js/src/fireworks.js"></script>
+</body>
+</html>
