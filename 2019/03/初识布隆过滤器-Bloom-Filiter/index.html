@@ -95,12 +95,13 @@
 <meta property="og:site_name" content="Tuski&#39;s Blog">
 <meta property="og:description" content="一个网站有 100 亿 url 存在一个黑名单中，每条 url 平均 64 字节。这个黑名单要怎么存？若此时随便输入一个 url，你如何快速判断该 url 是否在这个黑名单中？">
 <meta property="og:locale" content="en">
+<meta property="og:image" content="https://i.loli.net/2019/03/23/5c96434d68efb.png">
 <meta property="og:image" content="https://i.loli.net/2019/03/23/5c9611ef4abcc.gif">
-<meta property="og:updated_time" content="2019-03-23T14:28:56.550Z">
+<meta property="og:updated_time" content="2019-03-23T14:31:54.536Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="初识布隆过滤器(Bloom Filiter)">
 <meta name="twitter:description" content="一个网站有 100 亿 url 存在一个黑名单中，每条 url 平均 64 字节。这个黑名单要怎么存？若此时随便输入一个 url，你如何快速判断该 url 是否在这个黑名单中？">
-<meta name="twitter:image" content="https://i.loli.net/2019/03/23/5c9611ef4abcc.gif">
+<meta name="twitter:image" content="https://i.loli.net/2019/03/23/5c96434d68efb.png">
 
 
 
@@ -395,7 +396,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  3,607
+                  3,602
                 </span>
               
 
@@ -435,8 +436,6 @@
         <script src="/assets/js/APlayer.min.js"> </script><blockquote class="blockquote-center">一个网站有 100 亿 url 存在一个黑名单中，每条 url 平均 64 字节。这个黑名单要怎么存？若此时随便输入一个 url，你如何快速判断该 url 是否在这个黑名单中？</blockquote>
 
 <a id="more"></a>
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
-
 <h2 id="问题解析"><a href="#问题解析" class="headerlink" title="问题解析"></a>问题解析</h2><p>这是一道经常在面试中出现的算法题。凭借着题目极其容易描述，电面的时候也出现过。</p>
 <p>不考虑细节的话，此题就是一个简单的<strong>查找问题</strong>。对于查找问题而言，使用散列表来处理往往是一种效率比较高的方案。</p>
 <p>但是，如果你在面试中回答使用<strong>散列表</strong>，接下来面试官肯定会问你：然后呢？如果你不能回答个所以然，面试官就会面无表情的通知你：今天的面试到此结束，我们会在一周内给你答复，<del>然后你就gg了。</del></p>
@@ -446,7 +445,7 @@
 <p>因此这里可以使用一个存储了状态的<strong>数组</strong>来处理。这个数组特点是大小为 1 亿，并且数据类型为布尔类型（ True 或者 False ）。然后将这 1 千万个整数作为数组下标，将对应的数组值设置成 True，比如，整数 233 对应下标为 233 的数组值设置为 True，也就是 array [233] = True。</p>
 <p>这种操作就是<strong>位图法</strong>：就是用每一位来存放某种状态，适用于大规模数据，但数据状态又不是很多的情况。</p>
 <p>另外，<strong>位图法</strong>有一个优势就是<strong>空间不随集合内元素个数的增加而增加</strong>。它的存储空间计算方式是找到所有元素里面最大的元素（假设为 N ），因此所占空间为：</p>
-<div align="center"> $$S=\frac{N}{8}Byte$$ </div>
+<div align="center"> <img src="https://i.loli.net/2019/03/23/5c96434d68efb.png" alt="QQ20190323-223129.png"> </div>
 
 <p>因此，当 N 为 1 亿的时候需要 12MB 的存储空间。当 N 为 10 亿的时候需要 120MB 的存储空间了。也就是说：<strong>位图法的所占空间随集合内最大元素的增大而增大</strong>。这就会带来一个问题，如果查找的元素数量少但其中某个元素的值很大，比如数字范围是 1 到 1000 亿，那消耗的空间不容乐观。</p>
 <p>因此，出于性能和内存占用的考虑，在这里使用<strong>布隆过滤器</strong>才是最好的解决方案：布隆过滤器是对位图的一种改进。</p>
@@ -544,7 +543,7 @@
   <p><span>Title:  </span>初识布隆过滤器(Bloom Filiter)</a></p>
   <p><span>Author:  </span>Tuski</a></p>
   <p><span>Published:  </span>03/23/2019 - 18:31:19</p>
-  <p><span>Updated:  </span>03/23/2019 - 22:28:56</p>
+  <p><span>Updated:  </span>03/23/2019 - 22:31:54</p>
   <p><span>Link:  </span><a href="/2019/03/初识布隆过滤器-Bloom-Filiter/" title="初识布隆过滤器(Bloom Filiter)">http://www.perphet.com/2019/03/初识布隆过滤器-Bloom-Filiter/</a>
     <span class="copy-path"  title="Click to Copy article link"><i class="fa fa-clipboard" data-clipboard-text="http://www.perphet.com/2019/03/初识布隆过滤器-Bloom-Filiter/"  aria-label="Copy successfully！"></i></span>
   </p>
