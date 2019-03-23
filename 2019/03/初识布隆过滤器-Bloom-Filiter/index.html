@@ -76,7 +76,7 @@
 
 
 
-  <meta name="keywords" content="swift," />
+  <meta name="keywords" content="algorithm," />
 
 
 
@@ -87,18 +87,20 @@
 
 
 
-<meta name="description" content="In many types of apps, you have to access files.  They can be in your app bundle, on the file system, or even somewhere on the web.  You need to have someway to refer to where they are in your code.">
-<meta name="keywords" content="swift">
+<meta name="description" content="一个网站有 100 亿 url 存在一个黑名单中，每条 url 平均 64 字节。这个黑名单要怎么存？若此时随便输入一个 url，你如何快速判断该 url 是否在这个黑名单中？">
+<meta name="keywords" content="algorithm">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Creating and Modifying a URL in your Swift App">
-<meta property="og:url" content="http://www.perphet.com/2018/10/Creating-and-Modifying-a-URL-in-your-Swift-App/index.html">
+<meta property="og:title" content="初识布隆过滤器(Bloom Filiter)">
+<meta property="og:url" content="http://www.perphet.com/2019/03/初识布隆过滤器-Bloom-Filiter/index.html">
 <meta property="og:site_name" content="Tuski&#39;s Blog">
-<meta property="og:description" content="In many types of apps, you have to access files.  They can be in your app bundle, on the file system, or even somewhere on the web.  You need to have someway to refer to where they are in your code.">
+<meta property="og:description" content="一个网站有 100 亿 url 存在一个黑名单中，每条 url 平均 64 字节。这个黑名单要怎么存？若此时随便输入一个 url，你如何快速判断该 url 是否在这个黑名单中？">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-02-23T14:07:40.472Z">
+<meta property="og:image" content="https://i.loli.net/2019/03/23/5c9611ef4abcc.gif">
+<meta property="og:updated_time" content="2019-03-23T14:24:57.827Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Creating and Modifying a URL in your Swift App">
-<meta name="twitter:description" content="In many types of apps, you have to access files.  They can be in your app bundle, on the file system, or even somewhere on the web.  You need to have someway to refer to where they are in your code.">
+<meta name="twitter:title" content="初识布隆过滤器(Bloom Filiter)">
+<meta name="twitter:description" content="一个网站有 100 亿 url 存在一个黑名单中，每条 url 平均 64 字节。这个黑名单要怎么存？若此时随便输入一个 url，你如何快速判断该 url 是否在这个黑名单中？">
+<meta name="twitter:image" content="https://i.loli.net/2019/03/23/5c9611ef4abcc.gif">
 
 
 
@@ -128,14 +130,14 @@
 
 
 
-  <link rel="canonical" href="http://www.perphet.com/2018/10/Creating-and-Modifying-a-URL-in-your-Swift-App/"/>
+  <link rel="canonical" href="http://www.perphet.com/2019/03/初识布隆过滤器-Bloom-Filiter/"/>
 
 
 
 <link rel="stylesheet" href="../live2d/css/live2d.css" />
 
 
-  <title>Creating and Modifying a URL in your Swift App | Tuski's Blog</title>
+  <title>初识布隆过滤器(Bloom Filiter) | Tuski's Blog</title>
   
 
 
@@ -308,7 +310,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.perphet.com/2018/10/Creating-and-Modifying-a-URL-in-your-Swift-App/">
+    <link itemprop="mainEntityOfPage" href="http://www.perphet.com/2019/03/初识布隆过滤器-Bloom-Filiter/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Tuski">
@@ -325,7 +327,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Creating and Modifying a URL in your Swift App</h1>
+          <h1 class="post-title" itemprop="name headline">初识布隆过滤器(Bloom Filiter)</h1>
         
 
         <div class="post-meta">
@@ -338,8 +340,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-10-17T14:58:04+08:00">
-                2018-10-17
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-23T18:31:19+09:00">
+                2019-03-23
               </time>
             
 
@@ -358,8 +360,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/10/Creating-and-Modifying-a-URL-in-your-Swift-App/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count hc-comment-count" data-xid="2018/10/Creating-and-Modifying-a-URL-in-your-Swift-App/" itemprop="commentsCount"></span>
+                <a href="/2019/03/初识布隆过滤器-Bloom-Filiter/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="2019/03/初识布隆过滤器-Bloom-Filiter/" itemprop="commentsCount"></span>
                 </a>
               </span>
               <!--/noindex-->
@@ -368,7 +370,7 @@
 
           
           
-             <span id="/2018/10/Creating-and-Modifying-a-URL-in-your-Swift-App/" class="leancloud_visitors" data-flag-title="Creating and Modifying a URL in your Swift App">
+             <span id="/2019/03/初识布隆过滤器-Bloom-Filiter/" class="leancloud_visitors" data-flag-title="初识布隆过滤器(Bloom Filiter)">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -393,7 +395,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  1,237
+                  3,607
                 </span>
               
 
@@ -409,7 +411,7 @@
                   <span class="post-meta-item-text">Reading time &asymp;</span>
                 
                 <span title="Reading time">
-                  8
+                  14
                 </span>
               
             </div>
@@ -430,34 +432,98 @@
       
 
       
-        <script src="/assets/js/APlayer.min.js"> </script><blockquote class="blockquote-center">In many types of apps, you have to access files.  They can be in your app bundle, on the file system, or even somewhere on the web.  You need to have someway to refer to where they are in your code.  On Apple platforms, you basically have 2 choices, as a String or aURL.</blockquote>
+        <script src="/assets/js/APlayer.min.js"> </script><blockquote class="blockquote-center">一个网站有 100 亿 url 存在一个黑名单中，每条 url 平均 64 字节。这个黑名单要怎么存？若此时随便输入一个 url，你如何快速判断该 url 是否在这个黑名单中？</blockquote>
 
 <a id="more"></a>
-<p>Given the address bar right above you, or any use of a terminal, a Swift String would be a very understandable choice, I mean, that’s all that text is in the address bar, right?  Many of the older APIs in the Cocoa and Cocoa Touch SDKs take URLs and Strings (referred to as a “path” in those APIs usually), but things are moving more and more towards just using URL objects everywhere.  URL objects have many advantages over String paths, most notably that you can access different parts of the URL from properties, instead of having to write your own code to parse those components from the path String.</p>
-<p>Stay tuned as we learn a thing or two about creating and using URL objects in your Swift app.</p>
-<h1 id="Creating-a-URL-in-Swift"><a href="#Creating-a-URL-in-Swift" class="headerlink" title="Creating a URL in Swift"></a>Creating a URL in Swift</h1><p>There are several initializers and factory methods to create a URL in Swift, but I’m going to cover some of the more useful ones.</p>
-<h2 id="init-string-URLString-String"><a href="#init-string-URLString-String" class="headerlink" title="init?(string URLString: String)"></a>init?(string URLString: String)</h2><p>This one is the most plain, and probably the most used.  This takes your Swift String version of a URL, and changes it into a URL object.  It is a failable initializer, because not all strings can make valid URLS.  There are some characters that cannot be used in URLs, and thus are percent encoded, meaning a code that CAN be sent in a URL is used in its place.  The one I personally have seen the most is %20, the “space” character.  This initializer expects only valid characters, it will not percent encode for you.  If the string does have characters or anything that can’t be converted into a valid URL, this initializer will return nil.</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> <span class="type">NSHipster</span>  = <span class="type">URL</span>(string: <span class="string">"http://nshipster.com/"</span>)                 <span class="comment">//returns a valid URL</span></div><div class="line"><span class="keyword">let</span> invalidURL = <span class="type">URL</span>(string: <span class="string">"www.example.com/This is a sentence"</span>)    <span class="comment">//Returns nil</span></div></pre></td></tr></table></figure>
-<p>This is actually a convenience initializer which defers to the initializer below.</p>
-<h2 id="init-string-String-relativeTo-URL"><a href="#init-string-String-relativeTo-URL" class="headerlink" title="init?(string: String, relativeTo: URL?)"></a>init?(string: String, relativeTo: URL?)</h2><p>This is the dedicated initializer.  Similar to the previous initializer, it is a failable one, and takes a similar URL Swift String, but it also takes an optional baseURL object, which is a URL object itself.  If the baseURL is nil, it just makes the URL entirely from the URL String, which is probably what the first initializer does under the hood.</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> <span class="type">NSHipsterTwo</span> = <span class="type">URL</span>(string: <span class="string">"http://nshipster.com/"</span>, relativeTo: <span class="literal">nil</span>)   <span class="comment">//Returns valid NSHipster URL</span></div><div class="line"><span class="keyword">let</span> article      = <span class="type">URL</span>(string: <span class="string">"ios9/"</span>, relativeTo: <span class="type">NSHipster</span>)             <span class="comment">//Returns "http://nshipster.com/ios9/" URL</span></div></pre></td></tr></table></figure>
-<h2 id="init-fileURLWithPath-String-isDirectory-Bool"><a href="#init-fileURLWithPath-String-isDirectory-Bool" class="headerlink" title="init(fileURLWithPath: String, isDirectory: Bool)"></a>init(fileURLWithPath: String, isDirectory: Bool)</h2><p>This is similar to the above initializer, but is meant to point at a local file or directory.  I’m not certain why there is a special version for local files, but I presume some optimizations are made (at least to start it with the file scheme, as opposed to http, or other ones).  There is a version without the isDirectory parameter, but the header file suggests using this one if you do know whether it is a directory or not.  Presumably, the other one will need to perform the check itself, while this one has you providing the answer, saving it from having to check.</p>
-<h2 id="init-fileURLWithPath-String-isDirectory-Bool-relativeTo-URL"><a href="#init-fileURLWithPath-String-isDirectory-Bool-relativeTo-URL" class="headerlink" title="init(fileURLWithPath: String, isDirectory: Bool, relativeTo: URL?)"></a>init(fileURLWithPath: String, isDirectory: Bool, relativeTo: URL?)</h2><p>Newly added in iOS 9, this is similar to the previous one, but with the relativeToURL parameter.  Like the previous initializers, this will return a URL object that appends the path to the baseURL.  This could be used, if you had a directory of several files, where you were iterating through them to use for something.  You could supply the directory the files were in as the baseURL, and then just create the URLs with the file name as the Swift String path.</p>
-<h1 id="Converting-URL-back-to-a-Swift-String"><a href="#Converting-URL-back-to-a-Swift-String" class="headerlink" title="Converting URL back to a Swift String"></a>Converting URL back to a Swift String</h1><p>Sometimes, especially when dealing with older API, or when showing it to the user, you need to convert a URL object back to a Swift String.  Thankfully, URL provides a simple read-only property to get that out:  absoluteString.  Just call that property on your URL object and you’ve got it:</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> articleString = article?.absoluteString</div><div class="line"><span class="comment">//ArticleString now contains: "http://nshipster.com/ios9/"</span></div></pre></td></tr></table></figure>
-<p>In this case it took our article constant that we defined using the relativeToURL version of the initializer, resolved it into a complete URL from scheme until the end (which in this case is a path).  If we did have file extensions, queries, and fragments on this URL, it would resolve them as well.  The original article object was returned from the failable initializer, so that is why we still have that question mark there for Swift’s optional chaining.</p>
-<h1 id="Modifying-a-URL-Object"><a href="#Modifying-a-URL-Object" class="headerlink" title="Modifying a URL Object"></a>Modifying a URL Object</h1><p>Each of these functions return a new URL object based on the one it was called from, but with the requested modification done.  They do NOT change the URL they are called from though, it remains the same.</p>
-<h2 id="func-appendingPathComponent-String-isDirectory-Bool-gt-URL"><a href="#func-appendingPathComponent-String-isDirectory-Bool-gt-URL" class="headerlink" title="func appendingPathComponent(String, isDirectory: Bool) -&gt; URL"></a>func appendingPathComponent(String, isDirectory: Bool) -&gt; URL</h2><p>This one adds more path components to the URL, say if you were adding a file to the directory you’re in (which is stored in the URL this is called from).  There is a version without the isDirectory parameter like some of the initializers, but if you know whether it is a directory or not, it is recommended to use this one to save the metadata check to determine whether it is a directory or not.</p>
-<h2 id="func-deletingLastPathComponent-gt-URL"><a href="#func-deletingLastPathComponent-gt-URL" class="headerlink" title="func deletingLastPathComponent() -&gt; URL"></a>func deletingLastPathComponent() -&gt; URL</h2><p>This method will return a new URL with the last path component deleted.  This works on the path part of a URL, so other areas of the URL are unaffected, like the domain.  So we can do this:</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> articleTwo = <span class="type">NSHipster</span>?.<span class="type">URLByAppendingPathComponent</span>(<span class="string">"ios9"</span>, isDirectory: <span class="literal">true</span>)</div><div class="line"><span class="comment">//articleTwo now contains "http://nshipster.com/ios9/"</span></div><div class="line"> </div><div class="line"><span class="keyword">let</span> deletePathComp = articleTwo?.<span class="type">URLByDeletingLastPathComponent</span></div><div class="line"><span class="comment">//deletePathComp now contains "http://nshipster.com/"</span></div></pre></td></tr></table></figure>
-<p>If there is no path information, things can get a bit weird.  For fun, I chained a few URLByDeletingLastPathComponent afterwards, and it ended up just appending “../” afterwards, analogous to going up a directory in the command line (cd ..).</p>
-<p>There are several more modification methods and properties, but these are probably the most commonly used.</p>
-<h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><p>If you are curious about specifics of URL formatting specifications, you can checkout the RFC documents that Apple’s URL Class Reference mentions in how it handles URLs.  The strings used when initializing URLs must conform to <a href="https://tools.ietf.org/html/rfc2396" target="_blank" rel="external">RFC 2396</a>, and the URLs themselves are parsed according to <a href="https://tools.ietf.org/html/rfc1738" target="_blank" rel="external">RFC 1738</a> and <a href="https://tools.ietf.org/html/rfc1808" target="_blank" rel="external">RFC 1808</a>.  The are pretty long but probably have anything you would want to know about URLs, URIs, etc.</p>
-<p>There are many other properties in URL if you want a fully resolved URL, the baseURL, host, query, fragment, etc, and you can check them out in Apple’s URL Class Reference, but I personally primarily use absoluteString, and occasionally pathExtension.</p>
-<p>I hope you found this article helpful.  If you did, please don’t hesitate to share this post on Twitter or your social media of choice, every share helps.  Of course, if you have any questions, don’t hesitate to contact me on the <a href="http://www.codingexplorer.com/contact/" target="_blank" rel="external">Contact Page</a>, or on Twitter <a href="https://twitter.com/CodingExplorer" target="_blank" rel="external">@CodingExplorer</a>, and I’ll see what I can do.  Thanks!</p>
-<h1 id="Sources"><a href="#Sources" class="headerlink" title="Sources"></a>Sources</h1><ul>
-<li><a href="https://developer.apple.com/documentation/foundation/url" target="_blank" rel="external">URL Class Reference – Apple Inc.</a></li>
+<h2 id="问题解析"><a href="#问题解析" class="headerlink" title="问题解析"></a>问题解析</h2><p>这是一道经常在面试中出现的算法题。凭借着题目极其容易描述，电面的时候也出现过。</p>
+<p>不考虑细节的话，此题就是一个简单的<strong>查找问题</strong>。对于查找问题而言，使用散列表来处理往往是一种效率比较高的方案。</p>
+<p>但是，如果你在面试中回答使用<strong>散列表</strong>，接下来面试官肯定会问你：然后呢？如果你不能回答个所以然，面试官就会面无表情的通知你：今天的面试到此结束，我们会在一周内给你答复，<del>然后你就gg了。</del></p>
+<h2 id="为什么不能用散列表"><a href="#为什么不能用散列表" class="headerlink" title="为什么不能用散列表"></a>为什么不能用散列表</h2><p>100 亿是一个很大的数量级，这里每条 url 平均 64 字节，全部存储的话需要 640G 的内存空间。又因为使用了散列表这种数据结构，而散列表是会出现散列冲突的。为了让散列表维持较小的装载因子，避免出现过多的散列冲突，需要使用链表法来处理，这里就要存储链表指针。因此最后的内存空间可能超过 1000G 了。在实际生产环境中，用1000G来存储 url 显然不太现实。</p>
+<h2 id="位图（BitMap）"><a href="#位图（BitMap）" class="headerlink" title="位图（BitMap）"></a>位图（BitMap）</h2><p>这个时候就需要拓展一下思路。首先，先来考虑一个类似但更简单的问题：现在有一个<strong>非常庞大的数据</strong>，比如有 1 千万个整数，并且整数的范围在 1 到 1 亿之间。那么如何快速查找某个整数是否在这 1 千万个整数中呢？</p>
+<p>需要判断该数是否存在，也就是说这个数存在两种状态：存在（ True ）或者不存在（False）。</p>
+<p>因此这里可以使用一个存储了状态的<strong>数组</strong>来处理。这个数组特点是大小为 1 亿，并且数据类型为布尔类型（ True 或者 False ）。然后将这 1 千万个整数作为数组下标，将对应的数组值设置成 True，比如，整数 233 对应下标为 233 的数组值设置为 True，也就是 array [233] = True。</p>
+<p>这种操作就是<strong>位图法</strong>：就是用每一位来存放某种状态，适用于大规模数据，但数据状态又不是很多的情况。</p>
+<p>另外，<strong>位图法</strong>有一个优势就是<strong>空间不随集合内元素个数的增加而增加</strong>。它的存储空间计算方式是找到所有元素里面最大的元素（假设为 N ），因此所占空间为：</p>
+<div align="center"> $$S=\frac{N}{8}Byte$$ </div>
+
+<p>因此，当 N 为 1 亿的时候需要 12MB 的存储空间。当 N 为 10 亿的时候需要 120MB 的存储空间了。也就是说：<strong>位图法的所占空间随集合内最大元素的增大而增大</strong>。这就会带来一个问题，如果查找的元素数量少但其中某个元素的值很大，比如数字范围是 1 到 1000 亿，那消耗的空间不容乐观。</p>
+<p>因此，出于性能和内存占用的考虑，在这里使用<strong>布隆过滤器</strong>才是最好的解决方案：布隆过滤器是对位图的一种改进。</p>
+<h2 id="布隆过滤器-Bloom-Filter"><a href="#布隆过滤器-Bloom-Filter" class="headerlink" title="布隆过滤器(Bloom Filter)"></a>布隆过滤器(Bloom Filter)</h2><h3 id="简介"><a href="#简介" class="headerlink" title="简介*"></a>简介*</h3><blockquote>
+<p>看不太懂的建议看完后再返回看本部分</p>
+</blockquote>
+<p>布隆过滤器（Bloom Filter）是 1970 年由 <strong>Burton Bloom</strong> 提出的。</p>
+<blockquote>
+<p>布隆过滤器本质上是一个固定长度的<a href="https://github.com/andyRon/swift-algorithm-club-cn/blob/master/Bit%20Set" target="_blank" rel="external">位向量</a>，一个位数组。</p>
+</blockquote>
+<p>布隆过滤器是一种节省空间的数据结构，<strong>可以用来判断一个元素是否在一个集合中</strong>。它的优势是只需要占用很小的内存空间以及有着高效的查询效率。</p>
+<p>对于布隆过滤器而言，它的本质是一个固定长度的<strong>位向量</strong>，<strong>位数组</strong>。</p>
+<blockquote>
+<p>位数组就是数组的每个元素都只占用 1 bit ，并且每个元素只能是 0 或者 1。</p>
+</blockquote>
+<p>布隆过滤器除了一个位数组，还有 K 个哈希函数。当一个元素加入布隆过滤器中的时候，会进行如下操作：</p>
+<ul>
+<li>使用  K 个哈希函数对元素值进行 K 次计算，得到 K 个哈希值。</li>
+<li>根据得到的哈希值，在位数组中把对应下标的值置为 1。</li>
 </ul>
+<p>举个例子，假设布隆过滤器有 3 个哈希函数：f1, f2, f3 和一个位数组 <code>arr</code>。现在要把 <code>2333</code> 插入布隆过滤器中：</p>
+<ul>
+<li>对值进行三次哈希计算，得到三个值 n1, n2, n3。</li>
+<li>把位数组中三个元素 arr [n1], arr [n2], arr [3] 都置为 1。</li>
+</ul>
+<p>当要判断一个值是否在布隆过滤器中，对元素进行三次哈希计算，得到值之后判断位数组中的每个元素是否都为 1，如果值都为 1，那么说明这个值在布隆过滤器中，如果存在一个值不为 1，说明该元素不在布隆过滤器中。</p>
+<div align="center"> <img src="https://i.loli.net/2019/03/23/5c9611ef4abcc.gif" alt="169a878fc1c67913.gif"> </div>
+
+<p>很明显，数组的容量即使再大，也是<strong>有限</strong>的。那么随着元素的增加，插入的元素就会越多，位数组中被置为 1 的位置因此也越多，这就会造成一种情况：<strong>当一个不在布隆过滤器中的元素，经过同样规则的哈希计算之后，得到的值在位数组中查询，有可能这些位置因为之前其它元素的操作先被置为 1 了</strong>。</p>
+<p>所以，有可能一个不存在布隆过滤器中的会被误判成在布隆过滤器中。这就是布隆过滤器的一个缺陷。但是，如果布隆过滤器判断某个元素不在布隆过滤器中，那么这个值就一定不在布隆过滤器中。总结就是：</p>
+<ul>
+<li>布隆过滤器说某个元素在，<strong>可能</strong>会被误判</li>
+<li>布隆过滤器说某个元素不在，那么<strong>一定</strong>不在</li>
+</ul>
+<blockquote>
+<p> <strong>注意:</strong> 与哈希表不同，布隆过滤器不存储实际对象。 它只会记住你看过的物体（有一定程度的不确定性）以及你没有看过的物体。</p>
+</blockquote>
+<h3 id="将对象插入集合中"><a href="#将对象插入集合中" class="headerlink" title="将对象插入集合中"></a>将对象插入集合中</h3><p>布隆过滤器本质上是一个固定长度的<a href="https://github.com/andyRon/swift-algorithm-club-cn/blob/master/Bit%20Set" target="_blank" rel="external">位向量</a>，一个位数组。 当我们插入对象时，我们将其中一些位设置为 <code>1</code>，当我们查询对象时，我们检查某些位是 <code>0</code> 还是 <code>1</code>。 两个操作都使用哈希函数。要在过滤器中插入元素，可以使用多个不同的哈希函数对元素进行哈希。 每个哈希函数返回一个我们映射到数组中索引的值。 然后，我们将这些索引处的位设置为 <code>1</code> 。</p>
+<p>例如，假设这是我们的位数组。 我们有 17 位，最初它们都是 <code>0</code> ：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]</div></pre></td></tr></table></figure>
+<p>现在我们要在布隆过滤器中插入字符串 <code>&quot;Hello world!&quot;</code>。 我们对此字符串应用两个自定义哈希函数。第一个给出值 1999532104120917762。我们通过取数组长度的模数将此哈希值映射到数组的索引：<code>1999532104120917762 % 17 = 4</code>。 这意味着我们将索引 4 处的位设置为 <code>1</code> ：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[ 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]</div></pre></td></tr></table></figure>
+<p>然后我们再次散列原始字符串，但这次使用不同的散列函数。 它给出哈希值 9211818684948223801。模数 17 为 12，我们也将索引 12 处的位设置为 <code>1</code>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[ 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0 ]</div></pre></td></tr></table></figure>
+<p>这两个 1 位足以告诉布隆过滤器它现在包含字符串 <code>&quot;Hello world!&quot;</code>。 当然，它不包含实际的字符串，所以你不能要求布隆过滤器，“给我一个你包含的所有对象的列表”。 所有它都是一堆零和零。</p>
+<h3 id="查询集合"><a href="#查询集合" class="headerlink" title="查询集合"></a>查询集合</h3><p>类似于插入，查询是通过首先对期望值进行哈希来实现的，该期望值给出几个数组索引，然后检查这些索引处的所有位是否为 <code>1</code>。 如果其中一个位不是 <code>1</code>，则无法插入该元素，并且查询返回 <code>false</code>。 如果所有位都是 <code>1</code>，则查询返回 <code>true</code>。</p>
+<p>例如，如果我们查询字符串 <code>&quot;Hello WORLD&quot;</code>，那么第一个哈希函数返回 5383892684077141175，其中模 17 是 12. 该位是 <code>1</code>。但是第二个哈希函数给出 5625257205398334446，它映射到数组索引 9. 该位为 <code>0</code>。 这意味着字符串 <code>&quot;Hello WORLD&quot;</code> 不在过滤器中，查询返回 <code>false</code>。</p>
+<p>第一个哈希函数映射到 <code>1</code> 位的事实是巧合（它与两个字符串以 <code>&quot;Hello &quot;</code> 开头的事实无关）。 太多这样的巧合可能导致 “碰撞”。 如果存在冲突，即使未插入元素，查询也可能错误地返回 <code>true</code> 。</p>
+<p>假设我们插入了一些其他元素，<code>&quot;Bloom Filterz&quot;</code>，它设置了第 7 位和第 9 位。现在数组看起来像这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">[ 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0 ]</div></pre></td></tr></table></figure>
+<p>如果再次查询 <code>&quot;Hello WORLD&quot;</code>，则过滤器会看到第 12 位为真，第 9 位现在也为真。 它报告说 <code>&quot;Hello WORLD&quot;</code> 确实出现在集合中，即使它不是…… 因为我们从未插入过那个特定的字符串。这是误报。这个例子说明了为什么布隆过滤器永远不会说 <strong>“绝对是”</strong>，只有<strong>“可能是”</strong>。</p>
+<p>您可以通过使用具有更多位的数组并使用其他哈希函数来解决此类问题。 当然，使用的哈希函数越多，布隆过滤器就越慢。 所以你必须取得平衡。</p>
+<p>使用布隆过滤器无法删除，因为任何一个位都可能属于多个元素。 一旦你添加了一个元素，它就在那里。</p>
+<p>布隆过滤器的性能是 <strong>O (k)</strong> 其中 <strong>k</strong> 是哈希函数的数量。</p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><p>代码非常简单。 内部位数组在初始化时设置为固定长度，初始化后不能进行突变。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">init</span>(size: <span class="type">Int</span> = <span class="number">1024</span>, hashFunctions: [(<span class="type">T</span>) -&gt; <span class="type">Int</span>]) &#123;</div><div class="line">	<span class="keyword">self</span>.array = [<span class="type">Bool</span>](repeating: <span class="literal">false</span>, <span class="built_in">count</span>: size)</div><div class="line">  <span class="keyword">self</span>.hashFunctions = hashFunctions</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>应在初始化时指定几个哈希函数。 你使用哪些哈希函数将取决于您将添加到集合的元素的数据类型。 你可以在测试中看到一些例子 ———字符串的 <code>djb2</code> 和 <code>sdbm</code> 哈希函数。</p>
+<p><code>insert</code>只是将所需的位翻转为 <code>true</code>：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">func</span> <span class="title">insert</span><span class="params">(<span class="number">_</span> element: T)</span></span> &#123;</div><div class="line">  <span class="keyword">for</span> hashValue <span class="keyword">in</span> computeHashes(element) &#123;</div><div class="line">    array[hashValue] = <span class="literal">true</span></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这使用 <code>computeHashes()</code> 函数，它循环遍历指定的 <code>hashFunctions</code> 并返回索引数组：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">func</span> <span class="title">computeHashes</span><span class="params">(<span class="number">_</span> value: T)</span></span> -&gt; [<span class="type">Int</span>] &#123;</div><div class="line">  <span class="keyword">return</span> hashFunctions.<span class="built_in">map</span>() &#123; hashFunc <span class="keyword">in</span> <span class="built_in">abs</span>(hashFunc(value) % array.<span class="built_in">count</span>) &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>并查询检查以确保哈希值处的位为 <code>true</code>：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">func</span> <span class="title">query</span><span class="params">(<span class="number">_</span> value: T)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">  <span class="keyword">let</span> hashValues = computeHashes(value)</div><div class="line">  <span class="keyword">let</span> results = hashValues.<span class="built_in">map</span>() &#123; hashValue <span class="keyword">in</span> array[hashValue] &#125;</div><div class="line">	<span class="keyword">let</span> exists = results.<span class="built_in">reduce</span>(<span class="literal">true</span>, &#123; $<span class="number">0</span> &amp;&amp; $<span class="number">1</span> &#125;)</div><div class="line">  <span class="keyword">return</span> exists</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果你来自另一种命令式语言，你可能会注意到 <code>exists</code> 赋值中的不寻常语法。 当 Swift 使代码更加简洁和可读时，Swift 使用函数范例，在这种情况下，<code>reduce</code> 是一种更加简洁的方法来检查所有必需的位是否为 <code>true</code> 而不是 <code>for</code> 循环。</p>
+<h3 id="另一种方法"><a href="#另一种方法" class="headerlink" title="另一种方法"></a>另一种方法</h3><p>通过上面的例子，您了解了如何使用多个不同的哈希函数来帮助减少布隆过滤器中发生冲突的可能性。但是，良好的散列函数是很难设计的。多个散列函数的简单替代方法是使用一组随机数。</p>
+<p>举个例子，假设一个布隆过滤器想要在插入过程中对每个元素进行 15 次哈希处理。您可以只使用一个哈希函数，而不是使用 15 种不同的哈希函数。然后可以将散列值与 15 个不同的值组合以形成用于翻转的索引。此布隆过滤器将提前初始化一组 15 个随机数，并在每次插入期间使用这些值。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">hash(<span class="string">"Hello world!"</span>) &gt;&gt; hash(<span class="number">987654321</span>) <span class="comment">// would flip bit 8</span></div><div class="line">hash(<span class="string">"Hello world!"</span>) &gt;&gt; hash(<span class="number">123456789</span>) <span class="comment">// would flip bit 2</span></div></pre></td></tr></table></figure>
+<p>自 Swift 4.2 以来，<code>Hasher</code>现在包含在标准库中，该库旨在以有效的方式将多个哈希值减少到单个哈希值。这使得哈希的组合变得微不足道。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">func</span> <span class="title">computeHashes</span><span class="params">(<span class="number">_</span> value: T)</span></span> -&gt; [<span class="type">Int</span>] &#123;</div><div class="line">  <span class="keyword">return</span> randomSeeds.<span class="built_in">map</span>() &#123; seed <span class="keyword">in</span></div><div class="line">		<span class="keyword">let</span> hasher = <span class="type">Hasher</span>()</div><div class="line">		hasher.combine(seed)</div><div class="line">		hasher.combine(value)</div><div class="line">		<span class="keyword">let</span> hashValue = hasher.finalize()</div><div class="line">		<span class="keyword">return</span> <span class="built_in">abs</span>(hashValue % array.<span class="built_in">count</span>)</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果您想了解有关此方法的更多信息，可以阅读<a href="https://developer.apple.com/documentation/swift/hasher" target="_blank" rel="external">Hasher 文档</a>或 Soroush Khanlou 的<a href="http://khanlou.com/2018/09/bloom-filters/" target="_blank" rel="external">Swift 4.2 Bloom 过滤器</a>实现。</p>
+<h3 id="BloomFilter-swift"><a href="#BloomFilter-swift" class="headerlink" title="BloomFilter.swift"></a>BloomFilter.swift</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BloomFilter</span>&lt;<span class="title">T</span>&gt; </span>&#123;</div><div class="line">    <span class="keyword">fileprivate</span> <span class="keyword">var</span> array: [<span class="type">Bool</span>]</div><div class="line">    <span class="keyword">private</span> <span class="keyword">var</span> hashFunctions: [(<span class="type">T</span>) -&gt; <span class="type">Int</span>]</div><div class="line">    </div><div class="line">    <span class="keyword">public</span> <span class="keyword">init</span>(size: <span class="type">Int</span> = <span class="number">1024</span>, hashFunctions: [(<span class="type">T</span>) -&gt; <span class="type">Int</span>]) &#123;</div><div class="line">        <span class="keyword">self</span>.array = [<span class="type">Bool</span>](repeating: <span class="literal">false</span>, <span class="built_in">count</span>: size)</div><div class="line">        <span class="keyword">self</span>.hashFunctions = hashFunctions</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">private</span> <span class="function"><span class="keyword">func</span> <span class="title">computeHashes</span><span class="params">(<span class="number">_</span> value: T)</span></span> -&gt; [<span class="type">Int</span>] &#123;</div><div class="line">        <span class="keyword">return</span> hashFunctions.<span class="built_in">map</span> &#123; hashFunc <span class="keyword">in</span> <span class="built_in">abs</span>(hashFunc(value) % array.<span class="built_in">count</span>) &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">func</span> <span class="title">insert</span><span class="params">(<span class="number">_</span> element: T)</span></span> &#123;</div><div class="line">        <span class="keyword">for</span> hashValue <span class="keyword">in</span> computeHashes(element) &#123;</div><div class="line">            array[hashValue] = <span class="literal">true</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">func</span> <span class="title">insert</span><span class="params">(<span class="number">_</span> values: [T])</span></span> &#123;</div><div class="line">        <span class="keyword">for</span> value <span class="keyword">in</span> values &#123;</div><div class="line">            insert(value)</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">func</span> <span class="title">query</span><span class="params">(<span class="number">_</span> value: T)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">        <span class="keyword">let</span> hashValues = computeHashes(value)</div><div class="line">        </div><div class="line">        <span class="keyword">let</span> results = hashValues.<span class="built_in">map</span> &#123; hashValue <span class="keyword">in</span> array[hashValue] &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">let</span> exists = results.<span class="built_in">reduce</span>(<span class="literal">true</span>, &#123; $<span class="number">0</span> &amp;&amp; $<span class="number">1</span> &#125;)</div><div class="line">        <span class="keyword">return</span> exists</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">func</span> <span class="title">isEmpty</span><span class="params">()</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">        <span class="keyword">return</span> array.<span class="built_in">reduce</span>(<span class="literal">true</span>, &#123; prev, next <span class="keyword">in</span> prev &amp;&amp; !next&#125; )</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">djb2</span><span class="params">(x: String)</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">var</span> hash = <span class="number">5381</span></div><div class="line">    <span class="keyword">for</span> char <span class="keyword">in</span> x &#123;</div><div class="line">        hash = ((hash &lt;&lt; <span class="number">5</span>) &amp;+ hash) &amp;+ char.hashValue</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="type">Int</span>(hash)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">sdbm</span><span class="params">(x: String)</span></span> -&gt; <span class="type">Int</span> &#123;</div><div class="line">    <span class="keyword">var</span> hash = <span class="number">0</span></div><div class="line">    <span class="keyword">for</span> char <span class="keyword">in</span> x &#123;</div><div class="line">        hash = char.hashValue &amp;+ (hash &lt;&lt; <span class="number">6</span>) &amp;+ (hash &lt;&lt; <span class="number">16</span>) &amp;- hash</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="type">Int</span>(hash)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h3><p>布隆过滤器的最大的用处就是，能够迅速判断一个元素是否在一个集合中。因此它有如下三个使用场景:</p>
+<ul>
+<li>网页爬虫对 URL 的去重，避免爬取相同的 URL 地址</li>
+<li>进行垃圾邮件过滤：<strong>反垃圾邮件</strong>，从数十亿个垃圾邮件列表中判断某邮箱是否垃圾邮箱（同理，垃圾短信）</li>
+<li>有的黑客为了让服务宕机，他们会构建大量不存在于缓存中的 key 向服务器发起请求，在数据量足够大的情况下，频繁的数据库查询可能导致 DB 挂掉。布隆过滤器很好的解决了缓存击穿的问题。</li>
+</ul>
+<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><p><a href="https://juejin.im/post/5c959ff8e51d45509e2ccf84" target="_blank" rel="external">拜托，面试官别问我「布隆」了</a></p>
+<p><a href="https://github.com/raywenderlich/swift-algorithm-club/tree/master/Bloom%20Filter" target="_blank" rel="external">swift-algorithm-club/Bloom Filter</a></p>
 
       
     </div>
@@ -467,6 +533,36 @@
     <div>
       
         
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script type="text/javascript" src="http://jslibs.wuxubj.cn/sweetalert_mini/jquery-1.7.1.min.js"></script>
+  <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
+  <p><span>Title:  </span>初识布隆过滤器(Bloom Filiter)</a></p>
+  <p><span>Author:  </span>Tuski</a></p>
+  <p><span>Published:  </span>03/23/2019 - 18:31:19</p>
+  <p><span>Updated:  </span>03/23/2019 - 22:24:57</p>
+  <p><span>Link:  </span><a href="/2019/03/初识布隆过滤器-Bloom-Filiter/" title="初识布隆过滤器(Bloom Filiter)">http://www.perphet.com/2019/03/初识布隆过滤器-Bloom-Filiter/</a>
+    <span class="copy-path"  title="Click to Copy article link"><i class="fa fa-clipboard" data-clipboard-text="http://www.perphet.com/2019/03/初识布隆过滤器-Bloom-Filiter/"  aria-label="Copy successfully！"></i></span>
+  </p>
+  <p><span>Protocol:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)</a> Reprinted please keep the original link and author</p>  
+</div>
+<script>
+    var clipboard = new Clipboard('.fa-clipboard');
+    clipboard.on('success', $(function(){
+      $(".fa-clipboard").click(function(){
+        swal({   
+          title: "",   
+          text: 'Copy successfully！',   
+          html: false,
+          timer: 500,   
+          showConfirmButton: false
+        });
+      });
+    }));  
+</script>
+
       
     </div>
 
@@ -509,7 +605,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/swift/" rel="tag"><i class="fa fa-tag"></i> swift</a>
+            <a href="/tags/algorithm/" rel="tag"><i class="fa fa-tag"></i> algorithm</a>
           
         </div>
       
@@ -533,8 +629,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/10/Strings-in-Swift-4/" rel="next" title="Strings in Swift 4">
-                <i class="fa fa-chevron-left"></i> Strings in Swift 4
+              <a href="/2019/03/Red-Black-Tree-ZH-EN/" rel="next" title="Red-Black Tree (ZH && EN)">
+                <i class="fa fa-chevron-left"></i> Red-Black Tree (ZH && EN)
               </a>
             
           </div>
@@ -542,10 +638,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/11/mac​OS-Dynamic-Desktop/" rel="prev" title="macOS Dynamic Desktop">
-                macOS Dynamic Desktop <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -732,7 +824,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Creating-a-URL-in-Swift"><span class="nav-text">Creating a URL in Swift</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#init-string-URLString-String"><span class="nav-text">init?(string URLString: String)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#init-string-String-relativeTo-URL"><span class="nav-text">init?(string: String, relativeTo: URL?)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#init-fileURLWithPath-String-isDirectory-Bool"><span class="nav-text">init(fileURLWithPath: String, isDirectory: Bool)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#init-fileURLWithPath-String-isDirectory-Bool-relativeTo-URL"><span class="nav-text">init(fileURLWithPath: String, isDirectory: Bool, relativeTo: URL?)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Converting-URL-back-to-a-Swift-String"><span class="nav-text">Converting URL back to a Swift String</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Modifying-a-URL-Object"><span class="nav-text">Modifying a URL Object</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#func-appendingPathComponent-String-isDirectory-Bool-gt-URL"><span class="nav-text">func appendingPathComponent(String, isDirectory: Bool) -> URL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#func-deletingLastPathComponent-gt-URL"><span class="nav-text">func deletingLastPathComponent() -> URL</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Conclusion"><span class="nav-text">Conclusion</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Sources"><span class="nav-text">Sources</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#问题解析"><span class="nav-text">问题解析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么不能用散列表"><span class="nav-text">为什么不能用散列表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#位图（BitMap）"><span class="nav-text">位图（BitMap）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#布隆过滤器-Bloom-Filter"><span class="nav-text">布隆过滤器(Bloom Filter)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介"><span class="nav-text">简介*</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将对象插入集合中"><span class="nav-text">将对象插入集合中</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查询集合"><span class="nav-text">查询集合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码"><span class="nav-text">代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#另一种方法"><span class="nav-text">另一种方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BloomFilter-swift"><span class="nav-text">BloomFilter.swift</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用场景"><span class="nav-text">使用场景</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引用"><span class="nav-text">引用</span></a></li></ol></div>
             
 
           </div>
@@ -911,7 +1003,7 @@
 		_hcwp.push({widget:"Bloggerstream", widget_id: 99037, selector:".hc-comment-count", label: "{\%COUNT%\}" });
 
 		
-		_hcwp.push({widget:"Stream", widget_id: 99037, xid: "2018/10/Creating-and-Modifying-a-URL-in-your-Swift-App/"});
+		_hcwp.push({widget:"Stream", widget_id: 99037, xid: "2019/03/初识布隆过滤器-Bloom-Filiter/"});
 		
 
 		(function() {

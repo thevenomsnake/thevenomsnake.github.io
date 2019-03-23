@@ -464,7 +464,7 @@
 <p>旧的 <code>_ExpressibleByStringInterpolation</code> 协议被删除；如果您有使用此协议的代码，则需要做相应更新。您可以使用 <code>#if</code> 条件判断来区分 <code>Swift 4.2</code> 和 <code>Swift 5</code> 的代码。例如：</p>
 </li>
 </ul>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#<span class="keyword">if</span> compiler(&lt;<span class="number">5</span>)</div><div class="line"><span class="class"><span class="keyword">extension</span> <span class="title">MyType</span>: <span class="title">_ExpressibleByStringInterpolation</span> </span>&#123; <span class="comment">/*...*/</span> &#125;</div><div class="line">#<span class="keyword">else</span></div><div class="line"><span class="class"><span class="keyword">extension</span> <span class="title">MyType</span>: <span class="title">ExpressibleByStringInterpolation</span> </span>&#123; <span class="comment">/*...*/</span> &#125;</div><div class="line">#endif</div></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#<span class="keyword">if</span> compiler(&lt;<span class="number">5</span>)</div><div class="line"><span class="class"><span class="keyword">extension</span> <span class="title">MyType</span>: _ExpressibleByStringInterpolation </span>&#123; <span class="comment">/*...*/</span> &#125;</div><div class="line">#<span class="keyword">else</span></div><div class="line"><span class="class"><span class="keyword">extension</span> <span class="title">MyType</span>: <span class="title">ExpressibleByStringInterpolation</span> </span>&#123; <span class="comment">/*...*/</span> &#125;</div><div class="line">#endif</div></pre></td></tr></table></figure>
 <h1 id="Swift-标准库"><a href="#Swift-标准库" class="headerlink" title="Swift 标准库"></a>Swift 标准库</h1><h2 id="新功能"><a href="#新功能" class="headerlink" title="新功能"></a>新功能</h2><ul>
 <li><p><a href="https://link.juejin.im?target=https%3A%2F%2Fdeveloper.apple.com%2Fdocumentation%2Fswift%2Fdictionaryliteral%3Flanguage%3Dobjc" target="_blank" rel="external">DictionaryLiteral</a> 类型重命名为 <a href="https://link.juejin.im?target=https%3A%2F%2Fdeveloper.apple.com%2Fdocumentation%2Fswift%2Fkeyvaluepairs%3Flanguage%3Dobjc" target="_blank" rel="external">KeyValuePairs</a>。(<a href="https://link.juejin.im?target=https%3A%2F%2Fgithub.com%2Fapple%2Fswift-evolution%2Fblob%2Fmaster%2Fproposals%2F0214-DictionaryLiteral.md" target="_blank" rel="external">SE-0214</a>)</p>
 </li>
@@ -756,7 +756,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-count">39</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
