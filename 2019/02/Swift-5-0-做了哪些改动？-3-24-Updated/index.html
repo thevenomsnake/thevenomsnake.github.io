@@ -1,0 +1,1748 @@
+<!DOCTYPE html>
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+<script type="text/javascript">var OriginTitile=document.title,st;document.addEventListener("visibilitychange",function(){document.hidden?(document.title="(/≧▽≦/)Aw, Snap!",clearTimeout(st)):(document.title="(ฅ>ω<*ฅ) Fixed~"+OriginTitile,st=setTimeout(function(){document.title=OriginTitile},3e3))})</script>
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-bounce.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="swift," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="万众期待的 Swift 5 终于来了，苹果爸爸答应的 ABI 稳定也终于来了。">
+<meta name="keywords" content="swift">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Swift 5 做了哪些改动？(最低支持 Xcode 10.2 beta)&#x2F; 3.24 updated">
+<meta property="og:url" content="http://www.perphet.com/2019/02/Swift-5-0-做了哪些改动？-3-24-Updated/index.html">
+<meta property="og:site_name" content="Tuski&#39;s Blog">
+<meta property="og:description" content="万众期待的 Swift 5 终于来了，苹果爸爸答应的 ABI 稳定也终于来了。">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-03-24T13:59:57.986Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Swift 5 做了哪些改动？(最低支持 Xcode 10.2 beta)&#x2F; 3.24 updated">
+<meta name="twitter:description" content="万众期待的 Swift 5 终于来了，苹果爸爸答应的 ABI 稳定也终于来了。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.perphet.com/2019/02/Swift-5-0-做了哪些改动？-3-24-Updated/"/>
+
+
+
+<link rel="stylesheet" href="../live2d/css/live2d.css" />
+
+
+  <title>Swift 5 做了哪些改动？(最低支持 Xcode 10.2 beta)/ 3.24 updated | Tuski's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+<div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+   
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tuski's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">I code my life</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-music">
+          <a href="/music/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-music"></i> <br />
+            
+            Music
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.perphet.com/2019/02/Swift-5-0-做了哪些改动？-3-24-Updated/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tuski">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tuski's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Swift 5 做了哪些改动？(最低支持 Xcode 10.2 beta)/ 3.24 updated</h1>
+        
+
+        <div class="post-meta">
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-23T21:52:14+09:00">
+                2019-02-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+            <!--noindex-->
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/02/Swift-5-0-做了哪些改动？-3-24-Updated/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="2019/02/Swift-5-0-做了哪些改动？-3-24-Updated/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+              <!--/noindex-->
+            
+          
+
+          
+          
+             <span id="/2019/02/Swift-5-0-做了哪些改动？-3-24-Updated/" class="leancloud_visitors" data-flag-title="Swift 5 做了哪些改动？(最低支持 Xcode 10.2 beta)/ 3.24 updated">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  9,078
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  36
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <script src="/assets/js/APlayer.min.js"> </script><blockquote class="blockquote-center">万众期待的 Swift 5 终于来了，苹果爸爸答应的 ABI 稳定也终于来了。</blockquote>
+
+<a id="more"></a>
+<p><strong>亲自尝试一下：</strong> <a href="https://www.hackingwithswift.com/about" target="_blank" rel="external">Paul Hudson</a>创建了一个Xcode Playground，显示了 Swift 5.0 中的新功能以及可以编辑的示例</p>
+<p><a id="download" href="https://github.com/twostraws/whats-new-in-swift-5-0" target="_blank" rel="external"><i class="fa fa-download"></i><span> Download  Now</span> </a></p>
+<h1 id="App-瘦身"><a href="#App-瘦身" class="headerlink" title="App 瘦身"></a>App 瘦身</h1><h2 id="新特性"><a href="#新特性" class="headerlink" title="新特性"></a>新特性</h2><p>Swift 应用程序不再包含用于 Swift 标准库的<code>动态链接库</code>和用于运行 <code>iOS 12.2</code>，<code>watchOS 5.2</code> 和 <code>tvOS 12.2</code> 的设备的构建变体中的 <code>Swift SDK overlays</code>。因此，当为 <code>TestFlight</code> 进行测试部署时，或者在为本地开发分发瘦身应用的 <code>archive</code> 包时，Swift 应用程序可以更小。</p>
+<p>要对比 iOS 12.2 和 iOS 12.1 (或更早版本) 瘦身后 App 的文件大小差异，可以设置 App 的 <code>deployment target</code> 为 <code>iOS 12.1</code> 或更早版本，设置 <code>scheme set</code> 为 <code>Generic iOS Device</code> 并生成一个 App 的归档。在构建完成后，在 <code>Archives organizer</code> 选择中 <code>Distribute App</code>，然后选择 <code>Development distribution</code>。确保在 <code>App Thinning</code> 下拉菜单中选择一个特定设备，如 <code>iPhone XS</code>。当分发完成后，在新创建的文件夹下打开 <code>App Thinning Size Report</code>。iOS 12.2 系统的变体将小于 iOS 12.1 及更早的系统的变体。确切的大小差异取决于您的 App 使用的系统框架的数量。</p>
+<p>关于 App 瘦身更多的信息，可以查看 <a href="https://link.juejin.im?target=https%3A%2F%2Fhelp.apple.com%2Fxcode%2Fmac%2Fcurrent%2F" target="_blank" rel="external">Xcode Help</a> 中的 <a href="https://link.juejin.im?target=https%3A%2F%2Fhelp.apple.com%2Fxcode%2Fmac%2Fcurrent%2F%23%2Fdevbbdc5ce4f" target="_blank" rel="external">What is app thinning?</a> 有关应用程序文件大小的信息，请参考 <a href="https://link.juejin.im?target=https%3A%2F%2Fhelp.apple.com%2Fapp-store-connect%2F" target="_blank" rel="external">App Store Connect Help</a> 中的 <a href="https://link.juejin.im?target=https%3A%2F%2Fhelp.apple.com%2Fapp-store-connect%2F%23%2Fdev3b56ce97c" target="_blank" rel="external">View builds and file sizes</a></p>
+<h1 id="Swift-语言"><a href="#Swift-语言" class="headerlink" title="Swift 语言"></a>Swift 语言</h1><h2 id="新特性-1"><a href="#新特性-1" class="headerlink" title="新特性"></a>新特性</h2><h3 id="标准Result类型"><a href="#标准Result类型" class="headerlink" title="标准Result类型"></a>标准Result类型</h3><ul>
+<li><a href="https://www.youtube.com/watch?v=RBZFCp3kSLM" target="_blank" rel="external"><strong>观看视频</strong></a></li>
+</ul>
+<p><a href="https://github.com/apple/swift-evolution/blob/master/proposals/0235-add-result.md" target="_blank" rel="external">(SE-0235)</a> <code>Result</code>在标准库中引入了一种类型，为我们提供了一种更简单，更清晰的方法来处理复杂代码中的错误，例如异步 API。</p>
+<p>Swift 的<code>Result</code>类型实现为枚举，有两种情况：<code>success</code>和<code>failure</code>。两者都使用泛型实现，因此它们可以具有您选择的相关值，但<code>failure</code>必须符合 Swift 的<code>Error</code>类型。</p>
+<p>为了演示<code>Result</code>，我们可以编写一个连接到服务器的函数来确定有多少未读消息正在等待用户。在此示例代码中，我们将只有一个可能的错误，即请求的 URL 字符串不是有效的 URL：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">enum</span> <span class="title">NetworkError</span>: <span class="title">Error</span> </span>&#123;</div><div class="line">    <span class="keyword">case</span> badURL</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>提取函数将接受 URL 字符串作为其第一个参数，并将完成处理程序作为其第二个参数。该完成处理程序本身将接受一个 <code>Result</code>，其中成功案例将存储整数，并且失败案例会是某种<code>NetworkError</code>。我们实际上并没有在这里连接到服务器，但使用完成处理程序至少可以让我们模拟异步代码。</p>
+<p>这是代码：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> Foundation</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">fetchUnreadCount1</span><span class="params">(from urlString: String, completionHandler: @escaping <span class="params">(Result&lt;Int, NetworkError&gt;)</span></span></span> -&gt; <span class="type">Void</span>)  &#123;</div><div class="line">    <span class="keyword">guard</span> <span class="keyword">let</span> url = <span class="type">URL</span>(string: urlString) <span class="keyword">else</span> &#123;</div><div class="line">        completionHandler(.failure(.badURL))</div><div class="line">        <span class="keyword">return</span></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// complicated networking code here</span></div><div class="line">    <span class="built_in">print</span>(<span class="string">"Fetching <span class="subst">\(url.absoluteString)</span>..."</span>)</div><div class="line">    completionHandler(.success(<span class="number">5</span>))</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>要使用该代码，我们需要检查我们内部的值，<code>Result</code>以查看我们的调用是成功还是失败，如下所示：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">fetchUnreadCount1(from: <span class="string">"https://www.hackingwithswift.com"</span>) &#123; result <span class="keyword">in</span></div><div class="line">    <span class="keyword">switch</span> result &#123;</div><div class="line">    <span class="keyword">case</span> .success(<span class="keyword">let</span> <span class="built_in">count</span>):</div><div class="line">        <span class="built_in">print</span>(<span class="string">"<span class="subst">\(<span class="built_in">count</span>)</span> unread messages."</span>)</div><div class="line">    <span class="keyword">case</span> .failure(<span class="keyword">let</span> error):</div><div class="line">        <span class="built_in">print</span>(error.localizedDescription)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在你开始在自己的代码里面使用<code>Result</code>之前，这里还有三件事情你需要知道。</p>
+<ul>
+<li>首先，<code>Result</code>有一个<code>get()</code>方法，如果存在成功值，则返回成功值，否则抛出其错误。这允许您转换<code>Result</code>为常规抛出调用，如下所示：</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">fetchUnreadCount1(from: <span class="string">"https://www.hackingwithswift.com"</span>) &#123; result <span class="keyword">in</span></div><div class="line">    <span class="keyword">if</span> <span class="keyword">let</span> <span class="built_in">count</span> = <span class="keyword">try</span>? result.<span class="keyword">get</span>() &#123;</div><div class="line">        <span class="built_in">print</span>(<span class="string">"<span class="subst">\(<span class="built_in">count</span>)</span> unread messages."</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>其次，<code>Result</code>有一个接受抛出闭包的初始值设定项：如果闭包返回一个成功的值，用于该<code>success</code>情况，否则抛出的错误将放入该<code>failure</code>情况。</li>
+</ul>
+<p>例如：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> result = <span class="type">Result</span> &#123; <span class="keyword">try</span> <span class="type">String</span>(contentsOfFile: someFile) &#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>最后，您可以使用通用<code>Error</code>协议，而不是使用您创建的特定错误枚举。事实上，Swift Evolution 提案称 “预计结果的大部分用途都将<code>Swift.Error</code>用作<code>Error</code>类型参数。”</li>
+</ul>
+<p>所以，与其使用<code>Result&lt;Int, NetworkError&gt;</code>，不如使用<code>Result&lt;Int, Error&gt;</code>。虽然这意味着你失去了类型抛出的安全性，但你可以抛出各种不同的错误枚举 - 你更喜欢这取决于你的编码风格。</p>
+<h3 id="原始字符串"><a href="#原始字符串" class="headerlink" title="原始字符串"></a>原始字符串</h3><ul>
+<li><a href="https://www.youtube.com/watch?v=e6tuUzmxyOU" target="_blank" rel="external"><strong>观看视频</strong></a></li>
+</ul>
+<p><a href="https://github.com/apple/swift-evolution/blob/master/proposals/0200-raw-string-escaping.md" target="_blank" rel="external">(SE-0200)</a>增加了创建原始字符串的功能，其中反斜杠和引号被解释为那些文字符号，而不是转义字符或字符串终止符。这使得许多用例更容易，但特别是正则表达式将受益。</p>
+<p>要使用原始字符串，请在字符串前放置一个或多个<code>#</code>符号，如下所示：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> rain = #<span class="string">"The "</span>rain<span class="string">" in "</span><span class="type">Spain</span><span class="string">" falls mainly on the Spaniards."</span>#</div></pre></td></tr></table></figure>
+<p>字符串开头和结尾的<code>#</code>符号成为字符串分隔符的一部分，因此 Swift 理解 “rain” 和 “Spain” 周围的独立引号应该被视为文字引号而不是结束字符串。</p>
+<p>原始字符串也允许您使用反斜杠：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> keypaths = #<span class="string">"Swift keypaths such as \Person.name hold uninvoked references to properties."</span>#</div></pre></td></tr></table></figure>
+<p>这将反斜杠视为字符串中的文字字符，而不是转义字符。这反过来意味着字符串插值的工作方式不同：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> answer = <span class="number">42</span></div><div class="line"><span class="keyword">let</span> dontpanic = #<span class="string">"The answer to life, the universe, and everything is \#(answer)."</span>#</div></pre></td></tr></table></figure>
+<p>注意我之前如何用<code>\#(answer)</code>进行字符串插值 - 常规<code>\(answer)</code>将被解释为字符串中的字符，因此当您希望字符串插值在原始字符串中发生时，您必须添加额外的字符串<code>#</code>。</p>
+<p>Swift 原始字符串的一个有趣特性是在开头和结尾使用哈希符号，因为在不太可能的情况下你可以使用多个哈希符号。这里很难提供一个很好的例子，因为它真的应该是非常罕见的，但请考虑这个字符串：<strong>My dog said “woof”#gooddog</strong>。因为哈希之前没有空格，所以 Swift 会看到<code>&quot;#</code>并立即将其解释为字符串终止符。在这种情况下，我们需要将分隔符更改<code>#&quot;</code>为<code>##&quot;</code>，如下所示：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> str = ##<span class="string">"My dog said "</span>woof<span class="string">"#gooddog"</span>##</div></pre></td></tr></table></figure>
+<p>注意末尾的哈希数必须与开头哈希符号个数一致。</p>
+<p>原始字符串与 Swift 的多行字符串系统完全兼容 - 只需用于<code>#&quot;&quot;&quot;</code>启动，然后<code>&quot;&quot;&quot;#</code>结束，如下所示：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> multiline = #<span class="string">""</span><span class="string">"</span></div><div class="line"><span class="string">The answer to life,</span></div><div class="line"><span class="string">the universe,</span></div><div class="line"><span class="string">and everything is \#(answer).</span></div><div class="line"><span class="string">"</span><span class="string">""</span>#</div></pre></td></tr></table></figure>
+<p>没有大量反斜杠这种特性就能在正则表达式中是相当有用的。例如，编写一个简单的正则表达式来查找关键路径，例如<code>\Person.name</code>以前应该是这样：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> regex1 = <span class="string">"\\\\[A-Z]+[A-Za-z]+\\.[a-z]+"</span></div></pre></td></tr></table></figure>
+<p>感谢原始字符串，我们可以使用一半的反斜杠数量来编写相同的内容：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> regex2 = #<span class="string">"\\[A-Z]+[A-Za-z]+\.[a-z]+"</span>#</div></pre></td></tr></table></figure>
+<p>我们仍然需要<em>一些</em>反斜杠，因为正则表达式也使用它们。</p>
+<h3 id="自定义字符串插值"><a href="#自定义字符串插值" class="headerlink" title="自定义字符串插值"></a>自定义字符串插值</h3><p><a href="https://github.com/apple/swift-evolution/blob/master/proposals/0228-fix-expressiblebystringinterpolation.md" target="_blank" rel="external">(SE-0228)</a>大大改进了 Swift 的字符串插值系统，使其更高效，更灵活，并且创造了以前不可能实现的全新功能。</p>
+<p>在最基本的形式中，新的字符串插值系统让我们可以控制对象在字符串中的显示方式。Swift 具有有助于调试的结构的默认行为，因为它打印结构名称后跟其所有属性。但是如果您正在使用类（没有这种行为），或者想要格式化该输出以使其面向用户，那么您可以使用新的字符串插值系统。</p>
+<p>例如，如果我们有这样的结构：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">User</span> </span>&#123;</div><div class="line">    <span class="keyword">var</span> name: <span class="type">String</span></div><div class="line">    <span class="keyword">var</span> age: <span class="type">Int</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果我们想为它添加一个特殊的字符串插值，以便我们整齐地打印出用户，我们将<code>String.StringInterpolation</code>使用新的<code>appendInterpolation()</code>方法添加扩展。Swift 已经内置了几个，并且用户使用插值<em>类型</em> ——在这种情况下<code>User</code>要确定调用哪个方法。</p>
+<p>在这种情况下，我们将添加一个实现，将用户的名称和年龄放在一个字符串中，然后调用其中一个内置<code>appendInterpolation()</code>方法将其添加到我们的字符串中，如下所示：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">extension</span> <span class="title">String</span>.<span class="title">StringInterpolation</span> </span>&#123;</div><div class="line">    <span class="keyword">mutating</span> <span class="function"><span class="keyword">func</span> <span class="title">appendInterpolation</span><span class="params">(<span class="number">_</span> value: User)</span></span> &#123;</div><div class="line">        appendInterpolation(<span class="string">"My name is <span class="subst">\(value.name)</span> and I'm <span class="subst">\(value.age)</span>"</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>现在我们可以创建一个用户并打印出他们的数据：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> user = <span class="type">User</span>(name: <span class="string">"Guybrush Threepwood"</span>, age: <span class="number">33</span>)</div><div class="line"><span class="built_in">print</span>(<span class="string">"User details: <span class="subst">\(user)</span>"</span>)</div></pre></td></tr></table></figure>
+<p>这将会打印 <strong>User details: My name is Guybrush Threepwood and I’m 33</strong>，而使用自定义字符串插值，它将打印<strong>User details: User(name: “Guybrush Threepwood”, age: 33)</strong>当然，该功能与仅实施<code>CustomStringConvertible</code>协议没有什么不同，所以让我们继续使用更高级的用法。</p>
+<p>您的自定义插值方法可以根据需要使用任意数量的参数，标记或未标记。例如，我们可以使用各种样式添加插值来打印数字，如下所示：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">extension</span> <span class="title">String</span>.<span class="title">StringInterpolation</span> </span>&#123;</div><div class="line">    <span class="keyword">mutating</span> <span class="function"><span class="keyword">func</span> <span class="title">appendInterpolation</span><span class="params">(<span class="number">_</span> number: Int, style: NumberFormatter.Style)</span></span> &#123;</div><div class="line">        <span class="keyword">let</span> formatter = <span class="type">NumberFormatter</span>()</div><div class="line">        formatter.numberStyle = style</div><div class="line"></div><div class="line">        <span class="keyword">if</span> <span class="keyword">let</span> result = formatter.string(from: number <span class="keyword">as</span> <span class="type">NSNumber</span>) &#123;</div><div class="line">            appendLiteral(result)</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>该<code>NumberFormatter</code>类有多种<code>style</code>，包括货币（$ 72.83），序数（1st，12th）和拼写（five, forty-three）。因此，我们可以创建一个随机数，并将其拼写成如下字符串：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> number = <span class="type">Int</span>.random(<span class="keyword">in</span>: <span class="number">0</span>...<span class="number">100</span>)</div><div class="line"><span class="keyword">let</span> lucky = <span class="string">"The lucky number this week is <span class="subst">\(number, style: .spellOut)</span>."</span></div><div class="line"><span class="built_in">print</span>(lucky)</div></pre></td></tr></table></figure>
+<p>您可以根据需要多次调用<code>appendLiteral()</code>，如果有必要，甚至可以不调用。例如，我们可以添加一个字符串插值来多次重复一个字符串，如下所示：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">extension</span> <span class="title">String</span>.<span class="title">StringInterpolation</span> </span>&#123;</div><div class="line">    <span class="keyword">mutating</span> <span class="function"><span class="keyword">func</span> <span class="title">appendInterpolation</span><span class="params">(<span class="keyword">repeat</span> str: String, <span class="number">_</span> <span class="built_in">count</span>: Int)</span></span> &#123;</div><div class="line">        <span class="keyword">for</span> <span class="number">_</span> <span class="keyword">in</span> <span class="number">0</span> ..&lt; <span class="built_in">count</span> &#123;</div><div class="line">            appendLiteral(str)</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="built_in">print</span>(<span class="string">"Baby shark <span class="subst">\(<span class="keyword">repeat</span>: "doo ", <span class="number">6</span>)</span>"</span>)</div></pre></td></tr></table></figure>
+<p>而且这些只是常规方法，您可以使用 Swift 的全部功能。例如，我们可能会添加一个将字符串数组连接在一起的插值，但如果该数组为空，则执行一个返回字符串的闭包：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">extension</span> <span class="title">String</span>.<span class="title">StringInterpolation</span> </span>&#123;</div><div class="line">    <span class="keyword">mutating</span> <span class="function"><span class="keyword">func</span> <span class="title">appendInterpolation</span><span class="params">(<span class="number">_</span> values: [String], empty defaultValue: @autoclosure <span class="params">()</span></span></span> -&gt; <span class="type">String</span>) &#123;</div><div class="line">        <span class="keyword">if</span> values.<span class="built_in">count</span> == <span class="number">0</span> &#123;</div><div class="line">            appendLiteral(defaultValue())</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            appendLiteral(values.joined(separator: <span class="string">", "</span>))</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">let</span> names = [<span class="string">"Harry"</span>, <span class="string">"Ron"</span>, <span class="string">"Hermione"</span>]</div><div class="line"><span class="built_in">print</span>(<span class="string">"List of students: <span class="subst">\(names, empty: "No one")</span>."</span>)</div></pre></td></tr></table></figure>
+<p>使用<code>@autoclosure</code>意味着我们可以使用简单值或调用复杂函数作为默认值，但除非<code>values.count</code>为零，否则不会完成任何工作。</p>
+<p>通过<code>ExpressibleByStringLiteral</code>和<code>ExpressibleByStringInterpolation</code>协议的组合，现在可以使用字符串插值创建整个类型，如果我们添加<code>CustomStringConvertible</code>, 我们想要的话，甚至可以将这些类型打印为字符串。</p>
+<p>为了实现这个功能，我们需要满足一些特定的标准：</p>
+<ul>
+<li>无论我们创造什么类型都应该符合<code>ExpressibleByStringLiteral</code>，<code>ExpressibleByStringInterpolation</code>和<code>CustomStringConvertible</code>。只有在您想要自定义打印类型的方式时才需要后者。</li>
+<li>你的类型<em>内部</em>必须是一个<code>StringInterpolation</code>且符合的嵌套结构<code>StringInterpolationProtocol</code>。</li>
+<li>嵌套的 struct 需要有一个初始化器，它接受两个整数，告诉我们大概可以预期的数据量。</li>
+<li>它还需要实现一种<code>appendLiteral()</code>方法，以及一种或多种<code>appendInterpolation()</code>方法。</li>
+<li>您的主类型需要有两个初始化程序，允许从字符串文字和字符串插值创建它。</li>
+</ul>
+<p>我们可以将所有这些放在一个可以从各种常见元素构造 HTML 的示例类型中。嵌套<code>StringInterpolation</code>结构中的 “暂存器” 将是一个字符串：每次添加新的文字或插值时，我们都会将其附加到字符串中。为了帮助您确切了解发生了什么，我在各种追加方法中添加了一些<code>print()</code>调用。</p>
+<p>代码如下：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">HTMLComponent</span>: <span class="title">ExpressibleByStringLiteral</span>, <span class="title">ExpressibleByStringInterpolation</span>, <span class="title">CustomStringConvertible</span> </span>&#123;</div><div class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">StringInterpolation</span>: <span class="title">StringInterpolationProtocol</span> </span>&#123;</div><div class="line">        <span class="comment">// start with an empty string</span></div><div class="line">        <span class="keyword">var</span> output = <span class="string">""</span></div><div class="line"></div><div class="line">        <span class="comment">// allocate enough space to hold twice the amount of literal text</span></div><div class="line">        <span class="keyword">init</span>(literalCapacity: <span class="type">Int</span>, interpolationCount: <span class="type">Int</span>) &#123;</div><div class="line">            output.reserveCapacity(literalCapacity * <span class="number">2</span>)</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">// a hard-coded piece of text – just add it</span></div><div class="line">        <span class="keyword">mutating</span> <span class="function"><span class="keyword">func</span> <span class="title">appendLiteral</span><span class="params">(<span class="number">_</span> literal: String)</span></span> &#123;</div><div class="line">            <span class="built_in">print</span>(<span class="string">"Appending <span class="subst">\(literal)</span>"</span>)</div><div class="line">            output.append(literal)</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">// a Twitter username – add it as a link</span></div><div class="line">        <span class="keyword">mutating</span> <span class="function"><span class="keyword">func</span> <span class="title">appendInterpolation</span><span class="params">(twitter: String)</span></span> &#123;</div><div class="line">            <span class="built_in">print</span>(<span class="string">"Appending <span class="subst">\(twitter)</span>"</span>)</div><div class="line">            output.append(<span class="string">"&lt;a href=\"https://twitter/<span class="subst">\(twitter)</span>\"&gt;@<span class="subst">\(twitter)</span>&lt;/a&gt;"</span>)</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="comment">// an email address – add it using mailto</span></div><div class="line">        <span class="keyword">mutating</span> <span class="function"><span class="keyword">func</span> <span class="title">appendInterpolation</span><span class="params">(email: String)</span></span> &#123;</div><div class="line">            <span class="built_in">print</span>(<span class="string">"Appending <span class="subst">\(email)</span>"</span>)</div><div class="line">            output.append(<span class="string">"&lt;a href=\"mailto:<span class="subst">\(email)</span>\"&gt;<span class="subst">\(email)</span>&lt;/a&gt;"</span>)</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// the finished text for this whole component</span></div><div class="line">    <span class="keyword">let</span> description: <span class="type">String</span></div><div class="line"></div><div class="line">    <span class="comment">// create an instance from a literal string</span></div><div class="line">    <span class="keyword">init</span>(stringLiteral value: <span class="type">String</span>) &#123;</div><div class="line">        description = value</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// create an instance from an interpolated string</span></div><div class="line">    <span class="keyword">init</span>(stringInterpolation: <span class="type">StringInterpolation</span>) &#123;</div><div class="line">        description = stringInterpolation.output</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我们现在可以创建和使用<code>HTMLComponent</code>字符串插值的实例，如下所示：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> text: <span class="type">HTMLComponent</span> = <span class="string">"You should follow me on Twitter <span class="subst">\(twitter: "twostraws")</span>, or you can email me at <span class="subst">\(email: "paul@hackingwithswift.com")</span>."</span></div><div class="line"> <span class="built_in">print</span>(text)</div></pre></td></tr></table></figure>
+<p>多亏了<code>print()</code>分散在内部的调用，你会看到字符串插值功能的确切工作原理：你会看到 “Appending You should follow me on Twitter”，“Appending twostraws”，“Appending , or you can email me at ” ，“Appending paul@hackingwithswift.com”，最后 “Appending .” ——每个部分触发一个方法调用，并添加到我们的字符串中。</p>
+<h3 id="动态可调用类型"><a href="#动态可调用类型" class="headerlink" title="动态可调用类型"></a>动态可调用类型</h3><p><a href="https://link.juejin.im?target=https%3A%2F%2Fgithub.com%2Fapple%2Fswift-evolution%2Fblob%2Fmaster%2Fproposals%2F0216-dynamic-callable.md" target="_blank" rel="external">(SE-0216)</a> <code>@dynamicCallable</code> 允许您使用一个简单的语法糖像调用函数一样来调用命名类型。主要的应用场景是动态语言互操作。</p>
+<p>有效的将这段代码：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> result = random(numberOfZeroes: <span class="number">3</span>)</div></pre></td></tr></table></figure>
+<p>转化成:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> result = random.dynamicallyCall(withKeywordArguments: [<span class="string">"numberOfZeroes"</span>: <span class="number">3</span>])</div></pre></td></tr></table></figure>
+<p>之前<a href="https://www.hackingwithswift.com/about" target="_blank" rel="external">Paul Hudson</a> 写过 <a href="https://www.hackingwithswift.com/articles/55/how-to-use-dynamic-member-lookup-in-swift" target="_blank" rel="external">feature in Swift 4.2 called @dynamicMemberLookup</a>。<code>@dynamicCallable</code>是 <code>@dynamicMemberLookup</code> 的自然扩展，并且服务于同一目的：使 Swift 代码更容易与 Python 和 JavaScript 等动态语言一起工作。</p>
+<p>要将此功能添加到您自己的类型，您需要添加<code>@dynamicCallable</code>属性以及这些方法中的一个或两个：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">dynamicallyCall</span><span class="params">(withArguments args: [Int])</span></span> -&gt; <span class="type">Double</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">dynamicallyCall</span><span class="params">(withKeywordArguments args: KeyValuePairs&lt;String, Int&gt;)</span></span> -&gt; <span class="type">Double</span></div></pre></td></tr></table></figure>
+<p>第一个是当你调用不带参数的标识类型（例如，其中第一个使用<code>a(b, c)</code>）时使用的，第二个是当你确定提供标识的时候用的（如<code>a(b: cat, c: dog)</code>）。</p>
+<p><code>@dynamicCallable</code> 对于那些能够接受和返回的数据类型的方法来说非常灵活，使您可以从 Swift 的所有类型安全性中受益，同时仍然具有一些用于高级用途的蠕动空间（wriggle room）。因此，对于第一种方法（无参数标识），您可以使用任意符合<code>ExpressibleByArrayLiteral</code>的东西，诸如数组，数组切片和集合的任何内容，对于第二种方法（使用参数标识），您可以使用任何符合<code>ExpressibleByDictionaryLiteral</code> 诸如字典和键值对的任何内容。</p>
+<ul>
+<li><strong>注意：</strong>如果您之前没有使用过 <code>KeyValuePairs</code>，那么现在是了解它们的最佳时机，因为它们和<code>@dynamicCallable</code> 一起使用非常有用。在这里了解更多：<a href="https://www.hackingwithswift.com/example-code/language/what-are-keyvaluepairs" target="_blank" rel="external">KeyValuePairs 是什么？</a></li>
+</ul>
+<p>除了接受各种输入外，您还可以为各种输出提供多个重载 —— 一个可能返回一个字符串，一个是整数，依此类推。Swift 能够解决什么就使用使用哪一个，你就可以混合搭配你想要的一切。</p>
+<p>我们来看一个例子。首先，这是一个叫做 <code>RandomNumberGenerator</code> 的结构，生成介于 0 和某个最大值之间的数字，具体取决于传入的输入：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">RandomNumberGenerator</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">generate</span><span class="params">(numberOfZeroes: Int)</span></span> -&gt; <span class="type">Double</span> &#123;</div><div class="line">        <span class="keyword">let</span> maximum = pow(<span class="number">10</span>, <span class="type">Double</span>(numberOfZeroes))</div><div class="line">        <span class="keyword">return</span> <span class="type">Double</span>.random(<span class="keyword">in</span>: <span class="number">0</span>...maximum)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>把它切换到<code>@dynamicCallable</code>我们需要这样写：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">@dynamicCallable</div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">RandomNumberGenerator</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">dynamicallyCall</span><span class="params">(withKeywordArguments args: KeyValuePairs&lt;String, Int&gt;)</span></span> -&gt; <span class="type">Double</span> &#123;</div><div class="line">        <span class="keyword">let</span> numberOfZeroes = <span class="type">Double</span>(args.first?.value ?? <span class="number">0</span>)</div><div class="line">        <span class="keyword">let</span> maximum = pow(<span class="number">10</span>, numberOfZeroes)</div><div class="line">        <span class="keyword">return</span> <span class="type">Double</span>.random(<span class="keyword">in</span>: <span class="number">0</span>...maximum)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>可以使用任意数量的参数调用该方法，或者可能为零，因此我们仔细读取第一个值并使用 nil 合并以确保存在可能出现的默认值。</p>
+<p>我们现在可以创建一个实例<code>RandomNumberGenerator</code> 并将其声明为函数：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> random = <span class="type">RandomNumberGenerator</span>()</div><div class="line"><span class="keyword">let</span> result = random(numberOfZeroes: <span class="number">0</span>)</div></pre></td></tr></table></figure>
+<p>如果您曾经使用过<code>dynamicallyCall(withArguments:)</code>- 或者同时使用它们，因为您可以将它们都用于单一类型 - 那么您可以这样写：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">@dynamicCallable</div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">RandomNumberGenerator</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">dynamicallyCall</span><span class="params">(withArguments args: [Int])</span></span> -&gt; <span class="type">Double</span> &#123;</div><div class="line">        <span class="keyword">let</span> numberOfZeroes = <span class="type">Double</span>(args[<span class="number">0</span>])</div><div class="line">        <span class="keyword">let</span> maximum = pow(<span class="number">10</span>, numberOfZeroes)</div><div class="line">        <span class="keyword">return</span> <span class="type">Double</span>.random(<span class="keyword">in</span>: <span class="number">0</span>...maximum)</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">let</span> random = <span class="type">RandomNumberGenerator</span>()</div><div class="line"><span class="keyword">let</span> result = random(<span class="number">0</span>)</div></pre></td></tr></table></figure>
+<p>使用<code>@dynamicCallable</code>时需要注意一些重要的规则：</p>
+<ul>
+<li>您可以将它应用于结构，枚举，类和协议。</li>
+<li>如果你实现<code>withKeywordArguments:</code>并且没有实现<code>withArguments:</code>，你的类型仍然可以在没有参数标签的情况下调用 - 你将会只能获取键的空字符串。</li>
+<li>如果您的实现<code>withKeywordArguments:</code>或<code>withArguments:</code>被标记为 throw，则调用该类型也将被抛出。</li>
+<li>您无法添加<code>@dynamicCallable</code>到一个扩展，只能添加类型的主要定义。</li>
+<li>您仍然可以为您的类型添加其他方法和属性，并正常使用它们。</li>
+</ul>
+<p>也许更重要的是，此不支持方法解析，这意味着我们必须直接调用类型（例如<code>random(numberOfZeroes: 5)</code>）而不是调用类型上的特定方法（例如<code>random.generate(numberOfZeroes: 5)</code>）。已经有一些关于使用方法签名添加后者的讨论，例如：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">dynamicallyCallMethod</span><span class="params">(named: String, withKeywordArguments: KeyValuePairs&lt;String, Int&gt;)</span></span></div></pre></td></tr></table></figure>
+<p>如果在未来的 Swift 版本中成为可能，它可能会为测试模拟开辟一些非常有趣的可能性。</p>
+<p>与此同时，<code>@dynamicCallable</code> 不太可能广受欢迎，但对于少数想要与 Python，JavaScript 和其他语言交互的人来说，这<em>一点</em>非常重要。</p>
+<p>这里还有一个例子：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">@dynamicCallable <span class="class"><span class="keyword">struct</span> <span class="title">ToyCallable</span> </span>&#123;</div><div class="line">    func dynamicCall（withArguments：[Int]）&#123;&#125;</div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">dynamicCall</span>（<span class="title">withKeywordArguments</span>：<span class="title">KeyValuePairs</span> &lt;String，Int&gt;）</span>&#123;&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">let</span> x = <span class="type">ToyCallable</span>（）</div><div class="line"></div><div class="line">x（<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>）</div><div class="line"><span class="comment">// Equals to `x.dynamicallyCall（withArguments：[1,2,3]）`</span></div><div class="line"></div><div class="line">x(label: <span class="number">1</span>, <span class="number">2</span>)</div><div class="line"><span class="comment">// Equals to `x.dynamicallyCall(withKeywordArguments: ["label": 1, "": 2])`</span></div></pre></td></tr></table></figure>
+<h3 id="处理未来的枚举"><a href="#处理未来的枚举" class="headerlink" title="处理未来的枚举"></a>处理未来的枚举</h3><p><a href="https://github.com/apple/swift-evolution/blob/master/proposals/0192-non-exhaustive-enums.md" target="_blank" rel="external">(SE-0192)</a>增加了区分固定枚举和未来可能发生变化的枚举的功能。</p>
+<p>Swift 的一个安全功能是它要求所有 switch 语句都是详尽无遗的 - 它们必须覆盖所有情况。虽然这从安全角度来看效果很好，但是在将来添加新案例时会导致兼容性问题：系统框架可能会发送您未提供的不同内容，或者您依赖的代码可能会添加新案例并导致您的编译中断，因为你的<code>switch</code>不再详尽无遗。</p>
+<p>通过该<code>@unknown</code>属性，我们现在可以区分两个略有不同的场景：“这个默认情况应该针对所有其他情况运行，因为我不想单独处理它们” 和 “我想单独处理所有情况，但如果将来出现的话而不是导致错误。“</p>
+<p>这是一个 enum 示例：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">enum</span> <span class="title">PasswordError</span>: <span class="title">Error</span> </span>&#123;</div><div class="line">    <span class="keyword">case</span> short</div><div class="line">    <span class="keyword">case</span> obvious</div><div class="line">    <span class="keyword">case</span> simple</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我们可以使用<code>switch</code>块编写代码来处理每个案例：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">showOld</span><span class="params">(error: PasswordError)</span></span> &#123;</div><div class="line">    <span class="keyword">switch</span> error &#123;</div><div class="line">    <span class="keyword">case</span> .short:</div><div class="line">        <span class="built_in">print</span>(<span class="string">"Your password was too short."</span>)</div><div class="line">    <span class="keyword">case</span> .obvious:</div><div class="line">        <span class="built_in">print</span>(<span class="string">"Your password was too obvious."</span>)</div><div class="line">    <span class="keyword">default</span>:</div><div class="line">        <span class="built_in">print</span>(<span class="string">"Your password was too simple."</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>对于短密码和明显密码，它使用两个显式情况，但将第三种情况捆绑到默认块中。</p>
+<p>现在，如果将来我们在 enum 中添加了一个新的 case <code>old</code>，用于判断是否为之前使用过的密码，我们的<code>default</code>情况会被自动调用，即使它的消息没有道理 - 密码也许并不简单。</p>
+<p>Swift 无法向我们发出有关此代码的警告，因为它在技术上是正确的，因此很容易错过这个错误。幸运的是，新d的 <code>@unknown</code> 属性完美地修复了它——它只能在<code>default</code>案例中使用，并且设计为在将来出现新案例时运行。</p>
+<p>例如：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">showNew</span><span class="params">(error: PasswordError)</span></span> &#123;</div><div class="line">    <span class="keyword">switch</span> error &#123;</div><div class="line">    <span class="keyword">case</span> .short:</div><div class="line">        <span class="built_in">print</span>(<span class="string">"Your password was too short."</span>)</div><div class="line">    <span class="keyword">case</span> .obvious:</div><div class="line">        <span class="built_in">print</span>(<span class="string">"Your password was too obvious."</span>)</div><div class="line">    @unknown <span class="keyword">default</span>:</div><div class="line">        <span class="built_in">print</span>(<span class="string">"Your password wasn't suitable."</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>该代码现在将发出警告，因为该<code>switch</code>块不再详尽无遗 —— Swift 希望我们明确处理每个案例。实际上这只是一个<em>警告</em>，这使得这个属性如此有用：如果一个框架在未来添加一个新案例，你会收到警告，但它不会破坏你的源代码。</p>
+<p>不仅如此，在 Swift 5 之前，您可以编写一个带有可变参数的枚举 case：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">enum</span> <span class="title">X</span> </span>&#123;</div><div class="line">    <span class="keyword">case</span> foo(bar: <span class="type">Int</span>...) </div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">baz</span><span class="params">()</span></span> -&gt; <span class="type">X</span> &#123;</div><div class="line">    <span class="keyword">return</span> .foo(bar: <span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>) </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>之前不是特意要支持这个特性，而且现在这样写会报错了。</p>
+<p>取而代之的是，让枚举的 <code>case</code> 携带一个数组，并显式传递一个数组：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">enum</span> <span class="title">X</span> </span>&#123;</div><div class="line">    <span class="keyword">case</span> foo(bar: [<span class="type">Int</span>]) </div><div class="line">&#125; </div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">baz</span><span class="params">()</span></span> -&gt; <span class="type">X</span> &#123;</div><div class="line">    <span class="keyword">return</span> .foo(bar: [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]) </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="展平嵌套try-的可选结果"><a href="#展平嵌套try-的可选结果" class="headerlink" title="展平嵌套try?的可选结果"></a>展平嵌套<code>try?</code>的可选结果</h3><p><a href="https://github.com/apple/swift-evolution/blob/master/proposals/0230-flatten-optional-try.md" target="_blank" rel="external">(SE-0230)</a>修改了工作方式，<code>try?</code>使嵌套的选项变平，成为常规选项。这使得它的工作方式与可选链接和条件类型转换的工作方式相同，这两种方法都在早期的 Swift 版本中展平了选项。</p>
+<p>这是一个演示变化的实际示例：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">User</span> </span>&#123;</div><div class="line">    <span class="keyword">var</span> id: <span class="type">Int</span></div><div class="line"></div><div class="line">    <span class="keyword">init</span>?(id: <span class="type">Int</span>) &#123;</div><div class="line">        <span class="keyword">if</span> id &lt; <span class="number">1</span> &#123;</div><div class="line">            <span class="keyword">return</span> <span class="literal">nil</span></div><div class="line">        &#125;</div><div class="line"></div><div class="line">        <span class="keyword">self</span>.id = id</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">getMessages</span><span class="params">()</span></span> <span class="keyword">throws</span> -&gt; <span class="type">String</span> &#123;</div><div class="line">        <span class="comment">// complicated code here</span></div><div class="line">        <span class="keyword">return</span> <span class="string">"No messages"</span></div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">let</span> user = <span class="type">User</span>(id: <span class="number">1</span>)</div><div class="line"><span class="keyword">let</span> messages = <span class="keyword">try</span>? user?.getMessages()</div></pre></td></tr></table></figure>
+<p>该<code>User</code>结构具有可失败的初始化程序，因为我们希望确保用户创建具有有效 ID 的用户。<code>getMessages()</code>方法理论上应该包含某种复杂的代码，以获取用户的所有消息列表，因此标记为<code>throws</code>; 我已经让它返回一个固定的字符串，所以代码可以编译。</p>
+<p>关键是最后一行：因为用户是可选的，它使用可选的链接，因为<code>getMessages()</code>可以抛出它用于<code>try?</code>将 throw 方法转换为可选的，所以我们最终得到一个嵌套的可选。在 Swift 4.2 和更早版本中，这将让 <code>messages</code>是<code>String??</code>类型 —— 一个可选的可选字符串 —— 但是在 Swift 5.0 及更高版本的<code>try?</code>中，如果它们已经是可选的，它们将不会将值包装在可选中，因此它<code>messages</code>只是一个<code>String?</code>。</p>
+<p>此新行为与可选链接和条件类型转换的现有行为相匹配。也就是说，如果需要，可以在一行代码中使用可选链接十几次，但最终不会有 12 个嵌套选项。同样，如果你使用了可选的链接<code>as?</code>，你仍然只有一个级别的可选性，因为这通常是你想要的结果。</p>
+<h3 id="检查整数倍数"><a href="#检查整数倍数" class="headerlink" title="检查整数倍数"></a>检查整数倍数</h3><ul>
+<li><a href="https://www.youtube.com/watch?v=e6tuUzmxyOU" target="_blank" rel="external"><strong>观看视频</strong></a></li>
+</ul>
+<p><a href="https://github.com/apple/swift-evolution/blob/master/proposals/0225-binaryinteger-iseven-isodd-ismultiple.md" target="_blank" rel="external">(SE-0225)</a>为整数添加了一个 <code>isMultiple(of:)</code>方法，允许我们使用更清晰的方式检查一个数是否是另一个数的倍数<code>%</code>，而不是使用除法余数。</p>
+<p>例如：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> rowNumber = <span class="number">4</span></div><div class="line"></div><div class="line"><span class="keyword">if</span> rowNumber.isMultiple(of: <span class="number">2</span>) &#123;</div><div class="line">    <span class="built_in">print</span>(<span class="string">"Even"</span>)</div><div class="line">&#125; <span class="keyword">else</span> &#123;</div><div class="line">    <span class="built_in">print</span>(<span class="string">"Odd"</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>是的，我们可以用<code>if rowNumber % 2 == 0</code>完成同样的检查功能，但你必须承认这个方法不太清楚 - <code>isMultiple(of:)</code>作为方法意味着它可以在 Xcode 的代码完成选项中列出，这有助于理解代码和发现问题</p>
+<h3 id="使用-compactMapValues（）转换和解包字典值"><a href="#使用-compactMapValues（）转换和解包字典值" class="headerlink" title="使用 compactMapValues（）转换和解包字典值"></a>使用 compactMapValues（）转换和解包字典值</h3><ul>
+<li><a href="https://www.youtube.com/watch?v=Le32Tbkv2v0" target="_blank" rel="external"><strong>观看视频</strong></a></li>
+</ul>
+<p><a href="https://github.com/apple/swift-evolution/blob/master/proposals/0218-introduce-compact-map-values.md" target="_blank" rel="external">(SE-0218)</a> 为字典添加了一种新方法<code>compactMapValues()</code>，将来自数组的功能<code>compactMap()</code>（“转换我的值，解包结果，然后丢弃任何无效的东西”）与字典中的<code>mapValues()</code>方法结合在一起（“保持我的密钥完整但转换我的值”） 。</p>
+<p>作为一个例子，这里是一个人们在比赛中的字典，包含了他们在几秒钟内完成的时间。一个人没有完成，标记为 “DNF” (DO NOT FINISHED)：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> times = [</div><div class="line">    <span class="string">"Hudson"</span>: <span class="string">"38"</span>,</div><div class="line">    <span class="string">"Clarke"</span>: <span class="string">"42"</span>,</div><div class="line">    <span class="string">"Robinson"</span>: <span class="string">"35"</span>,</div><div class="line">    <span class="string">"Hartis"</span>: <span class="string">"DNF"</span></div><div class="line">]</div></pre></td></tr></table></figure>
+<p>我们可以使用<code>compactMapValues()</code>创建一个名称和时间为整数的新字典，删除一个 DNF 人员：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> finishers1 = times.compactMapValues &#123; <span class="type">Int</span>($<span class="number">0</span>) &#125;</div></pre></td></tr></table></figure>
+<p>或者，您可以直接将<code>Int</code>初始化程序传递给<code>compactMapValues()</code>，如下所示：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> finishers2 = times.compactMapValues(<span class="type">Int</span>.<span class="keyword">init</span>)</div></pre></td></tr></table></figure>
+<p>您还可以使用<code>compactMapValues()</code>解包选项并丢弃 nil 值而不执行任何类型的转换，如下所示：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> people = [</div><div class="line">    <span class="string">"Paul"</span>: <span class="number">38</span>,</div><div class="line">    <span class="string">"Sophie"</span>: <span class="number">8</span>,</div><div class="line">    <span class="string">"Charlotte"</span>: <span class="number">5</span>,</div><div class="line">    <span class="string">"William"</span>: <span class="literal">nil</span></div><div class="line">]</div><div class="line"></div><div class="line"><span class="keyword">let</span> knownAges = people.compactMapValues &#123; $<span class="number">0</span> &#125;</div></pre></td></tr></table></figure>
+<h3 id="计算序列中的匹配项"><a href="#计算序列中的匹配项" class="headerlink" title="计算序列中的匹配项"></a><del>计算序列中的匹配项</del></h3><ul>
+<li><a href="https://www.youtube.com/watch?v=syPKtPb0y-Y" target="_blank" rel="external"><strong><del>观看视频</del></strong></a></li>
+</ul>
+<p><del><strong>这个 Swift 5.0 新增的功能在 beta 测试中被撤销，因为它导致了类型检查器的性能问题。希望它能够及时回到 Swift 5.1，或者用一个新名称来避免问题。</strong></del></p>
+<p><del><a href="https://github.com/apple/swift-evolution/blob/master/proposals/0220-count-where.md" target="_blank" rel="external">(SE-0220)</a>引入了一种新的<code>count(where:)</code>方法，该方法和<code>filiter()</code>有相同的表现，而且包含单个的值传递。此举免去了去创建一个一分配就要马上被释放掉的数组，并为常见问题提供清晰简洁的解决方案。</del></p>
+<p><del>此示例创建一个测试结果数组，并计算大于或等于 85 的数量：</del></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> scores = [<span class="number">100</span>, <span class="number">80</span>, <span class="number">85</span>]</div><div class="line"><span class="keyword">let</span> passCount = scores.<span class="built_in">count</span> &#123; $<span class="number">0</span> &gt;= <span class="number">85</span> &#125;</div></pre></td></tr></table></figure>
+<p><del>这计算了数组中以 “Terry” 开头的名称数量：</del></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> pythons = [<span class="string">"Eric Idle"</span>, <span class="string">"Graham Chapman"</span>, <span class="string">"John Cleese"</span>, <span class="string">"Michael Palin"</span>, <span class="string">"Terry Gilliam"</span>, <span class="string">"Terry Jones"</span>]</div><div class="line"><span class="keyword">let</span> terryCount = pythons.<span class="built_in">count</span> &#123; $<span class="number">0</span>.hasPrefix(<span class="string">"Terry"</span>) &#125;</div></pre></td></tr></table></figure>
+<p><del>此方法适用于所有符合的类型<code>Sequence</code>，因此您也可以在集合和字典上使用它。</del></p>
+<h3 id="其它新特性（部分）"><a href="#其它新特性（部分）" class="headerlink" title="其它新特性（部分）"></a><strong>其它新特性（部分）</strong></h3><ul>
+<li>Key path 现在支持特性 (identity) keypath (<code>\.self</code>)，这是一个引用自身完整输入值的 <a href="https://link.juejin.im?target=https%3A%2F%2Fdeveloper.apple.com%2Fdocumentation%2Fswift%2Fwritablekeypath%3Flanguage%3Dobjc" target="_blank" rel="external">WritableKeyPath</a>。(<a href="https://link.juejin.im?target=https%3A%2F%2Fgithub.com%2Fapple%2Fswift-evolution%2Fblob%2Fmaster%2Fproposals%2F0227-identity-keypath.md" target="_blank" rel="external">SE-0227</a>)</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> id = \<span class="type">Int</span>.<span class="keyword">self</span></div><div class="line"><span class="keyword">var</span> x = <span class="number">2</span></div><div class="line"><span class="built_in">print</span>(x[keyPath: id]) <span class="comment">// Prints "2"</span></div><div class="line">x[keyPath: id] = <span class="number">3</span></div><div class="line"><span class="built_in">print</span>(x[keyPath: id]) <span class="comment">// Prints "3"</span></div></pre></td></tr></table></figure>
+<ul>
+<li><p>如果类型 <code>T</code> 符合 <a href="https://link.juejin.im?target=https%3A%2F%2Fdeveloper.apple.com%2Fdocumentation%2Fswift%2Fswift_standard_library%2Finitialization_with_literals%3Flanguage%3Dobjc" target="_blank" rel="external">Initialized with Literals</a> 中的其中一个协议（如 <a href="https://link.juejin.im?target=https%3A%2F%2Fdeveloper.apple.com%2Fdocumentation%2Fswift%2Fexpressiblebyintegerliteral%3Flanguage%3Dobjc" target="_blank" rel="external">ExpressibleByIntegerLiteral</a>），且 <code>literal</code> 是一个字面量表达示时，则 <code>T(literal)</code> 会使用相应的协议创建一个类型 <code>T</code> 的字面量，而不是使用一个协议的默认字面量类型的值来调用 <code>T</code> 的 <code>initializer</code>。</p>
+<p>如，类似于 <code>UInt64(0xffff_ffff_ffff_ffff)</code> 这样的表达式现在是有效的，则之前会由于整型字面量的默认类型是 <code>Int</code>，而导致溢出。(<a href="https://link.juejin.im?target=https%3A%2F%2Fgithub.com%2Fapple%2Fswift-evolution%2Fblob%2Fmaster%2Fproposals%2F0213-literal-init-via-coercion.md" target="_blank" rel="external">SE-0213</a>)</p>
+</li>
+<li><p>提高了<code>字符串插值</code>操作的性能、清晰性和效率。(<a href="https://link.juejin.im?target=https%3A%2F%2Fgithub.com%2Fapple%2Fswift-evolution%2Fblob%2Fmaster%2Fproposals%2F0228-fix-expressiblebystringinterpolation.md" target="_blank" rel="external">SE-0228</a>)</p>
+<p>旧的 <code>_ExpressibleByStringInterpolation</code> 协议被删除；如果您有使用此协议的代码，则需要做相应更新。您可以使用 <code>#if</code> 条件判断来区分 <code>Swift 4.2</code> 和 <code>Swift 5</code> 的代码。例如：</p>
+</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#<span class="keyword">if</span> compiler(&lt;<span class="number">5</span>)</div><div class="line"><span class="class"><span class="keyword">extension</span> <span class="title">MyType</span>: <span class="title">_ExpressibleByStringInterpolation</span> </span>&#123; <span class="comment">/*...*/</span> &#125;</div><div class="line">#<span class="keyword">else</span></div><div class="line"><span class="class"><span class="keyword">extension</span> <span class="title">MyType</span>: <span class="title">ExpressibleByStringInterpolation</span> </span>&#123; <span class="comment">/*...*/</span> &#125;</div><div class="line">#endif</div></pre></td></tr></table></figure>
+<h1 id="Swift-标准库"><a href="#Swift-标准库" class="headerlink" title="Swift 标准库"></a>Swift 标准库</h1><h2 id="新功能"><a href="#新功能" class="headerlink" title="新功能"></a>新功能</h2><ul>
+<li><p><a href="https://link.juejin.im?target=https%3A%2F%2Fdeveloper.apple.com%2Fdocumentation%2Fswift%2Fdictionaryliteral%3Flanguage%3Dobjc" target="_blank" rel="external">DictionaryLiteral</a> 类型重命名为 <a href="https://link.juejin.im?target=https%3A%2F%2Fdeveloper.apple.com%2Fdocumentation%2Fswift%2Fkeyvaluepairs%3Flanguage%3Dobjc" target="_blank" rel="external">KeyValuePairs</a>。(<a href="https://link.juejin.im?target=https%3A%2F%2Fgithub.com%2Fapple%2Fswift-evolution%2Fblob%2Fmaster%2Fproposals%2F0214-DictionaryLiteral.md" target="_blank" rel="external">SE-0214</a>)</p>
+</li>
+<li><p>桥接到 <code>Objective-C</code> 代码的 <code>Swift</code> 字符串现在可以在适当的时候从 <a href="https://link.juejin.im?target=https%3A%2F%2Fdeveloper.apple.com%2Fdocumentation%2Fcorefoundation%2F1542133-cfstringgetcstringptr%3Flanguage%3Dobjc" target="_blank" rel="external">CFStringGetCStringPtr</a> 返回一个 <code>non-nil</code> 值，同时从 <code>-UTF8String</code> 返回的指针与字符串的生命周期相关联，而不是最相近的那个 <code>autorelease pool</code>。如果程序正确，那应该没有任何问题，并且会发现性能显著提高。但是，这也可能会让之前一些未经测试的代码运行，从而暴露一些潜在的问题；例如，如果有一个对 <code>non-nil</code> 值的判断，而相应分支在 Swift 5 之前却从未被执行过。(26236614)</p>
+</li>
+<li><p><a href="https://link.juejin.im?target=https%3A%2F%2Fdeveloper.apple.com%2Fdocumentation%2Fswift%2Fsequence%3Flanguage%3Dobjc" target="_blank" rel="external">Sequence</a> 协议不再具有 <code>SubSequence</code> 关联类型。先前返回 <code>SubSequence</code> 的 <code>Sequence</code> 方法现在会返回具体类型。例如，<a href="https://link.juejin.im?target=https%3A%2F%2Fdeveloper.apple.com%2Fdocumentation%2Fswift%2Fsequence%2F3128822-suffix%3Flanguage%3Dobjc" target="_blank" rel="external">suffix(_:)</a> 现在会返回一个 <code>Array</code>。(47323459)</p>
+<p>使用 <code>SubSequence</code> 的 <code>Sequence</code> 扩展应该修改为类似地使用具体类型，或者修改为 <a href="https://link.juejin.im?target=https%3A%2F%2Fdeveloper.apple.com%2Fdocumentation%2Fswift%2Fcollection%3Flanguage%3Dobjc" target="_blank" rel="external">Collection</a> 的扩展，在 <code>Collection</code> 中 <code>SubSequence</code> 仍然可用。(45761817)</p>
+</li>
+</ul>
+<p>例如：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Sequence</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">dropTwo</span><span class="params">()</span></span> -&gt; <span class="type">SubSequence</span> &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">self</span>.<span class="built_in">dropFirst</span>(<span class="number">2</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>需要改为：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Sequence</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">dropTwo</span><span class="params">()</span></span> -&gt; <span class="type">DropFirstSequence</span>&lt;<span class="type">Self</span>&gt; &#123; </div><div class="line">        <span class="keyword">return</span> <span class="keyword">self</span>.<span class="built_in">dropFirst</span>(<span class="number">2</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>或者是：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Collection</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">func</span> <span class="title">dropTwo</span><span class="params">()</span></span> -&gt; <span class="type">SubSequence</span> &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">self</span>.<span class="built_in">dropFirst</span>(<span class="number">2</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li><a href="https://link.juejin.im?target=https%3A%2F%2Fdeveloper.apple.com%2Fdocumentation%2Fswift%2Fstring%3Flanguage%3Dobjc" target="_blank" rel="external">String</a> 结构的原生编码将从 <code>UTF-16</code> 切换到 <code>UTF-8</code>，与 <a href="https://link.juejin.im?target=https%3A%2F%2Fdeveloper.apple.com%2Fdocumentation%2Fswift%2Fstring%2Futf16view%3Flanguage%3Dobjc" target="_blank" rel="external">String.UTF16View</a> 相比，这会提高相关联的 <a href="https://link.juejin.im?target=https%3A%2F%2Fdeveloper.apple.com%2Fdocumentation%2Fswift%2Fstring%2Futf8view%3Flanguage%3Dobjc" target="_blank" rel="external">String.UTF8View</a> 的性能。重新对所有代码进行评审以提高性能，尤其是使用了 <code>String.UTF16View</code> 的代码。</li>
+</ul>
+<h1 id="Swift-包管理器"><a href="#Swift-包管理器" class="headerlink" title="Swift 包管理器"></a>Swift 包管理器</h1><h2 id="新功能-1"><a href="#新功能-1" class="headerlink" title="新功能"></a>新功能</h2><ul>
+<li><p>现在，在使用 Swift 5 软件包管理器时，<code>Targets</code> 可以声明一些常用的针对特定目标的 <code>build settings</code> 设置。新设置也可以基于平台和构建配置进行条件化处理。包含的构建设置支持 <code>Swift</code> 和 <code>C</code> 语言定义，<code>C</code> 语言头文件搜索路径，链接库和链接框架。(<a href="https://link.juejin.im?target=https%3A%2F%2Fgithub.com%2Fapple%2Fswift-evolution%2Fblob%2Fmaster%2Fproposals%2F0238-package-manager-build-settings.md" target="_blank" rel="external">SE-0238</a>)(23270646)</p>
+</li>
+<li><p>在使用 Swift 5 软件包管理器时，<code>package</code> 现在可以自定义 Apple 平台的最低 <code>deployment target</code>。而如果 <code>package A</code> 依赖于 <code>package B</code>，但 <code>package B</code> 指定的最小 <code>deployment target</code> 高于 package A 的最小 <code>deployment target</code>，则构建 package A 时会抛出错误。(<a href="https://link.juejin.im?target=https%3A%2F%2Fgithub.com%2Fapple%2Fswift-evolution%2Fblob%2Fmaster%2Fproposals%2F0236-package-manager-platform-deployment-settings.md" target="_blank" rel="external">SE-0236</a>)(28253354)</p>
+</li>
+<li><p>新的依赖镜像功能允许顶层包覆盖依赖 URL。(<a href="https://link.juejin.im?target=https%3A%2F%2Fgithub.com%2Fapple%2Fswift-evolution%2Fblob%2Fmaster%2Fproposals%2F0219-package-manager-dependency-mirroring.md" target="_blank" rel="external">SE-0219</a>)(42511642)</p>
+<p>使用以下命令设置镜像：</p>
+</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ swift package config <span class="keyword">set</span>-mirror \</div><div class="line">--package-url &lt;original <span class="type">URL</span>&gt; --mirror-url &lt;mirror <span class="type">URL</span>&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li><code>swift</code> 测试命令可以使用标志 <code>--enable-code-coverage</code>，来生成标准格式的代码覆盖率数据，以便其它代码覆盖工具使用。生成的代码覆盖率数据存储在 <code>&lt;build-dir&gt;/&lt;configuration&gt;/codecov</code> 目录中。</li>
+<li>Swift 5 不再支持 <code>Swift 3</code> 版本的软件包管理器。仍然在使用 Swift 3 Package.swift 工具版本（<code>tool-version</code>）上的软件包应该更新到新的工具版本上。</li>
+<li>对体积较大的包进行包管理器操作现在明显更快了。</li>
+<li>Swift 包管理器有一个新的 <code>--disable-automatic-resolution</code> 标志项，当 <code>Package.resolved</code> 条目不再与 <code>Package.swift</code> 清单文件中指定的依赖项版本兼容时，该标志项强制包解析失败。此功能对于持续集成系统非常有用，可以检查包的 <code>Package.resolved</code> 是否已过期。</li>
+<li><code>swift run</code> 命令有一个新的 <code>--repl</code> 选项，它会启动 <code>Swift REPL</code>，支持导入包的库目标。这使您可以轻松地从包目标中试用 API，而无需构建调用该 API 的可执行文件。</li>
+<li>有关使用 Swift 包管理器的更多信息，请访问 <a href="https://link.juejin.im?target=https%3A%2F%2Fswift.org%2F" target="_blank" rel="external">swift.org</a> 上的 <a href="https://link.juejin.im?target=https%3A%2F%2Fswift.org%2Fgetting-started%2F%23using-the-package-manager" target="_blank" rel="external">Using the Package Manager</a>。</li>
+</ul>
+<h1 id="Swift-编译器"><a href="#Swift-编译器" class="headerlink" title="Swift 编译器"></a>Swift 编译器</h1><h2 id="新特性-2"><a href="#新特性-2" class="headerlink" title="新特性"></a>新特性</h2><ul>
+<li><p>现在，在优化（<code>-O</code> 和 <code>-Osize</code>）构建中，默认情况下在运行时强制执行独占内存访问。违反排他性的程序将在运行时抛出带有 “重叠访问” 诊断消息错误。您可以使用命令行标志禁用此命令：<code>-enforce-exclusivity = unchecked</code>，但这样做可能会导致未定义的行为。运行时违反排他性通常是由于同时访问类属性，全局变量（包括顶层代码中的变量）或通过 <code>eacaping</code> 闭包捕获的变量。（<a href="https://link.juejin.im?target=https%3A%2F%2Fbugs.swift.org%2Fbrowse%2FSR-7139" target="_blank" rel="external">SR-7139</a>）</p>
+</li>
+<li><p>Swift 3 运行模式已被删除。<code>-swift-version</code> 标志支持的值为 <code>4</code>、<code>4.2</code> 和 <code>5</code>。</p>
+</li>
+<li><p>在 Swift 5 中，在 <code>switch</code> 语句中使用 <code>Objective-C</code> 中声明的或来自系统框架的枚举时，必须处理未知的 <code>case</code>，这些 <code>case</code> 可能将来会添加，也可能是在 <code>Objective-C</code> 实现文件中私下定义。形式上，<code>Objective-C</code> 允许在枚举中存储任何值，只要它匹配底层类型即可。这些未知的 <code>case</code> 可以使用新的 <code>@unknown default case</code> 来处理，当然如果 <code>switch</code> 中省略了任何已知的 <code>case</code>，编译器仍然会给出警告。它们也可以使用普通的 <code>default case</code> 来处理。</p>
+<p>如果您已在 <code>Objective-C</code> 中定义了自己的枚举，并且不需要客户端来处理 <code>unknown case</code>，则可以使用 <code>NS_CLOSED_ENUM</code> 宏而不是 <code>NS_ENUM</code>。Swift 编译器识别出这一点，并且不需求 <code>switch</code> 语句必须带有 <code>default case</code>。</p>
+<p>在 <code>Swift 4</code> 和 <code>4.2</code> 模式下，您仍然可以使用 <code>@unknown default</code>。如果省略 <code>@unknown default</code>，而又传递了一个未知的值，则程序在运行时抛出异常，这与 <code>Xcode 10.1</code> 中的 <code>Swift 4.2</code> 上的行为是一致的。(<a href="https://link.juejin.im?target=https%3A%2F%2Fgithub.com%2Fapple%2Fswift-evolution%2Fblob%2Fmaster%2Fproposals%2F0192-non-exhaustive-enums.md" target="_blank" rel="external">SE-0192</a>)(39367045)</p>
+</li>
+<li><p>现在在 <code>SourceKit</code> 生成的 Swift 模块接口中会打印默认参数，而不仅仅是使用占位符。</p>
+</li>
+<li><p><code>unowned</code> 和 <code>unowned(unsafe)</code> 类型的变量现在支持可选类型。</p>
+</li>
+</ul>
+<h2 id="已知的问题"><a href="#已知的问题" class="headerlink" title="已知的问题"></a>已知的问题</h2><ul>
+<li>如果引用了 <code>UIAccessibility</code> 结构的任何成员，则 Swift 编译器会在 “<code>Merge swiftmodule</code>” 构建步骤中崩溃。构建日志包含一条消息：</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="type">Cross</span>-reference to module '<span class="type">UIKit'</span></div><div class="line">... <span class="type">UIAccessibility</span></div><div class="line">... <span class="keyword">in</span> an <span class="class"><span class="keyword">extension</span> <span class="title">in</span> <span class="title">module</span> '<span class="title">UIKit</span>'</span></div><div class="line"><span class="class">... <span class="title">GuidedAccessError</span></span></div></pre></td></tr></table></figure>
+<p>包含 <code>NS_ERROR_ENUM</code> 枚举的其他类型也可能出现此问题，但 <code>UIAccessibility</code> 是最常见的。(47152185)</p>
+<p><strong>解决方法</strong>：在 <code>target</code> 的 <code>Build Setting -&gt; Swift Compiler -&gt; Code Generation</code> 下，设置 <code>Compilation Mode</code> 的值为 <code>Whole Module</code>。这是大多数 <code>Release</code> 配置的默认设置。</p>
+<ul>
+<li><p>为了减小 <code>Swift</code> 元数据的大小，Swift 中定义的 <code>convenience initializers</code> 如果调用了 <code>Objective-C</code> 中定义的一个 <code>designated initializer</code>，那只会提前分配一个对象。在大多数情况下，这对您的程序没有影响，但如果从 <code>Objective-C</code> 调用 <code>convenience initializers</code>，那么 <code>+alloc</code> 分配的初始内存会被释放，而不会调用任何 <code>initializer</code>。对于不希望发生任何类型的对象替换的调用者来说，这可能是有问题的。其中一个例子是 <a href="https://link.juejin.im?target=https%3A%2F%2Fdeveloper.apple.com%2Fdocumentation%2Ffoundation%2Fnscoding%2F1416145-initwithcoder%3Flanguage%3Dobjc" target="_blank" rel="external">initWithCoder:</a> ：如果 <a href="https://link.juejin.im?target=https%3A%2F%2Fdeveloper.apple.com%2Fdocumentation%2Ffoundation%2Fnskeyedunarchiver%3Flanguage%3Dobjc" target="_blank" rel="external">NSKeyedUnarchiver</a> 调用 <code>Swift</code> 实现 <code>init(coder:)</code> 并且存档对象存在循环时，则 <code>NSKeyedUnarchiver</code> 的实现可能会出错。</p>
+<p>在将来的版本中，编译器将保证一个 <code>convenience initializer</code> 永远不会丢弃它所调用的对象，只要它通过 <code>self.init</code> 委托给它的初始化程序也暴露给 <code>Objective-C</code>，或者是它在 <code>Objective-C</code> 中定义了，或者是使用 <code>@objc</code> 标记的，或者是重写了一个暴露给 <code>Objective-C</code> 的 <code>initializer</code>，或者是它满足 <code>@objc</code> 协议的要求。(46823518)</p>
+</li>
+<li><p>如果一个 <code>keypath</code> 字面量引用了 <code>Objective-C</code> 中定义的属性，或者是在 <code>Swift</code> 中使用 <code>@objc</code> 和 <code>dynamic</code> 修饰符定义的属性，则编译可能会失败，并且报 “<code>unsupported relocation of local symbol &#39;L_selector&#39;</code>” 错误，或者 key path 字面量无法在运行时生成正确的哈希值或处理相等比较。</p>
+<p><strong>解决方法</strong>：您可以定义一个不是 <code>@objc</code> 修饰的包装属性，来引用这个 <code>key path</code>。得到的 <code>key path</code> 与引用原始 <code>Objective-C</code> 属性的 <code>key path</code> 不相等，但使用包装属性效果是相同的。</p>
+</li>
+<li><p>某些项目可能会遇到以前版本的编译时回归。</p>
+</li>
+<li><p>Swift 命令行项目在启动时因抛出 “<code>dyld：Library not loaded</code>” 错误而崩溃。</p>
+<p><strong>解决方法</strong>：添加自定义的构建设置 <code>SWIFT_FORCE_STATIC_LINK_STDLIB=YES</code>。</p>
+</li>
+</ul>
+<h2 id="已解决的问题"><a href="#已解决的问题" class="headerlink" title="已解决的问题"></a>已解决的问题</h2><ul>
+<li><p>扩展绑定现在支持嵌套类型的扩展，这些嵌套类型本身是在扩展内定义的。之前可能会因为一些声明顺序而失败，并产生 “未声明类型” 错误。(<a href="https://link.juejin.im?target=https%3A%2F%2Fbugs.swift.org%2Fbrowse%2FSR-631" target="_blank" rel="external">SR-631</a>)</p>
+</li>
+<li><p>在 Swift 5 中，返回 <code>Self</code> 的类方法不能再被使用返回非 <code>final</code> 的具体类类型的方法来覆盖。此类代码不是类型安全的，需要更新。(<a href="https://link.juejin.im?target=https%3A%2F%2Fbugs.swift.org%2Fbrowse%2FSR-695" target="_blank" rel="external">SR-695</a>)</p>
+<p>例如：</p>
+</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Base</span> </span>&#123; </div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">func</span> <span class="title">factory</span>() -&gt; <span class="title">Self</span> </span>&#123; <span class="comment">/*...*/</span> &#125;</div><div class="line">&#125; </div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Derived</span>: <span class="title">Base</span> </span>&#123;</div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">override</span> <span class="title">func</span> <span class="title">factory</span>() -&gt; <span class="title">Derived</span> </span>&#123; <span class="comment">/*...*/</span> &#125; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li><p>在 Swift 5 模式下，现在会明确禁止声明与嵌套类型同名的静态属性。以前，可以在泛型类型的扩展中执行这样的声明。(<a href="https://link.juejin.im?target=https%3A%2F%2Fbugs.swift.org%2Fbrowse%2FSR-7251" target="_blank" rel="external">SR-7251</a>)</p>
+<p>例如：</p>
+</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Foo</span>&lt;<span class="title">T</span>&gt; </span>&#123;&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Foo</span> </span>&#123; </div><div class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">i</span> </span>&#123;&#125;</div><div class="line"></div><div class="line">    <span class="comment">// Error: Invalid redeclaration of 'i'.</span></div><div class="line">    <span class="comment">// (Prior to Swift 5, this didn’t produce an error.) </span></div><div class="line">    <span class="keyword">static</span> <span class="keyword">var</span> i: <span class="type">Int</span> &#123; <span class="keyword">return</span> <span class="number">0</span> &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li><p>现在可以在子类里继承父类中具有可变参数的初始化方法。</p>
+</li>
+<li><p>在 Swift 5 中，函数中的 <code>@autoclosure</code> 参数不能再作为 <code>@autoclosure</code> 参数传递到另一个函数中调用。相反，您必须使用括号显式调用函数值:<code>()</code>；调用本身包含在一个隐式闭包中，保证了与 <code>Swift 4</code> 相同的行为。（<a href="https://link.juejin.im?target=https%3A%2F%2Fbugs.swift.org%2Fbrowse%2FSR-5719" target="_blank" rel="external">SR-5719</a>）</p>
+<p>例如：</p>
+</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">foo</span><span class="params">(<span class="number">_</span> fn: @autoclosure <span class="params">()</span></span></span> -&gt; <span class="type">Int</span>) &#123;&#125;</div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">bar</span><span class="params">(<span class="number">_</span> fn: @autoclosure <span class="params">()</span></span></span> -&gt; <span class="type">Int</span>) &#123;</div><div class="line">    foo(fn) <span class="comment">// Incorrect, `fn` can’t be forwarded and has to be called.</span></div><div class="line">    foo(fn()) <span class="comment">// OK</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li><p>现在完全支持在类和泛型中定义复杂的递归类型，而此前可能会导致死锁。</p>
+</li>
+<li><p>在 Swift 5 中，当将可选值转换为泛型占位符类型时，编译器在解包值时会更加谨慎。这种转换的结果现在更接近于非泛型上下文中的结果。(<a href="https://link.juejin.im?target=https%3A%2F%2Fbugs.swift.org%2Fbrowse%2FSR-4248" target="_blank" rel="external">SR-4248</a>)</p>
+<p>例如：</p>
+</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">forceCast</span>&lt;U&gt;<span class="params">(<span class="number">_</span> value: Any?, to type: U.<span class="keyword">Type</span>)</span></span> -&gt; <span class="type">U</span> &#123;</div><div class="line">    <span class="keyword">return</span> value <span class="keyword">as</span>! <span class="type">U</span> </div><div class="line">&#125; </div><div class="line"></div><div class="line"><span class="keyword">let</span> value: <span class="type">Any</span>? = <span class="number">42</span></div><div class="line"><span class="built_in">print</span>(forceCast(value, to: <span class="type">Any</span>.<span class="keyword">self</span>))</div><div class="line"><span class="comment">// Prints "Optional(42)"</span></div><div class="line"><span class="comment">// (Prior to Swift 5, this would print "42".)</span></div><div class="line"></div><div class="line"><span class="built_in">print</span>(value <span class="keyword">as</span>! <span class="type">Any</span>)</div><div class="line"><span class="comment">// Prints "Optional(42)"</span></div></pre></td></tr></table></figure>
+<ul>
+<li>协议现在可以将它们的实现类型限定为指定类型的子类。支持两种等效形式：</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">MyView</span>: <span class="title">UIView</span> </span>&#123; <span class="comment">/*...*/</span> &#125;</div><div class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">MyView</span> <span class="title">where</span> <span class="title">Self</span>: <span class="title">UIView</span> </span>&#123; <span class="comment">/*...*/</span> &#125;</div></pre></td></tr></table></figure>
+<p>Swift 4.2 接受了第二种形式，但没有完全实现，有时可能在编译时或运行时崩溃。(<a href="https://link.juejin.im?target=https%3A%2F%2Fbugs.swift.org%2Fbrowse%2FSR-5581" target="_blank" rel="external">SR-5581</a>)</p>
+<ul>
+<li>在 Swift 5 中，当在属性自身的 <code>didSet</code> 或 <code>willSet</code> 中设置属性本身时，会避免递归调用（不论是隐式或显式地设置自身的属性）。(<a href="https://link.juejin.im?target=https%3A%2F%2Fbugs.swift.org%2Fbrowse%2FSR-419" target="_blank" rel="external">SR-419</a>)</li>
+</ul>
+<p>例如：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Node</span> </span>&#123;</div><div class="line">    <span class="keyword">var</span> children = [<span class="type">Node</span>]() </div><div class="line">    <span class="keyword">var</span> depth: <span class="type">Int</span> = <span class="number">0</span> &#123;</div><div class="line">        <span class="keyword">didSet</span> &#123; </div><div class="line">            <span class="keyword">if</span> depth &lt; <span class="number">0</span> &#123;</div><div class="line">                <span class="comment">// Won’t recursively call didSet, because this is setting depth on self. </span></div><div class="line">                depth = <span class="number">0</span></div><div class="line">            &#125; </div><div class="line"></div><div class="line">            <span class="comment">// Will call didSet for each of the children,</span></div><div class="line">            <span class="comment">// as this isn’t setting the property on self.</span></div><div class="line">            <span class="comment">// (Prior to Swift 5, this didn’t trigger property</span></div><div class="line">            <span class="comment">// observers to be called again.)</span></div><div class="line">            <span class="keyword">for</span> child <span class="keyword">in</span> children &#123; </div><div class="line">                child.depth = depth + <span class="number">1</span></div><div class="line">            &#125; </div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>Xcode 中 的 <code>diagnostics</code> 对 <code>#sourceLocation</code> 进行了支持。也就是说，如果您使用<code>#sourceLocation</code> 将生成的文件中的行映射回源代码时，<code>diagnostics</code> 会显示在原始源文件中的行数而不是生成的文件中的。</li>
+<li>使用泛型类型别名作为参数或 <code>@objc</code> 方法的返回类型，不再导致生成无效的 <code>Objective-C header</code>。(<a href="https://link.juejin.im?target=https%3A%2F%2Fbugs.swift.org%2Fbrowse%2FSR-8697" target="_blank" rel="external">SR-8697</a>)</li>
+</ul>
+<h1 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h1><p><a href="https://juejin.im/post/5c4b3e91e51d452c8e6d6bcc" target="_blank" rel="external"><strong>知识小集</strong></a></p>
+<p><a href="https://www.hackingwithswift.com/articles/126/whats-new-in-swift-5-0" target="_blank" rel="external">What’s new in Swift 5.0</a></p>
+
+      
+    </div>
+    
+    
+    
+    <div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script type="text/javascript" src="http://jslibs.wuxubj.cn/sweetalert_mini/jquery-1.7.1.min.js"></script>
+  <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
+  <p><span>Title:  </span>Swift 5 做了哪些改动？(最低支持 Xcode 10.2 beta)/ 3.24 updated</a></p>
+  <p><span>Author:  </span>Tuski</a></p>
+  <p><span>Published:  </span>02/23/2019 - 21:52:14</p>
+  <p><span>Updated:  </span>03/24/2019 - 21:59:57</p>
+  <p><span>Link:  </span><a href="/2019/02/Swift-5-0-做了哪些改动？-3-24-Updated/" title="Swift 5 做了哪些改动？(最低支持 Xcode 10.2 beta)/ 3.24 updated">http://www.perphet.com/2019/02/Swift-5-0-做了哪些改动？-3-24-Updated/</a>
+    <span class="copy-path"  title="Click to Copy article link"><i class="fa fa-clipboard" data-clipboard-text="http://www.perphet.com/2019/02/Swift-5-0-做了哪些改动？-3-24-Updated/"  aria-label="Copy successfully！"></i></span>
+  </p>
+  <p><span>Protocol:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)</a> Reprinted please keep the original link and author</p>  
+</div>
+<script>
+    var clipboard = new Clipboard('.fa-clipboard');
+    clipboard.on('success', $(function(){
+      $(".fa-clipboard").click(function(){
+        swal({   
+          title: "",   
+          text: 'Copy successfully！',   
+          html: false,
+          timer: 500,   
+          showConfirmButton: false
+        });
+      });
+    }));  
+</script>
+
+      
+    </div>
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>Thx F Sup</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="https://i.loli.net/2017/12/16/5a33fd668ce7c.png" alt="Tuski WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="https://i.loli.net/2017/12/16/5a33fdbe62e6f.png" alt="Tuski Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/swift/" rel="tag"><i class="fa fa-tag"></i> swift</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+         
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/What-is-SwiftSyntax/" rel="next" title="What is SwiftSyntax?">
+                <i class="fa fa-chevron-left"></i> What is SwiftSyntax?
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/02/The-Beauty-of-Swift-5-String-Interpolation/" rel="prev" title="The Beauty of Swift 5 String Interpolation">
+                The Beauty of Swift 5 String Interpolation <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a35fec5ad889f1e" async = "async" ></script>
+</div>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+    <div class="comments" id="comments">
+      <div id="hypercomments_widget"></div>
+    </div>
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="Tuski" />
+            
+              <p class="site-author-name" itemprop="name">Tuski</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">39</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/thevenomsnake" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:thevenomsnake@icloud.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plus.google.com/u/0/104624402456467592306" target="_blank" title="Google">
+                    
+                      <i class="fa fa-fw fa-google"></i>Google</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/perphet" target="_blank" title="Twitter">
+                    
+                      <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.youtube.com/channel/UComQu3jg43YgIvm2PqAG1tA" target="_blank" title="YouTube">
+                    
+                      <i class="fa fa-fw fa-youtube"></i>YouTube</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+
+  <div class="links-of-blogroll motion-element links-of-blogroll-block">
+    <div class="links-of-blogroll-title">
+      <i class="fa  fa-fw fa-globe"></i>
+      Links&nbsp;
+      <i class="fa  fa-fw fa-globe"></i>
+    </div>
+    <ul class="links-of-blogroll-list">
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.crazyforcode.org/" title="CFC" target="_blank">CFC</a>
+        </li>
+      
+    </ul>
+     
+  </div>
+ 
+
+          
+      <iframe src="https://open.spotify.com/embed?uri=spotify:user:spotify:playlist:37i9dQZF1DXcBWIGoYBM5M&theme=white" width="215" height="350" frameborder="0" allowtransparency="true"></iframe>
+       
+      </section>
+
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#App-瘦身"><span class="nav-text">App 瘦身</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#新特性"><span class="nav-text">新特性</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Swift-语言"><span class="nav-text">Swift 语言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#新特性-1"><span class="nav-text">新特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#标准Result类型"><span class="nav-text">标准Result类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原始字符串"><span class="nav-text">原始字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义字符串插值"><span class="nav-text">自定义字符串插值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态可调用类型"><span class="nav-text">动态可调用类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#处理未来的枚举"><span class="nav-text">处理未来的枚举</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#展平嵌套try-的可选结果"><span class="nav-text">展平嵌套try?的可选结果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#检查整数倍数"><span class="nav-text">检查整数倍数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-compactMapValues（）转换和解包字典值"><span class="nav-text">使用 compactMapValues（）转换和解包字典值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#计算序列中的匹配项"><span class="nav-text">计算序列中的匹配项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其它新特性（部分）"><span class="nav-text">其它新特性（部分）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Swift-标准库"><span class="nav-text">Swift 标准库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#新功能"><span class="nav-text">新功能</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Swift-包管理器"><span class="nav-text">Swift 包管理器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#新功能-1"><span class="nav-text">新功能</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Swift-编译器"><span class="nav-text">Swift 编译器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#新特性-2"><span class="nav-text">新特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#已知的问题"><span class="nav-text">已知的问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#已解决的问题"><span class="nav-text">已解决的问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#引用"><span class="nav-text">引用</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="heart">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tuski</span>
+
+
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by </div>
+
+
+
+  <span class="post-meta-divider">Perphet</span>
+
+
+<!--
+
+  <div class="theme-info">Theme &mdash;  v{}</div>
+
+
+
+
+-->
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+		<script type="text/javascript">
+		_hcwp = window._hcwp || [];
+
+		_hcwp.push({widget:"Bloggerstream", widget_id: 99037, selector:".hc-comment-count", label: "{\%COUNT%\}" });
+
+		
+		_hcwp.push({widget:"Stream", widget_id: 99037, xid: "2019/02/Swift-5-0-做了哪些改动？-3-24-Updated/"});
+		
+
+		(function() {
+		if("HC_LOAD_INIT" in window)return;
+		HC_LOAD_INIT = true;
+		var lang = (navigator.language || navigator.systemLanguage || navigator.userLanguage || "en").substr(0, 2).toLowerCase();
+		var hcc = document.createElement("script"); hcc.type = "text/javascript"; hcc.async = true;
+		hcc.src = ("https:" == document.location.protocol ? "https" : "http")+"://w.hypercomments.com/widget/hc/99037/"+lang+"/widget.js";
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(hcc, s.nextSibling);
+		})();
+		</script>
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("c6sjJ6fGADGrCVC48k5MVQcD-gzGzoHsz", "YuTcQ8aPXftmtmeC4VvTrK9B");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+  <script type="text/javascript">
+  wpac_init = window.wpac_init || [];
+  wpac_init.push({widget: 'Rating', id: 8566,
+    el: 'wpac-rating',
+    color: 'fc6423'
+  });
+  (function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = '//embed.widgetpack.com/widget.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+  })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+<div id="hexo-helper-live2d">
+  <canvas id="live2dcanvas" width="150" height="350"></canvas>
+</div>
+<style>
+  #live2dcanvas{
+    position: fixed;
+    width: 150px;
+    height: 350px;
+    opacity:0.8;
+    right: 0px;
+    z-index: 999;
+    pointer-events: none;
+    bottom: -20px;
+  }
+</style>
+<script type="text/javascript" src="/live2d/device.min.js"></script>
+<script type="text/javascript">
+const loadScript = function loadScript(c,b){var a=document.createElement("script");a.type="text/javascript";"undefined"!=typeof b&&(a.readyState?a.onreadystatechange=function(){if("loaded"==a.readyState||"complete"==a.readyState)a.onreadystatechange=null,b()}:a.onload=function(){b()});a.src=c;document.body.appendChild(a)};
+(function(){
+  if((typeof(device) != 'undefined') && (device.mobile())){
+    var trElement = document.getElementById('hexo-helper-live2d');
+    trElement.parentNode.removeChild(trElement);
+    return;
+  }else
+    if (typeof(device) === 'undefined') console.error('Cannot find current-device script.');
+  loadScript("/live2d/script.js", function(){loadlive2d("live2dcanvas", "/live2d/assets/shizuku.model.json", 0.5);});
+})();
+</script>
+
+ <canvas class="fireworks" 
+        style="position: fixed; left: 0px; top: 0px; z-index: 99999999; pointer-events: none; width: 1158px; height: 916px;" 
+        width="2316" 
+        height="1832">
+</canvas>
+<script type="text/javascript" src="/js/src/anime.min.js"></script>
+<script type="text/javascript" src="/js/src/fireworks.js"></script>
+</body>
+</html>
