@@ -95,7 +95,7 @@
 <meta property="og:site_name" content="Tuski&#39;s Blog">
 <meta property="og:description" content="万众期待的 Swift 5 终于来了，苹果爸爸答应的 ABI 稳定也终于来了。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-03-24T14:06:36.243Z">
+<meta property="og:updated_time" content="2019-03-26T08:37:50.144Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Swift 5 做了哪些改动？(最低支持 Xcode 10.2 beta)&#x2F; 3.24 updated">
 <meta name="twitter:description" content="万众期待的 Swift 5 终于来了，苹果爸爸答应的 ABI 稳定也终于来了。">
@@ -393,7 +393,7 @@
                   <span class="post-meta-item-text">Words count in article&#58;</span>
                 
                 <span title="Words count in article">
-                  9,078
+                  9,080
                 </span>
               
 
@@ -490,8 +490,8 @@
 <p>在最基本的形式中，新的字符串插值系统让我们可以控制对象在字符串中的显示方式。Swift 具有有助于调试的结构的默认行为，因为它打印结构名称后跟其所有属性。但是如果您正在使用类（没有这种行为），或者想要格式化该输出以使其面向用户，那么您可以使用新的字符串插值系统。</p>
 <p>例如，如果我们有这样的结构：</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">User</span> </span>&#123;</div><div class="line">    <span class="keyword">var</span> name: <span class="type">String</span></div><div class="line">    <span class="keyword">var</span> age: <span class="type">Int</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>如果我们想为它添加一个特殊的字符串插值，以便我们整齐地打印出用户，我们将<code>String.StringInterpolation</code>使用新的<code>appendInterpolation()</code>方法添加扩展。Swift 已经内置了几个，并且用户使用插值<em>类型</em> ——在这种情况下<code>User</code>要确定调用哪个方法。</p>
-<p>在这种情况下，我们将添加一个实现，将用户的名称和年龄放在一个字符串中，然后调用其中一个内置<code>appendInterpolation()</code>方法将其添加到我们的字符串中，如下所示：</p>
+<p>如果我们想为它添加一个特殊的字符串插值，以便我们整齐地打印出用户，我们将<code>String.StringInterpolation</code>使用新的<code>appendInterpolation()</code>方法添加扩展。Swift 已经内置了数个实现方法，并且使用插值<em>类型</em> ——在这种情况下 <code>User</code> 要确定调用哪个方法。</p>
+<p>在这种情况下，我们将添加一个实现，将用户的名称和年龄放在一个字符串中，然后调用其中一个内置 <code>appendInterpolation()</code> 方法将其添加到我们的字符串中，如下所示：</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">extension</span> <span class="title">String</span>.<span class="title">StringInterpolation</span> </span>&#123;</div><div class="line">    <span class="keyword">mutating</span> <span class="function"><span class="keyword">func</span> <span class="title">appendInterpolation</span><span class="params">(<span class="number">_</span> value: User)</span></span> &#123;</div><div class="line">        appendInterpolation(<span class="string">"My name is <span class="subst">\(value.name)</span> and I'm <span class="subst">\(value.age)</span>"</span>)</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>现在我们可以创建一个用户并打印出他们的数据：</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> user = <span class="type">User</span>(name: <span class="string">"Guybrush Threepwood"</span>, age: <span class="number">33</span>)</div><div class="line"><span class="built_in">print</span>(<span class="string">"User details: <span class="subst">\(user)</span>"</span>)</div></pre></td></tr></table></figure>
@@ -756,7 +756,7 @@
   <p><span>Title:  </span>Swift 5 做了哪些改动？(最低支持 Xcode 10.2 beta)/ 3.24 updated</a></p>
   <p><span>Author:  </span>Tuski</a></p>
   <p><span>Published:  </span>03/24/2019 - 22:02:34</p>
-  <p><span>Updated:  </span>03/24/2019 - 22:06:36</p>
+  <p><span>Updated:  </span>03/26/2019 - 16:37:50</p>
   <p><span>Link:  </span><a href="/2019/03/Swift-5-0-做了哪些改动？-3-24-Updated/" title="Swift 5 做了哪些改动？(最低支持 Xcode 10.2 beta)/ 3.24 updated">http://www.perphet.com/2019/03/Swift-5-0-做了哪些改动？-3-24-Updated/</a>
     <span class="copy-path"  title="Click to Copy article link"><i class="fa fa-clipboard" data-clipboard-text="http://www.perphet.com/2019/03/Swift-5-0-做了哪些改动？-3-24-Updated/"  aria-label="Copy successfully！"></i></span>
   </p>
@@ -852,6 +852,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/Swift-中的字符串是如何比较的？/" rel="prev" title="Swift 中的字符串是如何比较的？">
+                Swift 中的字符串是如何比较的？ <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>

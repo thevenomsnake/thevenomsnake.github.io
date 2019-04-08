@@ -1,0 +1,1499 @@
+<!DOCTYPE html>
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+<script type="text/javascript">var OriginTitile=document.title,st;document.addEventListener("visibilitychange",function(){document.hidden?(document.title="(/≧▽≦/)Aw, Snap!",clearTimeout(st)):(document.title="(ฅ>ω<*ฅ) Fixed~"+OriginTitile,st=setTimeout(function(){document.title=OriginTitile},3e3))})</script>
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-bounce.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="swift," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="今天写二叉树用到了 Comparable 协议，突然想到 Swift 中 String 也是遵守 Comparable 的，它们是如何互相比较的呢？">
+<meta name="keywords" content="swift">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Swift 中的字符串是如何比较的？">
+<meta property="og:url" content="http://www.perphet.com/2019/04/Swift-中的字符串是如何比较的？/index.html">
+<meta property="og:site_name" content="Tuski&#39;s Blog">
+<meta property="og:description" content="今天写二叉树用到了 Comparable 协议，突然想到 Swift 中 String 也是遵守 Comparable 的，它们是如何互相比较的呢？">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://i.loli.net/2019/04/07/5ca9f7f380996.png">
+<meta property="og:image" content="https://i.loli.net/2019/04/07/5ca9f9fb46e70.jpg">
+<meta property="og:image" content="https://i.loli.net/2019/04/07/5ca9fb98eb3ae.png">
+<meta property="og:image" content="https://i.loli.net/2019/04/07/5ca9ff2050c4c.png">
+<meta property="og:updated_time" content="2019-04-08T07:35:45.337Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Swift 中的字符串是如何比较的？">
+<meta name="twitter:description" content="今天写二叉树用到了 Comparable 协议，突然想到 Swift 中 String 也是遵守 Comparable 的，它们是如何互相比较的呢？">
+<meta name="twitter:image" content="https://i.loli.net/2019/04/07/5ca9f7f380996.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.perphet.com/2019/04/Swift-中的字符串是如何比较的？/"/>
+
+
+
+<link rel="stylesheet" href="../live2d/css/live2d.css" />
+
+
+  <title>Swift 中的字符串是如何比较的？ | Tuski's Blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+<div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+   
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Tuski's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">I code my life</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-music">
+          <a href="/music/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-music"></i> <br />
+            
+            Music
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="Searching..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.perphet.com/2019/04/Swift-中的字符串是如何比较的？/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Tuski">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tuski's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Swift 中的字符串是如何比较的？</h1>
+        
+
+        <div class="post-meta">
+
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-07T20:08:57+08:00">
+                2019-04-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+            <!--noindex-->
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/04/Swift-中的字符串是如何比较的？/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count hc-comment-count" data-xid="2019/04/Swift-中的字符串是如何比较的？/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+              <!--/noindex-->
+            
+          
+
+          
+          
+             <span id="/2019/04/Swift-中的字符串是如何比较的？/" class="leancloud_visitors" data-flag-title="Swift 中的字符串是如何比较的？">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  2,194
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Reading time &asymp;</span>
+                
+                <span title="Reading time">
+                  11
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <script src="/assets/js/APlayer.min.js"> </script><blockquote class="blockquote-center">今天写二叉树用到了 Comparable 协议，突然想到 Swift 中 String 也是遵守 Comparable 的，它们是如何互相比较的呢？</blockquote>
+
+<a id="more"></a>
+<h1 id="🤔"><a href="#🤔" class="headerlink" title="🤔"></a>🤔</h1><p>首先我们来看一下下面这一段代码：</p>
+<p><img src="https://i.loli.net/2019/04/07/5ca9f7f380996.png" alt="0x00.png"></p>
+<p>🤨？</p>
+<h1 id="🤯"><a href="#🤯" class="headerlink" title="🤯"></a>🤯</h1><p>首先我们查找一下 <code>String</code> 的定义中的 <code>extension</code>:</p>
+<p><img src="https://i.loli.net/2019/04/07/5ca9f9fb46e70.jpg" alt="0x01.jpg"></p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">extension</span> <span class="title">String</span> : <span class="title">Equatable</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">/// Returns a Boolean value indicating whether two values are equal.</span></div><div class="line">    <span class="comment">///</span></div><div class="line">    <span class="comment">/// Equality is the inverse of inequality. For any values `a` and `b`,</span></div><div class="line">    <span class="comment">/// `a == b` implies that `a != b` is `false`.</span></div><div class="line">    <span class="comment">///</span></div><div class="line">    <span class="comment">/// - Parameters:</span></div><div class="line">    <span class="comment">///   - lhs: A value to compare.</span></div><div class="line">    <span class="comment">///   - rhs: Another value to compare.</span></div><div class="line">    @inlinable <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">func</span> == <span class="params">(lhs: String, rhs: String)</span></span> -&gt; <span class="type">Bool</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">extension</span> <span class="title">String</span> : <span class="title">Comparable</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">/// Returns a Boolean value indicating whether the value of the first</span></div><div class="line">    <span class="comment">/// argument is less than that of the second argument.</span></div><div class="line">    <span class="comment">///</span></div><div class="line">    <span class="comment">/// This function is the only requirement of the `Comparable` protocol. The</span></div><div class="line">    <span class="comment">/// remainder of the relational operator functions are implemented by the</span></div><div class="line">    <span class="comment">/// standard library for any type that conforms to `Comparable`.</span></div><div class="line">    <span class="comment">///</span></div><div class="line">    <span class="comment">/// - Parameters:</span></div><div class="line">    <span class="comment">///   - lhs: A value to compare.</span></div><div class="line">    <span class="comment">///   - rhs: Another value to compare.</span></div><div class="line">    @inlinable <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">func</span> &lt; (lhs: String, rhs: String) -&gt; <span class="title">Bool</span></span></div><div class="line"><span class="function">&#125;</span></div></pre></td></tr></table></figure>
+<p>看来 <code>String</code> 确实是遵守 <code>Comparable</code> 协议的，那我们就得去找一下源码了。<a id="download" href="https://codeload.github.com/apple/swift/zip/master" target="_blank" rel="external"><i class="fa fa-download"></i><span> 下载 swift 源码</span> </a></p>
+<p>我们定位到  <code>swift/stdlib/public/core/String.swift</code>， 尝试搜索 <code>Comparable</code> 关键字，但是……？</p>
+<p><img src="https://i.loli.net/2019/04/07/5ca9fb98eb3ae.png" alt="0x02.png"></p>
+<p>不要灰心，通过查询 <a href="https://developer.apple.com/documentation/swift/comparable" target="_blank" rel="external">API Reference</a>可以得知 <code>Comparable</code> 也是标准库的一份子，所以我们打开一下同目录的 <code>Comparable.swift</code> ：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">protocol</span> <span class="title">Comparable</span> : <span class="title">Equatable</span> </span>&#123;</div><div class="line">  <span class="comment">/// Returns a Boolean value indicating whether the value of the first</span></div><div class="line">  <span class="comment">/// argument is less than that of the second argument.</span></div><div class="line">  <span class="comment">///</span></div><div class="line">  <span class="comment">/// This function is the only requirement of the `Comparable` protocol. The</span></div><div class="line">  <span class="comment">/// remainder of the relational operator functions are implemented by the</span></div><div class="line">  <span class="comment">/// standard library for any type that conforms to `Comparable`.</span></div><div class="line">  <span class="comment">///</span></div><div class="line">  <span class="comment">/// - Parameters:</span></div><div class="line">  <span class="comment">///   - lhs: A value to compare.</span></div><div class="line">  <span class="comment">///   - rhs: Another value to compare.</span></div><div class="line">  <span class="keyword">static</span> <span class="function"><span class="keyword">func</span> &lt; (lhs: Self, rhs: Self) -&gt; <span class="title">Bool</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">  /// <span class="title">Returns</span> <span class="title">a</span> <span class="title">Boolean</span> <span class="title">value</span> <span class="title">indicating</span> <span class="title">whether</span> <span class="title">the</span> <span class="title">value</span> <span class="title">of</span> <span class="title">the</span> <span class="title">first</span></span></div><div class="line"><span class="function">  /// <span class="title">argument</span> <span class="title">is</span> <span class="title">less</span> <span class="title">than</span> <span class="title">or</span> <span class="title">equal</span> <span class="title">to</span> <span class="title">that</span> <span class="title">of</span> <span class="title">the</span> <span class="title">second</span> <span class="title">argument</span>.</span></div><div class="line"><span class="function">  ///</span></div><div class="line"><span class="function">  /// - <span class="title">Parameters</span>:</span></div><div class="line"><span class="function">  ///   - <span class="title">lhs</span>: <span class="title">A</span> <span class="title">value</span> <span class="title">to</span> <span class="title">compare</span>.</span></div><div class="line"><span class="function">  ///   - <span class="title">rhs</span>: <span class="title">Another</span> <span class="title">value</span> <span class="title">to</span> <span class="title">compare</span>.</span></div><div class="line"><span class="function">  <span class="title">static</span> <span class="title">func</span> &lt;= (lhs: Self, rhs: Self) -&gt; <span class="title">Bool</span></span></div><div class="line"><span class="function"></span></div><div class="line"><span class="function">  /// <span class="title">Returns</span> <span class="title">a</span> <span class="title">Boolean</span> <span class="title">value</span> <span class="title">indicating</span> <span class="title">whether</span> <span class="title">the</span> <span class="title">value</span> <span class="title">of</span> <span class="title">the</span> <span class="title">first</span></span></div><div class="line"><span class="function">  /// <span class="title">argument</span> <span class="title">is</span> <span class="title">greater</span> <span class="title">than</span> <span class="title">or</span> <span class="title">equal</span> <span class="title">to</span> <span class="title">that</span> <span class="title">of</span> <span class="title">the</span> <span class="title">second</span> <span class="title">argument</span>.</span></div><div class="line"><span class="function">  ///</span></div><div class="line"><span class="function">  /// - <span class="title">Parameters</span>:</span></div><div class="line"><span class="function">  ///   - <span class="title">lhs</span>: <span class="title">A</span> <span class="title">value</span> <span class="title">to</span> <span class="title">compare</span>.</span></div><div class="line"><span class="function">  ///   - <span class="title">rhs</span>: <span class="title">Another</span> <span class="title">value</span> <span class="title">to</span> <span class="title">compare</span>.</span></div><div class="line"><span class="function">  <span class="title">static</span> <span class="title">func</span> &gt;= <span class="params">(lhs: <span class="keyword">Self</span>, rhs: <span class="keyword">Self</span>)</span></span> -&gt; <span class="type">Bool</span></div><div class="line"></div><div class="line">  <span class="comment">/// Returns a Boolean value indicating whether the value of the first</span></div><div class="line">  <span class="comment">/// argument is greater than that of the second argument.</span></div><div class="line">  <span class="comment">///</span></div><div class="line">  <span class="comment">/// - Parameters:</span></div><div class="line">  <span class="comment">///   - lhs: A value to compare.</span></div><div class="line">  <span class="comment">///   - rhs: Another value to compare.</span></div><div class="line">  <span class="keyword">static</span> <span class="function"><span class="keyword">func</span> &gt; <span class="params">(lhs: <span class="keyword">Self</span>, rhs: <span class="keyword">Self</span>)</span></span> -&gt; <span class="type">Bool</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Comparable</span> </span>&#123;</div><div class="line">  <span class="comment">/// Returns a Boolean value indicating whether the value of the first argument</span></div><div class="line">  <span class="comment">/// is greater than that of the second argument.</span></div><div class="line">  <span class="comment">///</span></div><div class="line">  <span class="comment">/// This is the default implementation of the greater-than operator (`&gt;`) for</span></div><div class="line">  <span class="comment">/// any type that conforms to `Comparable`.</span></div><div class="line">  <span class="comment">///</span></div><div class="line">  <span class="comment">/// - Parameters:</span></div><div class="line">  <span class="comment">///   - lhs: A value to compare.</span></div><div class="line">  <span class="comment">///   - rhs: Another value to compare.</span></div><div class="line">  @inlinable</div><div class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">func</span> &gt; <span class="params">(lhs: <span class="keyword">Self</span>, rhs: <span class="keyword">Self</span>)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">    <span class="keyword">return</span> rhs &lt; lhs</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">/// Returns a Boolean value indicating whether the value of the first argument</span></div><div class="line">  <span class="comment">/// is less than or equal to that of the second argument.</span></div><div class="line">  <span class="comment">///</span></div><div class="line">  <span class="comment">/// This is the default implementation of the less-than-or-equal-to</span></div><div class="line">  <span class="comment">/// operator (`&lt;=`) for any type that conforms to `Comparable`.</span></div><div class="line">  <span class="comment">///</span></div><div class="line">  <span class="comment">/// - Parameters:</span></div><div class="line">  <span class="comment">///   - lhs: A value to compare.</span></div><div class="line">  <span class="comment">///   - rhs: Another value to compare.</span></div><div class="line">  @inlinable</div><div class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">func</span> &lt;= (lhs: Self, rhs: Self) -&gt; <span class="title">Bool</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> !(rhs &lt; lhs)</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">/// Returns a Boolean value indicating whether the value of the first argument</span></div><div class="line">  <span class="comment">/// is greater than or equal to that of the second argument.</span></div><div class="line">  <span class="comment">///</span></div><div class="line">  <span class="comment">/// This is the default implementation of the greater-than-or-equal-to operator</span></div><div class="line">  <span class="comment">/// (`&gt;=`) for any type that conforms to `Comparable`.</span></div><div class="line">  <span class="comment">///</span></div><div class="line">  <span class="comment">/// - Parameters:</span></div><div class="line">  <span class="comment">///   - lhs: A value to compare.</span></div><div class="line">  <span class="comment">///   - rhs: Another value to compare.</span></div><div class="line">  <span class="comment">/// - Returns: `true` if `lhs` is greater than or equal to `rhs`; otherwise,</span></div><div class="line">  <span class="comment">///   `false`.</span></div><div class="line">  @inlinable</div><div class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">func</span> &gt;= <span class="params">(lhs: <span class="keyword">Self</span>, rhs: <span class="keyword">Self</span>)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">    <span class="keyword">return</span> !(lhs &lt; rhs)</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>但是这里只有 对比较符的实现，而且都是基于 <code>&lt;</code> 的实现，那么  <code>&lt;</code> 又是怎么实现的呢？</p>
+<h1 id="🧐"><a href="#🧐" class="headerlink" title="🧐"></a>🧐</h1><p>我们继续来查找一下源码，<del>因为源码都解决不能你的问题，你再怎么Google也是没有用的</del></p>
+<p><img src="https://i.loli.net/2019/04/07/5ca9ff2050c4c.png" alt="0x03.png"></p>
+<p>这个名字吸引了我的注意，点进去看一下：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">extension</span> <span class="title">String</span> : <span class="title">Comparable</span> </span>&#123;</div><div class="line">  @inlinable @inline(__always) <span class="comment">// For the bitwise comparision</span></div><div class="line">  @_effects(readonly)</div><div class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">func</span> &lt; (lhs: String, rhs: String) -&gt; <span class="title">Bool</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> _stringCompare(lhs._guts, rhs._guts, expecting: .less)</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>原来在标准库中 <code>Comparable</code> 本身并没有默认的实现方法，我们再打开<code>StringComparison.swift</code>：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">@inlinable @inline(__always) <span class="comment">// top-level fastest-paths</span></div><div class="line">@_effects(readonly)</div><div class="line"><span class="keyword">internal</span> <span class="function"><span class="keyword">func</span> <span class="title">_stringCompare</span><span class="params">(</span></span></div><div class="line"><span class="function"><span class="params">  <span class="number">_</span> lhs: _StringGuts, <span class="number">_</span> rhs: _StringGuts, expecting: _StringComparisonResult</span></span></div><div class="line"><span class="function"><span class="params">)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">  <span class="keyword">if</span> lhs.rawBits == rhs.rawBits &#123; <span class="keyword">return</span> expecting == .<span class="built_in">equal</span> &#125;</div><div class="line">  <span class="keyword">return</span> _stringCompareWithSmolCheck(lhs, rhs, expecting: expecting)</div><div class="line">&#125;</div><div class="line"></div><div class="line">@usableFromInline</div><div class="line">@_effects(readonly)</div><div class="line"><span class="keyword">internal</span> <span class="function"><span class="keyword">func</span> <span class="title">_stringCompareWithSmolCheck</span><span class="params">(</span></span></div><div class="line"><span class="function"><span class="params">  <span class="number">_</span> lhs: _StringGuts, <span class="number">_</span> rhs: _StringGuts, expecting: _StringComparisonResult</span></span></div><div class="line"><span class="function"><span class="params">)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">  <span class="comment">// ASCII small-string fast-path:</span></div><div class="line">  <span class="keyword">if</span> lhs.isSmallASCII &amp;&amp; rhs.isSmallASCII &#123;</div><div class="line">    <span class="keyword">let</span> lhsRaw = lhs.asSmall._storage</div><div class="line">    <span class="keyword">let</span> rhsRaw = rhs.asSmall._storage</div><div class="line"></div><div class="line">    <span class="keyword">if</span> lhsRaw.<span class="number">0</span> != rhsRaw.<span class="number">0</span> &#123;</div><div class="line">      <span class="keyword">return</span> _lexicographicalCompare(</div><div class="line">        lhsRaw.<span class="number">0</span>.bigEndian, rhsRaw.<span class="number">0</span>.bigEndian, expecting: expecting)</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> _lexicographicalCompare(</div><div class="line">      lhsRaw.<span class="number">1</span>.bigEndian, rhsRaw.<span class="number">1</span>.bigEndian, expecting: expecting)</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">return</span> _stringCompareInternal(lhs, rhs, expecting: expecting)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我们由此可以知道，如果 <code>.isSmallASCII</code> 是相同的，则把其 <code>.asSmall._storage</code> 赋值给变量 <code>lhsRaw</code> &amp;&amp; <code>rhsRaw</code> 。这个方法对 <code>ASCII</code> 字符串对比做了优化，其他情况用<code>_stringCompareInternal</code>:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">@inline(never) <span class="comment">// Keep `_stringCompareWithSmolCheck` fast-path fast</span></div><div class="line">@usableFromInline</div><div class="line">@_effects(readonly)</div><div class="line"><span class="keyword">internal</span> <span class="function"><span class="keyword">func</span> <span class="title">_stringCompareInternal</span><span class="params">(</span></span></div><div class="line"><span class="function"><span class="params">  <span class="number">_</span> lhs: _StringGuts, <span class="number">_</span> rhs: _StringGuts, expecting: _StringComparisonResult</span></span></div><div class="line"><span class="function"><span class="params">)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">  <span class="keyword">guard</span> _fastPath(lhs.isFastUTF8 &amp;&amp; rhs.isFastUTF8) <span class="keyword">else</span> &#123;</div><div class="line">    <span class="keyword">return</span> _stringCompareSlow(lhs, rhs, expecting: expecting)</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">let</span> isNFC = lhs.isNFC &amp;&amp; rhs.isNFC</div><div class="line">  <span class="keyword">return</span> lhs.withFastUTF8 &#123; lhsUTF8 <span class="keyword">in</span></div><div class="line">    <span class="keyword">return</span> rhs.withFastUTF8 &#123; rhsUTF8 <span class="keyword">in</span></div><div class="line">      <span class="keyword">return</span> _stringCompareFastUTF8(</div><div class="line">        lhsUTF8, rhsUTF8, expecting: expecting, bothNFC: isNFC)</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我们再看到 <code>_stringCompareSlow</code> ：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">@_effects(readonly)</div><div class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">func</span> <span class="title">_stringCompareSlow</span><span class="params">(</span></span></div><div class="line"><span class="function"><span class="params">  <span class="number">_</span> lhs: _StringGuts, <span class="number">_</span> rhs: _StringGuts, expecting: _StringComparisonResult</span></span></div><div class="line"><span class="function"><span class="params">)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">  <span class="keyword">return</span> _stringCompareSlow(</div><div class="line">    lhs, <span class="number">0</span>..&lt;lhs.<span class="built_in">count</span>, rhs, <span class="number">0</span>..&lt;rhs.<span class="built_in">count</span>, expecting: expecting)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>而其中  <code>_lexicographicalCompare</code> 定义如下：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">@_effects(readonly)</div><div class="line">@inline(__always)</div><div class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">func</span> <span class="title">_lexicographicalCompare</span>&lt;I: FixedWidthInteger&gt;<span class="params">(</span></span></div><div class="line"><span class="function"><span class="params">  <span class="number">_</span> lhs: I, <span class="number">_</span> rhs: I, expecting: _StringComparisonResult</span></span></div><div class="line"><span class="function"><span class="params">)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">  <span class="keyword">return</span> expecting == .<span class="built_in">equal</span> ? lhs == rhs : lhs &lt; rhs</div><div class="line">&#125;</div><div class="line"></div><div class="line">...</div><div class="line"></div><div class="line"><span class="keyword">internal</span> <span class="class"><span class="keyword">enum</span> <span class="title">_StringComparisonResult</span> </span>&#123;</div><div class="line">  <span class="keyword">case</span> <span class="built_in">equal</span></div><div class="line">  <span class="keyword">case</span> less</div><div class="line"></div><div class="line">  @inlinable @inline(__always)</div><div class="line">  <span class="keyword">internal</span> <span class="keyword">init</span>(signedNotation int: <span class="type">Int</span>) &#123;</div><div class="line">    _internalInvariant(int &lt;= <span class="number">0</span>)</div><div class="line">    <span class="keyword">self</span> = int == <span class="number">0</span> ? .<span class="built_in">equal</span> : .less</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  @inlinable @inline(__always)</div><div class="line">  <span class="keyword">static</span> <span class="function"><span class="keyword">func</span> ==<span class="params">(</span></span></div><div class="line"><span class="function"><span class="params">    <span class="number">_</span> lhs: _StringComparisonResult, <span class="number">_</span> rhs: _StringComparisonResult</span></span></div><div class="line"><span class="function"><span class="params">  )</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">    <span class="keyword">switch</span> (lhs, rhs) &#123;</div><div class="line">      <span class="keyword">case</span> (.<span class="built_in">equal</span>, .<span class="built_in">equal</span>): <span class="keyword">return</span> <span class="literal">true</span></div><div class="line">      <span class="keyword">case</span> (.less, .less): <span class="keyword">return</span> <span class="literal">true</span></div><div class="line">      <span class="keyword">default</span>: <span class="keyword">return</span> <span class="literal">false</span></div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这下我们大致明白 <code>_stringCompareWithSmolCheck</code> 的功能了，为了更加充分的理解，我们可以在 <code>StringGuts.swift</code> 中找到如下 <code>_StringGuts</code> 的定义：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">@_fixed_layout</div><div class="line"><span class="keyword">public</span> <span class="comment">// SPI(corelibs-foundation)</span></div><div class="line"><span class="class"><span class="keyword">struct</span> <span class="title">_StringGuts</span> </span>&#123;</div><div class="line">  @usableFromInline</div><div class="line">  <span class="keyword">internal</span> <span class="keyword">var</span> _object: _StringObject</div><div class="line"></div><div class="line">  @inlinable @inline(__always)</div><div class="line">  <span class="keyword">internal</span> <span class="keyword">init</span>(<span class="number">_</span> object: _StringObject) &#123;</div><div class="line">    <span class="keyword">self</span>._object = object</div><div class="line">    _invariantCheck()</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="comment">// Empty string</span></div><div class="line">  @inlinable @inline(__always)</div><div class="line">  <span class="keyword">init</span>() &#123;</div><div class="line">    <span class="keyword">self</span>.<span class="keyword">init</span>(_StringObject(empty: ()))</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我们继续看下去：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">extension</span> <span class="title">_StringGuts</span> </span>&#123;</div><div class="line">  @inlinable</div><div class="line">  <span class="keyword">internal</span> <span class="keyword">var</span> rawBits: _StringObject.<span class="type">RawBitPattern</span> &#123;</div><div class="line">    @inline(__always) <span class="keyword">get</span> &#123; <span class="keyword">return</span> _object.rawBits &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">....</div><div class="line"></div><div class="line">@inlinable</div><div class="line">  <span class="keyword">internal</span> <span class="keyword">var</span> asSmall: _SmallString &#123;</div><div class="line">    @inline(__always) <span class="keyword">get</span> &#123; <span class="keyword">return</span> _SmallString(_object) &#125;</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="keyword">internal</span> <span class="keyword">var</span> isSmallASCII: <span class="type">Bool</span> &#123;</div><div class="line">    @inline(__always) <span class="keyword">get</span> &#123; <span class="keyword">return</span> _object.isSmall &amp;&amp; _object.smallIsASCII &#125;</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<p>好吧，<code>asSmall</code>  是被声明为<code>_SmallString</code> 类型， 那我们在打开 <code>SmallString.swift</code> 看看：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">@_fixed_layout @usableFromInline</div><div class="line"><span class="keyword">internal</span> <span class="class"><span class="keyword">struct</span> <span class="title">_SmallString</span> </span>&#123;</div><div class="line">  @usableFromInline</div><div class="line">  <span class="keyword">internal</span> <span class="keyword">typealias</span> <span class="type">RawBitPattern</span> = (<span class="type">UInt64</span>, <span class="type">UInt64</span>)</div><div class="line"></div><div class="line">  <span class="comment">// Small strings are values; store them raw</span></div><div class="line">  @usableFromInline</div><div class="line">  <span class="keyword">internal</span> <span class="keyword">var</span> _storage: <span class="type">RawBitPattern</span></div><div class="line"></div><div class="line">  @inlinable</div><div class="line">  <span class="keyword">internal</span> <span class="keyword">var</span> rawBits: <span class="type">RawBitPattern</span> &#123;</div><div class="line">    @inline(__always) <span class="keyword">get</span> &#123; <span class="keyword">return</span> _storage &#125;</div><div class="line">  &#125;</div><div class="line">  ...</div></pre></td></tr></table></figure>
+<p>由此段代码可知，<code>_SmallString</code> 是 <code>(UInt64, UInt64)</code> 的别称。</p>
+<p>从以上可以看出，在 <code>swift</code>中，<code>String</code> 是 <code>Characters</code> 的集合，我们在 <code>Characters.swift</code> 中可以找到：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Character</span> : <span class="title">Equatable</span> </span>&#123;</div><div class="line">  @inlinable @inline(__always)</div><div class="line">  @_effects(readonly)</div><div class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">func</span> == <span class="params">(lhs: Character, rhs: Character)</span></span> -&gt; <span class="type">Bool</span> &#123;</div><div class="line">    <span class="keyword">return</span> lhs._str == rhs._str</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Character</span> : <span class="title">Comparable</span> </span>&#123;</div><div class="line">  @inlinable @inline(__always)</div><div class="line">  @_effects(readonly)</div><div class="line">  <span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">func</span> &lt; (lhs: Character, rhs: Character) -&gt; <span class="title">Bool</span> </span>&#123;</div><div class="line">    <span class="keyword">return</span> lhs._str &lt; rhs._str</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我们继续深挖：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">internal</span> <span class="keyword">init</span>(unchecked str: <span class="type">String</span>) &#123;</div><div class="line">    <span class="keyword">self</span>._str = str</div><div class="line">    _invariantCheck()</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在 <code>Assert.swift</code> 中：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">@usableFromInline @_transparent</div><div class="line"><span class="keyword">internal</span> <span class="function"><span class="keyword">func</span> <span class="title">_internalInvariant</span><span class="params">(</span></span></div><div class="line"><span class="function"><span class="params">  <span class="number">_</span> condition: @autoclosure <span class="params">()</span></span></span> -&gt; <span class="type">Bool</span>, <span class="number">_</span> message: <span class="type">StaticString</span> = <span class="type">StaticString</span>(),</div><div class="line">  file: <span class="type">StaticString</span> = #file, line: <span class="type">UInt</span> = #line</div><div class="line">) &#123;</div><div class="line">#<span class="keyword">if</span> <span class="type">INTERNAL_CHECKS_ENABLED</span></div><div class="line">  <span class="keyword">if</span> !_branchHint(condition(), expected: <span class="literal">true</span>) &#123;</div><div class="line">    _fatalErrorMessage(<span class="string">"Fatal error"</span>, message, file: file, line: line,</div><div class="line">      flags: _fatalErrorFlags())</div><div class="line">  &#125;</div><div class="line">#endif</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我们再找到：<code>swift-corelibs-foundation/bootstrap/x86_64-apple-darwin/usr/local/include/unicode/coll.h</code> </p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment">     * LESS is returned if source string is compared to be less than target</span></div><div class="line"><span class="comment">     * string in the compare() method.</span></div><div class="line"><span class="comment">     * EQUAL is returned if source string is compared to be equal to target</span></div><div class="line"><span class="comment">     * string in the compare() method.</span></div><div class="line"><span class="comment">     * GREATER is returned if source string is compared to be greater than</span></div><div class="line"><span class="comment">     * target string in the compare() method.</span></div><div class="line"><span class="comment">     * @see Collator#compare</span></div><div class="line"><span class="comment">     * @deprecated ICU 2.6. Use C enum UCollationResult defined in ucol.h</span></div><div class="line"><span class="comment">     */</span></div></pre></td></tr></table></figure>
+<p>我们再找到 <code>swift-corelibs-foundation/bootstrap/x86_64-apple-darwin/usr/local/include/unicode/unistr.h</code></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"><span class="comment">* characters (code units or code points) in a UnicodeString.</span></div><div class="line"><span class="comment"> * It's possible not only to create an</span></div><div class="line"><span class="comment"> * iterator that iterates over an entire UnicodeString, but also to</span></div><div class="line"><span class="comment"> * create one that iterates over only a subrange of a UnicodeString</span></div><div class="line"><span class="comment"> * (iterators over different subranges of the same UnicodeString don't</span></div><div class="line"><span class="comment"> * compare equal).</span></div><div class="line"><span class="comment"> **/</span></div></pre></td></tr></table></figure>
+<p>官方文档已经告诉了我们一切由此我们可以得出不同字符串的比较方式不同的，对于普通的 <code>ASCII</code>字符串，采用比较首位大小的方式进行判断，而遇见<code>Unicode</code>字符串时，如果两个字符串或两个字符值的扩展字符集规范相同，那么它们将被视作相等。如果它们含有相同的意义与表现形式，那么即使组成它们的 <code>Unicode</code> 标量元素不一样，它们的扩展字符集规范也会被视作相等。</p>
+<p>举个例子，<code>LATIN SMALL LETTER E WITH ACUTE</code>（<code>U+00E9</code>）在规范上等同于 <code>LATIN SMALL LETTER E</code> (<code>U+0065</code>)。 这两种都是使用扩展字符集表示字符 é 的有效方法，所以他们被视作在规范上相等。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// "Voulez-vous un café?" using LATIN SMALL LETTER E WITH ACUTE</span></div><div class="line"><span class="keyword">let</span> eAcuteQuestion = <span class="string">"Voulez-vous un caf\u&#123;E9&#125;?"</span></div><div class="line"> </div><div class="line"><span class="comment">// "Voulez-vous un café?" using LATIN SMALL LETTER E and COMBINING ACUTE ACCENT</span></div><div class="line"><span class="keyword">let</span> combinedEAcuteQuestion = <span class="string">"Voulez-vous un caf\u&#123;65&#125;\u&#123;301&#125;?"</span></div><div class="line"> </div><div class="line"><span class="keyword">if</span> eAcuteQuestion == combinedEAcuteQuestion &#123;</div><div class="line">    <span class="built_in">print</span>(<span class="string">"These two strings are considered equal"</span>)</div><div class="line">&#125;</div><div class="line"><span class="comment">// Prints "These two strings are considered equal"</span></div></pre></td></tr></table></figure>
+<p>相反的，英语中的 <code>LATIN CAPITAL LETTER A</code> (<code>U+0041</code>, or <code>&quot;A&quot;</code>) 与俄语中的 <code>CYRILLIC CAPITAL LETTER A</code> (<code>U+0410</code>, or <code>&quot;А&quot;</code>) 是不相等的。虽然它们两者十分相似，但是它们没有相同的语义：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> latinCapitalLetterA: <span class="type">Character</span> = <span class="string">"\u&#123;41&#125;"</span></div><div class="line"> </div><div class="line"><span class="keyword">let</span> cyrillicCapitalLetterA: <span class="type">Character</span> = <span class="string">"\u&#123;0410&#125;"</span></div><div class="line"> </div><div class="line"><span class="keyword">if</span> latinCapitalLetterA != cyrillicCapitalLetterA &#123;</div><div class="line">    <span class="built_in">print</span>(<span class="string">"These two characters are not equivalent."</span>)</div><div class="line">&#125;</div><div class="line"><span class="comment">// Prints "These two characters are not equivalent."</span></div></pre></td></tr></table></figure>
+<p>当一个 <code>Unicode</code> 字符串被写入到一个文本文件或其他存储空间时，在字符串中的 <code>Unicode</code> 标量将会其编码成 <code>Unicode</code> 定义的编码形式中的一种。每种形式都会将字符串编码成更小块的代码单元。其中包含了把字符串编码成 8 位代码单元的 <code>UTF-8</code> 编码形式，以及能够将字符串编码成 16 位代码单元的 <code>UTF-16</code> 编码形式，和将字符串编码成 32 位代码单元的 <code>UTF-32</code> 代码形式。通过为每个标准化后的字符串生成对照元素数组，根据对照元素数组，生成二进制的排序 Key，对比二进制数据的大小，其结果就是原字符串的大小。</p>
+<p>再回头看看最前面的那几行代码，恍然大悟。</p>
+<blockquote>
+<p>Swift 5.0</p>
+</blockquote>
+<h1 id="🥳"><a href="#🥳" class="headerlink" title="🥳"></a>🥳</h1><p><a href="https://developer.apple.com/documentation/swift/comparable" target="_blank" rel="external">Comparable</a></p>
+<p><a href="https://github.com/apple/swift-corelibs-foundation" target="_blank" rel="external">Foundation</a></p>
+<p><a href="https://github.com/apple/swift-lldb" target="_blank" rel="external">swift-lldb</a></p>
+<p><a href="https://github.com/apple/swift" target="_blank" rel="external">swift</a></p>
+
+      
+    </div>
+    
+    
+    
+    <div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script type="text/javascript" src="http://jslibs.wuxubj.cn/sweetalert_mini/jquery-1.7.1.min.js"></script>
+  <script src="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="http://jslibs.wuxubj.cn/sweetalert_mini/sweetalert.mini.css">
+  <p><span>Title:  </span>Swift 中的字符串是如何比较的？</a></p>
+  <p><span>Author:  </span>Tuski</a></p>
+  <p><span>Published:  </span>04/07/2019 - 21:08:57</p>
+  <p><span>Updated:  </span>04/08/2019 - 15:35:45</p>
+  <p><span>Link:  </span><a href="/2019/04/Swift-中的字符串是如何比较的？/" title="Swift 中的字符串是如何比较的？">http://www.perphet.com/2019/04/Swift-中的字符串是如何比较的？/</a>
+    <span class="copy-path"  title="Click to Copy article link"><i class="fa fa-clipboard" data-clipboard-text="http://www.perphet.com/2019/04/Swift-中的字符串是如何比较的？/"  aria-label="Copy successfully！"></i></span>
+  </p>
+  <p><span>Protocol:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)</a> Reprinted please keep the original link and author</p>  
+</div>
+<script>
+    var clipboard = new Clipboard('.fa-clipboard');
+    clipboard.on('success', $(function(){
+      $(".fa-clipboard").click(function(){
+        swal({   
+          title: "",   
+          text: 'Copy successfully！',   
+          html: false,
+          timer: 500,   
+          showConfirmButton: false
+        });
+      });
+    }));  
+</script>
+
+      
+    </div>
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>Thx F Sup</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="https://i.loli.net/2017/12/16/5a33fd668ce7c.png" alt="Tuski WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="https://i.loli.net/2017/12/16/5a33fdbe62e6f.png" alt="Tuski Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/swift/" rel="tag"><i class="fa fa-tag"></i> swift</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+          <div class="wp_rating">
+         
+            <div id="wpac-rating"></div>
+          </div>
+        
+
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/Swift-5-0-做了哪些改动？-3-24-Updated/" rel="next" title="Swift 5 做了哪些改动？(最低支持 Xcode 10.2 beta)/ 3.24 updated">
+                <i class="fa fa-chevron-left"></i> Swift 5 做了哪些改动？(最低支持 Xcode 10.2 beta)/ 3.24 updated
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5a35fec5ad889f1e" async = "async" ></script>
+</div>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  
+    <div class="comments" id="comments">
+      <div id="hypercomments_widget"></div>
+    </div>
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="Tuski" />
+            
+              <p class="site-author-name" itemprop="name">Tuski</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">39</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/thevenomsnake" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:thevenomsnake@icloud.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://plus.google.com/u/0/104624402456467592306" target="_blank" title="Google">
+                    
+                      <i class="fa fa-fw fa-google"></i>Google</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://twitter.com/perphet" target="_blank" title="Twitter">
+                    
+                      <i class="fa fa-fw fa-twitter"></i>Twitter</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.youtube.com/channel/UComQu3jg43YgIvm2PqAG1tA" target="_blank" title="YouTube">
+                    
+                      <i class="fa fa-fw fa-youtube"></i>YouTube</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+
+  <div class="links-of-blogroll motion-element links-of-blogroll-block">
+    <div class="links-of-blogroll-title">
+      <i class="fa  fa-fw fa-globe"></i>
+      Links&nbsp;
+      <i class="fa  fa-fw fa-globe"></i>
+    </div>
+    <ul class="links-of-blogroll-list">
+      
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.crazyforcode.org/" title="CFC" target="_blank">CFC</a>
+        </li>
+      
+    </ul>
+     
+  </div>
+ 
+
+          
+      <iframe src="https://open.spotify.com/embed?uri=spotify:user:spotify:playlist:37i9dQZF1DXcBWIGoYBM5M&theme=white" width="215" height="350" frameborder="0" allowtransparency="true"></iframe>
+       
+      </section>
+
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#🤔"><span class="nav-text">🤔</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#🤯"><span class="nav-text">🤯</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#🧐"><span class="nav-text">🧐</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#🥳"><span class="nav-text">🥳</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+            <span id="scrollpercent"><span>0</span>%</span>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="heart">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tuski</span>
+
+
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by </div>
+
+
+
+  <span class="post-meta-divider">Perphet</span>
+
+
+<!--
+
+  <div class="theme-info">Theme &mdash;  v{}</div>
+
+
+
+
+-->
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+		<script type="text/javascript">
+		_hcwp = window._hcwp || [];
+
+		_hcwp.push({widget:"Bloggerstream", widget_id: 99037, selector:".hc-comment-count", label: "{\%COUNT%\}" });
+
+		
+		_hcwp.push({widget:"Stream", widget_id: 99037, xid: "2019/04/Swift-中的字符串是如何比较的？/"});
+		
+
+		(function() {
+		if("HC_LOAD_INIT" in window)return;
+		HC_LOAD_INIT = true;
+		var lang = (navigator.language || navigator.systemLanguage || navigator.userLanguage || "en").substr(0, 2).toLowerCase();
+		var hcc = document.createElement("script"); hcc.type = "text/javascript"; hcc.async = true;
+		hcc.src = ("https:" == document.location.protocol ? "https" : "http")+"://w.hypercomments.com/widget/hc/99037/"+lang+"/widget.js";
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(hcc, s.nextSibling);
+		})();
+		</script>
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("c6sjJ6fGADGrCVC48k5MVQcD-gzGzoHsz", "YuTcQ8aPXftmtmeC4VvTrK9B");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+  <script type="text/javascript">
+  wpac_init = window.wpac_init || [];
+  wpac_init.push({widget: 'Rating', id: 8566,
+    el: 'wpac-rating',
+    color: 'fc6423'
+  });
+  (function() {
+    if ('WIDGETPACK_LOADED' in window) return;
+    WIDGETPACK_LOADED = true;
+    var mc = document.createElement('script');
+    mc.type = 'text/javascript';
+    mc.async = true;
+    mc.src = '//embed.widgetpack.com/widget.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(mc, s.nextSibling);
+  })();
+  </script>
+
+
+  
+
+  
+
+  
+
+  
+<div id="hexo-helper-live2d">
+  <canvas id="live2dcanvas" width="150" height="350"></canvas>
+</div>
+<style>
+  #live2dcanvas{
+    position: fixed;
+    width: 150px;
+    height: 350px;
+    opacity:0.8;
+    right: 0px;
+    z-index: 999;
+    pointer-events: none;
+    bottom: -20px;
+  }
+</style>
+<script type="text/javascript" src="/live2d/device.min.js"></script>
+<script type="text/javascript">
+const loadScript = function loadScript(c,b){var a=document.createElement("script");a.type="text/javascript";"undefined"!=typeof b&&(a.readyState?a.onreadystatechange=function(){if("loaded"==a.readyState||"complete"==a.readyState)a.onreadystatechange=null,b()}:a.onload=function(){b()});a.src=c;document.body.appendChild(a)};
+(function(){
+  if((typeof(device) != 'undefined') && (device.mobile())){
+    var trElement = document.getElementById('hexo-helper-live2d');
+    trElement.parentNode.removeChild(trElement);
+    return;
+  }else
+    if (typeof(device) === 'undefined') console.error('Cannot find current-device script.');
+  loadScript("/live2d/script.js", function(){loadlive2d("live2dcanvas", "/live2d/assets/shizuku.model.json", 0.5);});
+})();
+</script>
+
+ <canvas class="fireworks" 
+        style="position: fixed; left: 0px; top: 0px; z-index: 99999999; pointer-events: none; width: 1158px; height: 916px;" 
+        width="2316" 
+        height="1832">
+</canvas>
+<script type="text/javascript" src="/js/src/anime.min.js"></script>
+<script type="text/javascript" src="/js/src/fireworks.js"></script>
+</body>
+</html>
