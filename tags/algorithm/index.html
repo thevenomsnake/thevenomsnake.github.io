@@ -89,7 +89,7 @@
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="Tuski&#39;s Blog">
-<meta property="og:url" content="http://www.perphet.com/tags/algorithm/index.html">
+<meta property="og:url" content="http://www.perphet.com/tags/Algorithm/index.html">
 <meta property="og:site_name" content="Tuski&#39;s Blog">
 <meta property="og:locale" content="en">
 <meta name="twitter:card" content="summary">
@@ -123,14 +123,14 @@
 
 
 
-  <link rel="canonical" href="http://www.perphet.com/tags/algorithm/"/>
+  <link rel="canonical" href="http://www.perphet.com/tags/Algorithm/"/>
 
 
 
 <link rel="stylesheet" href="../live2d/css/live2d.css" />
 
 
-  <title>Tag: algorithm | Tuski's Blog</title>
+  <title>Tag: Algorithm | Tuski's Blog</title>
   
 
 
@@ -296,7 +296,7 @@
 
     <div id="posts" class="posts-collapse">
       <div class="collection-title">
-        <h1>algorithm<small>Tag</small>
+        <h1>Algorithm<small>Tag</small>
         </h1>
       </div>
 
@@ -308,37 +308,9 @@
 
       <h2 class="post-title">
         
-            <a class="post-title-link" href="/2019/03/初识布隆过滤器-Bloom-Filiter/" itemprop="url">
+            <a class="post-title-link" href="/2019/06/几个常用的sort算法/" itemprop="url">
               
-                <span itemprop="name">初识布隆过滤器(Bloom Filiter)</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2019-03-23T18:31:19+09:00"
-              content="2019-03-23" >
-          03-23
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-      
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2019/03/Red-Black-Tree-ZH-EN/" itemprop="url">
-              
-                <span itemprop="name">Red-Black Tree (ZH && EN)</span>
+                <span itemprop="name">几个常用的sort算法</span>
               
             </a>
         
@@ -346,9 +318,9 @@
 
       <div class="post-meta">
         <time class="post-time" itemprop="dateCreated"
-              datetime="2019-03-17T21:06:55+09:00"
-              content="2019-03-17" >
-          03-17
+              datetime="2019-06-18T16:02:42+09:00"
+              content="2019-06-18" >
+          06-18
         </time>
       </div>
 
@@ -414,7 +386,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">39</span>
+                  <span class="site-state-item-count">40</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -427,7 +399,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-count">36</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
@@ -1158,6 +1130,24 @@ const loadScript = function loadScript(c,b){var a=document.createElement("script
 (function(){
   if((typeof(device) != 'undefined') && (device.mobile())){
     var trElement = document.getElementById('hexo-helper-live2d');
+    trElement.parentNode.removeChild(trElement);
+    return;
+  }else
+    if (typeof(device) === 'undefined') console.error('Cannot find current-device script.');
+  loadScript("/live2d/script.js", function(){loadlive2d("live2dcanvas", "/live2d/assets/shizuku.model.json", 0.5);});
+})();
+</script>
+
+ <canvas class="fireworks" 
+        style="position: fixed; left: 0px; top: 0px; z-index: 99999999; pointer-events: none; width: 1158px; height: 916px;" 
+        width="2316" 
+        height="1832">
+</canvas>
+<script type="text/javascript" src="/js/src/anime.min.js"></script>
+<script type="text/javascript" src="/js/src/fireworks.js"></script>
+</body>
+</html>
+'hexo-helper-live2d');
     trElement.parentNode.removeChild(trElement);
     return;
   }else
