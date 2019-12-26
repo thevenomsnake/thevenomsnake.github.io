@@ -97,7 +97,7 @@
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://i.loli.net/2019/12/26/xM5yf9AP2Y1voQg.jpg">
 <meta property="og:image" content="https://i.loli.net/2019/12/26/zS28wrOkZXiIjd3.png">
-<meta property="og:updated_time" content="2019-12-26T08:19:21.390Z">
+<meta property="og:updated_time" content="2019-12-26T08:22:54.115Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="图像渲染的一些方法">
 <meta name="twitter:description" content="“你是怎样对一张图片进行渲染的？”">
@@ -341,7 +341,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-12-26T09:08:59+09:00">
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-12-26T08:08:59+08:00">
                 2019-12-26
               </time>
             
@@ -480,11 +480,11 @@
 </blockquote>
 <h1 id="图像渲染技巧"><a href="#图像渲染技巧" class="headerlink" title="图像渲染技巧"></a>图像渲染技巧</h1><p>优化图像渲染的方法有很多种，每种都有不同的功能和性能特性。我们在本文看到的这些例子，架构层次跨度上从底层的 <code>Core Graphics</code>、<code>vImage</code>、<code>Image I/O</code> 到上层的 <code>Core Image</code> 和 <code>UIKit</code> 都有。</p>
 <ol>
-<li><a href="#技巧 #1: 绘制到 UIGraphicsImageRenderer">绘制到 UIGraphicsImageRenderer</a></li>
-<li><a href="#技巧 #2：绘制到 Core Graphics Context 中">绘制到 Core Graphics Context 上</a></li>
-<li><a href="#技巧 #3：使用 Image I/O 创建缩略图像">使用 Image I/O 创建缩略图像</a></li>
-<li><a href="#技巧 #4：使用 Core Image 进行 Lanczos 重采样">使用 Core Image 进行 Lanczos 重采样</a></li>
-<li><a href="#技巧 #5: 使用 vImage 优化图片渲染">使用 vImage 优化图片渲染</a></li>
+<li><a href="# 技巧 #1: 绘制到 UIGraphicsImageRenderer">绘制到 UIGraphicsImageRenderer</a></li>
+<li><a href="# 技巧 #2：绘制到 Core Graphics Context 中">绘制到 Core Graphics Context 上</a></li>
+<li><a href="# 技巧 #3：使用 Image I/O 创建缩略图像">使用 Image I/O 创建缩略图像</a></li>
+<li><a href="# 技巧 #4：使用 Core Image 进行 Lanczos 重采样">使用 Core Image 进行 Lanczos 重采样</a></li>
+<li><a href="# 技巧 #5: 使用 vImage 优化图片渲染">使用 vImage 优化图片渲染</a></li>
 </ol>
 <p>为了统一，以下的每种技术共用一个公共接口：</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">resizeImage</span><span class="params">(at url: URL, <span class="keyword">for</span> size: CGSize)</span></span> -&gt; <span class="type">UIImage</span>? &#123; … &#125;</div><div class="line">iamgeView.iamge = resizedImage(at: url, <span class="keyword">for</span>: size)</div></pre></td></tr></table></figure>
@@ -590,7 +590,7 @@
   <p><span>Title:  </span>图像渲染的一些方法</a></p>
   <p><span>Author:  </span>Tuski</a></p>
   <p><span>Published:  </span>12/26/2019 - 09:08:59</p>
-  <p><span>Updated:  </span>12/26/2019 - 16:19:21</p>
+  <p><span>Updated:  </span>12/26/2019 - 16:22:54</p>
   <p><span>Link:  </span><a href="/2019/12/图像渲染的一些方法/" title="图像渲染的一些方法">http://www.perphet.com/2019/12/图像渲染的一些方法/</a>
     <span class="copy-path"  title="Click to Copy article link"><i class="fa fa-clipboard" data-clipboard-text="http://www.perphet.com/2019/12/图像渲染的一些方法/"  aria-label="Copy successfully！"></i></span>
   </p>
